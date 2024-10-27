@@ -1,0 +1,40 @@
+Project Title: Shadow Operative
+
+Project Description: A game focused on stealth and defusing nuclear bombs in a Cold War-era world. Players solve puzzles based on IBM skill badge quiz 
+questions in order to defuse bombs
+
+development environment: could be unity or any tools.
+
+Web using: Trello https://trello.com/b/wKWHzpFs/software-engineering
+                    Github https://github.com/orgs/COMP2281/teams/group24-25-05
+Allocation of the work: 
+1.Coding: Ben, Danial, Edi, Rui, Will
+2.Arts&Story line: Sami
+3.Documentation:Rui
+
+Ideas so far:
+1.Use card upgrades as a game mode to improve the quality of cards as players answer questions(Already rejected by the client)
+2.Design the AI part to control the difficulty of the questions encountered later by the player's correct answers, and realise the automatic escalation of difficulty
+
+
+
+
+
+ About the questions:
+1.What is RAG analysis board: 
+-review the badges and then decide which ones are Green (useful for career and course  and project) Amber (career and course) etc  I would use this as a way to find the questions and answers you need in the project - as you can then take Questions and Answers directly from the badge Q&A. So i would take the badges you mark Green - and start the badges and then at the test phase use the Q&A for the questions you will use in the game
+
+2.How complex should the questions in the game be ,Who is the target audience, and what is the age bracket:
+-Take the questions and answers directly from the IBM Skills Build badges - age range 16+
+
+3.You mentioned using AI to create a realistic Counterspy  -style environment. Are you referring to using something like ChatGPT to generate ideas based on   CounterSpy :
+-was thinking perhaps a chatbot approach where maybe the end boss quizes the player - and the player interfaces with an in game console to interact with the conversation - doesnt need to be chatgpt 
+
+4.When you mention ?high-quality graphics,? are you looking for realistic visuals or strong art direction with a stylized approach:
+ The prettier and the more WOW the better
+
+5.What do you mean by ?improving card quality:
+ - Hmm don't worry about the cards - actually i don't think this approach would fit the CounterSpy type game
+
+6.Regarding game models and environments, are we allowed to use open-source content?:
+-Yes
