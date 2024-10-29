@@ -2,4 +2,6 @@
 
 ## Table of Contents
 
-- [Project Brief](/documentation/projectBrief.md)
+- [Requirements Documentation](/documentation/requirements.md)
+- [Test Plan](/documentation/testPlan.md)
+- [Technical Report](/documentation/technicalReport.md)
