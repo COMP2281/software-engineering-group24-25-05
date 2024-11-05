@@ -12,17 +12,17 @@
 
 Group Number: 5
 Date the document was prepared:
-Version: 1.0.1
+Version: 1.0.2
 
 # 1 - Introduction
 
 ## 1.1 - Overview and Justification
 
-The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay.
+The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms traditional educational content into an immersive, game-based experience that enhances learner engagement and retention.
 
-This approach transforms traditional educational content into an immersive, game-based experience that enhances learner engagement and retention. It targets individuals pursuing IBM Skills Build knowledge, with potential applications for educational institutions or self-learners interested in complementing their studies with an engaging, interactive tool.
+It will benefit individuals pursuing IBM Skills Build knowledge, with potential applications for educational institutions or self-learners interested in complementing their studies with an engaging, interactive tool.
 
-The project’s client is IBM, represented by Mr. John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor, a UCL Honorary Professor, and Chair of the Institute of Technology Board. IBM aims to make IBM Skills Build content more accessible and engaging through this game.
+The project’s client is IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM aims to make IBM Skills Build content more accessible and engaging through this game.
 
 This document is organised as follows:
 
@@ -39,18 +39,6 @@ This document is organised as follows:
   - [3.3 - Project Schedule](#33---project-schedule)
 
 ## 1.2 - Project Scope
-
-The project addresses the need for an interactive educational tool that merges IBM Skills Build content with engaging gameplay mechanics. By incorporating quizzes linked to IBM Skills Build badges, the game provides a practical, enjoyable way for users to solidify their knowledge in Artificial Intelligence, Cybersecurity, and Data Science.
-
-The game aims to educate players in areas such as Artificial Intelligence, Cybersecurity, and Data Science, using quizzes and interactive elements that adapt dynamically through an AI-driven difficulty system. The player’s goal is to retrieve stolen plans for a new AI system, progressing by responding to skill-based challenges and engaging in interactive boss battles.
-
-Project objectives:
-
-- **Improve Engagement**: Use elements like quizzes, progressive difficulty, and AI-driven adaptations to create an enjoyable learning experience.
-- **Enable Personalised Learning**: Dynamically adjust question difficulty based on player performance, tailoring the challenge to each user.
-- **Support Goal-Oriented Learning**: Reinforce knowledge through boss battles and progressively challenging content that helps learners retain key concepts.
-
-The project’s primary stakeholders include IBM Skills Build content providers, educational institutions, and self-learners seeking an adaptive, game-based learning experience that complements traditional study methods.
 
 ## 1.3 - System Description
 
