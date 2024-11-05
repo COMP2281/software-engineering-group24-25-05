@@ -18,13 +18,13 @@ Version: 1.0.1
 
 ## 1.1 - Overview and Justification
 
-The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. The game aims to educate players in areas such as Artificial Intelligence, Cybersecurity, and Data Science, using quizzes and interactive elements that adapt dynamically through an AI-driven difficulty system. The player’s goal is to retrieve stolen plans for a new AI system, progressing by responding to skill-based challenges and engaging in interactive boss battles.
+The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay.
 
 This approach transforms traditional educational content into an immersive, game-based experience that enhances learner engagement and retention. It targets individuals pursuing IBM Skills Build knowledge, with potential applications for educational institutions or self-learners interested in complementing their studies with an engaging, interactive tool.
 
 The project’s client is IBM, represented by Mr. John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor, a UCL Honorary Professor, and Chair of the Institute of Technology Board. IBM aims to make IBM Skills Build content more accessible and engaging through this game.
 
-This document is organized as follows:
+This document is organised as follows:
 
 - [1 - Introduction](#1---introduction)
   - [1.1 - Overview and Justification](#11---overview-and-justification)
@@ -42,10 +42,12 @@ This document is organized as follows:
 
 The project addresses the need for an interactive educational tool that merges IBM Skills Build content with engaging gameplay mechanics. By incorporating quizzes linked to IBM Skills Build badges, the game provides a practical, enjoyable way for users to solidify their knowledge in Artificial Intelligence, Cybersecurity, and Data Science.
 
+The game aims to educate players in areas such as Artificial Intelligence, Cybersecurity, and Data Science, using quizzes and interactive elements that adapt dynamically through an AI-driven difficulty system. The player’s goal is to retrieve stolen plans for a new AI system, progressing by responding to skill-based challenges and engaging in interactive boss battles.
+
 Project objectives:
 
 - **Improve Engagement**: Use elements like quizzes, progressive difficulty, and AI-driven adaptations to create an enjoyable learning experience.
-- **Enable Personalized Learning**: Dynamically adjust question difficulty based on player performance, tailoring the challenge to each user.
+- **Enable Personalised Learning**: Dynamically adjust question difficulty based on player performance, tailoring the challenge to each user.
 - **Support Goal-Oriented Learning**: Reinforce knowledge through boss battles and progressively challenging content that helps learners retain key concepts.
 
 The project’s primary stakeholders include IBM Skills Build content providers, educational institutions, and self-learners seeking an adaptive, game-based learning experience that complements traditional study methods.
@@ -56,14 +58,14 @@ Shadow Operative is a game structured to integrate IBM Skills Build content into
 
 ### Existing Solutions and Research
 
-While platforms like Duolingo and Kahoot! offer gamified learning, they lack the real-time AI adaptations and direct IBM Skills Build content integration found in Shadow Operative. This project offers AI-driven personalization, which tailors difficulty specifically to enhance engagement and knowledge retention for users in IBM Skills Build areas.
+While platforms like Duolingo and Kahoot! offer gamified learning, they lack the real-time AI adaptations and direct IBM Skills Build content integration found in Shadow Operative. This project offers AI-driven personalisation, which tailors difficulty specifically to enhance engagement and knowledge retention for users in IBM Skills Build areas.
 
 ### System Design and Integration
 
 The game’s design will translate IBM Skills Build content into in-game scenarios and questions, with core features including:
 
 - **Question Generation**: IBM Skills Build questions populate different levels and scenarios.
-- **Dynamic Difficulty Adjustment**: AI algorithms monitor performance to optimize challenge levels.
+- **Dynamic Difficulty Adjustment**: AI algorithms monitor performance to optimise challenge levels.
 - **Boss Interactions**: Gameplay elements, such as boss battles, serve as knowledge assessments that reinforce learning.
 
 Through these features, Shadow Operative innovatively combines IBM Skills Build content with an interactive, adaptive gaming experience for enhanced skill acquisition.
