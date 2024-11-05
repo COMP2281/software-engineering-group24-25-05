@@ -138,6 +138,8 @@ of the development to enrich the puzzles with IBM Skills Build questions
 * they will start to run in parallel once we are at the end of the development
 cycle with the `Game Mechanics Implementation`
 
+### Gantt Chart
+
 <p align="center">
     <img src="./images/gantt-chart.png">
 </p>
