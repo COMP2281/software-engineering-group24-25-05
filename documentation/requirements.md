@@ -54,21 +54,27 @@ The project’s primary stakeholders include IBM Skills Build content providers,
 
 ## 1.3 - System Description
 
-Shadow Operative is a game structured to integrate IBM Skills Build content into a dynamic learning environment. The game combines quiz mechanics with an adventure format, where players progress by completing challenges that become more difficult based on their past performance. Unique boss battles and in-game challenges serve as checkpoints, testing players’ mastery of IBM Skills Build topics.
+**System Overview**  
+*Shadow Operative* is a educational game designed to help learners engage with IBM Skills Build content in an immersive and interactive environment. The game places players in the role of a spy during the Cold War, tasked with retrieving stolen plans for a cutting-edge AI system. Through skill-based challenges and AI-driven adaptive difficulty, players are guided through progressively complex levels that reinforce core IBM Skills Build concepts in a gamified format. No prior or legacy systems are used in this project; rather, it is a standalone initiative combining educational objectives with engaging stealth gameplay.
 
-### Existing Solutions and Research
+**Research into Alternative Solutions**  
+In designing *Shadow Operative*, the team conducted extensive research into comparable games and educational platforms to inform and enhance its structure, mechanics, and learning approach. The following games served as key references, with their unique aspects and usefulness to *Shadow Operative* outlined below:
 
-While platforms like Duolingo and Kahoot! offer gamified learning, they lack the real-time AI adaptations and direct IBM Skills Build content integration found in Shadow Operative. This project offers AI-driven personalisation, which tailors difficulty specifically to enhance engagement and knowledge retention for users in IBM Skills Build areas.
+- **CounterSpy**: A Cold War-era side-scrolling stealth game, *CounterSpy* serves as a primary thematic reference for *Shadow Operative*, offering insight into effective use of stealth elements, setting, and art direction within a Cold War context.
+- **This War of Mine**: This side-scrolling survival game provides a perspective on civilian experiences of war, integrating stealth mechanics and adding depth to our Cold War setting by informing character interactions and emotional undertones.
+- **Dishonored 2**: Known for refined stealth mechanics, *Dishonored 2* inspired dynamic sneaking, enemy awareness systems, and varied approaches to evasion and takedowns, all crucial for building the interactive stealth elements in *Shadow Operative*.
+- **Batman: Arkham Asylum**: Recognized for its claustrophobic environments and atmospheric design, *Batman: Arkham Asylum* offers a model for crafting immersive environments and leveraging tight spaces to build tension and intensity in gameplay.
+- **Kahoot!**: This gamified quiz platform highlights the power of interactive question-based challenges and adaptive difficulty, directly influencing *Shadow Operative*'s question generation system and difficulty adjustments. Kahoot's use of timers and music also offers insight into creating urgency within educational contexts.
 
-### System Design and Integration
+**Proposed Solution’s Technical Features**  
+*Shadow Operative* integrates the following key technical features to create a unique, adaptive learning experience:
 
-The game’s design will translate IBM Skills Build content into in-game scenarios and questions, with core features including:
+- **Question Generation**: Relevant IBM Skills Build content will populate various levels, embedding knowledge assessments seamlessly into gameplay scenarios. Questions will adapt in difficulty and context to align with players' progress, enhancing engagement and reinforcing learning objectives.
+- **Dynamic Difficulty Adjustment**: AI algorithms will monitor and assess player performance, adjusting challenge levels in real-time. This ensures players are consistently engaged and challenged without being overwhelmed, fostering a tailored learning experience.
+- **Boss Interactions**: Key encounters, such as boss battles, act as knowledge assessments, where players demonstrate their understanding of core Skills Build concepts in a high-stakes, interactive format that reinforces learning.
+- **Stealth Mechanics**: Inspired by *CounterSpy* and *Dishonored 2*, *Shadow Operative* incorporates stealth elements like sneaking, cover mechanics, and enemy awareness to create a tense, immersive experience that complements the game's educational content.
 
-- **Question Generation**: IBM Skills Build questions populate different levels and scenarios.
-- **Dynamic Difficulty Adjustment**: AI algorithms monitor performance to optimise challenge levels.
-- **Boss Interactions**: Gameplay elements, such as boss battles, serve as knowledge assessments that reinforce learning.
-
-Through these features, Shadow Operative innovatively combines IBM Skills Build content with an interactive, adaptive gaming experience for enhanced skill acquisition.
+Through these technical features, *Shadow Operative* innovatively merges stealth gameplay with educational content, allowing players to progress through an AI-powered, adaptive gameplay experience that motivates continuous learning and skill development. Additional behavioral requirements, such as user experience flow and precise player interactions, are still under development. 
 
 # 2 - Solution Requirements
 
@@ -84,13 +90,14 @@ Report on the steps undertaken by the group to elicit the client’s requirement
 
 ### 2.1.1. **Eliciting Requirements:**
 
-To gain a thorough understanding of the client's needs for the CounterSpy educational game, the team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project's focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features that were identified as redundant. These insights also guided us in structuring our team roles based on each members strengths and development areas.
+To gain a thorough understanding of the client's needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project's focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features that were identified as redundant. These insights also guided us in structuring our team roles based on each members strengths and development areas.
 
 Following this, we held an internal meeting to discuss our objectives in depth and to identify how each member's skills could contribute to creating a compelling, interactive experience that aligns with CounterSpy's Cold War-inspired, side-scrolling stealth gameplay. This meeting helped us generate additional questions for the client regarding specific elements, such as how best to implement game mechanics that motivate players to learn and progress through adaptive, question-based challenges. We also explored potential design inspirations, honing in on critical aspects like gameplay mechanics, the Cold War-era visual style, and strategies to maintain a consistent thematic experience that embodies the CounterSpy universe. Within this meeting we all came to a consesus that the card feature of the game did not fit our game's brief, which we addressed in a follow up email, in which the client agreed, and decided to remove that feature from the brief.
 
-**ADD MORE AFTER MEETING - Mention videos sent**
+**ADD MORE AFTER MEETING - Mention videos sent - Use More Gherkin**
 
 Within our first meeting, we address some key concerns and expressed our moscow with our client, seeing if he agrees with our priorties and if he believes a feature is more important. __________ etcetcetc
+
 
 ### Developing User Stories
 
@@ -102,8 +109,6 @@ Given a player completes a level with a correct answer
 When they answer a cybersecurity question correctly
 Then they advance to the part of the level/next level
 
-
-
 add diagram? Use with MOSCOW
 
 #### Challenges and Solutions
@@ -112,7 +117,6 @@ add diagram? Use with MOSCOW
 * **Solution** : Incorporating adaptive AI that adjusts question difficulty to player performance.
 * **Challenge** : Defining behavioral requirements that cater to both learning and entertainment.
 * **Solution** : Scenario-driven requirements helped visualize player journeys, ensuring learning moments felt natural within the game.
-
 
 ### 2.1.4. **Finalizing Specifications:**
 
