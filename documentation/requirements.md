@@ -79,6 +79,22 @@ Through these features, Shadow Operative innovatively combines IBM Skills Build 
 ## 3.1 - Risks and Issues
 
 ## 3.2 - Development Approach
+what we choose is incremental model:
+	• The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
+	• With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
+	• Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
+Why we think the Incremental Model Fits our Project:
+	1. Gradual Progress: Since our game includes different mechanics (e.g., running, jumping, sliding), puzzles, and IBM skill badge questions, we could develop one feature at a time. For example, we can first build core mechanics, then puzzles, and then implement the card system for enhancing IBM skills.
+	2. Feedback after Each Increment: After each partial development done , we can test it and get the feedback. This ensures that individual components work as intended before combining them into the final game.
+	3. Risk Management: The Incremental Model is useful when different features have varying complexities. It helps manage risk by addressing simpler features first and more complex ones later, ensuring a steady development pace.
+	4. Flexibility: when we developing the program , client might change the requirement or we need to adjust the direction or the function of our project , while incremental model plays a very important role to help us prevent from deleting a large number of previous documents
+	5. Player engagement: incremental model means we can republic our game in advance even thought we haven't finished the whole game , we can get the feedback from the client and vary our direction or adjust our code base on the feedback immediately .
+	6. Suitable for small team : Since we are a small which only has 7 people , the incremental model help us allocate the work more efficacy , we only need to focus on the specific content each time , and makes all the people engaged , also can clearly keep tracking work progress.
+	
+	7. Simplicity: The incremental model provides straightforward, predictable development process, also offers a structured, step-by-step approach with clear deliverables at each stage.
+
+![image](https://github.com/user-attachments/assets/b1e991a9-3894-4861-b379-4e0aeb2415d4)
+
 
 ## 3.3 - Project Schedule
 
