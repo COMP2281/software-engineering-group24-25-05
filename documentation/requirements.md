@@ -143,3 +143,8 @@ cycle with the `Game Mechanics Implementation`
 <p align="center">
     <img src="./images/gantt-chart.png">
 </p>
+
+### Key deadlines
+
+* `2024-11-28`: Finish client RAG Analysis and Questions Bank
+* `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
