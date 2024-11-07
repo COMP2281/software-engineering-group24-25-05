@@ -100,6 +100,118 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 ## 3.1 - Risks and Issues
 
+When developing a large software project with a team, it is important to be
+aware of the potential risks and issues that may arise, and to have plans in
+place to mitigate them. Issues may arise from a variety of sources, including
+the group itself, the client, the software produced or even the available
+hardware.
+
+### 3.1.1 Group Risks
+
+One of the most significant risks when working in a team is that of team members
+not working together effectively. This may result from differing levels of
+knowledge, different problem solving styles, alternate programming styles and
+more. Fortunately, this can be mitigated by creating comprehensive plans for the
+project and ensuring everyone is assigned roles that suit their strengths. If
+the team cannot work together effectively, it can become difficult to develop a
+cohesive product, and may lead to more bugs and issues down the line.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=4 \\
+  &\text{Likelihood}=2 \\
+  &\text{Risk}=4\times2=8 \implies {\color{orange}\text{High}}
+\end{aligned}
+$$
+
+Uneven workloads, despite being unfair on those doing more work, can lead to
+some members not understanding the current state of the project or how new
+features should be implemented. This can make it hard to continue contributing
+to the project, resulting in even lower productivity, slower development and a
+less complete product. To mitigate this risk, it is important to ensure that
+everyone is assigned tasks before the project starts, and that regular meetings
+are held to discuss progress and potential task shifts.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=3 \\
+  &\text{Likelihood}=3 \\
+  &\text{Risk}=4\times2=9 \implies {\color{orange}\text{High}}
+\end{aligned}
+$$
+
+### 3.1.2 Client Risks
+
+Another area of concern is the potential for the client to provide unrealistic,
+unreasonable or poorly defined requirements. If this happens, it can extremely
+difficult to produce a cohesive plan and deliver a product that meets the
+client's expectations. To mitigate such a risk, it is important to have multiple
+meetings with the client at regular intervals, discussing the project's current
+state, planned development and any changes the client may request. This way, the
+client can provide feedback and desired alterations before they are too deeply
+embedded in the project, or even before they are implemented.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=3 \\
+  &\text{Likelihood}=2 \\
+  &\text{Risk}=3\times2=6 \implies {\color{orange}\text{Moderate}}
+\end{aligned}
+$$
+
+Another potential risk is that the client may be slow to respond, or completely
+unresponsive. In this case, it can be difficult to get started on the project
+because the requirements are not clearly defined, and it is difficult to provide
+a product that meets their expectations, since the feedback is not beign
+given in a timely manner. To mitigate this risk, it is important to have a clear
+communication plan with set dates and deadlines for features, meetings and
+general updates. It is also especially important to develop a well-written
+codebase which can be easily modified and maintained.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=2 \\
+  &\text{Likelihood}=1 \\
+  &\text{Risk}=2\times1=2 \implies {\color{orange}\text{Low}}
+\end{aligned}
+$$
+
+### 3.1.3 Software Development Methodology Risks
+
+Large codebases require strict adherence to project-defined standards, as
+otherwise it can become difficult for team members to work on other parts of the
+project. Additionally, the code must be highly modular, since the code developed
+by one team member must be able to interact with the code developed by others,
+regardless of the implementation details. Furthermore, it is useful to have
+clean, readable code, with comments in areas that are not obvious. This ensures
+that code can still be understood months after it was first written, which may
+be necessary for debugging and maintenance purposes.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=4 \\
+  &\text{Likelihood}=4 \\
+  &\text{Risk}=4\times4=16 \implies {\color{orange}\text{Extreme}}
+\end{aligned}
+$$
+
+### 3.1.4 AI Risks
+
+AI is a very powerful tool, but can be dangerous if not used correctly. LLMs in
+particular can be very useful and produce high quality results, but are also
+susceptible to biases and may produce inaccurate or inappropriate results.
+Fortunately, much research has been conducted in this area, and popular LLMs are
+'aligned' with human values, and are highly unlikely to produce offensive
+suggestions. Unfortunately, incorrect results are still quite common.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=5 \\
+  &\text{Likelihood}=1 \\
+  &\text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
+\end{aligned}
+$$
+
 ## 3.2 - Development Approach
 
 ## 3.3 - Project Schedule
