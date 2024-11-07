@@ -125,7 +125,7 @@ place to mitigate them. Issues may arise from a variety of sources, including
 the group itself, the client, the software produced or even the available
 hardware.
 
-### 3.1.1Group Risks
+### 3.1.1 Group Risks
 
 One of the most significant risks when working in a team is that of team members
 not working together effectively. This may result from differing levels of
@@ -211,6 +211,23 @@ $$
   &\text{Consequence}=4 \\
   &\text{Likelihood}=4 \\
   &\text{Risk}=4\times4=16 \implies {\color{orange}\text{Extreme}}
+\end{aligned}
+$$
+
+### 3.1.4 AI Risks
+
+AI is a very powerful tool, but can be dangerous if not used correctly. LLMs in
+particular can be very useful and produce high quality results, but are also
+susceptible to biases and may produce inaccurate or inappropriate results.
+Fortunately, much research has been conducted in this area, and popular LLMs are
+'aligned' with human values, and are highly unlikely to produce offensive
+suggestions. Unfortunately, incorrect results are still quite common.
+
+$$
+\begin{aligned}
+  &\text{Consequence}=5 \\
+  &\text{Likelihood}=1 \\
+  &\text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
 \end{aligned}
 $$
 
