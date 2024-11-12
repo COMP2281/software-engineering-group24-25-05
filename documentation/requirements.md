@@ -79,7 +79,7 @@ Through these features, Shadow Operative innovatively combines IBM Skills Build 
 ## 3.1 - Risks and Issues
 
 ## 3.2 - Development Approach
-##what we choose is incremental model: 
+### what we choose is incremental model: 
 1. The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality. 
 2. With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one. 
 3. Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step. 
