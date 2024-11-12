@@ -83,7 +83,7 @@ Through these features, Shadow Operative innovatively combines IBM Skills Build 
 1. The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality. 
 2. With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one. 
 3. Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step. 
-##Why we think the Incremental Model Fits our Project: 
+### Why we think the Incremental Model Fits our Project: 
 1. Gradual Progress: Since our game includes different mechanics (e.g., running, jumping, sliding), puzzles, and IBM skill badge questions, we could develop one feature at a time. For example, we can first build core mechanics, then puzzles, and then implement the card system for enhancing IBM skills. 
 2. Feedback after Each Increment: After each partial development done , we can test it and get the feedback. This ensures that individual components work as intended before combining them into the final game. 
 3. Risk Management: The Incremental Model is useful when different features have varying complexities. It helps manage risk by addressing simpler features first and more complex ones later, ensuring a steady development pace. 
