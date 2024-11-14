@@ -10,9 +10,10 @@
 | Heria Chen     | qzxl76       |
 | Toby Davis     | cltz62       |
 
-Group Number: 5
-Date the document was prepared:
-Version: 1.0.2
+* Group Number: 5
+* Date the document was prepared:
+* Version: 1.0.2
+
 
 # 1 - Introduction
 
@@ -216,4 +217,95 @@ $$
 
 ## 3.2 - Development Approach
 
+### 3.2.1 - Incremental Model
+
+* The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
+
+* With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
+
+* Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
+
+### 3.2.2 - In the context of the project
+
+1. Gradual Progress: Since our game includes different mechanics (e.g., running, jumping, sliding), puzzles, and IBM skill badge questions, we could develop one feature at a time. For example, we can first build core mechanics, then puzzles, and then implement the card system for enhancing IBM skills.
+
+2. Feedback after Each Increment: After each partial development done , we can test it and get the feedback. This ensures that individual components work as intended before combining them into the final game.
+
+3. Risk Management: The Incremental Model is useful when different features have varying complexities. It helps manage risk by addressing simpler features first and more complex ones later, ensuring a steady development pace.
+
+4. Flexibility: when we developing the program , client might change the requirement or we need to adjust the direction or the function of our project , while incremental model plays a very important role to help us prevent from deleting a large number of previous documents
+
+5. Player engagement: incremental model means we can republic our game in advance even thought we haven't finished the whole game , we can get the feedback from the client and vary our direction or adjust our code base on the feedback immediately .
+
+6. Suitable for small team : Since we are a small which only has 7 people , the incremental model help us allocate the work more efficacy , we only need to focus on the specific content each time , and makes all the people engaged , also can clearly keep tracking work progress.
+
+7. Simplicity: The incremental model provides straightforward, predictable development process, also offers a structured, step-by-step approach with clear deliverables at each stage.
+
 ## 3.3 - Project Schedule
+
+### Art / Vision Design
+
+* due to **Unity** offering an open source template that closely
+matches the client's vision of the final game we have decided to
+have an extended period of planning the aspects of the game such as
+
+1) game mechanics (stealth, guns, puzzles)
+2) art direction
+
+### RAG Analysis and the Questions Bank
+
+* from `2024-11-06` to `2024-11-20` we want to finish the client's request for
+a RAG analysis of the IBM courses
+
+* which will be needed in order to create the questions bank for the puzzles
+of the game, as per request of the client, the puzzles will be related to the **IBM Skills Build**
+courses
+
+### C# / Unity Acquaintance
+
+* not all of us have worked in the past with `C#/Unity`, due to this we have planned
+a long lasting period (until the end Christmas Vacation) where we can familiarize ourselves
+with the tools at our disposal
+
+### Refactor Unity template
+
+* as mentioned in `Art / Vision Design` **Unity** offers a starter template, which
+will be refactored in such a way to suit our needs and / or coding style
+
+### Game Mechanics Implementation and Test Plan
+
+* these phases begin at the same time and we hope to identify a viable
+testing plan while developing game mechanics such as:
+
+1) basic movement
+2) stealth mechanics
+3) combat mechanics
+4) enemies
+
+### Level Design and IBM Education Integration
+
+* after the `Game Mechanics Implementation` phase once we have
+a solid foundation we can start the `Level Design` phase which
+consists in the creation of **3 stages**
+
+* and create puzzles for the 3 stages which will **act as a
+progression system**
+
+* we will use the **questions bank** made in the first stages
+of the development to enrich the puzzles with IBM Skills Build questions
+
+### Technical Report and Product Presentation
+
+* they will start to run in parallel once we are at the end of the development
+cycle with the `Game Mechanics Implementation`
+
+### Gantt Chart
+
+<p align="center">
+    <img src="./images/gantt-chart.png">
+</p>
+
+### Key deadlines
+
+* `2024-11-28`: Finish client RAG Analysis and Questions Bank
+* `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
