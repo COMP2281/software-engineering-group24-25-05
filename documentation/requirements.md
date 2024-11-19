@@ -101,32 +101,32 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 
 
-User Stories:
+### User Stories:
 
+### Stealth Gameplay (MAIN GAME MECHANICS)
+	MoSCoW Prioritisation : Must Have 
+**User Story:** 
 
-### Stealth Gameplay
+As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
+Feature: Stealth Mechanics
 
-**User Story:** As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
+**BR1.1Scenario:** Using Cover to Avoid Detection
 
-**Feature:** Stealth Mechanics
-
-**BR1.1 Scenario:** Using Cover to Avoid Detection
 - Given the player is near enemy guards,
-- And the player is within a visible range of the guard’s line of sight,
+- And the player is within the guard’s line of sight,
 - When the player moves into cover (e.g vent, shadowed area, or behind an object),
-- Then the guards should not detect the player,
-- And the player should remain hidden until they exit the cover.
+- Then the guards should not detect the player.
 
-**BR1.2 Scenario:** Moving Fast to Avoid Detection
-- Given the player is outside any cover,
-- And the player is near enemy guards,
-- When the player moves at high movement speed past the guards,
-- Then the guards should detect the player,
-- And the guards should alert others or start chasing the player.
+**BR1.2 Scenario:** Making Sound near Guards
+- Given the player is making noise,,,
+- When a guard is within earshot,
+- Then then an investigation state should be triggered,
+- And the guard should investigate the noise made.
+- And if the guard detects the player, an alert state is triggered.
 
-**BR1.3 Scenario:** Crouch Walking to Avoid Detection
+**BR1.3 Scenario: Crouch Walking to Avoid Detection**
 - Given the player is outside any cover,
-- And the player is within a visible range of the guard’s line of sight,
+- And the player is within the  guard’s line of sight,
 - When the player moves slowly in a crouched or stealthy stance,
 - Then the guards should have a reduced chance of detecting the player,
 - And the player can bypass guards without triggering an alert if they remain at a safe distance.
@@ -145,22 +145,15 @@ User Stories:
 - Then the guards should return to their normal patrol behaviour,
 - And the alert state should end.
 
-**MoSCoW:**
+**Rationale**
 
-**Must Have:**
-- Guards have a line of sight that determines player detection.
-- Players can enter cover to avoid being detected by guards.
-- Alerted guards start pursuing the player when detected.
-- Alerted Guards return to their patrol after losing altered state.
+Implementing this feature would contribute significantly to the client’s objectives as the core gameplay feature in the game design desired by the client was Stealth. 
 
-**Should Have:**
-- A variety of cover types with different effects on detection.
+Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have”.
 
-**Could Have:**
-- Guards alert other guards
+**MoSCoW Priority** : **MUST HAVE**
 
-**Won’t Have:**
-- Complex AI behaviours for guards (e.g., complex search patterns when alert).
+
 
 
 
