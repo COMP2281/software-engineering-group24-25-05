@@ -103,8 +103,8 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 ### User Stories:
 
-### Stealth Gameplay (MAIN GAME MECHANICS)
-	MoSCoW Prioritisation : Must Have 
+### Stealth Gameplay 
+	 
 **User Story:** 
 
 As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
