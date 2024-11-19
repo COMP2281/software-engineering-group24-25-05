@@ -149,10 +149,9 @@ As a player, I want a side-scrolling experience where I can use stealth mechanic
 **Rationale**
 
 Implementing this feature would contribute significantly to the client’s objectives as the core gameplay feature in the game design desired by the client was Stealth. 
+Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have."
 
-Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have”.
-
-**MoSCoW Priority** : **MUST HAVE**
+**MoSCoW Priority**: **MUST HAVE**
 
 This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
 
