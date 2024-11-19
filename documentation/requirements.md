@@ -243,69 +243,82 @@ $$
 
 ## 3.3 - Project Schedule
 
-### Art / Vision Design
-
-* due to **Unity** offering an open source template that closely
-matches the client's vision of the final game we have decided to
-have an extended period of planning the aspects of the game such as
-
-1) game mechanics (stealth, guns, puzzles)
-2) art direction
-
-### RAG Analysis and the Questions Bank
-
-* from `2024-11-06` to `2024-11-20` we want to finish the client's request for
-a RAG analysis of the IBM courses
-
-* which will be needed in order to create the questions bank for the puzzles
-of the game, as per request of the client, the puzzles will be related to the **IBM Skills Build**
-courses
-
-### C# / Unity Acquaintance
-
-* not all of us have worked in the past with `C#/Unity`, due to this we have planned
-a long lasting period (until the end Christmas Vacation) where we can familiarize ourselves
-with the tools at our disposal
-
-### Refactor Unity template
-
-* as mentioned in `Art / Vision Design` **Unity** offers a starter template, which
-will be refactored in such a way to suit our needs and / or coding style
-
-### Game Mechanics Implementation and Test Plan
-
-* these phases begin at the same time and we hope to identify a viable
-testing plan while developing game mechanics such as:
-
-1) basic movement
-2) stealth mechanics
-3) combat mechanics
-4) enemies
-
-### Level Design and IBM Education Integration
-
-* after the `Game Mechanics Implementation` phase once we have
-a solid foundation we can start the `Level Design` phase which
-consists in the creation of **3 stages**
-
-* and create puzzles for the 3 stages which will **act as a
-progression system**
-
-* we will use the **questions bank** made in the first stages
-of the development to enrich the puzzles with IBM Skills Build questions
-
-### Technical Report and Product Presentation
-
-* they will start to run in parallel once we are at the end of the development
-cycle with the `Game Mechanics Implementation`
-
-### Gantt Chart
+### 3.3.1 - Gantt Chart
 
 <p align="center">
     <img src="./images/gantt-chart.png">
 </p>
 
-### Key deadlines
+### 3.3.2 - Art / Vision Design
+
+Due to **Unity** offering an open source template that closely
+matches the client's vision of the final game we have decided to
+have an extended period of planning the aspects of the game such as:
+
+Game mechanics which include: stealth mechanics, boss fights (as per request of the client),
+integration of IBM's Granite AI into the project which would make game feel more "alive" as
+it adapts to the player's behaviour, and lastly the educational part of the game
+which integrates content from IBM's SkillsBuild.
+
+Careful thought has to go to the game's art direction, while the client
+specified CounterSpy as an inspiration he has allowed us to have artistic liberty
+which allows us to choose a style that could mesh together all of the client's
+requests.
+
+### 3.3.3 - RAG Analysis and the Questions Bank
+
+As mentioned in `3.3.1` the game has an educational side and the client
+has tasked us with taking questions from the IBM SkillsBuild courses
+and integrating them into the game.
+
+This is one of the first things that need to be completed in order
+to have a clear vision over how the game should take shape.
+
+### 3.3.4 - C# / Unity Acquaintance
+
+Not all of our team is well acquainted with the `C#` / `Unity` environment,
+because of this we have planned a long lasting period (until the end of Christmas
+Vacation) where we can familiarize ourselves with the toolset.
+
+For the team members who already have experience, there is a period
+dedicated to refactoring the Unity template in order to better suit our needs.
+
+### 3.3.5 - Game Mechanics Implementation and Test Plan
+
+The Game Mechanics Implementation and preparation of the Test Plan
+will run in parallel, as we develop the game incrementally we
+can identify ways of testing our solution.
+
+Key mechanics that have to be implemented and polished are:
+
+1) Basic movement: movement should feel fluid, responsive, must include
+crouching (stealth).
+
+2) Stealth Mechanics: "light" and "dark" zones where the AI of
+the laboratory can either see you or not, if detected sends enemies
+
+3) The environment reacting to the player: by using IBM's Granite AI
+we hope to achieve enemies/bosses that react dynamically to the player;
+and even in the case of the educational side make the questions harder/easier
+depending on the success rate of the player.
+
+### 3.3.6 - Level Design and IBM Education Integration
+
+Once we have a solid foundation of game mechanics we expect
+to be able to create a plausible environment around said mechanics.
+
+We plan on having `3` different stages due to how the **Questions Bank**
+is based off of 3 different IBM SkillsBuild courses.
+
+Each stage would teach the player different game mechanics and introduce
+new concepts.
+
+### 3.3.7 - Technical Report and Product Presentation
+
+They will start to run in parallel once we are at the end of the development
+cycle with the **Game Mechanics Implementation**
+
+### 3.3.8 - Key Deadlines
 
 * `2024-11-28`: Finish client RAG Analysis and Questions Bank
 * `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
