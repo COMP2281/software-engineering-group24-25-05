@@ -123,7 +123,7 @@ $$
 \begin{aligned}
   &\text{Consequence}=4 \\
   &\text{Likelihood}=2 \\
-  &\text{Risk}=4\times2=8 \implies {\color{orange}\text{High}}
+  &\text{Risk}=4\times2=8 \implies {\color{red}\text{High}}
 \end{aligned}
 $$
 
@@ -139,7 +139,7 @@ $$
 \begin{aligned}
   &\text{Consequence}=3 \\
   &\text{Likelihood}=3 \\
-  &\text{Risk}=4\times2=9 \implies {\color{orange}\text{High}}
+  &\text{Risk}=4\times2=9 \implies {\color{red}\text{High}}
 \end{aligned}
 $$
 
@@ -175,7 +175,7 @@ $$
 \begin{aligned}
   &\text{Consequence}=2 \\
   &\text{Likelihood}=1 \\
-  &\text{Risk}=2\times1=2 \implies {\color{orange}\text{Low}}
+  &\text{Risk}=2\times1=2 \implies {\color{green}\text{Low}}
 \end{aligned}
 $$
 
