@@ -139,6 +139,305 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 ## 2.2 - Behavioural Requirements
 
+User Stories:
+Stealth Gameplay (MAIN GAME MECHANICS)
+User Story: As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
+Feature: Stealth Mechanics
+Gherkin:
+Scenario: Using Cover to Avoid Detection
+Given the player is near enemy guards,
+And the player is within a visible range of the guard’s line of sight,
+When the player moves into cover (e.g vent, shadowed area, or behind an object),
+Then the guards should not detect the player,
+And the player should remain hidden until they exit the cover.
+Scenario: Moving Fast to Avoid Detection
+Given the player is outside any cover,
+And the player is near enemy guards,
+When the player moves at high movement speed past the guards,
+Then the guards should detect the player,
+And the guards should alert others or start chasing the player.
+Scenario: Crouch Walking to Avoid Detection
+Given the player is outside any cover,
+And the player is within a visible range of the guard’s line of sight,
+When the player moves slowly in a crouched or stealthy stance,
+Then the guards should have a reduced chance of detecting the player,
+And the player can bypass guards without triggering an alert if they remain at a safe distance.
+Scenario: Triggering an Alert When Spotted
+Given the player is within a visible range of the guard’s line of sight,
+And the player is not in cover,
+When the guard spots the player,
+Then an alert state should be triggered,
+And nearby guards should move toward the player’s last known position.
+Scenario: Returning to Patrol after Losing Sight of Player
+Given guards are in an alert state after spotting the player,
+And the player has moved out of their line of sight,
+When the guards do not detect the player for a set amount of time,
+Then the guards should return to their normal patrol behaviour,
+And the alert state should end.
+MoSCoW:
+Must Have:
+Guards have a line of sight that determines player detection.
+Players can enter cover to avoid being detected by guards.
+Alerted guards start pursuing the player when detected.
+Alerted Guards return to their patrol after losing altered state.
+Should Have:
+A variety of cover types with different effects on detection.
+Could Have:
+Guards alert other guards
+Won’t Have:
+Complex AI behaviours for guards (e.g., complex search patterns when alert).
+
+Educational Engagement
+User Story: As a player, I want to answer AI, Cybersecurity, and Data Analytics questions to earn boosts, so I can improve my gameplay skills and understand IBM Skills Build concepts.
+Feature: IBM Skills Question Bank
+Scenario: Player Encountered After Getting Caught by a Guard
+Given the player has been detected by a guard,
+When the quiz prompt appears on the screen,
+Then the player must answer a question related to AI, Data Analytics, or Cybersecurity,
+Scenario: Quiz at the End of the Level
+Given the player has reached the final challenge of the level,
+When the quiz prompt appears on the screen,
+Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity,
+And if the player answers all questions correctly, they gain bonus points and level-up opportunities,
+And if the player answers incorrectly, they may proceed but with reduced resources in the next level.
+MoSCoW:
+Must Have:
+Quiz prompt triggered upon detection by a guard, with questions related to IBM Skills (AI, Cybersecurity, Data Analytics).
+Quiz prompt at the end of each level with a series of IBM Skills questions that award bonus points for correct answers.
+Should Have:
+Different levels of question difficulty depending on the player’s progress within the game.
+Could Have:
+Detailed progress tracking of IBM Skills in a player’s profile, showing strengths and weaknesses in each knowledge area.
+Rewards for consistent correct answers across multiple levels (e.g., unlocking special abilities or game content).
+Won’t Have:
+Full tutorials or lessons on IBM Skills concepts within the game.
+In-depth skill explanations after each quiz, as the focus is on engaging gameplay rather than comprehensive training.
+
+Pause Screen
+User Story: As a player, I want to be able to pause my game so that I can take a break from the game or change the settings.
+Feature: Pause Screen
+Background:
+Given the player is in a level
+When the player presses the designated pause key on the keyboard
+Then the game pauses
+And the Pause screen is displayed
+Scenario: Taking a break from the game
+Given the game is paused
+Then the player can resume gameplay by pressing the designated pause key again
+Scenario: Accessing and Adjusting Game Settings from the Pause Screen
+Given the game is paused
+When the player selects the settings option from the Pause screen
+Then the settings menu is displayed
+And the player can adjust settings to their preference
+MoSCoW:
+Must Have:
+Pause Functionality: Pressing the pause key must reliably pause the game and display the Pause screen.
+Resume Functionality: Pressing the pause key again must resume gameplay from where it was paused.
+Should Have:
+Settings Access: While the game is paused, the player should be able to access the settings menu to adjust preferences, such as audio, graphics, and controls.
+Could Have:
+Additional Options on Pause Screen: Options like “Quit Level” or “Restart Level” could be added for convenience but are not critical to the core pause functionality.
+In-game Tips or Hints on Pause Screen: Could display hints or objectives when paused to remind the player of their current goals.
+Won’t Have:
+Save Game Option: If this is an action game or doesn’t involve complex progress tracking, a save function may be unnecessary on the pause screen.
+
+AI Boss
+User Story: As a player, I want an AI boss that challenges my skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under immense pressure.
+Feature:
+Adaptive Learning
+Scenario: Testing Stealth Skills
+Given the player has previously failed on majority Stealth based tasks in the game
+When they encounter the final boss
+Then the boss will adapt the the level environment so that the player must use stealth to try avoid being found by the Boss’s goons
+But there will still be elements of the other skills  
+Scenario: Testing AI Knowledge with Adaptive Quiz Challenges
+Given the player has previously struggled with AI-related quiz questions in the game
+When they encounter the final boss
+Then the boss will challenge the player with an adaptive AI quiz that includes harder questions based on previous failures
+And the player must complete the quiz successfully to disable part of the boss’s defences
+Scenario: Testing Cybersecurity Skills with an Adaptive Puzzle Challenge
+Given the player has previously struggled with cybersecurity questions in the game
+When they encounter the final boss
+Then the final puzzle to defeat the boss will include additional complex layers of encryption and security checks
+And the player must solve these adaptive puzzles to unlock the boss’s weakness
+Scenario: Testing Data Analytics Skills
+Given the player has previously failed on majority of Data Analytics questions in the quizzes in the game
+When they encounter the final boss
+Then the
+MoSCoW:
+Must Have:
+Adaptive Boss Encounter: Boss adjusts tactics based on the player’s performance in stealth, quizzes, and cybersecurity.
+Stealth Challenge Adaptation: Adds stealth difficulty (e.g., more vigilant guards) if the player struggled with stealth tasks.
+Quiz-Based Challenge: Boss includes quiz-based checks for AI and cybersecurity, focusing on the player’s weaker areas.
+Cybersecurity Puzzle Difficulty: Final puzzle becomes more complex if the player struggled with cybersecurity tasks in previous challenges.
+Should Have:
+Dynamic Environment Adjustments: Boss can alter environment elements (e.g., lighting, patrols) in real-time based on player strengths and weaknesses.
+Skill Mastery Rewards: Rewards for demonstrating skill mastery (e.g., temporary advantage in battle).
+Could Have:
+Intermittent Knowledge Checks: Mini-quiz questions mid-battle to gain an advantage for correct answers.
+Skill-Specific Phases: Distinct phases for stealth, hacking, and combat, adjusting difficulty based on the player’s previous performance.
+Won’t Have:
+Backtracking for Skill Improvement: No requirement to revisit previous levels to improve skills.
+Separate Adaptive Bosses: Only one adaptive boss will incorporate all skill areas.
+
+VFX
+User Story: As a player, I want to have music and sound effects in the game so that when I am playing the game feels more immersive and fun.
+Feature:
+VFX
+Scenario: Background Music for Immersive Atmosphere
+Given the player is in a game level
+When the level starts
+Then background music plays that matches the mood and intensity of the level
+And the player can adjust the volume in settings
+Scenario: Sound effects for actions
+Given the player performs an action (e.g., shooting, opening doors, or collecting items)
+When the action occurs
+Then a corresponding sound effect plays to reflect the action
+And the sound effect volume is consistent with the settings
+Scenario: Adaptive Music for Boss Encounters
+Given the player is entering a boss encounter
+When the encounter begins
+Then the music dynamically shifts to a more intense track
+And the music fades back to normal when the boss is defeated
+Scenario: Environmental Sound Effects
+Given the player is moving through different environments (e.g., forests, caves, buildings)
+When the player enters a new environment
+Then ambient sound effects play (e.g., wind, footsteps, machinery) to match the setting
+And these effects enhance immersion by changing with player movement
+MoSCoW:
+Must Have:
+Background Music: Background music that enhances immersion and matches the level’s mood.
+Action Sound Effects: Sound effects for common player actions (e.g., movement, shooting) to provide feedback.
+Volume Control: Settings menu to adjust the volume of music and sound effects.
+Should Have:
+Adaptive Music for Boss Battles: Dynamic music changes during boss encounters to build tension.
+Environmental Sound Effects: Ambient sounds that match different environments, enhancing immersion.
+Positional Audio: Sounds that reflect the player’s position, such as footsteps getting louder or softer.
+Could Have:
+Reactive Sound Effects: Sound changes based on gameplay context (e.g., faster music during high action).
+Special Effect Sounds: Unique sounds for special events like level completion or significant discoveries.
+Immersive 3D Audio: Enhanced spatial audio for a more realistic sound experience if wearing headphones.
+Won’t Have:
+Voice Acting: No voice-acted dialogue to focus resources on essential music and sound effects.
+Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
+
+6. Stylised Cold War era cartoonish graphics/art
+   User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
+   Feature: Stylised art
+   Scenario: Cold War era background and atmosphere
+   Given the player is exploring the Cold War era military base
+   When they move through the map
+   Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
+   And the player feels immersed in the tense atmosphere
+   Scenario: Enemy uniforms
+   Given An enemy is in the player’s vision cone
+   When the enemy renders on the screen
+   Then the enemy is clothed in dark militaristic uniforms
+   And their uniform is contrasted by bright red Soviet Union insignias
+   And the user is able to identify guards
+   Scenario: Stealing plans
+   Given the player enters a room
+   When they look around the room
+   Then the player is greeted by dim overhead lights which cast a glow on a desk
+   And the desk is covered in battle plans and classified documents
+   And the room’s cabinets are filled with 1960s era technology
+   Moscow:
+   Must Have:
+   Enemy uniforms: Enemies must be clad in dark, militaristic uniforms with bright red soviet insignias/badges helping the player easily identify enemies
+   Background: The background colours of the game at any given moment must give a sense of a soviet era game with high tension and stress
+   Architecture: The structure of the enemy base must be one that is designed in a similar manner to actual soviet era bases to enrich the player’s experience.
+   Should Have:
+   Technology: Technology from that era should be placed around the rooms where the plans are being stolen from (e.g radios, CRT monitors)
+   Vehicles: Militaristic soviet vehicles can be placed around the map
+   Equipment: Guns used should resemble weapons used in the Soviet union during the 1960s
+
+- Could Have:
+- Relevant propaganda: Some documents and posters could reference real events that took place during the cold war - Won’t Have - 3D Graphics : Graphics will be 2D due to the game being a sidescroller - Realism : The graphics won’t be realistic to keep with the cartoony counter spy theme - Blood & Gore : No overly violent game due to the game being 16+
+
+7. Playable story
+   User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly
+   Feature : Story unfolds based on user choices
+   Scenario : Player is assigned a new mission when they complete their previous one
+   Given the player is given a mission
+   When they complete the mission
+   Then the player is assigned a new mission  
+   Scenario: Player receives a reward when they complete a mission
+   Given the player is completing a mission  
+   When complete their mission
+   Then the player receives a reward  
+   And the player’s stats are upgraded  
+   Moscow
+   Must Have
+   Multiple Missions : Game should have more than one mission
+   Rewards : Player should receive rewards after completing a mission
+   Should Have :
+   Different types of missions : Add variety of missions to keep the game interesting
+   Could Have :
+   Choices : The player could have the choice to pick between the missions they want to complete for different rewards
+   Won’t Have :
+   Branching story : Story will not have multiple endings
+8. Movement mechanics
+   User story: As a player, I want to have basic movement so I can navigate the map
+   Feature: Movement
+   Scenario: Horizontal movement
+   Given the player is moving their character
+   When the player presses a movement key
+   Then the character should move in the corresponding direction
+   Scenario: Sprinting
+   Given the player is moving
+   When the player holds the sprint button
+   Then the player should move faster until their stamina is depleted
+   Scenario: Vertical movement
+   Given the player is standing or moving on a solid surface
+   When the player presses the spacebar
+   Then then the character moves upwards in the air  
+   And the player’s character reaches peak height
+   And the character starts moving downwards  
+   Moscow
+   Must Have
+   Horizontal movement : Player moves left and right when holding down the corresponding movement keys
+   Vertical movement : Player is able to jump to get to higher platforms
+   Should Have
+   Sprinting : Player can sprint to move faster, improving the pacing of the game.
+   Could Have
+   Double jump : Player can jump again mid air  
+   Sliding : Player can fluidly slide when running, giving the player more options
+   Won’t Have
+   Flying : Player will not be able to fly
+   Vehicular movement : Player will not be able to enter vehicles and use them
+
+9. Combat mechanics
+   User story : As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
+   Feature : Combat
+   Scenario :
+   Given the player is engaging an enemy
+   When the player shoots
+   Then the enemy takes damage
+   Scenario
+   Given the player shoots an enemy
+   When the enemy’s health drop’s below 0
+   Then the enemy dies
+   And the enemy drops a coin
+   Scenario
+   Given the player is next to an enemy
+   When the player melee attacks the enemy
+   Then the enemy immediately dies
+   And the enemy drops two coins
+   Moscow
+   Must Have :
+   Shooting mechanics : The player should be able to shoot bullets at enemies
+   Melee mechanics : The player should be able to melee attack enemies when close enough
+   Damage feedback : Health bars displayed for player and enemies which is adjusted according to their health points left
+   Should Have
+   Throwable items : Items purchased by the player can be thrown at enemies
+   Headshots multiplier : Enemies take more damage when hit in the head
+   Could Have
+   Bullet physics : Bullets can be affected by gravity
+   Adrenaline : When the player is near death they gain a temporary adrenaline boost
+   Won’t Have
+   Scopes : No guns will have scoped shooting
+   Bloom & recoil : Guns will have no firing error or recoil
+
 # 3 - Project Management
 
 ## 3.1 - Risks and Issues
