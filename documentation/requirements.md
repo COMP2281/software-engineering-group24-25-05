@@ -218,51 +218,42 @@ As a player, I want to be able to pause my game so that I can take a break from 
 Implementing this feature would enhance the user’s gameplay experience and improve the overall quality of life within the game. Rather than having to complete the game in a single session, players would be able to pause the game, and complete it a later time. Although a pause screen is not explicitly mentioned as a core requirement, this feature adds flexibility and convenience to the game, therefore significantly improving the game’s quality of life, achieving the client’s objectives of a high quality user experience ; Due to the reasons outlined above, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
 **MoSCoW: COULD HAVE**
+
 This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
 
 
 ### AI Boss
-User Story: As a player, I want an AI boss that challenges my skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under immense pressure.
-Feature: Adaptive Learning
+**User Story:** 
+As a player, I want an AI boss that challenges the skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
+**Feature:** Adaptive Learning
 
 **BR4.1 Scenario:** Testing Stealth Skills
-- Given the player has previously failed on majority Stealth based tasks in the game
+- Given the player has demonstrated weakness in Stealth based tasks in the game
 - When they encounter the final boss
-- Then the boss will adapt the the level environment so that the player must use stealth to try avoid being found by the Boss’s goons
-- But there will still be elements of the other skills  
+- Then the boss will adapt the the level environment to include stealth based mechanics 
+- But the main objective is still the final quiz  
 
-**BR4.2 Scenario:** Testing AI Knowledge with Adaptive Quiz Challenges
-- Given the player has previously struggled with AI-related quiz questions in the game
+**BR4.2 Scenario:** Quiz adjustment 
+- Given the player has previously struggled with certain topics.
 - When they encounter the final boss
-- Then the boss will challenge the player with an adaptive AI quiz that includes harder questions based on previous failures
-- And the player must complete the quiz successfully to disable part of the boss’s defences
+- Then the boss can adapt to the player’s weaknesses 
+- And generate a custom quiz for the player 
+- And include the player’s weaknesses in the custom quiz 
 
-**BR4.3 Scenario:** Testing Cybersecurity Skills with an Adaptive Puzzle Challenge
-- Given the player has previously struggled with cybersecurity questions in the game
-- When they encounter the final boss
-- Then the final puzzle to defeat the boss will include additional complex layers of encryption and security checks
-- And the player must solve these adaptive puzzles to unlock the boss’s weakness
+**BR4.3 Scenario:** Combat mechanics adjustment
+- Given the player has demonstrated weakness in combat abilities
+- When the player encounters the final boss
+- Then can adjust the level to include to include an element of combat based mechanics alongside the final quiz
+- But the main objective is still the final quiz 
 
-**MoSCoW:**
+**RATIONALE**
+Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements.
+The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications. Whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult. Consequently, this feature’s MoSCoW prioritisation is classified as 
+“Must Have.”
 
-**Must Have:**
-- Adaptive Boss Encounter: Boss adjusts tactics based on the player’s performance in stealth, quizzes, and cybersecurity.
-- Stealth Challenge Adaptation: Adds stealth difficulty (e.g., more vigilant guards) if the player struggled with stealth tasks.
-- Quiz-Based Challenge: Boss includes quiz-based checks for AI and cybersecurity, focusing on the player’s weaker areas.
-- Cybersecurity Puzzle Difficulty: Final puzzle becomes more complex if the player struggled with cybersecurity tasks in previous challenges.
+**MoSCoW: MUST HAVE**
 
-**Should Have:**
-- Dynamic Environment Adjustments: Boss can alter environment elements (e.g., lighting, patrols) in real-time based on player strengths and weaknesses.
-- Skill Mastery Rewards: Rewards for demonstrating skill mastery (e.g., temporary advantage in battle).
-
-**Could Have:**
-- Intermittent Knowledge Checks: Mini-quiz questions mid-battle to gain an advantage for correct answers.
-- Skill-Specific Phases: Distinct phases for stealth, hacking, and combat, adjusting difficulty based on the player’s previous performance.
-
-**Won’t Have:**
-- Backtracking for Skill Improvement: No requirement to revisit previous levels to improve skills.
-- Separate Adaptive Bosses: Only one adaptive boss will incorporate all skill areas.
-
+This feature is considered a “Must Have” as it directly supports the client’s core requirements and objectives.
 
 
 ### VFX
