@@ -98,6 +98,126 @@ To ensure that our refined requirements aligned accurately with the client’s n
 Our team then met to discuss the client’s feedback and refine our understanding of the project’s requirements. We identified key features, such as question generation, dynamic difficulty adjustment, and boss interactions, that would enhance the game’s educational value and align with the client’s objectives.
 
 ## 2.2 - Behavioural Requirements
+6) Stylised Cold War era cartoonish graphics/art 
+User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
+Feature: Stylised art 
+Scenario: Cold War era background and atmosphere
+Given the player is exploring the Cold War era military base
+When they move through the map 
+Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters 
+And the player feels immersed in the tense atmosphere
+Scenario: Enemy uniforms 
+Given An enemy is in the player’s vision cone 
+When the enemy renders on the screen
+Then the enemy is clothed in dark militaristic uniforms 
+And their uniform is contrasted by bright red Soviet Union insignias 
+And the user is able to identify guards
+Scenario: Stealing plans
+Given the player enters a room 
+ When they look around the room 
+Then the player is greeted by dim overhead lights which cast a glow on a desk
+And the desk is covered in battle plans and classified documents
+And the room’s cabinets are filled with 1960s era technology 
+Moscow:
+Must Have:
+Enemy uniforms: Enemies must be clad in dark, militaristic uniforms with bright red soviet insignias/badges helping the player easily identify enemies 
+Background: The background colours of the game at any given moment must give a sense of a soviet era game with high tension and stress
+Architecture: The structure of the enemy base must be one that is designed in a similar manner to actual soviet era bases to enrich the player’s experience.
+Should Have:
+Technology: Technology from that era should be placed around the rooms where the plans are being stolen from (e.g radios, CRT monitors)
+Vehicles: Militaristic soviet vehicles can be placed around the map
+Equipment: Guns used should resemble weapons used in the Soviet union during the 1960s 
+- Could Have:
+-   Relevant propaganda: Some documents and posters could reference real events that took place during the cold war 
+		- Won’t Have
+			- 3D Graphics : Graphics will be 2D due to the game being a sidescroller
+			- Realism : The graphics won’t be realistic to keep with the cartoony counter spy theme 
+			- Blood & Gore : No overly violent game due to the game being 16+ 
+		
+7) Playable story 
+User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly	
+Feature : Story unfolds based on user choices
+Scenario : Player is assigned a new mission when they complete their previous one
+Given the player is given a mission
+When they complete the mission 
+Then the player is assigned a new mission    
+Scenario: Player receives a reward when they complete a mission 
+Given the player is completing a mission  
+When complete their mission 
+Then the player receives a reward  
+And the player’s stats are upgraded  
+Moscow 
+Must Have
+Multiple Missions : Game should have more than one mission
+Rewards : Player should receive rewards after completing a mission 
+Should Have :	
+Different types of missions : Add variety of missions to keep the game interesting 
+Could Have :
+Choices : The player could have the choice to pick between the missions they want to complete for different rewards 
+Won’t Have : 
+Branching story : Story will not have multiple endings 
+8) Movement mechanics 
+User story: As a player, I want to have basic movement so I can navigate the map 
+Feature: Movement
+Scenario: Horizontal movement 
+Given the player is moving their character 
+When the player presses a movement key 
+Then the character should move in the corresponding direction 
+Scenario: Sprinting 
+Given the player is moving 
+When the player holds the sprint button 
+Then the player should move faster until their stamina is depleted
+Scenario: Vertical movement 
+Given the player is standing or moving on a solid surface 
+When the player presses the spacebar 
+Then then the character moves upwards in the air  
+And the player’s character reaches peak height 
+And the character starts moving downwards  
+Moscow 
+Must Have 
+Horizontal movement : Player moves left and right when holding down the corresponding movement keys 
+Vertical movement : Player is able to jump to get to higher platforms 
+Should Have 
+Sprinting : Player can sprint to move faster, improving the pacing of the game.
+Could Have 
+Double jump : Player can jump again mid air  
+Sliding : Player can fluidly slide when running, giving the player more options 
+Won’t Have 
+Flying : Player will not be able to fly 
+Vehicular movement : Player will not be able to enter vehicles and use them 
+ 
+9) Combat mechanics 
+User story : As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
+Feature : Combat 
+Scenario : 
+Given the player is engaging an enemy 
+When the player shoots 
+Then the enemy takes damage 
+Scenario 
+Given the player shoots an enemy 
+When the enemy’s health drop’s below 0 
+Then the enemy dies 
+And the enemy drops a coin 
+Scenario 
+Given the player is next to an enemy 
+When the player melee attacks the enemy 
+Then the enemy immediately dies 
+And the enemy drops two coins 
+Moscow
+Must Have : 
+Shooting mechanics : The player should be able to shoot bullets at enemies
+Melee mechanics : The player should be able to melee attack enemies when close enough 
+Damage feedback : Health bars displayed for player and enemies which is adjusted according to their health points left 
+Should Have 
+Throwable items : Items purchased by the player can be thrown at enemies
+Headshots multiplier : Enemies take more damage when hit in the head
+Could Have 	
+Bullet physics : Bullets can be affected by gravity 
+Adrenaline : When the player is near death they gain a temporary adrenaline boost 
+Won’t Have 
+Scopes : No guns will have scoped shooting 
+Bloom & recoil : Guns will have no firing error or recoil 
+
 
 # 3 - Project Management
 
