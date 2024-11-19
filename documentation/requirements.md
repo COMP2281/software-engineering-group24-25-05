@@ -102,10 +102,12 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 
 User Stories:
+
 ### Stealth Gameplay
 
-**User Story**: As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
-Feature: Stealth Mechanics
+**User Story:** As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
+
+**Feature:** Stealth Mechanics
 
 **BR1.1 Scenario:** Using Cover to Avoid Detection
 - Given the player is near enemy guards,
@@ -162,8 +164,9 @@ Feature: Stealth Mechanics
 
 ### Educational Engagement
 
-User Story: As a player, I want to answer AI, Cybersecurity, and Data Analytics questions to earn boosts, so I can improve my gameplay skills and understand IBM Skills Build concepts.
-Feature: IBM Skills Question Bank
+**User Story:** As a player, I want to answer AI, Cybersecurity, and Data Analytics questions to earn boosts, so I can improve my gameplay skills and understand IBM Skills Build concepts.
+
+**Feature:** IBM Skills Question Bank
 
 **BR2.1 Scenario:** Player Encountered After Getting Caught by a Guard
 - Given the player has been detected by a guard,
@@ -278,9 +281,9 @@ Feature: Adaptive Learning
 
 ### VFX
 
-User Story: As a player, I want to have music and sound effects in the game so that when I am playing the game feels more immersive and fun.
-Feature:
-VFX
+**User Story:** As a player, I want to have music and sound effects in the game so that when I am playing the game feels more immersive and fun.
+
+**Feature:** VFX
 
 **BR5.1 Scenario:** Background Music for Immersive Atmosphere
 - Given the player is in a game level
@@ -368,7 +371,7 @@ Feature: Stylised art
 - Equipment: Guns used should resemble weapons used in the Soviet union during the 1960s 
 
 **Could Have:**
--   Relevant propaganda: Some documents and posters could reference real events that took place during the cold war
+- Relevant propaganda: Some documents and posters could reference real events that took place during the cold war
   
 **Won’t Have**
 - 3D Graphics : Graphics will be 2D due to the game being a sidescroller
@@ -380,7 +383,7 @@ Feature: Stylised art
 User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly	
 Feature : Story unfolds based on user choices
 
-**BR7.1 Scenario :** Player is assigned a new mission when they complete their previous one
+**BR7.1 Scenario:** Player is assigned a new mission when they complete their previous one
 - Given the player is given a mission
 - When they complete the mission 
 - Then the player is assigned a new mission    
@@ -409,7 +412,8 @@ Feature : Story unfolds based on user choices
 
 ### Movement mechanics 
 User story: As a player, I want to have basic movement so I can navigate the map 
-Feature: Movement
+
+**Feature:** Movement
 
 **BR8.1 Scenario:** Horizontal movement 
 - Given the player is moving their character 
@@ -431,30 +435,30 @@ Feature: Movement
 **MoSCoW:**
   
 **Must Have:** 
-- Horizontal movement : Player moves left and right when holding down the corresponding movement keys 
-- Vertical movement : Player is able to jump to get to higher platforms
+- Horizontal movement: Player moves left and right when holding down the corresponding movement keys 
+- Vertical movement: Player is able to jump to get to higher platforms
 
-**Should Have**
-- Sprinting : Player can sprint to move faster, improving the pacing of the game.
+**Should Have:**
+- Sprinting: Player can sprint to move faster, improving the pacing of the game.
 
 **Could Have:** 
-- Double jump : Player can jump again mid air  
-- Sliding : Player can fluidly slide when running, giving the player more options 
-**Won’t Have**
-- Flying : Player will not be able to fly 
-- Vehicular movement : Player will not be able to enter vehicles and use them 
+- Double jump: Player can jump again mid air  
+- Sliding: Player can fluidly slide when running, giving the player more options 
+**Won’t Have:**
+- Flying: Player will not be able to fly 
+- Vehicular movement: Player will not be able to enter vehicles and use them 
 
  
 ### Combat mechanics
-User story : As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
-Feature : Combat 
+**User story:** As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
+**Feature:** Combat 
 
-**BR9.1 Scenario : Shooting**
+**BR9.1 Scenario: Shooting**
 - Given the player is engaging an enemy 
 - When the player shoots 
 - Then the enemy takes damage 
 
-**BR9.2 Scenario** 
+**BR9.2 Scenario:** 
 - Given the player shoots an enemy 
 - When the enemy’s health drop’s below 0 
 - Then the enemy dies 
@@ -469,21 +473,21 @@ Feature : Combat
 **MoSCoW:**
 
 **Must Have:** 
-- Shooting mechanics : The player should be able to shoot bullets at enemies
-- Melee mechanics : The player should be able to melee attack enemies when close enough 
-- Damage feedback : Health bars displayed for player and enemies which is adjusted according to their health points left 
+- Shooting mechanics: The player should be able to shoot bullets at enemies
+- Melee mechanics: The player should be able to melee attack enemies when close enough 
+- Damage feedback: Health bars displayed for player and enemies which is adjusted according to their health points left 
 
 **Should Have:** 
-- Throwable items : Items purchased by the player can be thrown at enemies
-- Headshots multiplier : Enemies take more damage when hit in the head
+- Throwable items: Items purchased by the player can be thrown at enemies
+- Headshots multiplier: Enemies take more damage when hit in the head
 
 **Could Have:** 	
-- Bullet physics : Bullets can be affected by gravity 
-- Adrenaline : When the player is near death they gain a temporary adrenaline boost 
+- Bullet physics: Bullets can be affected by gravity 
+- Adrenaline: When the player is near death they gain a temporary adrenaline boost 
 
 **Won’t Have:** 
-- Scopes : No guns will have scoped shooting 
-- Bloom & recoil : Guns will have no firing error or recoil 
+- Scopes: No guns will have scoped shooting 
+- Bloom & recoil: Guns will have no firing error or recoil 
 
 
 # 3 - Project Management
