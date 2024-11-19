@@ -43,11 +43,11 @@ This document is organised as follows:
 
 ## 1.3 - System Description
 
-**System Overview**
+### 1.3.1 System Overview
 
 Shadow Operative is an educational game designed to help learners engage with IBM Skills Build content in an immersive and interactive environment. The game places players in the role of a spy during the Cold War, tasked with retrieving stolen plans for a cutting-edge AI system. Through skill-based challenges and AI-driven adaptive difficulty, players are guided through progressively complex levels that reinforce core IBM Skills Build concepts in a gamified format.
 
-**Research into Alternative Solutions**
+### 1.3.2 Research into Alternative Solutions
 
 In designing Shadow Operative, the team conducted extensive research into comparable games and educational platforms to inform and enhance its structure, mechanics, and learning approach. The following games served as key references, with their unique aspects and usefulness to Shadow Operative outlined below:
 
@@ -62,7 +62,7 @@ In designing Shadow Operative, the team conducted extensive research into compar
 - **Kahoot!**: This gamified quiz platform highlights the power of interactive question-based challenges and adaptive difficulty. It directly influences Shadow Operative's question generation system and difficulty adjustments, with timers and music used to create urgency in an educational context.
   - Limitation: Kahoot!'s approach lacks the narrative and immersive elements we aim to include, which Shadow Operative addresses by integrating learning into a cohesive story-driven experience.
 
-**Proposed Solution’s Technical Features**
+### 1.3.3 Proposed Solution’s Technical Features
 
 Shadow Operative integrates the following key technical features to create a unique, adaptive learning experience:
 
@@ -71,13 +71,13 @@ Shadow Operative integrates the following key technical features to create a uni
 - **Boss Interactions**: Key encounters, such as boss battles, act as knowledge assessments, where players demonstrate their understanding of core Skills Build concepts in a high-stakes, interactive format that reinforces learning.
 - **Stealth Mechanics**: Inspired by CounterSpy and Dishonored 2, Shadow Operative incorporates stealth elements like sneaking, cover mechanics, and enemy awareness to create a tense, immersive experience that complements the game's educational content, keeping the user engaged.
 
-**Integration Considerations**
+### 1.3.4 Integration Considerations
 
 Shadow Operative is designed as a standalone educational game; however, it is making use of IBM’s AI technology, Granite, allowing the user to make the experience adpative to them, focusing more on their usecase of the system.
 
 # 2 - Solution Requirements
 
-## **2.1 Requirements Elicitation**
+## 2.1 Requirements Elicitation
 
 To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
 
