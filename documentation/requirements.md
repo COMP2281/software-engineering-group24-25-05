@@ -113,38 +113,38 @@ As a player, I want a side-scrolling experience where I can use stealth mechanic
 
 **BR1.1 Scenario:** Using Cover to Avoid Detection
 
-- Given the player is near enemy guards,
-- And the player is within the guard’s line of sight,
-- When the player moves into cover (e.g vent, shadowed area, or behind an object),
-- Then the guards should not detect the player.
+- Given the player is near enemy guards
+- And the player is within the guard’s line of sight
+- When the player moves into cover
+- Then the guards should not detect the player
 
 **BR1.2 Scenario:** Making noise near Guards
-- Given the player is making noise,
-- When a guard is within earshot,
-- Then then an investigation state should be triggered,
-- And the guard should investigate the noise made.
-- And if the guard detects the player, an alert state is triggered.
+- Given the player is making noise
+- When a guard is within earshot
+- Then then an investigation state should be triggered
+- And the guard should investigate the noise made
+- And if the guard detects the player, an alert state is triggered
 
 **BR1.3 Scenario: Crouch Walking to Avoid Detection**
-- Given the player is outside any cover,
-- And the player is within the  guard’s line of sight,
-- When the player moves slowly in a crouched or stealthy stance,
-- Then the guards should have a reduced chance of detecting the player,
-- And the player can bypass guards without triggering an alert if they remain at a safe distance.
+- Given the player is outside any cover
+- And the player is within the  guard’s line of sight
+- When the player moves slowly in a crouched or stealthy stance
+- Then the guards should have a reduced chance of detecting the player
+- And the player can bypass guards without triggering an alert if they remain at a safe distance
 
 **BR1.4 Scenario:** Triggering an Alert When Spotted
-- Given the player is within a visible range of the guard’s line of sight,
-- And the player is not in cover,
-- When the guard spots the player,
-- Then an alert state should be triggered,
-- And nearby guards should move toward the player’s last known position.
+- Given the player is within a visible range of the guard’s line of sight
+- And the player is not in cover
+- When the guard spots the player
+- Then an alert state should be triggered
+- And nearby guards should move toward the player’s last known position
 
 **BR1.5 Scenario:** Returning to Patrol after Losing Sight of Player
-- Given guards are in an alert state after spotting the player,
-- And the player has moved out of their line of sight,
-- When the guards do not detect the player for a set amount of time,
-- Then the guards should return to their normal patrol behaviour,
-- And the alert state should end.
+- Given guards are in an alert state after spotting the player
+- And the player has moved out of their line of sight
+- When the guards do not detect the player for a set amount of time
+- Then the guards should return to their normal patrol behaviour
+- And the alert state should end
 
 **Rationale**
 
@@ -168,18 +168,18 @@ As a player, I want to answer AI, Cybersecurity, and Data Analytics questions fr
 **Feature:** IBM Skills Question Bank
 
 **BR2.1 Scenario:** Player steals classified document
-- Given the player has found a classified document,
-- When the player steals the document ,
+- Given the player has found a classified document
+- When the player steals the document
 - Then the player must answer a question related to AI, Data Analytics, or Cybersecurity
 - And if the player answers the question correctly, they get 10 coins
-- But if the player answers the question incorrectly, guards nearby are triggered into an alert state.
+- But if the player answers the question incorrectly, guards nearby are triggered into an alert state
 
 **BR2.2 Scenario:** Quiz at the End of the Level 
-- Given the player has reached the final challenge of the level,
-- When the quiz prompt appears on the screen,
-- Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity,
-- And if the player answers the questions correctly an accuracy of at least 80%, they can progress to the next level.
-- But if the player answers incorrectly, they must redo the quiz.
+- Given the player has reached the final challenge of the level
+- When the quiz prompt appears on the screen
+- Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
+- And if the player answers the questions correctly an accuracy of at least 80%, they can progress to the next level
+- But if the player answers incorrectly, they must redo the quiz
 
 **Rationale**
 
@@ -238,7 +238,7 @@ As a player, I want an AI boss that challenges the skills I learnt throughout th
 - But the main objective is still the final quiz  
 
 **BR4.2 Scenario:** Quiz adjustment 
-- Given the player has previously struggled with certain topics.
+- Given the player has previously struggled with certain topics
 - When they encounter the final boss
 - Then the boss can adapt to the player’s weaknesses 
 - And generate a custom quiz for the player 
@@ -253,8 +253,7 @@ As a player, I want an AI boss that challenges the skills I learnt throughout th
 **Rationale**
 
 Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements.
-The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications. Whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult. Consequently, this feature’s MoSCoW prioritisation is classified as 
-“Must Have.”
+The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications. Whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult. Consequently, this feature’s MoSCoW prioritisation is classified as “Must Have.”
 
 **MoSCoW: MUST HAVE**
 
@@ -272,7 +271,7 @@ As a player, I want to have music and sound effects in the game, so the game fee
 - And the player can adjust the volume in settings
 
 **BR5.2 Scenario:** Sound effects for actions
-- Given the player performs an action (e.g., shooting, opening doors, or collecting items)
+- Given the player performs an action
 - When the action occurs
 - Then a corresponding sound effect plays to reflect the action
 - And the sound effect volume is consistent with the settings
