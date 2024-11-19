@@ -108,7 +108,8 @@ Our team then met to discuss the client’s feedback and refine our understandin
 **User Story:** 
 
 As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
-Feature: Stealth Mechanics
+
+**Feature:** Stealth Mechanics
 
 **BR1.1 Scenario:** Using Cover to Avoid Detection
 
@@ -159,38 +160,31 @@ Due to the theme of the game being Cold war espionage, stealth is one of the cor
 
 ### Educational Engagement
 
-**User Story:** As a player, I want to answer AI, Cybersecurity, and Data Analytics questions to earn boosts, so I can improve my gameplay skills and understand IBM Skills Build concepts.
+**User Story:** 
+As a player, I want to answer AI, Cybersecurity, and Data Analytics questions from the IBM Skills Question Bank, so that I can test my knowledge and understand IBM Skills Build concepts.
 
 **Feature:** IBM Skills Question Bank
-
-**BR2.1 Scenario:** Player Encountered After Getting Caught by a Guard
-- Given the player has been detected by a guard,
-- When the quiz prompt appears on the screen,
-- Then the player must answer a question related to AI, Data Analytics, or Cybersecurity,
+**BR2.1 Scenario:** Player steals classified document
+- Given the player has found a classified document,
+- When the player steals the document ,
+- Then the player must answer a question related to AI, Data Analytics, or Cybersecurity
+- And if the player answers the question incorrectly, guards nearby are triggered into an alert state.
+- But if the player answers the question correctly, they get 10 coins.
 
 **BR2.2 Scenario:** Quiz at the End of the Level 
 - Given the player has reached the final challenge of the level,
 - When the quiz prompt appears on the screen,
 - Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity,
-- And if the player answers all questions correctly, they gain bonus points and level-up opportunities,
-- And if the player answers incorrectly, they may proceed but with reduced resources in the next level. (SHOULD I REMOVE THIS)
+- And if the player answers the questions correctly an accuracy of at least 80%, they can progress to the next level.
+- But if the player answers incorrectly, they must redo the quiz.
 
-**MoSCoW:**
+**Rationale:**
 
-**Must Have:**
-- Quiz prompt triggered upon detection by a guard, with questions related to IBM Skills (AI, Cybersecurity, Data Analytics).
-- Quiz prompt at the end of each level with a series of IBM Skills questions that award bonus points for correct answers.
+The client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
+This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build. As such, this feature has been assigned a MoSCoW prioritisation of “Must Have.”
 
-**Should Have:**
-- Different levels of question difficulty depending on the player’s progress within the game.
+**MoSCoW: MUST HAVE**
 
-**Could Have:**
-- Detailed progress tracking of IBM Skills in a player’s profile, showing strengths and weaknesses in each knowledge area.
-- Rewards for consistent correct answers across multiple levels (e.g., unlocking special abilities or game content).
-
-**Won’t Have:**
-- Full tutorials or lessons on IBM Skills concepts within the game.
-- In-depth skill explanations after each quiz, as the focus is on engaging gameplay rather than comprehensive training.
 
 
 ### Pause Screen
