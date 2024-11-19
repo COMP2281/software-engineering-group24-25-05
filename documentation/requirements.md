@@ -19,11 +19,11 @@
 
 ## 1.1 - Overview and Justification
 
-The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms traditional educational content into an immersive, game-based experience that enhances learner engagement and retention.
+The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms their current educational material into an immersive, game-based experience, enhancing both learner engagement and knowledge retention; In doing so, the project addresses the challenge of making educational content more appealing and interactive, something that IBM have identified as a key area of improvement.
 
-It will benefit individuals pursuing IBM Skills Build knowledge, with potential applications for educational institutions or self-learners interested in complementing their studies with an engaging, interactive tool.
+The project benefits individuals who currently learn via the IBM Skills Build, including self-learners and educational institutions seeking interactive tools to complement their curricula. By gamifying the learning process, this solution has the potential to expand the reach and effectiveness of IBM Skills Build programs, particularly for younger learners or those in need of alternative learning methods.
 
-The project’s client is IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM aims to make IBM Skills Build content more accessible and engaging through this game.
+The project’s client is IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM’s overarching goal is to increase the engagement of Skills Build content. This project aligns with IBM’s strategic aim to integrate cutting-edge solutions into its educational offerings.
 
 This document is organised as follows:
 
