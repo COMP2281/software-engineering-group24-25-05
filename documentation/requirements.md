@@ -162,9 +162,9 @@ This Feature can be considered a “Must have” and takes higher priority than 
 ### Educational Engagement
 
 **User Story:** 
-As a player, I want to answer AI, cybersecurity, and data analytics questions from the IBM skills question bank, so that I can test my knowledge and understand IBM skills build concepts.
+As a player, I want to answer AI, cybersecurity, and data analytics questions from the IBM Skills question bank, so that I can test my knowledge and understand IBM Skills build concepts.
 
-**Feature:** IBM skills question bank
+**Feature:** IBM Skills question bank
 
 **BR2.1 Scenario:** Player steals classified document
 - Given the player has found a classified document
@@ -182,7 +182,7 @@ As a player, I want to answer AI, cybersecurity, and data analytics questions fr
 
 **Rationale**
 
-The client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
+Implementing this feature is would contribute significantly, because client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
 This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build. As such, this feature has been assigned a MoSCoW prioritisation of “Must Have.”
 
 **MoSCoW Priority: MUST HAVE**
@@ -226,8 +226,10 @@ This feature is considered a “Could Have” as it is not a mandatory requireme
 
 
 ### AI Boss
+
 **User Story:** 
 As a player, I want an AI boss that challenges the skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
+
 **Feature:** Adaptive Learning
 
 **BR4.1 Scenario:** Testing stealth skills
@@ -259,8 +261,10 @@ The use of AI to personalise the learning experience and adapt the game to the p
 This feature is considered a “Must Have” as it directly supports the client’s core requirements and objectives.
 
 ### SFX
+
 **User Story:** 
 As a player, I want to have music and sound effects in the game, so the game feels more immersive and enjoyable.
+
 **Feature:** SFX
 
 **BR5.1 Scenario:** Background music for immersive atmosphere
@@ -334,6 +338,7 @@ This feature is considered a “Must Have” as it is crucial to achieving the g
 ### Mission system  
 **User story:** 
 As a player, I want to complete mission objectives in a clear, structured storyline so there is a clear path of what to do next.
+
 **Feature:** Mission system   
 
 **BR7.1 Scenario:** Receiving mission objective 
