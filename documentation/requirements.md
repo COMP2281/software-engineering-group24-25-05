@@ -106,46 +106,56 @@ User Stories:
 **User Story**: As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
 Feature: Stealth Mechanics
 Gherkin:
+
 **BR1.1 Scenario:** Using Cover to Avoid Detection
 - Given the player is near enemy guards,
 - And the player is within a visible range of the guard’s line of sight,
 - When the player moves into cover (e.g vent, shadowed area, or behind an object),
 - Then the guards should not detect the player,
 - And the player should remain hidden until they exit the cover.
+
 **BR1.2 Scenario:** Moving Fast to Avoid Detection
 - Given the player is outside any cover,
 - And the player is near enemy guards,
 - When the player moves at high movement speed past the guards,
 - Then the guards should detect the player,
 - And the guards should alert others or start chasing the player.
+
 **BR1.3 Scenario:** Crouch Walking to Avoid Detection
-- Given the player is outside any cover,
-- And the player is within a visible range of the guard’s line of sight,
-- When the player moves slowly in a crouched or stealthy stance,
-- Then the guards should have a reduced chance of detecting the player,
-- And the player can bypass guards without triggering an alert if they remain at a safe distance.
+- **Given** the player is outside any cover,
+- **And** the player is within a visible range of the guard’s line of sight,
+- **When** the player moves slowly in a crouched or stealthy stance,
+- **Then** the guards should have a reduced chance of detecting the player,
+- **And** the player can bypass guards without triggering an alert if they remain at a safe distance.
+
 **BR1.4 Scenario:** Triggering an Alert When Spotted
 - Given the player is within a visible range of the guard’s line of sight,
 - And the player is not in cover,
 - When the guard spots the player,
 - Then an alert state should be triggered,
 - And nearby guards should move toward the player’s last known position.
+
 **BR1.5 Scenario:** Returning to Patrol after Losing Sight of Player
 - Given guards are in an alert state after spotting the player,
 - And the player has moved out of their line of sight,
 - When the guards do not detect the player for a set amount of time,
 - Then the guards should return to their normal patrol behaviour,
 - And the alert state should end.
+
 MoSCoW:
+
 **Must Have:**
 - Guards have a line of sight that determines player detection.
 - Players can enter cover to avoid being detected by guards.
 - Alerted guards start pursuing the player when detected.
 - Alerted Guards return to their patrol after losing altered state.
+
 **Should Have:**
 - A variety of cover types with different effects on detection.
+
 **Could Have:**
 - Guards alert other guards
+
 **Won’t Have:**
 - Complex AI behaviours for guards (e.g., complex search patterns when alert).
 
