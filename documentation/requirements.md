@@ -217,7 +217,7 @@ $$
 
 ## 3.2 - Development Approach
 
-### 3.2.1 - Incremental Model
+### 3.2.1 Incremental Model
 
 * The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
 
@@ -225,7 +225,7 @@ $$
 
 * Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
 
-### 3.2.2 - In the context of the project
+### 3.2.2 In the context of the project
 
 1. Gradual Progress: Since our game includes different mechanics (e.g., running, jumping, sliding), puzzles, and IBM skill badge questions, we could develop one feature at a time. For example, we can first build core mechanics, then puzzles, and then implement the card system for enhancing IBM skills.
 
@@ -243,13 +243,13 @@ $$
 
 ## 3.3 - Project Schedule
 
-### 3.3.1 - Gantt Chart
+### 3.3.1 Gantt Chart
 
 <p align="center">
     <img src="./images/gantt-chart.png">
 </p>
 
-### 3.3.2 - Art / Vision Design
+### 3.3.2 Art / Vision Design
 
 Due to **Unity** offering an open source template that closely
 matches the client's vision of the final game we have decided to
@@ -265,7 +265,7 @@ specified CounterSpy as an inspiration he has allowed us to have artistic libert
 which allows us to choose a style that could mesh together all of the client's
 requests.
 
-### 3.3.3 - RAG Analysis and the Questions Bank
+### 3.3.3 RAG Analysis and the Questions Bank
 
 As mentioned in `3.3.1` the game has an educational side and the client
 has tasked us with taking questions from the IBM SkillsBuild courses
@@ -274,7 +274,7 @@ and integrating them into the game.
 This is one of the first things that need to be completed in order
 to have a clear vision over how the game should take shape.
 
-### 3.3.4 - C# / Unity Acquaintance
+### 3.3.4 C# / Unity Acquaintance
 
 Not all of our team is well acquainted with the `C#` / `Unity` environment,
 because of this we have planned a long lasting period (until the end of Christmas
@@ -283,7 +283,7 @@ Vacation) where we can familiarize ourselves with the toolset.
 For the team members who already have experience, there is a period
 dedicated to refactoring the Unity template in order to better suit our needs.
 
-### 3.3.5 - Game Mechanics Implementation and Test Plan
+### 3.3.5 Game Mechanics Implementation and Test Plan
 
 The Game Mechanics Implementation and preparation of the Test Plan
 will run in parallel, as we develop the game incrementally we
@@ -302,7 +302,7 @@ we hope to achieve enemies/bosses that react dynamically to the player;
 and even in the case of the educational side make the questions harder/easier
 depending on the success rate of the player.
 
-### 3.3.6 - Level Design and IBM Education Integration
+### 3.3.6 Level Design and IBM Education Integration
 
 Once we have a solid foundation of game mechanics we expect
 to be able to create a plausible environment around said mechanics.
@@ -313,12 +313,12 @@ is based off of 3 different IBM SkillsBuild courses.
 Each stage would teach the player different game mechanics and introduce
 new concepts.
 
-### 3.3.7 - Technical Report and Product Presentation
+### 3.3.7 Technical Report and Product Presentation
 
 They will start to run in parallel once we are at the end of the development
 cycle with the **Game Mechanics Implementation**
 
-### 3.3.8 - Key Deadlines
+### 3.3.8 Key Deadlines
 
 * `2024-11-28`: Finish client RAG Analysis and Questions Bank
 * `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
