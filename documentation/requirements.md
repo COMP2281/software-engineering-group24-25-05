@@ -122,11 +122,11 @@ Feature: Stealth Mechanics
 - And the guards should alert others or start chasing the player.
 
 **BR1.3 Scenario:** Crouch Walking to Avoid Detection
-- **Given** the player is outside any cover,
-- **And** the player is within a visible range of the guard’s line of sight,
-- **When** the player moves slowly in a crouched or stealthy stance,
-- **Then** the guards should have a reduced chance of detecting the player,
-- **And** the player can bypass guards without triggering an alert if they remain at a safe distance.
+- Given the player is outside any cover,
+- And the player is within a visible range of the guard’s line of sight,
+- When the player moves slowly in a crouched or stealthy stance,
+- Then the guards should have a reduced chance of detecting the player,
+- And the player can bypass guards without triggering an alert if they remain at a safe distance.
 
 **BR1.4 Scenario:** Triggering an Alert When Spotted
 - Given the player is within a visible range of the guard’s line of sight,
@@ -175,7 +175,7 @@ Feature: IBM Skills Question Bank
 - When the quiz prompt appears on the screen,
 - Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity,
 - And if the player answers all questions correctly, they gain bonus points and level-up opportunities,
-- And if the player answers incorrectly, they may proceed but with reduced resources in the next level.
+- And if the player answers incorrectly, they may proceed but with reduced resources in the next level. (SHOULD I REMOVE THIS)
 
 **MoSCoW:**
 
@@ -207,7 +207,8 @@ Feature: Pause Screen
 
 **BR3.1 Scenario:** Taking a break from the game
 - Given the game is paused
-- Then the player can resume gameplay by pressing the designated pause key again
+- When the player presses the pause button
+- Then the player can resume gameplay
 
 **BR3.2 Scenario:** Accessing and Adjusting Game Settings from the Pause Screen
 - Given the game is paused
@@ -432,7 +433,7 @@ Feature: Movement
 **Must Have:** 
 - Horizontal movement : Player moves left and right when holding down the corresponding movement keys 
 - Vertical movement : Player is able to jump to get to higher platforms
-- 
+
 **Should Have**
 - Sprinting : Player can sprint to move faster, improving the pacing of the game.
 
@@ -454,10 +455,10 @@ Feature : Combat
 - Then the enemy takes damage 
 
 **BR9.2 Scenario** 
-Given the player shoots an enemy 
-When the enemy’s health drop’s below 0 
-Then the enemy dies 
-And the enemy drops a coin 
+- Given the player shoots an enemy 
+- When the enemy’s health drop’s below 0 
+- Then the enemy dies 
+- And the enemy drops a coin 
 
 **BR9.3 Scenario** 
 - Given the player is next to an enemy 
