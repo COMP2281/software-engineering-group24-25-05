@@ -107,8 +107,6 @@ User Stories:
 **User Story**: As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
 Feature: Stealth Mechanics
 
-Gherkin:
-
 **BR1.1 Scenario:** Using Cover to Avoid Detection
 - Given the player is near enemy guards,
 - And the player is within a visible range of the guard’s line of sight,
@@ -144,7 +142,7 @@ Gherkin:
 - Then the guards should return to their normal patrol behaviour,
 - And the alert state should end.
 
-MoSCoW:
+**MoSCoW:**
 
 **Must Have:**
 - Guards have a line of sight that determines player detection.
@@ -160,6 +158,7 @@ MoSCoW:
 
 **Won’t Have:**
 - Complex AI behaviours for guards (e.g., complex search patterns when alert).
+
 
 ### Educational Engagement
 
@@ -195,7 +194,8 @@ Feature: IBM Skills Question Bank
 - Full tutorials or lessons on IBM Skills concepts within the game.
 - In-depth skill explanations after each quiz, as the focus is on engaging gameplay rather than comprehensive training.
 
-**Pause Screen**
+
+### Pause Screen
 User Story: As a player, I want to be able to pause my game so that I can take a break from the game or change the settings.
 Feature: Pause Screen
 
@@ -215,7 +215,7 @@ Feature: Pause Screen
 - Then the settings menu is displayed
 - And the player can adjust settings to their preference
 
-MoSCoW:
+**MoSCoW:**
 
 **Must Have:**
 - Pause Functionality: Pressing the pause key must reliably pause the game and display the Pause screen.
@@ -230,6 +230,7 @@ MoSCoW:
 
 **Won’t Have:**
 - Save Game Option: If this is an action game or doesn’t involve complex progress tracking, a save function may be unnecessary on the pause screen.
+
 
 ### AI Boss
 User Story: As a player, I want an AI boss that challenges my skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under immense pressure.
@@ -272,6 +273,7 @@ Feature: Adaptive Learning
 **Won’t Have:**
 - Backtracking for Skill Improvement: No requirement to revisit previous levels to improve skills.
 - Separate Adaptive Bosses: Only one adaptive boss will incorporate all skill areas.
+
 
 ### VFX
 
@@ -326,6 +328,7 @@ VFX
 - Voice Acting: No voice-acted dialogue to focus resources on essential music and sound effects.
 - Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
 
+
 ### Stylised Cold War era cartoonish graphics/art 
 User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
 Feature: Stylised art 
@@ -371,7 +374,8 @@ Feature: Stylised art
 - Realism : The graphics won’t be realistic to keep with the cartoony counter spy theme 
 - Blood & Gore : No overly violent game due to the game being 16+ 
 
-**Playable story**
+
+### Playable story
 User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly	
 Feature : Story unfolds based on user choices
 
@@ -386,7 +390,8 @@ Feature : Story unfolds based on user choices
 - Then the player receives a reward  
 - And the player’s stats are upgraded
 
-**Moscow** 
+**MoSCoW:**
+
 **Must Have:**
 - Multiple Missions : Game should have more than one mission
 - Rewards : Player should receive rewards after completing a mission 
@@ -400,7 +405,8 @@ Feature : Story unfolds based on user choices
 **Won’t Have:**
 - Branching story : Story will not have multiple endings 
 
-**Movement mechanics** 
+
+### Movement mechanics 
 User story: As a player, I want to have basic movement so I can navigate the map 
 Feature: Movement
 
@@ -421,7 +427,7 @@ Feature: Movement
 - And the player’s character reaches peak height 
 - And the character starts moving downwards  
 
-**Moscow**
+**MoSCoW:**
   
 **Must Have:** 
 - Horizontal movement : Player moves left and right when holding down the corresponding movement keys 
@@ -436,8 +442,9 @@ Feature: Movement
 **Won’t Have**
 - Flying : Player will not be able to fly 
 - Vehicular movement : Player will not be able to enter vehicles and use them 
+
  
-**Combat mechanics**
+### Combat mechanics
 User story : As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
 Feature : Combat 
 
@@ -458,7 +465,7 @@ And the enemy drops a coin
 - Then the enemy immediately dies 
 - And the enemy drops two coins 
 
-**Moscow**
+**MoSCoW:**
 
 **Must Have:** 
 - Shooting mechanics : The player should be able to shoot bullets at enemies
