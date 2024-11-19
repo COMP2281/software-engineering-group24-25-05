@@ -103,6 +103,7 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 User Stories:
 
+
 ### Stealth Gameplay
 
 **User Story:** As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
@@ -160,6 +161,7 @@ User Stories:
 
 **Won’t Have:**
 - Complex AI behaviours for guards (e.g., complex search patterns when alert).
+
 
 
 ### Educational Engagement
@@ -236,6 +238,7 @@ Feature: Pause Screen
 - Save Game Option: If this is an action game or doesn’t involve complex progress tracking, a save function may be unnecessary on the pause screen.
 
 
+
 ### AI Boss
 User Story: As a player, I want an AI boss that challenges my skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under immense pressure.
 Feature: Adaptive Learning
@@ -277,6 +280,7 @@ Feature: Adaptive Learning
 **Won’t Have:**
 - Backtracking for Skill Improvement: No requirement to revisit previous levels to improve skills.
 - Separate Adaptive Bosses: Only one adaptive boss will incorporate all skill areas.
+
 
 
 ### VFX
@@ -333,6 +337,7 @@ Feature: Adaptive Learning
 - Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
 
 
+
 ### Stylised Cold War era cartoonish graphics/art 
 User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
 Feature: Stylised art 
@@ -379,6 +384,7 @@ Feature: Stylised art
 - Blood & Gore : No overly violent game due to the game being 16+ 
 
 
+
 ### Playable story
 User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly	
 Feature : Story unfolds based on user choices
@@ -408,6 +414,7 @@ Feature : Story unfolds based on user choices
 
 **Won’t Have:**
 - Branching story : Story will not have multiple endings 
+
 
 
 ### Movement mechanics 
@@ -447,6 +454,7 @@ User story: As a player, I want to have basic movement so I can navigate the map
 **Won’t Have:**
 - Flying: Player will not be able to fly 
 - Vehicular movement: Player will not be able to enter vehicles and use them 
+
 
  
 ### Combat mechanics
@@ -488,6 +496,7 @@ User story: As a player, I want to have basic movement so I can navigate the map
 **Won’t Have:** 
 - Scopes: No guns will have scoped shooting 
 - Bloom & recoil: Guns will have no firing error or recoil 
+
 
 
 # 3 - Project Management
