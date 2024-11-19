@@ -14,7 +14,6 @@
 * Date the document was prepared:
 * Version: 1.0.2
 
-
 # 1 - Introduction
 
 ## 1.1 - Overview and Justification
@@ -220,26 +219,19 @@ $$
 ### 3.2.1 Incremental Model
 
 * The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
-
 * With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
-
 * Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
+* Risk is managed effectively by focusing on simpler, high-priority features early and addressing complex ones later.
 
-### 3.2.2 In the context of the project
+#### 3.2.2 Application in the Project Context
 
-1. Gradual Progress: Since our game includes different mechanics (e.g., running, jumping, sliding), puzzles, and IBM skill badge questions, we could develop one feature at a time. For example, we can first build core mechanics, then puzzles, and then implement the card system for enhancing IBM skills.
-
-2. Feedback after Each Increment: After each partial development done , we can test it and get the feedback. This ensures that individual components work as intended before combining them into the final game.
-
-3. Risk Management: The Incremental Model is useful when different features have varying complexities. It helps manage risk by addressing simpler features first and more complex ones later, ensuring a steady development pace.
-
-4. Flexibility: when we developing the program , client might change the requirement or we need to adjust the direction or the function of our project , while incremental model plays a very important role to help us prevent from deleting a large number of previous documents
-
-5. Player engagement: incremental model means we can republic our game in advance even thought we haven't finished the whole game , we can get the feedback from the client and vary our direction or adjust our code base on the feedback immediately .
-
-6. Suitable for small team : Since we are a small which only has 7 people , the incremental model help us allocate the work more efficacy , we only need to focus on the specific content each time , and makes all the people engaged , also can clearly keep tracking work progress.
-
-7. Simplicity: The incremental model provides straightforward, predictable development process, also offers a structured, step-by-step approach with clear deliverables at each stage.
+1. **Gradual Progress**: Our game comprises multiple components, including core mechanics (e.g., running, jumping, and sliding), puzzles, and IBM Skills Build badge questions. Using the Incremental Model, we can develop each component sequentially, starting with the foundational mechanics before progressing to puzzles and gamification elements like the card system.
+2. **Iterative Feedback and Testing**: After completing each increment, we can conduct testing and gather client or player feedback. This ensures each feature works as intended and aligns with the project goals before integrating it into the overall game.
+3. **Risk Management**: By addressing straightforward features early in the development process, the Incremental Model reduces risk and ensures a consistent development pace. This strategy allows us to allocate more time and resources to resolving challenges posed by complex features.
+4. **Flexibility for Changes**: Given the possibility of evolving client requirements or necessary adjustments, the Incremental Model minimizes disruption. Changes can be accommodated without requiring significant rework, as only specific increments need updating, preserving the integrity of prior developments.
+5. **Early Player Engagement**: The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input.
+6. **Adaptability to a Small Team**: With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked.
+7. **Simplicity and Structure**: The model offers a straightforward and predictable process, breaking development into clear, manageable stages. This structured approach ensures transparency and provides measurable milestones throughout the project lifecycle.
 
 ## 3.3 - Project Schedule
 
@@ -292,15 +284,13 @@ can identify ways of testing our solution.
 Key mechanics that have to be implemented and polished are:
 
 1) Basic movement: movement should feel fluid, responsive, must include
-crouching (stealth).
-
+   crouching (stealth).
 2) Stealth Mechanics: "light" and "dark" zones where the AI of
-the laboratory can either see you or not, if detected sends enemies
-
+   the laboratory can either see you or not, if detected sends enemies
 3) The environment reacting to the player: by using IBM's Granite AI
-we hope to achieve enemies/bosses that react dynamically to the player;
-and even in the case of the educational side make the questions harder/easier
-depending on the success rate of the player.
+   we hope to achieve enemies/bosses that react dynamically to the player;
+   and even in the case of the educational side make the questions harder/easier
+   depending on the success rate of the player.
 
 ### 3.3.6 Level Design and IBM Education Integration
 
