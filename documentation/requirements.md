@@ -181,7 +181,7 @@ As a player, I want to answer AI, Cybersecurity, and Data Analytics questions fr
 - And if the player answers the questions correctly an accuracy of at least 80%, they can progress to the next level.
 - But if the player answers incorrectly, they must redo the quiz.
 
-**Rationale:**
+**Rationale**
 
 The client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
 This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build. As such, this feature has been assigned a MoSCoW prioritisation of “Must Have.”
