@@ -102,9 +102,11 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 
 User Stories:
-**Stealth Gameplay (MAIN GAME MECHANICS)**
+### Stealth Gameplay
+
 **User Story**: As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
 Feature: Stealth Mechanics
+
 Gherkin:
 
 **BR1.1 Scenario:** Using Cover to Avoid Detection
@@ -159,7 +161,8 @@ MoSCoW:
 **Won’t Have:**
 - Complex AI behaviours for guards (e.g., complex search patterns when alert).
 
-**Educational Engagement**
+### Educational Engagement
+
 User Story: As a player, I want to answer AI, Cybersecurity, and Data Analytics questions to earn boosts, so I can improve my gameplay skills and understand IBM Skills Build concepts.
 Feature: IBM Skills Question Bank
 
@@ -228,7 +231,7 @@ MoSCoW:
 **Won’t Have:**
 - Save Game Option: If this is an action game or doesn’t involve complex progress tracking, a save function may be unnecessary on the pause screen.
 
-**AI Boss**
+### AI Boss
 User Story: As a player, I want an AI boss that challenges my skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under immense pressure.
 Feature: Adaptive Learning
 
@@ -270,7 +273,8 @@ Feature: Adaptive Learning
 - Backtracking for Skill Improvement: No requirement to revisit previous levels to improve skills.
 - Separate Adaptive Bosses: Only one adaptive boss will incorporate all skill areas.
 
-**VFX**
+### VFX
+
 User Story: As a player, I want to have music and sound effects in the game so that when I am playing the game feels more immersive and fun.
 Feature:
 VFX
@@ -309,20 +313,20 @@ VFX
 
 **Should Have:**
 
-Adaptive Music for Boss Battles: Dynamic music changes during boss encounters to build tension.
-Environmental Sound Effects: Ambient sounds that match different environments, enhancing immersion.
-Positional Audio: Sounds that reflect the player’s position, such as footsteps getting louder or softer.
-Could Have:
-Reactive Sound Effects: Sound changes based on gameplay context (e.g., faster music during high action).
-Special Effect Sounds: Unique sounds for special events like level completion or significant discoveries.
-Immersive 3D Audio: Enhanced spatial audio for a more realistic sound experience if wearing headphones.
+- Adaptive Music for Boss Battles: Dynamic music changes during boss encounters to build tension.
+- Environmental Sound Effects: Ambient sounds that match different environments, enhancing immersion.
+- Positional Audio: Sounds that reflect the player’s position, such as footsteps getting louder or softer.
+
+**Could Have:**
+- Reactive Sound Effects: Sound changes based on gameplay context (e.g., faster music during high action).
+- Special Effect Sounds: Unique sounds for special events like level completion or significant discoveries.
+- Immersive 3D Audio: Enhanced spatial audio for a more realistic sound experience if wearing headphones.
 
 **Won’t Have:**
+- Voice Acting: No voice-acted dialogue to focus resources on essential music and sound effects.
+- Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
 
-Voice Acting: No voice-acted dialogue to focus resources on essential music and sound effects.
-Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
-
-**Stylised Cold War era cartoonish graphics/art** 
+### Stylised Cold War era cartoonish graphics/art 
 User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
 Feature: Stylised art 
 
@@ -346,7 +350,7 @@ Feature: Stylised art
 - And the desk is covered in battle plans and classified documents
 - And the room’s cabinets are filled with 1960s era technology 
 
-**Moscow:**
+**MoSCoW:**
 
 **Must Have:**
 
