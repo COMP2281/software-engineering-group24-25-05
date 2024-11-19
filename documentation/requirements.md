@@ -119,7 +119,7 @@ As a player, I want a side-scrolling experience where I can use stealth mechanic
 - Then the guards should not detect the player.
 
 **BR1.2 Scenario:** Making noise near Guards
-- Given the player is making noise,,,
+- Given the player is making noise,
 - When a guard is within earshot,
 - Then then an investigation state should be triggered,
 - And the guard should investigate the noise made.
