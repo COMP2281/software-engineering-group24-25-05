@@ -169,8 +169,8 @@ As a player, I want to answer AI, Cybersecurity, and Data Analytics questions fr
 - Given the player has found a classified document,
 - When the player steals the document ,
 - Then the player must answer a question related to AI, Data Analytics, or Cybersecurity
-- And if the player answers the question incorrectly, guards nearby are triggered into an alert state.
-- But if the player answers the question correctly, they get 10 coins.
+- And if the player answers the question correctly, they get 10 coins
+- But if the player answers the question incorrectly, guards nearby are triggered into an alert state.
 
 **BR2.2 Scenario:** Quiz at the End of the Level 
 - Given the player has reached the final challenge of the level,
@@ -213,7 +213,7 @@ As a player, I want to be able to pause my game so that I can take a break from 
 - Then the settings menu is displayed
 - And the player can adjust settings to their preference
 
-**RATIONALE**
+**Rationale**
 
 Implementing this feature would enhance the user’s gameplay experience and improve the overall quality of life within the game. Rather than having to complete the game in a single session, players would be able to pause the game, and complete it a later time. Although a pause screen is not explicitly mentioned as a core requirement, this feature adds flexibility and convenience to the game, therefore significantly improving the game’s quality of life, achieving the client’s objectives of a high quality user experience ; Due to the reasons outlined above, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
@@ -246,7 +246,8 @@ As a player, I want an AI boss that challenges the skills I learnt throughout th
 - Then can adjust the level to include to include an element of combat based mechanics alongside the final quiz
 - But the main objective is still the final quiz 
 
-**RATIONALE**
+**Rationale**
+
 Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements.
 The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications. Whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult. Consequently, this feature’s MoSCoW prioritisation is classified as 
 “Must Have.”
@@ -255,12 +256,10 @@ The use of AI to personalise the learning experience and adapt the game to the p
 
 This feature is considered a “Must Have” as it directly supports the client’s core requirements and objectives.
 
-
-### VFX
-
-**User Story:** As a player, I want to have music and sound effects in the game so that when I am playing the game feels more immersive and fun.
-
-**Feature:** VFX
+### SFX
+**User Story:** 
+As a player, I want to have music and sound effects in the game, so the game feels more immersive and enjoyable.
+**Feature:** SFX
 
 **BR5.1 Scenario:** Background Music for Immersive Atmosphere
 - Given the player is in a game level
@@ -281,34 +280,18 @@ This feature is considered a “Must Have” as it directly supports the client�
 - And the music fades back to normal when the boss is defeated
 
 **BR5.4 Scenario:** Environmental Sound Effects
-- Given the player is moving through different environments (e.g., forests, caves, buildings)
+- Given the player is moving through different environments 
 - When the player enters a new environment
-- Then ambient sound effects play (e.g., wind, footsteps, machinery) to match the setting
-- And these effects enhance immersion by changing with player movement
+- Then ambient sound effects play to match the setting
 
-**MoSCoW:**
-  
-**Must Have:**
+**Rationale** 
 
-- Background Music: Background music that enhances immersion and matches the level’s mood.
-- Action Sound Effects: Sound effects for common player actions (e.g., movement, shooting) to provide feedback.
-- Volume Control: Settings menu to adjust the volume of music and sound effects.
+Implementing this feature would contribute significantly to the client’s goal of creating an enjoyable and immersive game.
+The inclusion of sound effects (SFX) enables another dimension to the game which can deepen the player’s immersion and enhance the game’s atmosphere. Despite not being explicitly stated in the Product/Service Requirements, it provides a great addition to the experience and greatly increases the high quality immersion the game seeks to achieve. For these reasons, this feature’s MoSCoW prioritisation is classified as “Should Have.”
 
-**Should Have:**
+**MoSCoW: SHOULD HAVE**
 
-- Adaptive Music for Boss Battles: Dynamic music changes during boss encounters to build tension.
-- Environmental Sound Effects: Ambient sounds that match different environments, enhancing immersion.
-- Positional Audio: Sounds that reflect the player’s position, such as footsteps getting louder or softer.
-
-**Could Have:**
-- Reactive Sound Effects: Sound changes based on gameplay context (e.g., faster music during high action).
-- Special Effect Sounds: Unique sounds for special events like level completion or significant discoveries.
-- Immersive 3D Audio: Enhanced spatial audio for a more realistic sound experience if wearing headphones.
-
-**Won’t Have:**
-- Voice Acting: No voice-acted dialogue to focus resources on essential music and sound effects.
-- Licensed Music: Only original or royalty-free music tracks, not licensed music due to budget constraints.
-
+This feature is considered a “Should Have” as it adds value to the player’s experience but is not essential or equal in importance to the game’s core visual components.
 
 
 ### Stylised Cold War era cartoonish graphics/art 
