@@ -110,14 +110,14 @@ Our team then met to discuss the client’s feedback and refine our understandin
 As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
 Feature: Stealth Mechanics
 
-**BR1.1Scenario:** Using Cover to Avoid Detection
+**BR1.1 Scenario:** Using Cover to Avoid Detection
 
 - Given the player is near enemy guards,
 - And the player is within the guard’s line of sight,
 - When the player moves into cover (e.g vent, shadowed area, or behind an object),
 - Then the guards should not detect the player.
 
-**BR1.2 Scenario:** Making Sound near Guards
+**BR1.2 Scenario:** Making noise near Guards
 - Given the player is making noise,,,
 - When a guard is within earshot,
 - Then then an investigation state should be triggered,
