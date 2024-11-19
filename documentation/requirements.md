@@ -294,82 +294,78 @@ The inclusion of sound effects (SFX) enables another dimension to the game which
 This feature is considered a “Should Have” as it adds value to the player’s experience but is not essential or equal in importance to the game’s core visual components.
 
 
-### Stylised Cold War era cartoonish graphics/art 
-User story: As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
-Feature: Stylised art 
+### Stylised Cold War era graphics   
+	
+**User story:**
+As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
 
-**BR6.1 Scenario:** Cold War era background and atmosphere
+**Feature:** Stylised art 
+
+**BR6.1 Scenario:** Cold War era background & atmosphere
 - Given the player is exploring the Cold War era military base
 - When they move through the map 
-- Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters 
-- And the player feels immersed in the tense atmosphere
+- Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
 
 **BR6.2 Scenario:** Enemy uniforms 
-- Given An enemy is in the player’s vision cone 
+- Given An enemy is in the player’s line of sight 
 - When the enemy renders on the screen
-- Then the enemy is clothed in dark militaristic uniforms 
+- Then the enemy is shown to be wearing dark militaristic uniform
 - And their uniform is contrasted by bright red Soviet Union insignias 
-- And the user is able to identify guards
+- And the player is able to identify guards easily 
 
-**BR6.3 Scenario:** Stealing plans
+**BR6.3 Scenario:** Entering a room
 - Given the player enters a room 
-- When they look around the room 
-- Then the player is greeted by dim overhead lights which cast a glow on a desk
-- And the desk is covered in battle plans and classified documents
-- And the room’s cabinets are filled with 1960s era technology 
+- When they move around in the room  
+- Then the player is greeted by dim overhead lights which cast a glow beneath them
+- And lights up any objects seen beneath the light
 
-**MoSCoW:**
+**Rationale**
 
-**Must Have:**
+Implementing this feature would contribute significantly to the client’s goal of creating a Cold War-inspired game.
+The client’s Product/Service Requirements emphasise the importance of a Cold War stealth theme. Incorporating Cold War-era graphics would enhance the game’s atmosphere and strengthen its connection to the desired theme, aligning with the client’s vision. As this feature directly supports the core thematic focus of the game, its inclusion is essential. For these reasons, this feature’s MoSCoW prioritisation is classified as “Must Have.”
 
-- Enemy uniforms: Enemies must be clad in dark, militaristic uniforms with bright red soviet insignias/badges helping the player easily identify enemies 
-- Background: The background colours of the game at any given moment must give a sense of a soviet era game with high tension and stress
-- Architecture: The structure of the enemy base must be one that is designed in a similar manner to actual soviet era bases to enrich the player’s experience.
+**MoSCoW: MUST HAVE**
 
-**Should Have:**
-- Technology: Technology from that era should be placed around the rooms where the plans are being stolen from (e.g radios, CRT monitors)
-- Vehicles: Militaristic soviet vehicles can be placed around the map
-- Equipment: Guns used should resemble weapons used in the Soviet union during the 1960s 
-
-**Could Have:**
-- Relevant propaganda: Some documents and posters could reference real events that took place during the cold war
-  
-**Won’t Have**
-- 3D Graphics : Graphics will be 2D due to the game being a sidescroller
-- Realism : The graphics won’t be realistic to keep with the cartoony counter spy theme 
-- Blood & Gore : No overly violent game due to the game being 16+ 
+This feature is considered a “Must Have” as it is crucial to achieving the game’s intended atmosphere and aligning with the client’s specific requirements.
 
 
+### Mission system  
+**User story:** 
+As a player, I want to complete mission objectives in a clear, structured storyline so there is a clear path of what to do next.
+**Feature:** Mission system   
 
-### Playable story
-User story : As a player, I want to experience stealing classified documents, and complete objectives where the story progresses linearly	
-Feature : Story unfolds based on user choices
+**BR7.1 Scenario:** Receiving mission objective 
+- Given the player has completed their previous mission
+- When the player enters their mission logs  
+- Then the player is assigned a new mission  
+- And they learn about the objectives for the next mission    
 
-**BR7.1 Scenario:** Player is assigned a new mission when they complete their previous one
-- Given the player is given a mission
-- When they complete the mission 
-- Then the player is assigned a new mission    
+**BR7.2 Scenario:** Unlocking a reward for completing a mission 
+- Given the player has successfully completed a mission  
+- When they open their inventory 
+- Then the player unlocks a new item   
+- And the player can use this item for further missions 
 
-**BR7.2 Scenario:** Player receives a reward when they complete a mission 
-- Given the player is completing a mission  
-- When complete their mission 
-- Then the player receives a reward  
-- And the player’s stats are upgraded
+**BR7.3 Scenario :** Unlocking new chapter 
+- Given the player completes a major mission 
+- When they collect their reward 
+- Then a new cutscene plays 
+- And a new part of the map is unlocked
 
-**MoSCoW:**
+**BR7.4 Scenario:** Completing secondary objective  
+- Given a secondary objective has been completed during a mission 
+- When the mission ends 
+- Then the player is given a bonus reward
 
-**Must Have:**
-- Multiple Missions : Game should have more than one mission
-- Rewards : Player should receive rewards after completing a mission 
+**Rationale**
+Implementing this feature would enhance the client’s goal of creating a Cold War infiltration stealth game.
+While a mission system is not a core requirement  in the Product/Service Requirements, the document emphasises the importance of creating an immersive and thematic player experience. Including a mission system would help this by providing players with a structured and focused gameplay experience, aligning with the mindset of a Cold War spy. By offering clear progression via a way to track how much a player has completed and giving visual milestones in the Mission’s UI, this feature would deepen the player’s drive to continue playing. Therefore enhance their engagement with the game. For these reasons, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
-**Should Have:**
-- Different types of missions : Add variety of missions to keep the game interesting 
+**MoSCoW: COULD HAVE**
 
-**Could Have:**
-- Choices : The player could have the choice to pick between the missions they want to complete for different rewards 
+This feature is considered a “Could Have” as it is not essential but offers noticeable improvements to the player’s experience and alignment with the game’s theme.
 
-**Won’t Have:**
-- Branching story : Story will not have multiple endings 
+
 
 
 
