@@ -107,39 +107,39 @@ Our team then met to discuss the client’s feedback and refine our understandin
 	 
 **User Story:** 
 
-As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so that I can emulate spy tactics.
+As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so I can emulate spy tactics.
 
 **Feature:** Stealth Mechanics
 
-**BR1.1 Scenario:** Using Cover to Avoid Detection
+**BR1.1 Scenario:** Using cover to avoid detection
 
 - Given the player is near enemy guards
 - And the player is within the guard’s line of sight
 - When the player moves into cover
 - Then the guards should not detect the player
 
-**BR1.2 Scenario:** Making noise near Guards
+**BR1.2 Scenario:** Making noise near guards
 - Given the player is making noise
 - When a guard is within earshot
 - Then then an investigation state should be triggered
 - And the guard should investigate the noise made
 - And if the guard detects the player, an alert state is triggered
 
-**BR1.3 Scenario: Crouch Walking to Avoid Detection**
+**BR1.3 Scenario: Crouch walking to avoid detection**
 - Given the player is outside any cover
 - And the player is within the  guard’s line of sight
 - When the player moves slowly in a crouched or stealthy stance
 - Then the guards should have a reduced chance of detecting the player
 - And the player can bypass guards without triggering an alert if they remain at a safe distance
 
-**BR1.4 Scenario:** Triggering an Alert When Spotted
+**BR1.4 Scenario:** Triggering an alert when spotted
 - Given the player is within a visible range of the guard’s line of sight
 - And the player is not in cover
 - When the guard spots the player
 - Then an alert state should be triggered
 - And nearby guards should move toward the player’s last known position
 
-**BR1.5 Scenario:** Returning to Patrol after Losing Sight of Player
+**BR1.5 Scenario:** Returning to patrol after losing sight of player
 - Given guards are in an alert state after spotting the player
 - And the player has moved out of their line of sight
 - When the guards do not detect the player for a set amount of time
@@ -163,21 +163,21 @@ This Feature can be considered a “Must have” and takes higher priority than 
 ### Educational Engagement
 
 **User Story:** 
-As a player, I want to answer AI, Cybersecurity, and Data Analytics questions from the IBM Skills Question Bank, so that I can test my knowledge and understand IBM Skills Build concepts.
+As a player, I want to answer AI, cybersecurity, and data analytics questions from the IBM skills question bank, so that I can test my knowledge and understand IBM skills build concepts.
 
-**Feature:** IBM Skills Question Bank
+**Feature:** IBM skills question bank
 
 **BR2.1 Scenario:** Player steals classified document
 - Given the player has found a classified document
 - When the player steals the document
-- Then the player must answer a question related to AI, Data Analytics, or Cybersecurity
+- Then the player must answer a question related to AI, data analytics, or cybersecurity
 - And if the player answers the question correctly, they get 10 coins
 - But if the player answers the question incorrectly, guards nearby are triggered into an alert state
 
-**BR2.2 Scenario:** Quiz at the End of the Level 
+**BR2.2 Scenario:** Quiz at the end of the level 
 - Given the player has reached the final challenge of the level
 - When the quiz prompt appears on the screen
-- Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
+- Then the player must answer a series of questions related to AI, data analytics, and cybersecurity
 - And if the player answers the questions correctly an accuracy of at least 80%, they can progress to the next level
 - But if the player answers incorrectly, they must redo the quiz
 
@@ -211,7 +211,7 @@ As a player, I want to be able to pause my game so that I can take a break from 
 - Then the game resumes 
 - And the player can pick up where they left off  
 
-**BR3.2 Scenario:** Accessing and Adjusting Game Settings from the Pause Screen
+**BR3.2 Scenario:** Accessing game settings
 - Given the game is paused
 - When the player selects the settings option from the Pause screen
 - Then the settings menu is displayed
@@ -231,7 +231,7 @@ This feature is considered a “Could Have” as it is not a mandatory requireme
 As a player, I want an AI boss that challenges the skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
 **Feature:** Adaptive Learning
 
-**BR4.1 Scenario:** Testing Stealth Skills
+**BR4.1 Scenario:** Testing stealth skills
 - Given the player has demonstrated weakness in Stealth based tasks in the game
 - When they encounter the final boss
 - Then the boss will adapt the the level environment to include stealth based mechanics 
@@ -264,7 +264,7 @@ This feature is considered a “Must Have” as it directly supports the client�
 As a player, I want to have music and sound effects in the game, so the game feels more immersive and enjoyable.
 **Feature:** SFX
 
-**BR5.1 Scenario:** Background Music for Immersive Atmosphere
+**BR5.1 Scenario:** Background music for immersive atmosphere
 - Given the player is in a game level
 - When the level starts
 - Then background music plays that matches the mood and intensity of the level
@@ -276,13 +276,13 @@ As a player, I want to have music and sound effects in the game, so the game fee
 - Then a corresponding sound effect plays to reflect the action
 - And the sound effect volume is consistent with the settings
 
-**BR5.3 Scenario:** Adaptive Music for Boss Encounters
+**BR5.3 Scenario:** Adaptive music for boss encounters
 - Given the player is entering a boss encounter
 - When the encounter begins
 - Then the music dynamically shifts to a more intense track
 - And the music fades back to normal when the boss is defeated
 
-**BR5.4 Scenario:** Environmental Sound Effects
+**BR5.4 Scenario:** Environmental sound effects
 - Given the player is moving through different environments 
 - When the player enters a new environment
 - Then ambient sound effects play to match the setting
