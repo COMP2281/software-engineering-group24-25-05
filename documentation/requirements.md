@@ -346,7 +346,7 @@ As a player, I want to complete mission objectives in a clear, structured storyl
 - Then the player unlocks a new item   
 - And the player can use this item for further missions 
 
-**BR7.3 Scenario :** Unlocking new chapter 
+**BR7.3 Scenario:** Unlocking new chapter 
 - Given the player completes a major mission 
 - When they collect their reward 
 - Then a new cutscene plays 
@@ -358,96 +358,113 @@ As a player, I want to complete mission objectives in a clear, structured storyl
 - Then the player is given a bonus reward
 
 **Rationale**
+
 Implementing this feature would enhance the client’s goal of creating a Cold War infiltration stealth game.
-While a mission system is not a core requirement  in the Product/Service Requirements, the document emphasises the importance of creating an immersive and thematic player experience. Including a mission system would help this by providing players with a structured and focused gameplay experience, aligning with the mindset of a Cold War spy. By offering clear progression via a way to track how much a player has completed and giving visual milestones in the Mission’s UI, this feature would deepen the player’s drive to continue playing. Therefore enhance their engagement with the game. For these reasons, this feature’s MoSCoW prioritisation is classified as “Could Have.”
+While a mission system is not a core requirement in the Product/Service Requirements, the document emphasises creating an immersive and thematic player experience. Including a mission system would help this by providing players with a structured and focused gameplay experience, aligning with the mindset of a Cold War spy. By offering clear progression via a way to track how much a player has completed and giving visual milestones in the Mission’s UI, this feature would deepen the player’s drive to continue playing. Therefore, it enhances their engagement with the game. For these reasons, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
 **MoSCoW: COULD HAVE**
 
 This feature is considered a “Could Have” as it is not essential but offers noticeable improvements to the player’s experience and alignment with the game’s theme.
 
-
-
-
-
 ### Movement mechanics 
-User story: As a player, I want to have basic movement so I can navigate the map 
+**User story:** As a player, I want to have basic movement mechanics, so I can navigate the map and complete missions.
 
 **Feature:** Movement
 
 **BR8.1 Scenario:** Horizontal movement 
 - Given the player is moving their character 
-- When the player presses a movement key 
-- Then the character should move in the corresponding direction
+- When the player presses a sideward movement key 
+- Then the character should move in the corresponding direction 
+- And the character has a fluid walking animation 
 
 **BR8.2 Scenario:** Sprinting 
 - Given the player is moving 
 - When the player holds the sprint button 
-- Then the player should move faster until their stamina is depleted
+- Then the player’s speed increases by a large margin 
+- And the player’s stamina decreases while they sprint 
+- And when their stamina runs out their speed slows down  
 
 **BR8.3 Scenario:** Vertical movement 
 - Given the player is standing or moving on a solid surface 
 - When the player presses the spacebar 
 - Then then the character moves upwards in the air  
 - And the player’s character reaches peak height 
-- And the character starts moving downwards  
+- And the character starts moving downwards 
 
-**MoSCoW:**
-  
-**Must Have:** 
-- Horizontal movement: Player moves left and right when holding down the corresponding movement keys 
-- Vertical movement: Player is able to jump to get to higher platforms
+**BR8.4 Scenario:** Dodge 
+- Given the player is moving while engaging an enemy 
+- When the player presses the dodge button
+- Then the player performs a quick roll on the ground 
+- And evades an attack
 
-**Should Have:**
-- Sprinting: Player can sprint to move faster, improving the pacing of the game.
+**BR8.5 Scenario:** Fall damage
+- Given the player jumps off a platform 
+- When the player lands on a solid surface 
+- Then the player takes fall damage if the height exceeded the fall damage limit 
+- And the player’s screen displays visual feedback
 
-**Could Have:** 
-- Double jump: Player can jump again mid air  
-- Sliding: Player can fluidly slide when running, giving the player more options 
-**Won’t Have:**
-- Flying: Player will not be able to fly 
-- Vehicular movement: Player will not be able to enter vehicles and use them 
+**Rationale**
 
+Implementing this feature would significantly contribute to the client’s overall objective of creating an immersive and engaging player experience.
+Movement mechanics allow players to navigate the game maps and scenarios effectively, providing the foundation for other key features such as stealth. The game can fully deliver on its intended Cold War espionage theme and ensure a cohesive gameplay experience by enabling these mechanics. For these reasons, this feature’s MoSCoW prioritisation is classified as “Must Have.”
 
- 
-### Combat mechanics
-**User story:** As a player, I want to have combat mechanics so I can defeat enemies while navigating the map
+**MoSCoW: MUST HAVE**
+
+This feature is considered a “Must Have” as it is fundamental to the game’s functionality and directly supports the client’s objective of delivering an immersive stealth experience.
+
+### Combat mechanics 
+**User story:** 
+
+As a player, I want to have combat mechanics so I can defeat enemy guards while completing missions.
+
 **Feature:** Combat 
 
-**BR9.1 Scenario: Shooting**
+**BR9.1 Scenario:** Shooting 
 - Given the player is engaging an enemy 
-- When the player shoots 
-- Then the enemy takes damage 
+- When the player’s bullet connects with the enemy  
+- Then the enemy takes damage based on strength of the weapon 
+- And the gun’s ammo decreases by one 
 
-**BR9.2 Scenario:** 
+**BR9.2 Scenario:** Enemy death
 - Given the player shoots an enemy 
-- When the enemy’s health drop’s below 0 
-- Then the enemy dies 
+- When the enemy’s health drop’s to or below 0 
+- Then the enemy is defeated 
 - And the enemy drops a coin 
 
-**BR9.3 Scenario** 
+**BR9.3 Scenario:** Melee attack 
 - Given the player is next to an enemy 
 - When the player melee attacks the enemy 
-- Then the enemy immediately dies 
+- Then the enemy is immediately defeated 
 - And the enemy drops two coins 
 
-**MoSCoW:**
+**BR9.4 Scenario:** Out of ammo 
+- Given the player’s gun has run out of ammo 
+- When the player clicks the reload key 
+- Then the player reloads their weapon 
+- And can shoot again with full ammo 
 
-**Must Have:** 
-- Shooting mechanics: The player should be able to shoot bullets at enemies
-- Melee mechanics: The player should be able to melee attack enemies when close enough 
-- Damage feedback: Health bars displayed for player and enemies which is adjusted according to their health points left 
+**BR9.5 Scenario:** grenade attack
+- Given player is holding a grenade 
+- When the player throws the grenade
+- Then the grenade explodes upon impacting the ground
+- And enemies within the blast radius take damage 
 
-**Should Have:** 
-- Throwable items: Items purchased by the player can be thrown at enemies
-- Headshots multiplier: Enemies take more damage when hit in the head
+**BR9.6 Scenario:** Player taking a hit
+- Given the player is engaged in combat with an enemy  
+- When the player takes damage 
+- Then the player’s health points decrease according to how much damage they took 
+- And the player’s screen shows visual feedback
 
-**Could Have:** 	
-- Bullet physics: Bullets can be affected by gravity 
-- Adrenaline: When the player is near death they gain a temporary adrenaline boost 
+**Rationale**
 
-**Won’t Have:** 
-- Scopes: No guns will have scoped shooting 
-- Bloom & recoil: Guns will have no firing error or recoil 
+Implementing this feature would significantly contribute to the client’s goal of enhancing gameplay and immersion within the themes of the Cold War and infiltration.
+This feature allows players to engage in infiltration and combat scenarios to achieve their objectives, aligning closely with the game’s desired theme. However, due to its secondary nature compared to the primary stealth mechanic, this feature is not considered of higher priority. For these reasons, this feature’s MoSCoW prioritisation is classified as “Should Have.”
+
+**MoSCoW: SHOULD HAVE**
+
+This feature is considered a “Should Have” as it supports the game’s overall themes and objectives and enhances active gameplay elements. However, it is not essential for achieving the core gameplay experience.
+
+
 
 
 
