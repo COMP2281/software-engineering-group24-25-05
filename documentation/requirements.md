@@ -164,6 +164,7 @@ Due to the theme of the game being Cold war espionage, stealth is one of the cor
 As a player, I want to answer AI, Cybersecurity, and Data Analytics questions from the IBM Skills Question Bank, so that I can test my knowledge and understand IBM Skills Build concepts.
 
 **Feature:** IBM Skills Question Bank
+
 **BR2.1 Scenario:** Player steals classified document
 - Given the player has found a classified document,
 - When the player steals the document ,
