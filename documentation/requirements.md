@@ -154,6 +154,8 @@ Due to the theme of the game being Cold war espionage, stealth is one of the cor
 
 **MoSCoW Priority** : **MUST HAVE**
 
+This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
+
 
 
 
@@ -186,6 +188,8 @@ This feature would ensure that the game’s design aligns with the client’s ed
 
 **MoSCoW Priority: MUST HAVE**
 
+This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
+
 
 
 ### Pause Screen
@@ -217,7 +221,7 @@ As a player, I want to be able to pause my game so that I can take a break from 
 
 Implementing this feature would enhance the user’s gameplay experience and improve the overall quality of life within the game. Rather than having to complete the game in a single session, players would be able to pause the game, and complete it a later time. Although a pause screen is not explicitly mentioned as a core requirement, this feature adds flexibility and convenience to the game, therefore significantly improving the game’s quality of life, achieving the client’s objectives of a high quality user experience ; Due to the reasons outlined above, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
-**MoSCoW: COULD HAVE**
+**MoSCoW Priority: COULD HAVE**
 
 This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
 
