@@ -10,10 +10,9 @@
 | Heria Chen     | qzxl76       |
 | Toby Davis     | cltz62       |
 
-* Group Number: 5
-* Date the document was prepared:
-* Version: 1.0.2
-
+- Group Number: 5
+- Date the document was prepared:
+- Version: 1.0.2
 
 # 1 - Introduction
 
@@ -40,6 +39,47 @@ This document is organised as follows:
   - [3.3 - Project Schedule](#33---project-schedule)
 
 ## 1.2 - Project Scope
+
+### 1.2.1 Purpose and Overall Goals
+
+The primary goal of the Shadow Operative project is to enhance learner engagement and retention by transforming IBM Skills Build concepts into an immersive, interactive gaming experience. By integrating educational content within gameplay, the project seeks to address the limitations of traditional learning methods, such as low engagement and lack of interactivity, with a more innovative and appealing approach.
+
+Through the combination of stealth-based challenges and gamified learning mechanics, the project aims to not only make learning enjoyable but also improve understanding and application of key concepts. The game aspires to serve as a scalable, versatile educational tool that can support a wide range of learners and promote the adoption of IBM Skills Build across diverse educational environments.
+
+### 1.2.2 Stakeholders
+
+- **Primary Stakeholder:**  
+  IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM's aim is to improve accessibility to their Skills Build content and enhance learner outcomes through innovative tools.
+
+- **Target Users:**
+
+  - Students in educational institutions who wish to complement their studies with engaging, interactive tools.
+  - Educators looking for gamified solutions to teach IBM Skills Build concepts in a classroom setting.
+  - Self-learners pursuing certifications to improve their skills in fields such as cybersecurity, AI, and data analytics.
+
+- **Secondary Stakeholders:**
+  - IBM’s educational partners, who may use this tool to promote IBM Skills Build.
+  - Developers and teams within IBM involved in creating or supporting educational technologies.
+
+### 1.2.3 Boundaries
+
+- **Educational Content:**  
+  The game focuses solely on IBM Skills Build content, avoiding unrelated gameplay elements like heavy combat mechanics. Content is designed to be both engaging and educational, blending narrative with skill-based challenges directly linked to IBM Skills Build objectives.
+
+- **Platform Compatibility:**  
+  Development is restricted to the Windows platform, prioritising stability and simplicity. Expanding to other platforms, such as macOS, mobile devices, or gaming consoles, is beyond the scope of this project due to resource and time constraints.
+
+- **Multiplayer:**  
+  The game will only support single-player gameplay to maintain consistency in educational content delivery and simplicity in development. Multiplayer features, such as cooperative or competitive modes, are excluded from the current scope.
+
+- **Graphical and Animation Complexity:**  
+  To focus on functionality and thematic coherence, the game will avoid advanced graphical techniques, such as photorealistic rendering or motion capture. Instead, it will use stylised visuals that align with its educational goals.
+
+### 1.2.4 Vision
+
+Shadow Operative aims to blend stealth gameplay mechanics with dynamic, question-based educational challenges, creating a unique tool that enhances learning through immersive storytelling. The game will place players in a Cold War-era setting, engaging them in scenarios where success is tied to their mastery of IBM Skills Build concepts.
+
+By leveraging adaptive difficulty, engaging narratives, and a stealth-driven environment, Shadow Operative seeks to inspire the development of new educational tools that merge fun and functionality. The vision is to redefine how learners interact with educational content, shifting from passive consumption to active, enjoyable engagement.
 
 ## 1.3 - System Description
 
@@ -219,11 +259,11 @@ $$
 
 ### 3.2.1 - Incremental Model
 
-* The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
+- The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
 
-* With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
+- With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
 
-* Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
+- Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
 
 ### 3.2.2 - In the context of the project
 
@@ -245,59 +285,59 @@ $$
 
 ### Art / Vision Design
 
-* due to **Unity** offering an open source template that closely
-matches the client's vision of the final game we have decided to
-have an extended period of planning the aspects of the game such as
+- due to **Unity** offering an open source template that closely
+  matches the client's vision of the final game we have decided to
+  have an extended period of planning the aspects of the game such as
 
-1) game mechanics (stealth, guns, puzzles)
-2) art direction
+1. game mechanics (stealth, guns, puzzles)
+2. art direction
 
 ### RAG Analysis and the Questions Bank
 
-* from `2024-11-06` to `2024-11-20` we want to finish the client's request for
-a RAG analysis of the IBM courses
+- from `2024-11-06` to `2024-11-20` we want to finish the client's request for
+  a RAG analysis of the IBM courses
 
-* which will be needed in order to create the questions bank for the puzzles
-of the game, as per request of the client, the puzzles will be related to the **IBM Skills Build**
-courses
+- which will be needed in order to create the questions bank for the puzzles
+  of the game, as per request of the client, the puzzles will be related to the **IBM Skills Build**
+  courses
 
 ### C# / Unity Acquaintance
 
-* not all of us have worked in the past with `C#/Unity`, due to this we have planned
-a long lasting period (until the end Christmas Vacation) where we can familiarize ourselves
-with the tools at our disposal
+- not all of us have worked in the past with `C#/Unity`, due to this we have planned
+  a long lasting period (until the end Christmas Vacation) where we can familiarize ourselves
+  with the tools at our disposal
 
 ### Refactor Unity template
 
-* as mentioned in `Art / Vision Design` **Unity** offers a starter template, which
-will be refactored in such a way to suit our needs and / or coding style
+- as mentioned in `Art / Vision Design` **Unity** offers a starter template, which
+  will be refactored in such a way to suit our needs and / or coding style
 
 ### Game Mechanics Implementation and Test Plan
 
-* these phases begin at the same time and we hope to identify a viable
-testing plan while developing game mechanics such as:
+- these phases begin at the same time and we hope to identify a viable
+  testing plan while developing game mechanics such as:
 
-1) basic movement
-2) stealth mechanics
-3) combat mechanics
-4) enemies
+1. basic movement
+2. stealth mechanics
+3. combat mechanics
+4. enemies
 
 ### Level Design and IBM Education Integration
 
-* after the `Game Mechanics Implementation` phase once we have
-a solid foundation we can start the `Level Design` phase which
-consists in the creation of **3 stages**
+- after the `Game Mechanics Implementation` phase once we have
+  a solid foundation we can start the `Level Design` phase which
+  consists in the creation of **3 stages**
 
-* and create puzzles for the 3 stages which will **act as a
-progression system**
+- and create puzzles for the 3 stages which will **act as a
+  progression system**
 
-* we will use the **questions bank** made in the first stages
-of the development to enrich the puzzles with IBM Skills Build questions
+- we will use the **questions bank** made in the first stages
+  of the development to enrich the puzzles with IBM Skills Build questions
 
 ### Technical Report and Product Presentation
 
-* they will start to run in parallel once we are at the end of the development
-cycle with the `Game Mechanics Implementation`
+- they will start to run in parallel once we are at the end of the development
+  cycle with the `Game Mechanics Implementation`
 
 ### Gantt Chart
 
@@ -307,5 +347,5 @@ cycle with the `Game Mechanics Implementation`
 
 ### Key deadlines
 
-* `2024-11-28`: Finish client RAG Analysis and Questions Bank
-* `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
+- `2024-11-28`: Finish client RAG Analysis and Questions Bank
+- `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
