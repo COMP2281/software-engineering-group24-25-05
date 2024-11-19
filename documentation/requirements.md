@@ -184,24 +184,28 @@ As a player, I want to answer AI, Cybersecurity, and Data Analytics questions fr
 The client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
 This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build. As such, this feature has been assigned a MoSCoW prioritisation of “Must Have.”
 
-**MoSCoW: MUST HAVE**
+**MoSCoW Priority: MUST HAVE**
 
 
 
 ### Pause Screen
-User Story: As a player, I want to be able to pause my game so that I can take a break from the game or change the settings.
-Feature: Pause Screen
+**User Story:** 
+As a player, I want to be able to pause my game so that I can take a break from the game, change the settings or exit the game.
+
+**Feature:** Pause Screen
 
 **Background:**
 - Given the player is in a level
 - When the player presses the designated pause key on the keyboard
 - Then the game pauses
 - And the Pause screen is displayed
+- And buttons are displayed on the screen 
 
 **BR3.1 Scenario:** Taking a break from the game
 - Given the game is paused
-- When the player presses the pause button
-- Then the player can resume gameplay
+- When the player clicks the resume button 
+- Then the game resumes 
+- And the player can pick up where they left off  
 
 **BR3.2 Scenario:** Accessing and Adjusting Game Settings from the Pause Screen
 - Given the game is paused
@@ -209,22 +213,12 @@ Feature: Pause Screen
 - Then the settings menu is displayed
 - And the player can adjust settings to their preference
 
-**MoSCoW:**
+**RATIONALE**
 
-**Must Have:**
-- Pause Functionality: Pressing the pause key must reliably pause the game and display the Pause screen.
-- Resume Functionality: Pressing the pause key again must resume gameplay from where it was paused.
+Implementing this feature would enhance the user’s gameplay experience and improve the overall quality of life within the game. Rather than having to complete the game in a single session, players would be able to pause the game, and complete it a later time. Although a pause screen is not explicitly mentioned as a core requirement, this feature adds flexibility and convenience to the game, therefore significantly improving the game’s quality of life, achieving the client’s objectives of a high quality user experience ; Due to the reasons outlined above, this feature’s MoSCoW prioritisation is classified as “Could Have.”
 
-**Should Have:**
-- Settings Access: While the game is paused, the player should be able to access the settings menu to adjust preferences, such as audio, graphics, and controls.
-
-**Could Have:**
-- Additional Options on Pause Screen: Options like “Quit Level” or “Restart Level” could be added for convenience but are not critical to the core pause functionality.
-- In-game Tips or Hints on Pause Screen: Could display hints or objectives when paused to remind the player of their current goals.
-
-**Won’t Have:**
-- Save Game Option: If this is an action game or doesn’t involve complex progress tracking, a save function may be unnecessary on the pause screen.
-
+**MoSCoW: COULD HAVE**
+This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
 
 
 ### AI Boss
