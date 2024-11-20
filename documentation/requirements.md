@@ -135,7 +135,7 @@ Shadow Operative is designed as a standalone educational game; however, it is ma
 
 # 2 - Solution Requirements
 
-## 2.1 Requirements Elicitation
+## 2.1 - Requirements Elicitation
 
 To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on `17/10/24`, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
 
