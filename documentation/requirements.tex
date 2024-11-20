@@ -22,6 +22,7 @@
 
 \newpage
 
+\addtocontents{toc}{\protect\enlargethispage{2\baselineskip}}
 \tableofcontents
 
 \newpage
@@ -82,16 +83,6 @@
         \item \textbf{Limitation:} The game's heavy emotional themes may not be suitable or relevant for younger learners. Shadow Operative maintains engagement while ensuring content is appropriate for educational purposes.
     \end{itemize}
 
-    \item \textbf{Dishonored 2:} Dishonored 2 inspired our enemy awareness systems, and varied approaches to evasion and takedowns. These features are crucial for building the interactive stealth elements in Shadow Operative.
-    \begin{itemize}
-        \item \textbf{Limitation:} The complexity of Dishonored 2's mechanics could overwhelm learners. Our game simplifies these systems to ensure accessibility while maintaining engaging gameplay.
-    \end{itemize}
-
-    \item \textbf{Batman: Arkham Asylum:} Recognized for its claustrophobic environments and atmospheric design, Batman: Arkham Asylum offers a model for crafting immersive environments and leveraging tight spaces to build tension.
-    \begin{itemize}
-        \item \textbf{Limitation:} The combat focus of Batman: Arkham Asylum is less relevant for our stealth-driven gameplay. Shadow Operative focuses purely on stealth to maintain thematic and educational alignment.
-    \end{itemize}
-
     \item \textbf{Kahoot!:} This gamified quiz platform highlights the power of interactive question-based challenges and adaptive difficulty. It directly influences Shadow Operative's question generation system and difficulty adjustments, with timers and music used to create urgency in an educational context.
     \begin{itemize}
         \item \textbf{Limitation:} Kahoot!'s approach lacks the narrative and immersive elements we aim to include, which Shadow Operative addresses by integrating learning into a cohesive story-driven experience.
@@ -115,6 +106,8 @@
 \subsubsection{Integration Considerations}
 
 \noindent Shadow Operative is designed as a standalone educational game; however, it is making use of IBM’s AI technology, Granite, allowing the user to make the experience adaptive to them, focusing more on their use-case of the system.
+
+\newpage
 
 \section{Solution Requirements}
 
@@ -162,27 +155,7 @@
         \item And if the guard detects the player, an alert state is triggered
     \end{itemize}
 
-    \item \textbf{BR 1.3 Scenario:} crouch walking to avoid detection
-
-    \begin{itemize}
-        \item Given the player is outside any cover
-        \item And the player is within the  guard’s line of sight
-        \item When the player moves slowly in a crouched or stealthy stance
-        \item Then the guards should have a reduced chance of detecting the player
-        \item And the player can bypass guards without triggering an alert if they remain at a safe distance
-    \end{itemize}
-
-    \item \textbf{BR 1.4 Scenario:} triggering an alert when spotted
-
-    \begin{itemize}
-        \item Given the player is within a visible range of the guard’s line of sight
-        \item And the player is not in cover
-        \item When the guard spots the player
-        \item Then an alert state should be triggered
-        \item And nearby guards should move toward the player’s last known position
-    \end{itemize}
-
-    \item \textbf{BR 1.5 Scenario:} returning to patrol after losing sight of player
+    \item \textbf{BR 1.3 Scenario:} returning to patrol after losing sight of player
 
     \begin{itemize}
         \item Given guards are in an alert state after spotting the player
@@ -237,6 +210,8 @@
     \end{itemize}
 \end{itemize}
 
+\newpage
+
 \subsubsection{Pause Screen}
 
 \begin{itemize}
@@ -270,6 +245,8 @@
         \item This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
     \end{itemize}
 \end{itemize}
+
+\newpage
 
 \subsubsection{AI Boss}
 
@@ -467,17 +444,7 @@
         \item And the character has a fluid walking animation
     \end{itemize}
 
-    \item \textbf{BR 8.2 Scenario:} sprinting
-
-    \begin{itemize}
-        \item Given the player is moving
-        \item When the player holds the sprint button
-        \item Then the player’s speed increases by a large margin
-        \item And the player’s stamina decreases while they sprint
-        \item And when their stamina runs out their speed slows down
-    \end{itemize}
-
-    \item \textbf{BR 8.3 Scenario:} vertical movement
+    \item \textbf{BR 8.2 Scenario:} vertical movement
 
     \begin{itemize}
         \item Given the player is standing or moving on a solid surface
@@ -487,7 +454,7 @@
         \item And the character starts moving downwards
     \end{itemize}
 
-    \item \textbf{BR 8.4 Scenario:} dodge
+    \item \textbf{BR 8.3 Scenario:} dodge
 
     \begin{itemize}
         \item Given the player is moving while engaging an enemy
@@ -525,21 +492,12 @@
 
     \begin{itemize}
         \item Given the player shoots an enemy
-        \item When the enemy’s health drop’s to or below 0
+        \item When the enemy’s health drops to or below 0
         \item Then the enemy is defeated
         \item And the enemy drops a coin
     \end{itemize}
 
-    \item \textbf{BR 9.3 Scenario:} melee attack
-
-    \begin{itemize}
-        \item Given the player is next to an enemy
-        \item When the player melee attacks the enemy
-        \item Then the enemy is immediately defeated
-        \item And the enemy drops two coins
-    \end{itemize}
-
-    \item \textbf{BR 9.4 Scenario:} out of ammo
+    \item \textbf{BR 9.3 Scenario:} out of ammo
 
     \begin{itemize}
         \item Given the player’s gun has run out of ammo
@@ -548,7 +506,7 @@
         \item And can shoot again with full ammo
     \end{itemize}
 
-    \item \textbf{BR 9.5 Scenario:} player taking a hit
+    \item \textbf{BR 9.4 Scenario:} player taking a hit
 
     \begin{itemize}
         \item Given the player is engaged in combat with an enemy
@@ -557,7 +515,7 @@
         \item And the player’s screen shows visual feedback
     \end{itemize}
 
-    \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s goal of enhancing gameplay and immersion within the themes of the Cold War and infiltration. This feature allows players to engage in infiltration and combat scenarios to achieve their objectives, aligning closely with the game’s desired theme. However, due to its secondary nature compared to the primary stealth mechanic, this feature is not considered of higher priority.
+    \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s goal of enhancing gameplay and immersion within the themes of the Cold War and infiltration. This feature allows players to engage in combat scenarios to achieve their objectives, aligning closely with the game’s desired theme.
 
     \item \textbf{MoSCoW Priority: SHOULD HAVE}
 
@@ -616,18 +574,6 @@
     \end{aligned}
 \end{equation*}
 
-\subsubsection{Software Development Methodology Risks}
-
-\noindent Large codebases require strict adherence to project-defined standards, as otherwise it can become difficult for team members to work on other parts of the project. Additionally, the code must be highly modular, since the code developed by one team member must be able to interact with the code developed by others, regardless of the implementation details. Furthermore, it is useful to have clean, readable code, with comments in areas that are not obvious. This ensures that code can still be understood months after it was first written, which may be necessary for debugging and maintenance purposes.
-
-\begin{equation*}
-    \begin{aligned}
-        &\text{Consequence}=4 \\
-        &\text{Likelihood}=4 \\
-        &\text{Risk}=4\times4=16 \implies {\color{magenta}\text{Extreme}}
-\end{aligned}
-\end{equation*}
-
 \subsubsection{AI Risks}
 
 \noindent AI is a very powerful tool, but can be dangerous if not used correctly. LLMs in particular can be very useful and produce high quality results, but are also susceptible to biases and may produce inaccurate or inappropriate results. Fortunately, much research has been conducted in this area, and popular LLMs are 'aligned' with human values, and are highly unlikely to produce offensive suggestions. Unfortunately, incorrect results are still quite common.
@@ -639,6 +585,8 @@
         &\text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
     \end{aligned}
 \end{equation*}
+
+\newpage
 
 \subsection{Development Approach}
 
@@ -666,8 +614,6 @@
     \item \textbf{Early Player Engagement:} The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input.
 
     \item \textbf{Adaptability to a Small Team:} With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked.
-
-    \item \textbf{Simplicity and Structure:} The model offers a straightforward and predictable process, breaking development into clear, manageable stages. This structured approach ensures transparency and provides measurable milestones throughout the project life-cycle.
 \end{enumerate}
 
 \subsection{Project Schedule}
