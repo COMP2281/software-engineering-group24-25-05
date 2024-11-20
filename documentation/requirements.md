@@ -11,7 +11,7 @@
 | Toby Davis     | cltz62       |
 
 * Group Number: 5
-* Date the document was prepared:
+* Date the document was prepared: `11/20/2024`
 * Version: 1.0.2
 
 # 1 - Introduction
@@ -137,9 +137,9 @@ Shadow Operative is designed as a standalone educational game; however, it is ma
 
 ## 2.1 Requirements Elicitation
 
-To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
+To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on `17/10/24`, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
 
-**Challenges Encountered**
+### 2.1.1 Challenges Encountered
 
 Our initial difficulty was organizing our first meeting with the client due to conflicting schedules among team members. This caused a delay in setting up a direct conversation, which impacted our early progress. Additionally, one of our team members was unavailable for a few weeks due to being away, which further complicated scheduling and resource allocation. Despite these obstacles, the team coordinated through asynchronous communication and adjusted roles temporarily to maintain momentum.
 
@@ -149,7 +149,7 @@ In our first client meeting on 06/11/24, we discussed key project concerns and s
 
 To refine our requirements into behavioral specifications, we used Gherkin language. For example, we created scenarios detailing how the game would present challenges, adjust difficulty dynamically, and integrate IBM Skills Build content seamlessly. This method allowed us to concisely capture the desired system behavior and align it with the client’s educational objectives. This allowed us to create user stories that detailed the player’s journey through the game, from initial engagement to mastery of key concepts, ensuring that our requirements were user-focused and aligned with the client’s vision.
 
-**Requirement Validation**
+### 2.1.2 Requirement Validation
 
 To ensure that our refined requirements aligned accurately with the client’s needs, we sent a confirmation email summarizing key decisions and requested feedback. The client’s positive response affirmed our direction. We also planned a follow-up meeting to further validate our approach and address any remaining questions, ensuring continuous alignment with the client’s educational goals.
 
@@ -679,7 +679,7 @@ requests.
 
 ### 3.3.3 RAG Analysis and the Questions Bank
 
-As mentioned in `3.3.1` the game has an educational side and the client
+As mentioned in `3.3.2` the game has an educational side and the client
 has tasked us with taking questions from the IBM SkillsBuild courses
 and integrating them into the game.
 
@@ -730,5 +730,5 @@ cycle with the **Game Mechanics Implementation**
 
 ### 3.3.8 Key Deadlines
 
-- `2024-11-28`: Finish client RAG Analysis and Questions Bank
-- `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
+* `2024-11-28`: Finish client RAG Analysis and Questions Bank
+* `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
