@@ -81,7 +81,7 @@
 \subsubsection{Boundaries}
 
 \begin{itemize}
-    \item \textbf{Educational Content:} The game is centred on IBM Skills Build content, deliberately avoiding irrelevant gameplay elements such as heavy combat. The focus is on creating a balance between engagement and educational value.
+    \item \textbf{Educational Content:} The game is centred on IBM Skills Build content, deliberately avoiding irrelevant gameplay elements such as worldbuilding. The focus is on creating a balance between engagement and educational value.
 
     \item \textbf{Platform Compatibility:} Development is restricted to Windows due to resource and time constraints. Expanding to additional platforms, such as mobile devices or gaming consoles, is beyond the project's scope.
 
@@ -172,7 +172,7 @@
 
     \item \textbf{Feature:} Stealth Mechanics
 
-    \item \textbf{BR 1.1 Scenario}: using cover to avoid detection
+    \item \textbf{BR 1.1 Scenario}: Using cover to avoid detection
 
     \begin{itemize}
         \item Given the player is near enemy guards
@@ -181,7 +181,7 @@
         \item Then the guards should not detect the player
     \end{itemize}
 
-    \item \textbf{BR 1.2 Scenario}: making noise near guards
+    \item \textbf{BR 1.2 Scenario}: Making noise near guards
 
     \begin{itemize}
         \item Given the player is making noise
@@ -191,7 +191,7 @@
         \item And if the guard detects the player, an alert state is triggered
     \end{itemize}
 
-    \item \textbf{BR 1.3 Scenario:} returning to patrol after losing sight of player
+    \item \textbf{BR 1.3 Scenario:} Returning to patrol after losing sight of player
 
     \begin{itemize}
         \item Given guards are in an alert state after spotting the player
@@ -201,7 +201,7 @@
         \item And the alert state should end
     \end{itemize}
 
-    \item \textbf{Rationale:} Implementing this feature would contribute significantly to the client’s objectives as the core gameplay feature in the game design desired by the client was Stealth. Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective.
+    \item \textbf{Rationale:} Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have”. 
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
 
@@ -217,7 +217,7 @@
 
     \item \textbf{Feature:} IBM Skills question bank
 
-    \item \textbf{BR 2.1 Scenario:} player steals classified document
+    \item \textbf{BR 2.1 Scenario:} Player steals classified document
 
     \begin{itemize}
         \item Given the player has reached the final challenge of the level
@@ -227,7 +227,7 @@
         \item But if the player answers incorrectly, they must redo the quiz
     \end{itemize}
 
-    \item \textbf{BR 2.2 Scenario:} quiz at the end of the level
+    \item \textbf{BR 2.2 Scenario:} Quiz at the end of the level
 
     \begin{itemize}
         \item Given the player has reached the final challenge of the level
@@ -255,7 +255,7 @@
 
     \item \textbf{Feature:} Pause Screen
 
-    \item \textbf{BR 3.1 Scenario:} taking a break from the game
+    \item \textbf{BR 3.1 Scenario:} Taking a break from the game
 
     \begin{itemize}
         \item Given the game is paused
@@ -264,7 +264,7 @@
         \item And the player can pick up where they left off
     \end{itemize}
 
-    \item \textbf{BR 3.2 Scenario:} accessing game settings
+    \item \textbf{BR 3.2 Scenario:} Accessing game settings
 
     \begin{itemize}
         \item Given the game is paused
@@ -291,7 +291,7 @@
 
     \item \textbf{Feature:} Adaptive Learning
 
-    \item \textbf{BR 4.1 Scenario}: testing stealth skills
+    \item \textbf{BR 4.1 Scenario}: Testing stealth skills
 
     \begin{itemize}
         \item Given the player has demonstrated weakness in Stealth based tasks in the game
@@ -300,7 +300,7 @@
         \item But the main objective is still the final quiz
     \end{itemize}
 
-    \item \textbf{BR 4.2 Scenario:} quiz adjustment
+    \item \textbf{BR 4.2 Scenario:} Quiz adjustment
 
     \begin{itemize}
         \item Given the player has previously struggled with certain topics
@@ -308,15 +308,6 @@
         \item Then the boss can adapt to the player’s weaknesses
         \item And generate a custom quiz for the player
         \item And include the player’s weaknesses in the custom quiz
-    \end{itemize}
-
-    \item \textbf{BR 4.3 Scenario:} combat mechanics adjustment
-
-    \begin{itemize}
-        \item Given the player has demonstrated weakness in combat abilities
-        \item When the player encounters the final boss
-        \item Then can adjust the level to include to include an element of combat based mechanics alongside the final quiz
-        \item But the main objective is still the final quiz
     \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements. The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications. Whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult.
@@ -335,7 +326,7 @@
 
     \item \textbf{Feature:} SFX
 
-    \item \textbf{BR 5.1 Scenario:} background music for immersive atmosphere
+    \item \textbf{BR 5.1 Scenario:} Background music for immersive atmosphere
 
     \begin{itemize}
         \item Given the player is in a game level
@@ -344,7 +335,7 @@
         \item And the player can adjust the volume in settings
     \end{itemize}
 
-    \item \textbf{BR 5.2 Scenario:} sound effects for actions
+    \item \textbf{BR 5.2 Scenario:} Sound effects for actions
 
     \begin{itemize}
         \item Given the player performs an action
@@ -353,7 +344,7 @@
         \item And the sound effect volume is consistent with the settings
     \end{itemize}
 
-    \item \textbf{BR 5.3 Scenario:} adaptive music for boss encounters
+    \item \textbf{BR 5.3 Scenario:} Adaptive music for boss encounters
 
     \begin{itemize}
         \item Given the player is entering a boss encounter
@@ -362,7 +353,7 @@
         \item And the music fades back to normal when the boss is defeated
     \end{itemize}
 
-    \item \textbf{BR 5.4 Scenario:} environmental sound effects
+    \item \textbf{BR 5.4 Scenario:} Environmental sound effects
 
     \begin{itemize}
         \item Given the player is moving through different environments
@@ -394,7 +385,7 @@
         \item Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
     \end{itemize}
 
-    \item \textbf{BR 6.2 Scenario:} enemy uniforms
+    \item \textbf{BR 6.2 Scenario:} Enemy uniforms
 
     \begin{itemize}
         \item Given An enemy is in the player’s line of sight
@@ -404,7 +395,7 @@
         \item And the player is able to identify guards easily
     \end{itemize}
 
-    \item \textbf{BR 6.3 Scenario:} entering a room
+    \item \textbf{BR 6.3 Scenario:} Entering a room
 
     \begin{itemize}
         \item Given the player enters a room
@@ -431,7 +422,7 @@
 
     \item \textbf{Feature:} Mission System
 
-    \item \textbf{BR 7.1 Scenario}: receiving mission objective
+    \item \textbf{BR 7.1 Scenario}: Receiving mission objective
 
     \begin{itemize}
         \item Given the player has completed their previous mission
@@ -440,7 +431,7 @@
         \item And they learn about the objectives for the next mission
     \end{itemize}
 
-    \item \textbf{BR 7.2 Scenario}: unlocking a reward for completing a mission
+    \item \textbf{BR 7.2 Scenario}: Unlocking a reward for completing a mission
 
     \begin{itemize}
         \item Given the player has successfully completed a mission
@@ -449,7 +440,7 @@
         \item And the player can use this item for further missions
     \end{itemize}
 
-    \item \textbf{BR 7.4 Scenario:} completing secondary objective
+    \item \textbf{BR 7.4 Scenario:} Completing secondary objective
 
     \begin{itemize}
         \item Given a secondary objective has been completed during a mission
@@ -475,7 +466,7 @@
 
     \item \textbf{Feature:} Movement
 
-    \item \textbf{BR 8.1 Scenario:} horizontal movement
+    \item \textbf{BR 8.1 Scenario:} Horizontal movement
 
     \begin{itemize}
         \item Given the player is moving their character
@@ -484,7 +475,7 @@
         \item And the character has a fluid walking animation
     \end{itemize}
 
-    \item \textbf{BR 8.2 Scenario:} vertical movement
+    \item \textbf{BR 8.2 Scenario:} Vertical movement
 
     \begin{itemize}
         \item Given the player is standing or moving on a solid surface
@@ -494,7 +485,7 @@
         \item And the character starts moving downwards
     \end{itemize}
 
-    \item \textbf{BR 8.3 Scenario:} dodge
+    \item \textbf{BR 8.3 Scenario:} Dodge
 
     \begin{itemize}
         \item Given the player is moving while engaging an enemy
@@ -521,7 +512,7 @@
 
     \item \textbf{Feature:} Combat
 
-    \item \textbf{BR 9.1 Scenario:} shooting
+    \item \textbf{BR 9.1 Scenario:} Shooting
 
     \begin{itemize}
         \item Given the player is engaging an enemy
@@ -530,7 +521,7 @@
         \item And the gun’s ammo decreases by one
     \end{itemize}
 
-    \item \textbf{BR 9.2 Scenario:} enemy death
+    \item \textbf{BR 9.2 Scenario:} Enemy death
 
     \begin{itemize}
         \item Given the player shoots an enemy
@@ -539,7 +530,7 @@
         \item And the enemy drops a coin
     \end{itemize}
 
-    \item \textbf{BR 9.3 Scenario:} out of ammo
+    \item \textbf{BR 9.3 Scenario:} Out of ammo
 
     \begin{itemize}
         \item Given the player’s gun has run out of ammo
@@ -548,7 +539,7 @@
         \item And can shoot again with full ammo
     \end{itemize}
 
-    \item \textbf{BR 9.4 Scenario:} player taking a hit
+    \item \textbf{BR 9.4 Scenario:} Player taking a hit
 
     \begin{itemize}
         \item Given the player is engaged in combat with an enemy
@@ -689,11 +680,11 @@
 \noindent Key mechanics that have to be implemented and polished are:
 
 \begin{enumerate}
-    \item \textbf{Basic movement:} movement should feel fluid, responsive, must include crouching (stealth).
+    \item \textbf{Basic movement:} Movement should feel fluid, responsive, must include crouching (stealth).
 
-    \item \textbf{Stealth Mechanics:} "light" and "dark" zones where the AI of the laboratory can either see you or not, if detected sends enemies.
+    \item \textbf{Stealth Mechanics:} "Light" and "dark" zones where the AI of the laboratory can either see you or not, if detected sends enemies.
 
-    \item \textbf{Environment reacting to the player:} by using IBM's Granite AI we hope to achieve enemies/bosses that react dynamically to the player; and even in the case of the educational side make the questions harder/easier depending on the success rate of the player.
+    \item \textbf{Environment reacting to the player:} By using IBM's Granite AI we hope to achieve enemies/bosses that react dynamically to the player; even in the case of the educational side make the questions harder/easier depending on the success rate of the player.
 \end{enumerate}
 
 \subsubsection{Level Design and IBM Education Integration}
