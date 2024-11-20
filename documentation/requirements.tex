@@ -1,0 +1,314 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+
+\title{Requirements Documentation}
+\date{November 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Overview and Justification}
+
+\noindent The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms their current educational material into an immersive, game-based experience, enhancing both learner engagement and knowledge retention; In doing so, the project addresses the challenge of making educational content more appealing and interactive, something that IBM have identified as a key area of improvement.
+
+\noindent The project benefits individuals who currently learn via the IBM Skills Build, including self-learners and educational institutions seeking interactive tools to complement their curricula. By gamifying the learning process, this solution has the potential to expand the reach and effectiveness of IBM Skills Build programs, particularly for younger learners or those in need of alternative learning methods.
+
+\noindent The project’s client is IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM’s overarching goal is to increase the engagement of Skills Build content. This project aligns with IBM’s strategic aim to integrate cutting-edge solutions into its educational offerings.
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\subsection{Project Scope}
+
+\subsubsection{Purpose and Overall Goals}
+
+\noindent The primary goal of the Shadow Operative project is to enhance learner engagement and retention by transforming IBM Skills Build concepts into an immersive, interactive gaming experience. By integrating educational content within gameplay, the project seeks to address the limitations of traditional learning methods, such as low engagement and lack of interactivity, with a more innovative and appealing approach.
+
+\noindent Through the combination of stealth-based challenges and gamified learning mechanics, the project aims to not only make learning enjoyable but also improve understanding and application of key concepts. The game aspires to serve as a scalable, versatile educational tool that can support a wide range of learners and promote the adoption of IBM Skills Build across diverse educational environments.
+
+\subsubsection{Stakeholders}
+
+\begin{itemize}
+    \item \textbf{Primary Stakeholder}: IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM's aim is to improve accessibility to their Skills Build content and enhance learner outcomes through innovative tools.
+
+    \item \textbf{Target Users:}
+    \begin{itemize}
+        \item Students in educational institutions who wish to complement their studies with engaging, interactive tools.
+        \item Educators looking for gameified solutions to teach IBM Skills Build concepts in a classroom setting.
+        \item Self-learners pursuing certifications to improve their skills in fields such as cybersecurity, AI, and data analytics.
+    \end{itemize}
+
+    \item \textbf{Secondary Stakeholders}
+    \begin{itemize}
+        \item IBM’s educational partners, who may use this tool to promote IBM Skills Build.
+        \item Developers and teams within IBM involved in creating or supporting educational technologies.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Boundaries}
+
+\begin{itemize}
+    \item \textbf{Educational Content:} The game focuses solely on IBM Skills Build content, avoiding unrelated gameplay elements like heavy combat mechanics. Content is designed to be both engaging and educational, blending narrative with skill-based challenges directly linked to IBM Skills Build objectives.
+
+    \item \textbf{Platform Compatibility:} Development is restricted to the Windows platform, prioritising stability and simplicity. Expanding to other platforms, such as macOS, mobile devices, or gaming consoles, is beyond the scope of this project due to resource and time constraints.
+
+    \item \textbf{Multiplayer:} The game will only support single-player gameplay to maintain consistency in educational content delivery and simplicity in development. Multiplayer features, such as cooperative or competitive modes, are excluded from the current scope.
+
+    \item \textbf{Graphical and Animation Complexity:} To focus on functionality and thematic coherence, the game will avoid advanced graphical techniques, such as photorealistic rendering or motion capture. Instead, it will use stylised visuals that align with its educational goals.
+\end{itemize}
+
+\subsubsection{Vision}
+
+\noindent Shadow Operative aims to blend stealth gameplay mechanics with dynamic, question-based educational challenges, creating a unique tool that enhances learning through immersive storytelling. The game will place players in a Cold War-era setting, engaging them in scenarios where success is tied to their mastery of IBM Skills Build concepts.
+
+\noindent By leveraging adaptive difficulty, engaging narratives, and a stealth-driven environment, Shadow Operative seeks to inspire the development of new educational tools that merge fun and functionality. The vision is to redefine how learners interact with educational content, shifting from passive consumption to active, enjoyable engagement.
+
+\newpage
+
+\subsection{System Description}
+
+\subsubsection{System Overview}
+
+\noindent Shadow Operative is an educational game designed to help learners engage with IBM Skills Build content in an immersive and interactive environment. The game places players in the role of a spy during the Cold War, tasked with retrieving stolen plans for a cutting-edge AI system. Through skill-based challenges and AI-driven adaptive difficulty, players are guided through progressively complex levels that reinforce core IBM Skills Build concepts in a gamified format.
+
+\subsubsection{Research into Alternative Solutions}
+
+\noindent In designing Shadow Operative, the team conducted extensive research into comparable games and educational platforms to inform and enhance its structure, mechanics, and learning approach. The following games served as key references, with their unique aspects and usefulness to Shadow Operative outlined below:
+
+\begin{itemize}
+    \item \textbf{CounterSpy:} A Cold War-era side-scrolling stealth game, CounterSpy serves as a primary thematic reference for Shadow Operative, offering insight into effective use of stealth elements, setting, and art direction within a Cold War context.
+    \begin{itemize}
+        \item \textbf{Limitation:} CounterSpy does not integrate educational content, which limits its application in learning environments. Shadow Operative addresses this by embedding educational challenges into the gameplay.
+    \end{itemize}
+
+    \item \textbf{This War Of Mine:} This side-scrolling survival game provides a perspective on civilian experiences of war, integrating stealth mechanics and adding depth to our Cold War setting by informing character interactions and emotional undertones.
+    \begin{itemize}
+        \item \textbf{Limitation:} The game's heavy emotional themes may not be suitable or relevant for younger learners. Shadow Operative maintains engagement while ensuring content is appropriate for educational purposes.
+    \end{itemize}
+
+    \item \textbf{Dishonored 2:} Dishonored 2 inspired our enemy awareness systems, and varied approaches to evasion and takedowns. These features are crucial for building the interactive stealth elements in Shadow Operative.
+    \begin{itemize}
+        \item \textbf{Limitation:} The complexity of Dishonored 2's mechanics could overwhelm learners. Our game simplifies these systems to ensure accessibility while maintaining engaging gameplay.
+    \end{itemize}
+
+    \newpage
+
+    \item \textbf{Batman: Arkham Asylum:} Recognized for its claustrophobic environments and atmospheric design, Batman: Arkham Asylum offers a model for crafting immersive environments and leveraging tight spaces to build tension.
+    \begin{itemize}
+        \item \textbf{Limitation:} The combat focus of Batman: Arkham Asylum is less relevant for our stealth-driven gameplay. Shadow Operative focuses purely on stealth to maintain thematic and educational alignment.
+    \end{itemize}
+
+    \item \textbf{Kahoot!:} This gamified quiz platform highlights the power of interactive question-based challenges and adaptive difficulty. It directly influences Shadow Operative's question generation system and difficulty adjustments, with timers and music used to create urgency in an educational context.
+    \begin{itemize}
+        \item \textbf{Limitation:} Kahoot!'s approach lacks the narrative and immersive elements we aim to include, which Shadow Operative addresses by integrating learning into a cohesive story-driven experience.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Proposed Solution’s Technical Features}
+
+\noindent Shadow Operative integrates the following key technical features to create a unique, adaptive learning experience:
+
+\begin{itemize}
+    \item \textbf{Question Generation:} Relevant IBM Skills Build content will populate various levels, embedding knowledge assessments seamlessly into gameplay scenarios. Questions will adapt in difficulty and context to align with players' progress, enhancing engagement and reinforcing learning objectives.
+
+    \item \textbf{Dynamic Difficulty Adjustment:} AI algorithms will monitor and assess player performance, adjusting challenge levels in real-time. This ensures players are consistently engaged and challenged without being overwhelmed, fostering a tailored learning experience.
+
+    \item \textbf{Boss Interactions:} Key encounters, such as boss battles, act as knowledge assessments, where players demonstrate their understanding of core Skills Build concepts in a high-stakes, interactive format that reinforces learning.
+
+    \item \textbf{Stealth Mechanics} Inspired by CounterSpy and Dishonored 2, Shadow Operative incorporates stealth elements like sneaking, cover mechanics, and enemy awareness to create a tense, immersive experience that complements the game's educational content, keeping the user engaged.
+\end{itemize}
+
+\subsubsection{Integration Considerations}
+
+\noindent Shadow Operative is designed as a standalone educational game; however, it is making use of IBM’s AI technology, Granite, allowing the user to make the experience adaptive to them, focusing more on their use-case of the system.
+
+\section{Solution Requirements}
+
+\subsection{Requirements Elicitation}
+
+\noindent To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
+
+\subsubsection{Challenges Encountered}
+
+\noindent Our initial difficulty was organizing our first meeting with the client due to conflicting schedules among team members. This caused a delay in setting up a direct conversation, which impacted our early progress. Additionally, one of our team members was unavailable for a few weeks due to being away, which further complicated scheduling and resource allocation. Despite these obstacles, the team coordinated through asynchronous communication and adjusted roles temporarily to maintain momentum.
+
+\noindent Following this, we held an internal meeting to discuss our objectives in depth and to identify how each member’s skills could contribute to creating a compelling, interactive experience that aligns with CounterSpy’s Cold War-inspired, side-scrolling stealth gameplay. This meeting helped us generate additional questions for the client regarding elements such as how best to implement game mechanics that motivate players to learn and progress through adaptive, question-based challenges. We also explored design inspirations, focusing on essential aspects like gameplay mechanics, Cold War-era visual style, and strategies to maintain a consistent thematic experience. During this meeting, we reached a consensus that the card feature did not align with the game’s objectives, which we then proposed for removal in a follow-up email. The client agreed with this decision.
+
+\subsubsection{Requirement Validation}
+
+\noindent To ensure that our refined requirements aligned accurately with the client’s needs, we sent a confirmation email summarizing key decisions and requested feedback. The client’s positive response affirmed our direction. We also planned a follow-up meeting to further validate our approach and address any remaining questions, ensuring continuous alignment with the client’s educational goals.
+
+\noindent Our team then met to discuss the client’s feedback and refine our understanding of the project’s requirements. We identified key features, such as question generation, dynamic difficulty adjustment, and boss interactions, that would enhance the game’s educational value and align with the client’s objectives.
+
+\subsection{Behavioural Requirements}
+
+\section{Project Management}
+
+\subsection{Risks and Issues}
+
+\noindent When developing a large software project with a team, it is important to be aware of the potential risks and issues that may arise, and to have plans in place to mitigate them. Issues may arise from a variety of sources, including the group itself, the client, the software produced or even the available hardware.
+
+\subsubsection{Group Risks}
+
+\noindent One of the most significant risks when working in a team is that of team members not working together effectively. This may result from differing levels of knowledge, different problem solving styles, alternate programming styles and more. Fortunately, this can be mitigated by creating comprehensive plans for the project and ensuring everyone is assigned roles that suit their strengths. If the team cannot work together effectively, it can become difficult to develop a cohesive product, and may lead to more bugs and issues down the line.
+
+\begin{equation*}
+    \begin{aligned}
+        &\text{Consequence}=4 \\
+        &\text{Likelihood}=2 \\
+        &\text{Risk}=4\times2=8 \implies {\color{red}\text{High}}
+    \end{aligned}
+\end{equation*}
+
+\noindent Uneven workloads, despite being unfair on those doing more work, can lead to some members not understanding the current state of the project or how new features should be implemented. This can make it hard to continue contributing to the project, resulting in even lower productivity, slower development and a less complete product. To mitigate this risk, it is important to ensure that everyone is assigned tasks before the project starts, and that regular meetings are held to discuss progress and potential task shifts.
+
+\begin{equation}
+    \begin{aligned}
+        &\text{Consequence}=3 \\
+        &\text{Likelihood}=3 \\
+        &\text{Risk}=4\times2=9 \implies {\color{red}\text{High}}
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Client Risks}
+
+\noindent Another area of concern is the potential for the client to provide unrealistic, unreasonable or poorly defined requirements. If this happens, it can extremely difficult to produce a cohesive plan and deliver a product that meets the client's expectations. To mitigate such a risk, it is important to have multiple meetings with the client at regular intervals, discussing the project's current state, planned development and any changes the client may request. This way, the client can provide feedback and desired alterations before they are too deeply embedded in the project, or even before they are implemented.
+
+\begin{equation*}
+    \begin{aligned}
+        &\text{Consequence}=3 \\
+        &\text{Likelihood}=2 \\
+        &\text{Risk}=3\times2=6 \implies {\color{orange}\text{Moderate}}
+    \end{aligned}
+\end{equation*}
+
+\noindent Another potential risk is that the client may be slow to respond, or completely unresponsive. In this case, it can be difficult to get started on the project because the requirements are not clearly defined, and it is difficult to provide a product that meets their expectations, since the feedback is not beign given in a timely manner. To mitigate this risk, it is important to have a clear communication plan with set dates and deadlines for features, meetings and general updates. It is also especially important to develop a well-written codebase which can be easily modified and maintained.
+
+\begin{equation*}
+    \begin{aligned}
+        &\text{Consequence}=2 \\
+        &\text{Likelihood}=1 \\
+        &\text{Risk}=2\times1=2 \implies {\color{green}\text{Low}}
+    \end{aligned}
+\end{equation*}
+
+\subsubsection{Software Development Methodology Risks}
+
+\noindent Large codebases require strict adherence to project-defined standards, as otherwise it can become difficult for team members to work on other parts of the project. Additionally, the code must be highly modular, since the code developed by one team member must be able to interact with the code developed by others, regardless of the implementation details. Furthermore, it is useful to have clean, readable code, with comments in areas that are not obvious. This ensures that code can still be understood months after it was first written, which may be necessary for debugging and maintenance purposes.
+
+\begin{equation*}
+    \begin{aligned}
+        &\text{Consequence}=4 \\
+        &\text{Likelihood}=4 \\
+        &\text{Risk}=4\times4=16 \implies {\color{magenta}\text{Extreme}}
+\end{aligned}
+\end{equation*}
+
+\subsubsection{AI Risks}
+
+\noindent AI is a very powerful tool, but can be dangerous if not used correctly. LLMs in particular can be very useful and produce high quality results, but are also susceptible to biases and may produce inaccurate or inappropriate results. Fortunately, much research has been conducted in this area, and popular LLMs are 'aligned' with human values, and are highly unlikely to produce offensive suggestions. Unfortunately, incorrect results are still quite common.
+
+\begin{equation*}
+    \begin{aligned}
+        &\text{Consequence}=5 \\
+        &\text{Likelihood}=1 \\
+        &\text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
+    \end{aligned}
+\end{equation*}
+
+\subsection{Development Approach}
+
+\subsubsection{Incremental Model}
+
+\noindent The Incremental Model divides the project into smaller, manageable portions (increments). Each increment represents a subset of the full game functionality.
+
+\noindent With each increment, you develop a part of the game and deliver it. Once that part is functional, you can move on to the next one.
+
+\noindent Each new increment builds upon the previous one, allowing you to add new features, mechanics, or puzzle elements step by step.
+
+\noindent Risk is managed effectively by focusing on simpler, high-priority features early and addressing complex ones later.
+
+\subsubsection{Application in the Project Context}
+
+\begin{enumerate}
+    \item \textbf{Gradual Progress:} Our game comprises multiple components, including core mechanics (e.g., running, jumping, and sliding), puzzles, and IBM Skills Build badge questions. Using the Incremental Model, we can develop each component sequentially, starting with the foundational mechanics before progressing to puzzles and gamification elements like the card system.
+
+    \item \textbf{Iterative Feedback and Testing:} After completing each increment, we can conduct testing and gather client or player feedback. This ensures each feature works as intended and aligns with the project goals before integrating it into the overall game.
+
+    \item \textbf{Risk Management:} By addressing straightforward features early in the development process, the Incremental Model reduces risk and ensures a consistent development pace. This strategy allows us to allocate more time and resources to resolving challenges posed by complex features.
+
+    \item \textbf{Flexibility for Changes:} Given the possibility of evolving client requirements or necessary adjustments, the Incremental Model minimizes disruption. Changes can be accommodated without requiring significant rework, as only specific increments need updating, preserving the integrity of prior developments.
+
+    \item \textbf{Early Player Engagement:} The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input.
+
+    \item \textbf{Adaptability to a Small Team:} With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked.
+
+    \item \textbf{Simplicity and Structure:} The model offers a straightforward and predictable process, breaking development into clear, manageable stages. This structured approach ensures transparency and provides measurable milestones throughout the project life-cycle.
+\end{enumerate}
+
+\subsection{Project Schedule}
+
+\subsubsection{Gantt Chart}
+
+\includegraphics[width = \textwidth]{gantt-chart.png}
+
+\subsubsection{Art / Vision Design}
+
+\noindent Due to Unity offering an open source template that closely matches the client's vision of the final game we have decided to have an extended period of planning the aspects of the game such as:
+
+\noindent Game mechanics which include: stealth mechanics, boss fights (as per request of the client), integration of IBM's Granite AI into the project which would make game feel more "alive" as it adapts to the player's behaviour, and lastly the educational part of the game which integrates content from IBM's SkillsBuild.
+
+\noindent Careful thought has to go to the game's art direction, while the client specified CounterSpy as an inspiration he has allowed us to have artistic liberty which allows us to choose a style that could mesh together all of the client's requests.
+
+\subsubsection{RAG Analysis and the Questions Bank}
+
+\noindent As mentioned in 3.3.2 the game has an educational side and the client has tasked us with taking questions from the IBM SkillsBuild courses and integrating them into the game. This is one of the first things that need to be completed in order to have a clear vision over how the game should take shape.
+
+\subsubsection{C# / Unity Acquaintance}
+
+\noindent Not all of our team is well acquainted with the `C#` / `Unity` environment, because of this we have planned a long lasting period (until the end of Christmas Vacation) where we can familiarize ourselves with the toolset.
+
+\noindent For the team members who already have experience, there is a period dedicated to refactoring the Unity template in order to better suit our needs.
+
+\subsubsection{Game Mechanics Implementation and Test Plan}
+
+\noindent The Game Mechanics Implementation and preparation of the Test Plan will run in parallel, as we develop the game incrementally we can identify ways of testing our solution.
+
+\noindent Key mechanics that have to be implemented and polished are:
+
+\begin{enumerate}
+    \item \textbf{Basic movement:} movement should feel fluid, responsive, must include crouching (stealth).
+
+    \item \textbf{Stealth Mechanics:} "light" and "dark" zones where the AI of the laboratory can either see you or not, if detected sends enemies.
+
+    \item \textbf{Environment reacting to the player:} by using IBM's Granite AI we hope to achieve enemies/bosses that react dynamically to the player; and even in the case of the educational side make the questions harder/easier depending on the success rate of the player.
+\end{enumerate}
+
+\subsubsection{Level Design and IBM Education Integration}
+
+\noindent Once we have a solid foundation of game mechanics we expect to be able to create a plausible environment around said mechanics.
+
+\noindent We plan on having 3 different stages due to how the Questions Bank is based off of 3 different IBM SkillsBuild courses.
+
+\noindent Each stage would teach the player different game mechanics and introduce new concepts.
+
+\subsubsection{Technical Report and Product Presentation}
+
+\noindent They will start to run in parallel once we are at the end of the development cycle with the Game Mechanics Implementation
+
+\subsubsection{Key Deadlines}
+
+\begin{enumerate}
+    \item \textbf{28/11/24:} Finish client RAG Analysis and Questions Bank
+    \item \textbf{21/03/25:} Finish all game deadlines (mechanics, level design, IBM integration)
+\end{enumerate}
+
+\end{document}
