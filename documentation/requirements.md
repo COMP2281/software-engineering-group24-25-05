@@ -690,7 +690,7 @@ $$
 \begin{aligned}
   &\text{Consequence}=4 \\
   &\text{Likelihood}=4 \\
-  &\text{Risk}=4\times4=16 \implies {\color{orange}\text{Extreme}}
+  &\text{Risk}=4\times4=16 \implies {\color{magenta}\text{Extreme}}
 \end{aligned}
 $$
 
