@@ -58,6 +58,47 @@ This document is organised as follows:
 
 ## 1.2 - Project Scope
 
+### 1.2.1 Purpose and Overall Goals
+
+The primary goal of the Shadow Operative project is to enhance learner engagement and retention by transforming IBM Skills Build concepts into an immersive, interactive gaming experience. By integrating educational content within gameplay, the project seeks to address the limitations of traditional learning methods, such as low engagement and lack of interactivity, with a more innovative and appealing approach.
+
+Through the combination of stealth-based challenges and gamified learning mechanics, the project aims to not only make learning enjoyable but also improve understanding and application of key concepts. The game aspires to serve as a scalable, versatile educational tool that can support a wide range of learners and promote the adoption of IBM Skills Build across diverse educational environments.
+
+### 1.2.2 Stakeholders
+
+- **Primary Stakeholder:**
+  IBM, represented by John McManara, who leads IBM UK University Programs and serves as an IBM Master Inventor. IBM's aim is to improve accessibility to their Skills Build content and enhance learner outcomes through innovative tools.
+
+- **Target Users:**
+
+  - Students in educational institutions who wish to complement their studies with engaging, interactive tools.
+  - Educators looking for gamified solutions to teach IBM Skills Build concepts in a classroom setting.
+  - Self-learners pursuing certifications to improve their skills in fields such as cybersecurity, AI, and data analytics.
+
+- **Secondary Stakeholders:**
+  - IBM’s educational partners, who may use this tool to promote IBM Skills Build.
+  - Developers and teams within IBM involved in creating or supporting educational technologies.
+
+### 1.2.3 Boundaries
+
+- **Educational Content:**
+  The game focuses solely on IBM Skills Build content, avoiding unrelated gameplay elements like heavy combat mechanics. Content is designed to be both engaging and educational, blending narrative with skill-based challenges directly linked to IBM Skills Build objectives.
+
+- **Platform Compatibility:**
+  Development is restricted to the Windows platform, prioritising stability and simplicity. Expanding to other platforms, such as macOS, mobile devices, or gaming consoles, is beyond the scope of this project due to resource and time constraints.
+
+- **Multiplayer:**
+  The game will only support single-player gameplay to maintain consistency in educational content delivery and simplicity in development. Multiplayer features, such as cooperative or competitive modes, are excluded from the current scope.
+
+- **Graphical and Animation Complexity:**
+  To focus on functionality and thematic coherence, the game will avoid advanced graphical techniques, such as photorealistic rendering or motion capture. Instead, it will use stylised visuals that align with its educational goals.
+
+### 1.2.4 Vision
+
+Shadow Operative aims to blend stealth gameplay mechanics with dynamic, question-based educational challenges, creating a unique tool that enhances learning through immersive storytelling. The game will place players in a Cold War-era setting, engaging them in scenarios where success is tied to their mastery of IBM Skills Build concepts.
+
+By leveraging adaptive difficulty, engaging narratives, and a stealth-driven environment, Shadow Operative seeks to inspire the development of new educational tools that merge fun and functionality. The vision is to redefine how learners interact with educational content, shifting from passive consumption to active, enjoyable engagement.
+
 ## 1.3 - System Description
 
 ### 1.3.1 System Overview
@@ -689,5 +730,5 @@ cycle with the **Game Mechanics Implementation**
 
 ### 3.3.8 Key Deadlines
 
-* `2024-11-28`: Finish client RAG Analysis and Questions Bank
-* `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
+- `2024-11-28`: Finish client RAG Analysis and Questions Bank
+- `2024-03-21`: Finish all game deadlines (mechanics, level design, IBM integration)
