@@ -116,13 +116,11 @@ Our team then met to discuss the client’s feedback and refine our understandin
 
 ## 2.2 - Behavioural Requirements
 
-
-
 ### User Stories:
 
-### Stealth Gameplay 
-	 
-**User Story:** 
+### Stealth Gameplay
+
+**User Story:**
 
 As a player, I want a side-scrolling experience where I can use stealth mechanics to infiltrate enemy bases, so I can emulate spy tactics.
 
@@ -165,20 +163,16 @@ As a player, I want a side-scrolling experience where I can use stealth mechanic
 
 **Rationale**
 
-Implementing this feature would contribute significantly to the client’s objectives as the core gameplay feature in the game design desired by the client was Stealth. 
+Implementing this feature would contribute significantly to the client’s objectives as the core gameplay feature in the game design desired by the client was Stealth.
 Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have."
 
 **MoSCoW Priority**: **MUST HAVE**
 
 This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
 
-
-
-
-
 ### Educational Engagement
 
-**User Story:** 
+**User Story:**
 As a player, I want to answer AI, cybersecurity, and data analytics questions from the IBM Skills question bank, so that I can test my knowledge and understand IBM Skills build concepts.
 
 **Feature:** IBM Skills question bank
@@ -190,7 +184,7 @@ As a player, I want to answer AI, cybersecurity, and data analytics questions fr
 - And if the player answers the question correctly, they get 10 coins
 - But if the player answers the question incorrectly, guards nearby are triggered into an alert state
 
-**BR2.2 Scenario:** Quiz at the end of the level 
+**BR2.2 Scenario:** Quiz at the end of the level
 - Given the player has reached the final challenge of the level
 - When the quiz prompt appears on the screen
 - Then the player must answer a series of questions related to AI, data analytics, and cybersecurity
@@ -199,17 +193,15 @@ As a player, I want to answer AI, cybersecurity, and data analytics questions fr
 
 **Rationale**
 
-Implementing this feature is would contribute significantly, because client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. 
+Implementing this feature is would contribute significantly, because client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build.
 This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build. As such, this feature has been assigned a MoSCoW prioritisation of “Must Have.”
 
 **MoSCoW Priority: MUST HAVE**
 
 This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
 
-
-
 ### Pause Screen
-**User Story:** 
+**User Story:**
 As a player, I want to be able to pause my game so that I can take a break from the game, change the settings or exit the game.
 
 **Feature:** Pause Screen
@@ -219,13 +211,13 @@ As a player, I want to be able to pause my game so that I can take a break from 
 - When the player presses the designated pause key on the keyboard
 - Then the game pauses
 - And the Pause screen is displayed
-- And buttons are displayed on the screen 
+- And buttons are displayed on the screen
 
 **BR3.1 Scenario:** Taking a break from the game
 - Given the game is paused
-- When the player clicks the resume button 
-- Then the game resumes 
-- And the player can pick up where they left off  
+- When the player clicks the resume button
+- Then the game resumes
+- And the player can pick up where they left off
 
 **BR3.2 Scenario:** Accessing game settings
 - Given the game is paused
@@ -241,10 +233,9 @@ Implementing this feature would enhance the user’s gameplay experience and imp
 
 This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
 
-
 ### AI Boss
 
-**User Story:** 
+**User Story:**
 As a player, I want an AI boss that challenges the skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
 
 **Feature:** Adaptive Learning
@@ -252,21 +243,21 @@ As a player, I want an AI boss that challenges the skills I learnt throughout th
 **BR4.1 Scenario:** Testing stealth skills
 - Given the player has demonstrated weakness in Stealth based tasks in the game
 - When they encounter the final boss
-- Then the boss will adapt the the level environment to include stealth based mechanics 
-- But the main objective is still the final quiz  
+- Then the boss will adapt the the level environment to include stealth based mechanics
+- But the main objective is still the final quiz
 
-**BR4.2 Scenario:** Quiz adjustment 
+**BR4.2 Scenario:** Quiz adjustment
 - Given the player has previously struggled with certain topics
 - When they encounter the final boss
-- Then the boss can adapt to the player’s weaknesses 
-- And generate a custom quiz for the player 
-- And include the player’s weaknesses in the custom quiz 
+- Then the boss can adapt to the player’s weaknesses
+- And generate a custom quiz for the player
+- And include the player’s weaknesses in the custom quiz
 
 **BR4.3 Scenario:** Combat mechanics adjustment
 - Given the player has demonstrated weakness in combat abilities
 - When the player encounters the final boss
 - Then can adjust the level to include to include an element of combat based mechanics alongside the final quiz
-- But the main objective is still the final quiz 
+- But the main objective is still the final quiz
 
 **Rationale**
 
@@ -279,7 +270,7 @@ This feature is considered a “Must Have” as it directly supports the client�
 
 ### SFX
 
-**User Story:** 
+**User Story:**
 As a player, I want to have music and sound effects in the game, so the game feels more immersive and enjoyable.
 
 **Feature:** SFX
@@ -303,11 +294,11 @@ As a player, I want to have music and sound effects in the game, so the game fee
 - And the music fades back to normal when the boss is defeated
 
 **BR5.4 Scenario:** Environmental sound effects
-- Given the player is moving through different environments 
+- Given the player is moving through different environments
 - When the player enters a new environment
 - Then ambient sound effects play to match the setting
 
-**Rationale** 
+**Rationale**
 
 Implementing this feature would contribute significantly to the client’s goal of creating an enjoyable and immersive game.
 The inclusion of sound effects (SFX) enables another dimension to the game which can deepen the player’s immersion and enhance the game’s atmosphere. Despite not being explicitly stated in the Product/Service Requirements, it provides a great addition to the experience and greatly increases the high quality immersion the game seeks to achieve. For these reasons, this feature’s MoSCoW prioritisation is classified as “Should Have.”
@@ -316,29 +307,28 @@ The inclusion of sound effects (SFX) enables another dimension to the game which
 
 This feature is considered a “Should Have” as it adds value to the player’s experience but is not essential or equal in importance to the game’s core visual components.
 
+### Stylised Cold War era graphics
 
-### Stylised Cold War era graphics   
-	
 **User story:**
 As a player, I want to experience the tension and politics of the Cold War era by being immersed in the atmosphere of that era.
 
-**Feature:** Stylised art 
+**Feature:** Stylised art
 
 **BR6.1 Scenario:** Cold War era background & atmosphere
 - Given the player is exploring the Cold War era military base
-- When they move through the map 
+- When they move through the map
 - Then The background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
 
-**BR6.2 Scenario:** Enemy uniforms 
-- Given An enemy is in the player’s line of sight 
+**BR6.2 Scenario:** Enemy uniforms
+- Given An enemy is in the player’s line of sight
 - When the enemy renders on the screen
 - Then the enemy is shown to be wearing dark militaristic uniform
-- And their uniform is contrasted by bright red Soviet Union insignias 
-- And the player is able to identify guards easily 
+- And their uniform is contrasted by bright red Soviet Union insignias
+- And the player is able to identify guards easily
 
 **BR6.3 Scenario:** Entering a room
-- Given the player enters a room 
-- When they move around in the room  
+- Given the player enters a room
+- When they move around in the room
 - Then the player is greeted by dim overhead lights which cast a glow beneath them
 - And lights up any objects seen beneath the light
 
@@ -351,34 +341,33 @@ The client’s Product/Service Requirements emphasise the importance of a Cold W
 
 This feature is considered a “Must Have” as it is crucial to achieving the game’s intended atmosphere and aligning with the client’s specific requirements.
 
-
-### Mission system  
-**User story:** 
+### Mission system
+**User story:**
 As a player, I want to complete mission objectives in a clear, structured storyline so there is a clear path of what to do next.
 
-**Feature:** Mission system   
+**Feature:** Mission system
 
-**BR7.1 Scenario:** Receiving mission objective 
+**BR7.1 Scenario:** Receiving mission objective
 - Given the player has completed their previous mission
-- When the player enters their mission logs  
-- Then the player is assigned a new mission  
-- And they learn about the objectives for the next mission    
+- When the player enters their mission logs
+- Then the player is assigned a new mission
+- And they learn about the objectives for the next mission
 
-**BR7.2 Scenario:** Unlocking a reward for completing a mission 
-- Given the player has successfully completed a mission  
-- When they open their inventory 
-- Then the player unlocks a new item   
-- And the player can use this item for further missions 
+**BR7.2 Scenario:** Unlocking a reward for completing a mission
+- Given the player has successfully completed a mission
+- When they open their inventory
+- Then the player unlocks a new item
+- And the player can use this item for further missions
 
-**BR7.3 Scenario:** Unlocking new chapter 
-- Given the player completes a major mission 
-- When they collect their reward 
-- Then a new cutscene plays 
+**BR7.3 Scenario:** Unlocking new chapter
+- Given the player completes a major mission
+- When they collect their reward
+- Then a new cutscene plays
 - And a new part of the map is unlocked
 
-**BR7.4 Scenario:** Completing secondary objective  
-- Given a secondary objective has been completed during a mission 
-- When the mission ends 
+**BR7.4 Scenario:** Completing secondary objective
+- Given a secondary objective has been completed during a mission
+- When the mission ends
 - Then the player is given a bonus reward
 
 **Rationale**
@@ -390,41 +379,41 @@ While a mission system is not a core requirement in the Product/Service Requirem
 
 This feature is considered a “Could Have” as it is not essential but offers noticeable improvements to the player’s experience and alignment with the game’s theme.
 
-### Movement mechanics 
+### Movement mechanics
 **User story:** As a player, I want to have basic movement mechanics, so I can navigate the map and complete missions.
 
 **Feature:** Movement
 
-**BR8.1 Scenario:** Horizontal movement 
-- Given the player is moving their character 
-- When the player presses a sideward movement key 
-- Then the character should move in the corresponding direction 
-- And the character has a fluid walking animation 
+**BR8.1 Scenario:** Horizontal movement
+- Given the player is moving their character
+- When the player presses a sideward movement key
+- Then the character should move in the corresponding direction
+- And the character has a fluid walking animation
 
-**BR8.2 Scenario:** Sprinting 
-- Given the player is moving 
-- When the player holds the sprint button 
-- Then the player’s speed increases by a large margin 
-- And the player’s stamina decreases while they sprint 
-- And when their stamina runs out their speed slows down  
+**BR8.2 Scenario:** Sprinting
+- Given the player is moving
+- When the player holds the sprint button
+- Then the player’s speed increases by a large margin
+- And the player’s stamina decreases while they sprint
+- And when their stamina runs out their speed slows down
 
-**BR8.3 Scenario:** Vertical movement 
-- Given the player is standing or moving on a solid surface 
-- When the player presses the spacebar 
-- Then then the character moves upwards in the air  
-- And the player’s character reaches peak height 
-- And the character starts moving downwards 
+**BR8.3 Scenario:** Vertical movement
+- Given the player is standing or moving on a solid surface
+- When the player presses the spacebar
+- Then then the character moves upwards in the air
+- And the player’s character reaches peak height
+- And the character starts moving downwards
 
-**BR8.4 Scenario:** Dodge 
-- Given the player is moving while engaging an enemy 
+**BR8.4 Scenario:** Dodge
+- Given the player is moving while engaging an enemy
 - When the player presses the dodge button
-- Then the player performs a quick roll on the ground 
+- Then the player performs a quick roll on the ground
 - And evades an attack
 
 **BR8.5 Scenario:** Fall damage
-- Given the player jumps off a platform 
-- When the player lands on a solid surface 
-- Then the player takes fall damage if the height exceeded the fall damage limit 
+- Given the player jumps off a platform
+- When the player lands on a solid surface
+- Then the player takes fall damage if the height exceeded the fall damage limit
 - And the player’s screen displays visual feedback
 
 **Rationale**
@@ -436,47 +425,47 @@ Movement mechanics allow players to navigate the game maps and scenarios effecti
 
 This feature is considered a “Must Have” as it is fundamental to the game’s functionality and directly supports the client’s objective of delivering an immersive stealth experience.
 
-### Combat mechanics 
-**User story:** 
+### Combat mechanics
+**User story:**
 
 As a player, I want to have combat mechanics so I can defeat enemy guards while completing missions.
 
-**Feature:** Combat 
+**Feature:** Combat
 
-**BR9.1 Scenario:** Shooting 
-- Given the player is engaging an enemy 
-- When the player’s bullet connects with the enemy  
-- Then the enemy takes damage based on strength of the weapon 
-- And the gun’s ammo decreases by one 
+**BR9.1 Scenario:** Shooting
+- Given the player is engaging an enemy
+- When the player’s bullet connects with the enemy
+- Then the enemy takes damage based on strength of the weapon
+- And the gun’s ammo decreases by one
 
 **BR9.2 Scenario:** Enemy death
-- Given the player shoots an enemy 
-- When the enemy’s health drop’s to or below 0 
-- Then the enemy is defeated 
-- And the enemy drops a coin 
+- Given the player shoots an enemy
+- When the enemy’s health drop’s to or below 0
+- Then the enemy is defeated
+- And the enemy drops a coin
 
-**BR9.3 Scenario:** Melee attack 
-- Given the player is next to an enemy 
-- When the player melee attacks the enemy 
-- Then the enemy is immediately defeated 
-- And the enemy drops two coins 
+**BR9.3 Scenario:** Melee attack
+- Given the player is next to an enemy
+- When the player melee attacks the enemy
+- Then the enemy is immediately defeated
+- And the enemy drops two coins
 
-**BR9.4 Scenario:** Out of ammo 
-- Given the player’s gun has run out of ammo 
-- When the player clicks the reload key 
-- Then the player reloads their weapon 
-- And can shoot again with full ammo 
+**BR9.4 Scenario:** Out of ammo
+- Given the player’s gun has run out of ammo
+- When the player clicks the reload key
+- Then the player reloads their weapon
+- And can shoot again with full ammo
 
 **BR9.5 Scenario:** grenade attack
-- Given player is holding a grenade 
+- Given player is holding a grenade
 - When the player throws the grenade
 - Then the grenade explodes upon impacting the ground
-- And enemies within the blast radius take damage 
+- And enemies within the blast radius take damage
 
 **BR9.6 Scenario:** Player taking a hit
-- Given the player is engaged in combat with an enemy  
-- When the player takes damage 
-- Then the player’s health points decrease according to how much damage they took 
+- Given the player is engaged in combat with an enemy
+- When the player takes damage
+- Then the player’s health points decrease according to how much damage they took
 - And the player’s screen shows visual feedback
 
 **Rationale**
@@ -487,10 +476,6 @@ This feature allows players to engage in infiltration and combat scenarios to ac
 **MoSCoW: SHOULD HAVE**
 
 This feature is considered a “Should Have” as it supports the game’s overall themes and objectives and enhances active gameplay elements. However, it is not essential for achieving the core gameplay experience.
-
-
-
-
 
 # 3 - Project Management
 
