@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Tectonic
+        uses: wtfjoke/setup-tectonic@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Tectonic
+        run: |
+          cd documentation
+          tectonic requirements.tex
+
+      - name: Find and Zip Log Files
+        if: failure()
+        run: |
+          cd documentation
+          find . -name "*.log" -print0 | xargs -0 zip logs.zip
+
+      - name: Upload Log Files
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: documentation/logs.zip
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: requirements
+          path: |
+            documentation/requirements.pdf
