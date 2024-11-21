@@ -1,12 +1,13 @@
-\documentclass{article}
+\documentclass[11pt, a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
 \usepackage[dvipsnames]{xcolor}
 
-\usepackage[a4paper, total={6in, 8in}]{geometry}
+% \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \title{Requirements Documentation for Shadow Operative}
-\date{20th of November 2024}
+\date{\today}
 
 \author{
     Ben Magowan \\
@@ -37,7 +38,7 @@
 
 \begin{center}
     \text{Group Number 05} \\
-    \text{Version 1.0.6}
+    \text{Version 1.0.7}
 \end{center}
 
 \newpage
@@ -46,7 +47,7 @@
 
 \subsection{Overview and Justification}
 
-\noindent The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms their current educational material into an immersive, game-based experience, enhancing both learner engagement and knowledge retention; In doing so, the project addresses the challenge of making educational content more appealing and interactive, something that IBM have identified as a key area of improvement. \\
+\noindent The purpose of this project is to develop an engaging educational game, based on the CounterSpy universe, that integrates IBM Skills Build content into its gameplay. This approach transforms their current educational material into an immersive, game-based experience, enhancing both learner engagement and knowledge retention; In doing so, the project addresses the challenge of making educational content more appealing and interactive, something that IBM have identified as a key area for improvement. \\
 
 \noindent The project benefits individuals who currently learn via the IBM Skills Build, including self-learners and educational institutions seeking interactive tools to complement their curricula. By gamifying the learning process, this solution can potentially expand the reach and effectiveness of IBM Skills Build programs, particularly for younger learners or those needing alternative learning methods. \\
 
@@ -63,7 +64,7 @@
 
 \subsubsection{Purpose and Overall Goals}
 
-\noindent The primary goal is to enhance learner engagement and retention by embedding IBM Skills Build concepts into immersive gameplay. This project addresses the growing need for innovative educational tools that effectively combine learning with interactive storytelling.
+\noindent The primary goal of the project is to enhance learner engagement and retention by embedding IBM Skills Build concepts into immersive gameplay. This project addresses the growing need for innovative educational tools that effectively combine learning with interactive storytelling. \\
 
 \noindent By integrating gamified mechanics with educational content, the project aims to create an engaging learning experience that fosters understanding and application of key concepts. The ultimate objective is to make learning enjoyable, accessible, and impactful for diverse user groups.
 
@@ -72,10 +73,10 @@
 \begin{itemize}
     \item \textbf{Primary Stakeholder:} IBM, represented by John McNamara, who leads IBM UK University Programs.
     \item \textbf{Target Users:}
-    \begin{itemize}
-        \item Students pursuing IBM Skills Build certifications as a supplement to their academic studies.
-        \item Self-learners aim to enhance their skills through certifications in areas like AI, cybersecurity, and data analytics.
-    \end{itemize}
+          \begin{itemize}
+              \item Students pursuing IBM Skills Build certifications as a supplement to their academic studies.
+              \item Self-learners aiming to enhance their skills through certifications in areas like AI, cybersecurity, and data analytics.
+          \end{itemize}
 \end{itemize}
 
 \subsubsection{Boundaries}
@@ -90,7 +91,7 @@
 
 \subsubsection{Vision}
 
-\noindent \textit{Shadow Operative} aspires to combine stealth gameplay mechanics with dynamic, question-based educational challenges. By immersing players in an engaging narrative, the game aims to inspire new, interactive approaches to learning.
+\noindent \textit{Shadow Operative} aspires to combine stealth gameplay mechanics with dynamic, question-based educational challenges. By immersing players in an engaging narrative, the game aims to inspire new, interactive approaches to learning. \\
 
 \noindent The project envisions a future where educational tools seamlessly integrate entertainment and learning, driving a new standard for impactful and enjoyable education.
 
@@ -104,23 +105,23 @@
 
 \subsubsection{Research into Alternative Solutions}
 
-\noindent In designing Shadow Operative, the team conducted extensive research into comparable games and educational platforms to inform and enhance its structure, mechanics, and learning approach. The following games served as key references, with their unique aspects and usefulness to Shadow Operative outlined below:
+\noindent When designing Shadow Operative, the team conducted extensive research into comparable games and educational platforms to inform and enhance its structure, mechanics, and learning approach. The following games served as key references, with their unique aspects and usefulness to Shadow Operative outlined below:
 
 \begin{itemize}
     \item \textbf{CounterSpy:} A Cold War-era side-scrolling stealth game, CounterSpy serves as a primary thematic reference for Shadow Operative, offering insight into effective use of stealth elements, setting, and art direction within a Cold War context.
-    \begin{itemize}
-        \item \textbf{Limitation:} CounterSpy does not integrate educational content, which limits its application in learning environments. Shadow Operative addresses this by embedding educational challenges into the gameplay.
-    \end{itemize}
+          \begin{itemize}
+              \item \textbf{Limitation:} CounterSpy does not integrate educational content, which limits its application in learning environments. Shadow Operative addresses this by embedding educational challenges into the gameplay.
+          \end{itemize}
 
     \item \textbf{This War Of Mine:} This side-scrolling survival game provides a perspective on civilian experiences of war, integrating stealth mechanics and adding depth to our Cold War setting by informing character interactions and emotional undertones.
-    \begin{itemize}
-        \item \textbf{Limitation:} The game's heavy emotional themes may not be suitable or relevant for younger learners. Shadow Operative maintains engagement while ensuring content is appropriate for educational purposes.
-    \end{itemize}
+          \begin{itemize}
+              \item \textbf{Limitation:} The game's heavy emotional themes may not be suitable or relevant for younger learners. Shadow Operative maintains engagement while ensuring content is appropriate for educational purposes.
+          \end{itemize}
 
     \item \textbf{Kahoot!:} This gamified quiz platform highlights the power of interactive question-based challenges and adaptive difficulty. It directly influences Shadow Operative's question generation system and difficulty adjustments, with timers and music used to create urgency in an educational context.
-    \begin{itemize}
-        \item \textbf{Limitation:} Kahoot!'s approach lacks the narrative and immersive elements we aim to include, which Shadow Operative addresses by integrating learning into a cohesive story-driven experience.
-    \end{itemize}
+          \begin{itemize}
+              \item \textbf{Limitation:} Kahoot!'s approach lacks the narrative and immersive elements we aim to include, which Shadow Operative addresses by integrating learning into a cohesive story-driven experience.
+          \end{itemize}
 \end{itemize}
 
 \subsubsection{Proposed Solution’s Technical Features}
@@ -130,16 +131,21 @@
 \begin{itemize}
     \item \textbf{Question Generation:} Relevant IBM Skills Build content will populate various levels, embedding knowledge assessments seamlessly into gameplay scenarios. Questions will adapt in difficulty and context to align with players' progress, enhancing engagement and reinforcing learning objectives.
 
-    \item \textbf{Dynamic Difficulty Adjustment:} AI algorithms will monitor and assess player performance, adjusting challenge levels in real-time. This ensures players are consistently engaged and challenged without being overwhelmed, fostering a tailored learning experience.
+    \item \textbf{Dynamic Difficulty Adjustment:} AI algorithms will monitor and assess player performance, adjusting the difficulty and types of questions asked throughout the game. This ensures players are consistently engaged and challenged without being overwhelmed, fostering a tailored learning experience.
 
-    \item \textbf{Boss Interactions:} Key encounters, such as boss battles, act as knowledge assessments, where players demonstrate their understanding of core Skills Build concepts in a high-stakes, interactive format that reinforces learning.
+    \item \textbf{Boss Interactions:} Key encounters, such as boss battles, act as knowledge assessments. Players demonstrate their understanding of core IBM Skills Build concepts in a high-stakes, interactive format that reinforces learning.
 
     \item \textbf{Stealth Mechanics} Inspired by CounterSpy and Dishonored 2, Shadow Operative incorporates stealth elements like sneaking, cover mechanics, and enemy awareness to create a tense, immersive experience that complements the game's educational content, keeping the user engaged.
 \end{itemize}
 
 \subsubsection{Integration Considerations}
 
-\noindent Shadow Operative is designed as a standalone educational game; however, it is making use of IBM’s AI technology, Granite, allowing the user to make the experience adaptive to them, focusing more on their use-case of the system.
+% \noindent Shadow Operative is designed as a standalone educational game; however, it is making use of IBM’s AI technology, Granite, allowing the user to make the experience adaptive to them, focusing more on their use-case of the system.
+
+\noindent Shadow Operative is designed to be a standalone educational game, but
+also integrates with IBM's AI technology, Granite. Granite allows the game to
+dynamically adapt to the user's skill level, learning objectives and progress,
+creating a more personalized and engaging experience.
 
 \newpage
 
@@ -147,11 +153,11 @@
 
 \subsection{Requirements Elicitation}
 
-\noindent To gain a thorough understanding of the client’s needs, our team reached out via email on 15/10/24, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on 17/10/24, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
+\noindent To gain a thorough understanding of the client’s needs, our team reached out via email on 15\textsuperscript{th} October 2024, aiming to address specific concerns about feature integration, gameplay mechanics, and AI-driven educational content. The client responded on the 17\textsuperscript{th} October 2024, clarifying the project’s focus on seamlessly incorporating IBM Skills Build content (including AI, Cybersecurity, and Data Analytics) into the gameplay. This exchange allowed us to refine the project scope, confirm the inclusion of adaptive learning through AI algorithms, and remove features identified as redundant. These insights also guided us in structuring team roles based on each member’s strengths and development areas.
 
 \subsubsection{Challenges Encountered}
 
-\noindent Our initial difficulty was organizing our first meeting with the client due to conflicting schedules among team members. This caused a delay in setting up a direct conversation, which impacted our early progress. Additionally, one of our team members was unavailable for a few weeks due to being away, which further complicated scheduling and resource allocation. Despite these obstacles, the team coordinated through asynchronous communication and adjusted roles temporarily to maintain momentum.
+\noindent The first challenge we encountred was that of organizing our first meeting with the client. Conflicting schedules among team members caused a delay in setting up a direct conversation, which impacted our early progress. Additionally, one of our team members was unavailable for a few weeks, which further complicated scheduling and resource allocation. Despite these obstacles, the team coordinated through asynchronous communication and adjusted roles temporarily to maintain momentum.
 
 \noindent Following this, we held an internal meeting to discuss our objectives in depth and to identify how each member’s skills could contribute to creating a compelling, interactive experience that aligns with CounterSpy’s Cold War-inspired, side-scrolling stealth gameplay. This meeting helped us generate additional questions for the client regarding elements such as how best to implement game mechanics that motivate players to learn and progress through adaptive, question-based challenges. We also explored design inspirations, focusing on essential aspects like gameplay mechanics, Cold War-era visual style, and strategies to maintain a consistent thematic experience. During this meeting, we reached a consensus that the card feature did not align with the game’s objectives, which we then proposed for removal in a follow-up email. The client agreed with this decision.
 
@@ -159,7 +165,7 @@
 
 \noindent To ensure that our refined requirements aligned accurately with the client’s needs, we sent a confirmation email summarizing key decisions and requested feedback. The client’s positive response affirmed our direction. We also planned a follow-up meeting to further validate our approach and address any remaining questions, ensuring continuous alignment with the client’s educational goals.
 
-\noindent Our team then met to discuss the client’s feedback and refine our understanding of the project’s requirements. We identified key features, such as question generation, dynamic difficulty adjustment, and boss interactions, that would enhance the game’s educational value and align with the client’s objectives.
+\noindent Our team then met to discuss the client’s feedback and refine our understanding of the project’s requirements. We identified key features, such as question generation, dynamic difficulty adjustment, and boss interactions, all of which would enhance the game’s educational value and align with the client’s objectives.
 
 \newpage
 
@@ -168,82 +174,92 @@
 \subsubsection{Stealth Gameplay}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want a side-scrolling experience, where I can use stealth mechanics to infiltrate enemy bases, so I can emulate spy tactics.
+    \item \textbf{User Story:} As a player, I want a side-scrolling experience
+          where I can use stealth mechanics to infiltrate enemy bases and emulate
+          spy tactics.
 
     \item \textbf{Feature:} Stealth Mechanics
 
     \item \textbf{BR 1.1 Scenario}: Using cover to avoid detection
 
-    \begin{itemize}
-        \item Given the player is near enemy guards
-        \item And the player is within the guard’s line of sight
-        \item When the player moves into cover
-        \item Then the guards should not detect the player
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is near enemy guards
+              \item And the player is within the guards' line of sight
+              \item When the player moves into cover
+              \item Then the guards should not detect the player
+          \end{itemize}
 
     \item \textbf{BR 1.2 Scenario}: Making noise near guards
 
-    \begin{itemize}
-        \item Given the player is making noise
-        \item When a guard is within earshot
-        \item Then then an investigation state should be triggered
-        \item And the guard should investigate the noise made
-        \item And if the guard detects the player, an alert state is triggered
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is making noise
+              \item When a guard is within earshot
+              \item Then then an investigation state should be triggered
+              \item And the guard should investigate the noise made
+              \item And if the guard detects the player, an alert state is triggered
+          \end{itemize}
 
     \item \textbf{BR 1.3 Scenario:} Returning to patrol after losing sight of player
 
-    \begin{itemize}
-        \item Given guards are in an alert state after spotting the player
-        \item And the player has moved out of their line of sight
-        \item When the guards do not detect the player for a set amount of time
-        \item Then the guards should return to their normal patrol behaviour
-        \item And the alert state should end
-    \end{itemize}
+          \begin{itemize}
+              \item Given guards are in an alert state after spotting the player
+              \item And the player has moved out of their line of sight
+              \item And the player is not making any noise
+              \item When the guards do not detect the player for a set amount of time
+              \item Then the guards should return to their normal patrol behaviour
+              \item And the alert state should end
+          \end{itemize}
 
-    \item \textbf{Rationale:} Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have”. 
+          % \item \textbf{Rationale:} Due to the theme of the game being Cold war espionage, stealth is one of the core requirements of the game outlined by the client, therefore implementing this feature would contribute significantly to the clients objective, therefore this feature’s MosCoW prioritisation is “Must Have”.
+
+    \item \textbf{Rationale:} Since the main theme of the game is Cold War
+          espionage, stealth has been outlined as a core requirement of the game
+          by the client. Therefore, this feature's MoSCoW prioritisation is
+          "Must Have".
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
-
-    \begin{itemize}
-        \item This Feature can be considered a “Must have” and takes higher priority than other gameplay mechanics besides Movement.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature can be considered a “Must have” and takes higher
+                    priority than other gameplay mechanics besides Movement.
+          \end{itemize}
 \end{itemize}
 
 \subsubsection{Educational Engagement}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to answer AI, Cybersecurity, and Data Analytics questions from the IBM Skills question bank, so that I can test my knowledge and understand IBM Skills Build concepts.
+    \item \textbf{User Story:} As a player, I want to answer AI, Cybersecurity, and Data Analytics questions from the IBM Skills question bank to test my knowledge and understand IBM Skills Build concepts.
 
     \item \textbf{Feature:} IBM Skills question bank
 
     \item \textbf{BR 2.1 Scenario:} Player steals classified document
 
-    \begin{itemize}
-        \item Given the player has reached the final challenge of the level
-        \item When the quiz prompt appears on the screen
-        \item Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
-        \item And if the player answers the questions correctly an accuracy of at least 80\%, they can progress to the next level
-        \item But if the player answers incorrectly, they must redo the quiz
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has reached the final challenge of the level
+              \item When the quiz prompt appears on the screen
+              \item Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
+              \item And if the player answers the questions correctly with an
+                    accuracy of at least 80\%, they can progress to the next level
+              \item But if the player answers incorrectly, they must redo the quiz
+          \end{itemize}
 
     \item \textbf{BR 2.2 Scenario:} Quiz at the end of the level
 
-    \begin{itemize}
-        \item Given the player has reached the final challenge of the level
-        \item When the quiz prompt appears on the screen
-        \item Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
-        \item And if the player answers the questions correctly an accuracy of at least 80\%, they can progress to the next level
-        \item But if the player answers incorrectly, they must redo the quiz
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has reached the final challenge of the level
+              \item When the quiz prompt appears on the screen
+              \item Then the player must answer a series of questions related to AI, Data Analytics, and Cybersecurity
+              \item And if the player answers the questions correctly an accuracy of at least 80\%, they can progress to the next level
+              \item But if the player answers incorrectly, they must redo the quiz
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature is the main objective of the game, because the client aims to expand beyond their pre-existing website by exploring new mediums to attract more interest in IBM Skills Build. This feature would ensure that the game’s design aligns with the client’s educational goals, seamlessly integrating the learning aspect into the gameplay, creating a fun and engaging platform to develop IBM Skills Build.
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
 
-    \begin{itemize}
-        \item This Feature can be considered a “Must have” as it is the primary purpose for building the game.
-    \end{itemize}
+          \begin{itemize}
+              \item This Feature can be considered a “Must have”, as it is the
+                    primary purpose for building the game.
+          \end{itemize}
 \end{itemize}
 
 \newpage
@@ -251,35 +267,35 @@
 \subsubsection{Pause Screen}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to be able to pause my game so that I can take a break from the game, change the settings or exit the game.
+    \item \textbf{User Story:} As a player, I want to be able to pause my game so that I can take a break from the game, change the settings, or exit the game.
 
     \item \textbf{Feature:} Pause Screen
 
     \item \textbf{BR 3.1 Scenario:} Taking a break from the game
 
-    \begin{itemize}
-        \item Given the game is paused
-        \item When the player clicks the resume button
-        \item Then the game resumes
-        \item And the player can pick up where they left off
-    \end{itemize}
+          \begin{itemize}
+              \item Given the game is paused
+              \item When the player clicks the resume button
+              \item Then the game resumes
+              \item And the player can pick up where they left off
+          \end{itemize}
 
     \item \textbf{BR 3.2 Scenario:} Accessing game settings
 
-    \begin{itemize}
-        \item Given the game is paused
-        \item When the player selects the settings option from the Pause screen
-        \item Then the settings menu is displayed
-        \item And the player can adjust settings to their preference
-    \end{itemize}
+          \begin{itemize}
+              \item Given the game is paused
+              \item When the player selects the settings option from the Pause screen
+              \item Then the settings menu is displayed
+              \item And the player can adjust settings to their preference
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would enhance the user’s gameplay experience and improve the overall quality of life within the game. Rather than having to complete the game in a single session, players would be able to pause the game, and complete it a later time. Although a pause screen is not explicitly mentioned as a core requirement, this feature adds flexibility and convenience to the game, therefore significantly improving the game’s quality of life, achieving the client’s objectives of a high quality user experience.
 
     \item \textbf{MoSCoW Priority: COULD HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Could Have” as it is not a mandatory requirement but offers a meaningful improvement to the player experience.
+          \end{itemize}
 \end{itemize}
 
 \newpage
@@ -287,87 +303,87 @@
 \subsubsection{AI Boss}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want an AI boss that challenges the skills I learnt throughout the game, so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
+    \item \textbf{User Story:} As a player, I want an AI boss that challenges the skills I learnt throughout the game so that I can demonstrate my abilities in stealth, quizzes and combat mechanics under pressure.
 
     \item \textbf{Feature:} Adaptive Learning
 
     \item \textbf{BR 4.1 Scenario}: Testing stealth skills
 
-    \begin{itemize}
-        \item Given the player has demonstrated weakness in stealth based tasks in the game
-        \item When they encounter the final boss
-        \item Then the boss will adapt the the level environment to include stealth based mechanics
-        \item But the main objective is still the final quiz
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has demonstrated weakness in stealth based tasks in the game
+              \item When they encounter the final boss
+              \item Then the boss will adapt the the level environment to include stealth based mechanics
+              \item But the main objective is still the final quiz
+          \end{itemize}
 
     \item \textbf{BR 4.2 Scenario:} Quiz adjustment
 
-    \begin{itemize}
-        \item Given the player has previously struggled with certain topics
-        \item When they encounter the final boss
-        \item Then the boss can adapt to the player’s weaknesses
-        \item And generate a custom quiz for the player
-        \item And include the player’s weaknesses in the custom quiz
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has previously struggled with certain topics
+              \item When they encounter the final boss
+              \item Then the boss can adapt to the player’s weaknesses
+              \item And generate a custom quiz for the player
+              \item And include the player’s weaknesses in the custom quiz
+          \end{itemize}
 
-    \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements. The use of AI to personalise the learning experience and adapt the game to the player’s performance is a key directive from the client. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications, whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult.
+    \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s overall goals and objectives, as AI algorithms were explicitly specified in the Technical Requirements of the Product/Service Requirements. By incorporating this feature, the game ensures alignment with the client’s vision and technical specifications, whilst also additionally building upon the education aspect of the game, enabling the user to be tested and learn based on what it may have found difficult.
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Must Have” as it directly supports the client’s core requirements and objectives.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Must Have” as it directly supports the client’s core requirements and objectives.
+          \end{itemize}
 \end{itemize}
 
 \subsubsection{SFX}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to have music and sound effects in the game, so the game feels more immersive and enjoyable.
+    \item \textbf{User Story:} As a player, I want to have music and sound effects in the game so the game feels more immersive and enjoyable.
 
     \item \textbf{Feature:} SFX
 
     \item \textbf{BR 5.1 Scenario:} Background music for immersive atmosphere
 
-    \begin{itemize}
-        \item Given the player is in a game level
-        \item When the level starts
-        \item Then background music plays that matches the mood and intensity of the level
-        \item And the player can adjust the volume in settings
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is in a game level
+              \item When the level starts
+              \item Then background music plays that matches the mood and intensity of the level
+              \item And the player can adjust the volume in settings
+          \end{itemize}
 
     \item \textbf{BR 5.2 Scenario:} Sound effects for actions
 
-    \begin{itemize}
-        \item Given the player performs an action
-        \item When the action occurs
-        \item Then a corresponding sound effect plays to reflect the action
-        \item And the sound effect volume is consistent with the settings
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player performs an action
+              \item When the action occurs
+              \item Then a corresponding sound effect plays to reflect the action
+              \item And the sound effect volume is consistent with the settings
+          \end{itemize}
 
     \item \textbf{BR 5.3 Scenario:} Adaptive music for boss encounters
 
-    \begin{itemize}
-        \item Given the player is entering a boss encounter
-        \item When the encounter begins
-        \item Then the music dynamically shifts to a more intense track
-        \item And the music fades back to normal when the boss is defeated
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is entering a boss encounter
+              \item When the encounter begins
+              \item Then the music dynamically shifts to a more intense track
+              \item And the music fades back to normal when the boss is defeated
+          \end{itemize}
 
     \item \textbf{BR 5.4 Scenario:} Environmental sound effects
 
-    \begin{itemize}
-        \item Given the player is moving through different environments
-        \item When the player enters a new environment
-        \item Then ambient sound effects play to match the setting
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is moving through different environments
+              \item When the player enters a new environment
+              \item Then ambient sound effects play to match the setting
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would contribute significantly to the client’s goal of creating an enjoyable and immersive game. The inclusion of sound effects (SFX) enables another dimension to the game which can deepen the player’s immersion and enhance the game’s atmosphere. Despite not being explicitly stated in the Product/Service Requirements, it provides a great addition to the experience and greatly increases the high quality immersion the game seeks to achieve.
 
     \item \textbf{MoSCoW Priority: SHOULD HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Should Have” as it adds value to the player’s experience but is not essential or equal in importance to the game’s core visual components.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Should Have” as it adds value to the player’s experience but is not essential or equal in importance to the game’s core visual components.
+          \end{itemize}
 \end{itemize}
 
 \subsubsection{Stylised Cold War era Graphics}
@@ -379,38 +395,38 @@
 
     \item \textbf{BR 6.1 Scenario:} Cold War era background and atmosphere
 
-    \begin{itemize}
-        \item Given the player is exploring the Cold War era military base
-        \item When they move through the map
-        \item Then the background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is exploring the Cold War era military base
+              \item When they move through the map
+              \item Then the background colours feature desaturated blues and greys contrasted by bright red soviet propaganda posters
+          \end{itemize}
 
     \item \textbf{BR 6.2 Scenario:} Enemy uniforms
 
-    \begin{itemize}
-        \item Given an enemy is in the player’s line of sight
-        \item When the enemy renders on the screen
-        \item Then the enemy is shown to be wearing dark militaristic uniform
-        \item And their uniform is contrasted by bright red Soviet Union insignias
-        \item And the player is able to identify guards easily
-    \end{itemize}
+          \begin{itemize}
+              \item Given an enemy is in the player’s line of sight
+              \item When the enemy renders on the screen
+              \item Then the enemy is shown to be wearing dark militaristic uniform
+              \item And their uniform is contrasted by bright red Soviet Union insignias
+              \item And the player is able to identify guards easily
+          \end{itemize}
 
     \item \textbf{BR 6.3 Scenario:} Entering a room
 
-    \begin{itemize}
-        \item Given the player enters a room
-        \item When they move around in the room
-        \item Then the player is greeted by dim overhead lights which cast a glow beneath them
-        \item And lights up any objects seen beneath the light
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player enters a room
+              \item When they move around in the room
+              \item Then the player is greeted by dim overhead lights which cast a glow beneath them
+              \item And lights up any objects seen beneath the light
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would contribute significantly to the client’s goal of creating a Cold War-inspired game. The client’s Product/Service Requirements emphasise the importance of a Cold War stealth theme. Incorporating Cold War-era graphics would enhance the game’s atmosphere and strengthen its connection to the desired theme, aligning with the client’s vision. As this feature directly supports the core thematic focus of the game, its inclusion is essential.
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Must Have” as it is crucial to achieving the game’s intended atmosphere and aligning with the client’s specific requirements.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Must Have” as it is crucial to achieving the game’s intended atmosphere and aligning with the client’s specific requirements.
+          \end{itemize}
 \end{itemize}
 
 \newpage
@@ -418,43 +434,44 @@
 \subsubsection{Mission System}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to complete mission objectives in a clear, and structured storyline, so there is a clear path of what to do next.
+    \item \textbf{User Story:} As a player, I want to complete mission objectives in a clear and structured storyline so there is a clear path of what to do next.
 
     \item \textbf{Feature:} Mission System
 
     \item \textbf{BR 7.1 Scenario}: Receiving mission objective
 
-    \begin{itemize}
-        \item Given the player has completed their previous mission
-        \item When the player enters their mission logs
-        \item Then the player is assigned a new mission
-        \item And they learn about the objectives for the next mission
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has completed their previous mission
+              \item When the player enters their mission logs
+              \item Then the player is assigned a new mission
+              \item And they learn about the objectives for the next mission
+          \end{itemize}
 
     \item \textbf{BR 7.2 Scenario}: Unlocking a reward for completing a mission
 
-    \begin{itemize}
-        \item Given the player has successfully completed a mission
-        \item When they open their inventory
-        \item Then the player unlocks a new item
-        \item And the player can use this item for further missions
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player has successfully completed a mission
+              \item When they open their inventory
+              \item Then the player unlocks a new item
+              \item And the player can use this item for further missions
+          \end{itemize}
 
     \item \textbf{BR 7.4 Scenario:} Completing secondary objective
 
-    \begin{itemize}
-        \item Given a secondary objective has been completed during a mission
-        \item When the mission ends
-        \item Then the player is given a bonus reward
-    \end{itemize}
+          \begin{itemize}
+              \item Given a secondary objective has been completed during a mission
+              \item When the mission ends
+              \item Then the player is given a bonus reward
+          \end{itemize}
 
-    \item \textbf{Rationale:} Implementing this feature would enhance the client’s goal of creating a Cold War infiltration stealth game. While a mission system is not a core requirement in the Product/Service Requirements, the document emphasises creating an immersive and thematic player experience. Including a mission system would help this by providing players with a structured and focused gameplay experience, aligning with the mindset of a Cold War spy. By offering clear progression via a way to track how much a player has completed and giving visual milestones in the Mission’s UI, this feature would deepen the player’s drive to continue playing.
+    \item \textbf{Rationale:} Implementing this feature would enhance the client’s goal of creating a Cold War infiltration stealth game. While a mission system is not a core requirement in the Product/Service Requirements, the document emphasises creating an immersive and thematic player experience. Including a mission system would help this by providing players with a structured and focused gameplay experience, aligning with the mindset of a Cold War spy. Providing a clear progression path with visual milestones would help the player understand
+          the storyline and create stronger connections between different learning objectives.
 
     \item \textbf{MoSCoW Priority: COULD HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Could Have” as it is not essential but offers noticeable improvements to the player’s experience and alignment with the game’s theme.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Could Have” as it is not essential but offers noticeable improvements to the player’s experience and alignment with the game’s theme.
+          \end{itemize}
 \end{itemize}
 
 \newpage
@@ -462,45 +479,45 @@
 \subsubsection{Movement Mechanics}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to have basic movement mechanics, so I can navigate the map and complete missions.
+    \item \textbf{User Story:} As a player, I want to have basic movement mechanics so I can navigate the map and complete missions.
 
     \item \textbf{Feature:} Movement
 
     \item \textbf{BR 8.1 Scenario:} Horizontal movement
 
-    \begin{itemize}
-        \item Given the player is moving their character
-        \item When the player presses a sideward movement key
-        \item Then the character should move in the corresponding direction
-        \item And the character has a fluid walking animation
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is moving their character
+              \item When the player presses a sideward movement key
+              \item Then the character should move in the corresponding direction
+              \item And the character has a fluid walking animation
+          \end{itemize}
 
     \item \textbf{BR 8.2 Scenario:} Vertical movement
 
-    \begin{itemize}
-        \item Given the player is standing or moving on a solid surface
-        \item When the player presses the spacebar
-        \item Then then the character moves upwards in the air
-        \item And the player’s character reaches peak height
-        \item And the character starts moving downwards
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is standing or moving on a solid surface
+              \item When the player presses the spacebar
+              \item Then then the character moves upwards in the air
+              \item And the player’s character reaches peak height
+              \item And the character starts moving downwards
+          \end{itemize}
 
     \item \textbf{BR 8.3 Scenario:} Dodge
 
-    \begin{itemize}
-        \item Given the player is moving while engaging an enemy
-        \item When the player presses the dodge button
-        \item Then the player performs a quick roll on the ground
-        \item And evades an attack
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is moving while engaging an enemy
+              \item When the player presses the dodge button
+              \item Then the player performs a quick roll on the ground
+              \item And evades an attack
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s overall objective of creating an immersive and engaging player experience. Movement mechanics allow players to navigate the game maps and scenarios effectively, providing the foundation for other key features such as stealth. The game can fully deliver on its intended Cold War espionage theme and ensure a cohesive gameplay experience by enabling these mechanics.
 
     \item \textbf{MoSCoW Priority: MUST HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Must Have” as it is fundamental to the game’s functionality and directly supports the client’s objective of delivering an immersive stealth experience.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Must Have” as it is fundamental to the game’s functionality and directly supports the client’s objective of delivering an immersive stealth experience.
+          \end{itemize}
 \end{itemize}
 
 \newpage
@@ -508,53 +525,53 @@
 \subsubsection{Combat Mechanics}
 
 \begin{itemize}
-    \item \textbf{User Story:} As a player, I want to have combat mechanics, so I can defeat enemy guards, while completing missions.
+    \item \textbf{User Story:} As a player, I want to have combat mechanics so I can defeat enemy guards, while completing missions.
 
     \item \textbf{Feature:} Combat
 
     \item \textbf{BR 9.1 Scenario:} Shooting
 
-    \begin{itemize}
-        \item Given the player is engaging an enemy
-        \item When the player’s bullet connects with the enemy
-        \item Then the enemy takes damage based on strength of the weapon
-        \item And the gun’s ammo decreases by one
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is engaging an enemy
+              \item When the player’s bullet connects with the enemy
+              \item Then the enemy takes damage based on strength of the weapon
+              \item And the gun’s ammo decreases by one
+          \end{itemize}
 
     \item \textbf{BR 9.2 Scenario:} Enemy death
 
-    \begin{itemize}
-        \item Given the player shoots an enemy
-        \item When the enemy’s health drops to or below 0
-        \item Then the enemy is defeated
-        \item And the enemy drops a coin
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player shoots an enemy
+              \item When the enemy’s health drops to or below 0
+              \item Then the enemy is defeated
+              \item And the enemy drops a coin
+          \end{itemize}
 
     \item \textbf{BR 9.3 Scenario:} Out of ammo
 
-    \begin{itemize}
-        \item Given the player’s gun has run out of ammo
-        \item When the player clicks the reload key
-        \item Then the player reloads their weapon
-        \item And can shoot again with full ammo
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player’s gun has run out of ammo
+              \item When the player clicks the reload key
+              \item Then the player reloads their weapon
+              \item And can shoot again with full ammo
+          \end{itemize}
 
     \item \textbf{BR 9.4 Scenario:} Player taking a hit
 
-    \begin{itemize}
-        \item Given the player is engaged in combat with an enemy
-        \item When the player takes damage
-        \item Then the player’s health points decrease according to how much damage they took
-        \item And the player’s screen shows visual feedback
-    \end{itemize}
+          \begin{itemize}
+              \item Given the player is engaged in combat with an enemy
+              \item When the player takes damage
+              \item Then the player’s health points decrease according to how much damage they took
+              \item And the player’s screen shows visual feedback
+          \end{itemize}
 
     \item \textbf{Rationale:} Implementing this feature would significantly contribute to the client’s goal of enhancing gameplay and immersion within the themes of the Cold War and infiltration. This feature allows players to engage in combat scenarios to achieve their objectives, aligning closely with the game’s desired theme.
 
     \item \textbf{MoSCoW Priority: SHOULD HAVE}
 
-    \begin{itemize}
-        \item This feature is considered a “Should Have” as it supports the game’s overall themes and objectives and enhances active gameplay elements, however it is not essential for achieving the core gameplay experience.
-    \end{itemize}
+          \begin{itemize}
+              \item This feature is considered a “Should Have” as it supports the game’s overall themes and objectives and enhances active gameplay elements, however it is not essential for achieving the core gameplay experience.
+          \end{itemize}
 \end{itemize}
 
 \section{Project Management}
@@ -569,21 +586,21 @@
 
 \begin{equation*}
     \begin{aligned}
-        &\text{Consequence}=4 \\
-        &\text{Likelihood}=2 \\
-        &\text{Risk}=4\times2=8 \implies {\color{red}\text{High}}
+         & \text{Consequence}=4                                     \\
+         & \text{Likelihood}=2                                      \\
+         & \text{Risk}=4\times2=8 \implies {\color{red}\text{High}}
     \end{aligned}
 \end{equation*}
 
 \noindent Uneven workloads, despite being unfair on those doing more work, can lead to some members not understanding the current state of the project or how new features should be implemented. This can make it hard to continue contributing to the project, resulting in even lower productivity, slower development and a less complete product. To mitigate this risk, it is important to ensure that everyone is assigned tasks before the project starts, and that regular meetings are held to discuss progress and potential task shifts.
 
-\begin{equation}
+\begin{equation*}
     \begin{aligned}
-        &\text{Consequence}=3 \\
-        &\text{Likelihood}=3 \\
-        &\text{Risk}=4\times2=9 \implies {\color{red}\text{High}}
+         & \text{Consequence}=3                                     \\
+         & \text{Likelihood}=3                                      \\
+         & \text{Risk}=4\times2=9 \implies {\color{red}\text{High}}
     \end{aligned}
-\end{equation}
+\end{equation*}
 
 \subsubsection{Client Risks}
 
@@ -591,9 +608,9 @@
 
 \begin{equation*}
     \begin{aligned}
-        &\text{Consequence}=3 \\
-        &\text{Likelihood}=2 \\
-        &\text{Risk}=3\times2=6 \implies {\color{orange}\text{Moderate}}
+         & \text{Consequence}=3                                            \\
+         & \text{Likelihood}=2                                             \\
+         & \text{Risk}=3\times2=6 \implies {\color{orange}\text{Moderate}}
     \end{aligned}
 \end{equation*}
 
@@ -601,9 +618,9 @@
 
 \begin{equation*}
     \begin{aligned}
-        &\text{Consequence}=2 \\
-        &\text{Likelihood}=1 \\
-        &\text{Risk}=2\times1=2 \implies {\color{green}\text{Low}}
+         & \text{Consequence}=2                                      \\
+         & \text{Likelihood}=1                                       \\
+         & \text{Risk}=2\times1=2 \implies {\color{green}\text{Low}}
     \end{aligned}
 \end{equation*}
 
@@ -613,9 +630,9 @@
 
 \begin{equation*}
     \begin{aligned}
-        &\text{Consequence}=5 \\
-        &\text{Likelihood}=1 \\
-        &\text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
+         & \text{Consequence}=5                                            \\
+         & \text{Likelihood}=1                                             \\
+         & \text{Risk}=5\times1=5 \implies {\color{orange}\text{Moderate}}
     \end{aligned}
 \end{equation*}
 
@@ -653,7 +670,7 @@
 
 \subsubsection{Gantt Chart}
 
-\includegraphics[width = \textwidth]{gantt-chart.png}
+\includegraphics[width = \textwidth]{images/gantt-chart.png}
 
 \subsubsection{Art / Vision Design}
 
