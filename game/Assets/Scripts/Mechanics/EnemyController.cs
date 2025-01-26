@@ -14,7 +14,9 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
+        public float viewDistance = 5f;
 
+        private Transform player;
         internal PatrolPath.Mover mover;
         internal AnimationController control;
         internal Collider2D _collider;
@@ -29,6 +31,12 @@ namespace Platformer.Mechanics
             _collider = GetComponent<Collider2D>();
             _audio = GetComponent<AudioSource>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        void Start()
+        {
+            
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -48,6 +56,25 @@ namespace Platformer.Mechanics
             {
                 if (mover == null) mover = path.CreateMover(control.maxSpeed * 0.5f);
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+            }
+
+            Vector2 direction = player.position - transform.position;
+            Debug.DrawRay(transform.position, direction.normalized * viewDistance, Color.red);
+            int layerMask = LayerMask.GetMask("Default", "Player");
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, viewDistance, layerMask);
+            if (hit)
+            {
+
+                if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("Enemy spotted the player!");
+                    // Replace with alert UI or other handling
+                }
+                else
+                {
+                    // Log the name of the object that was hit if it was not the player
+                    Debug.Log("Raycast hit: " + hit.transform.name + " on layer: " + LayerMask.LayerToName(hit.transform.gameObject.layer));
+                }
             }
         }
 

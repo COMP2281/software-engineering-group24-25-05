@@ -5,6 +5,8 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+// Add the Input System namespace
+using UnityEngine.InputSystem;
 
 namespace Platformer.Mechanics
 {
@@ -39,6 +41,8 @@ namespace Platformer.Mechanics
         SpriteRenderer spriteRenderer;
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        private PlayerInputs inputActions;
+        private Vector2 moveInput;
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -49,20 +53,26 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            // Initialize the Input Actions
+            inputActions = new PlayerInputs();
+            inputActions.BaseMovement.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+            inputActions.BaseMovement.Move.canceled += ctx => moveInput = Vector2.zero;
+            inputActions.BaseMovement.Jump.started += ctx => OnJump();
+            inputActions.BaseMovement.Jump.canceled += ctx => OnJumpCanceled();
+            inputActions.Enable();
+        }
+
+        void OnDestroy()
+        {
+            inputActions.Disable();
         }
 
         protected override void Update()
         {
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-                    jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
-                {
-                    stopJump = true;
-                    Schedule<PlayerStopJump>().player = this;
-                }
+                move.x = moveInput.x;
+                // Jump is handled via input events
             }
             else
             {
@@ -127,6 +137,18 @@ namespace Platformer.Mechanics
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             targetVelocity = move * maxSpeed;
+        }
+
+        void OnJump()
+        {
+            if (jumpState == JumpState.Grounded)
+                jumpState = JumpState.PrepareToJump;
+        }
+
+        void OnJumpCanceled()
+        {
+            stopJump = true;
+            Schedule<PlayerStopJump>().player = this;
         }
 
         public enum JumpState
