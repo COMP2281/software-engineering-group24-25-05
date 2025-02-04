@@ -808,6 +808,35 @@
 \end{tabularx}
 \end{center}
 
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_6 \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Display:}
+    \begin{itemize}
+        \item When the quiz is initiated the first question and answers are rendered correctly.
+        \item After the last question is answered the quiz UI closes.
+    \end{itemize}
+    \textbf{Funciton:}
+    \begin{itemize}
+        \item When an answer is clicked the user gets notified whether they are correct or incorrect.
+        \item After answering the current question the user can move on to the next question.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & High \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
 \newpage
 
 \subsection{System Testing}
@@ -1267,6 +1296,44 @@
     \textbf{Created by} & BM \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage 
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_5 \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item The user loses health when they answer a question incorrectly.
+        \item Audio and visual feedback is provided after correct and incorrect answers.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item Smooth transition from gameplay to the quiz and vice versa.
+        \item The quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item The questions relate to the course selected.
+        \item Each question has 3 incorrect answers and 1 correct answer.
+        \item A correct answer is shown when the user answers incorrectly.
+        \item Answering correctly moves the user to the next question.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate \\
+    \hline
+    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
