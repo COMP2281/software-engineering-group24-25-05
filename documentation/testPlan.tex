@@ -2,6 +2,7 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 
 \usepackage{makecell}
@@ -54,11 +55,18 @@
 
 \section{Introduction and Test Overview}
 
-\subsection{Introduction}
+\noindent Shadow Operative is an educational video game that integrates IBM SkillsBuild content to create an engaging learning platform focused on AI, Cybersecurity, and Data Analytics. The game incorporates IBM SkillsBuild badges and leverages AI-driven adaptive learning to personalise content based on players' performance and progress. This innovative approach combines education with entertainment, fostering a dynamic and enjoyable learning experience. \\
 
-\noindent Shadow Operative integrates IBM SkillsBuild content into a video game, creating an innovative platform that makes learning about AI, Cybersecurity, and Data Analytics more engaging for younger audiences. The game incorporates IBM SkillsBuild badges and leverages AI-driven adaptive learning to personalize content based on each player's performance and progress. This approach blends education with entertainment, fostering a learning experience that is not only effective but also enjoyable. \\
+\noindent Players can earn industry-recognized certifications by completing practical, game-based challenges that build valuable skills in high-demand areas. The game dynamically adjusts its difficulty and content to cater to individual learning paths, promoting mastery of complex topics, and encouraging continuous growth. \\
 
-\noindent The integration ensures players can earn recognizable certifications while playing, enhancing their skills in high-demand areas through practical, game-based challenges. As players advance, the game dynamically adjusts difficulty and content, tailoring lessons to their unique needs and encouraging mastery of complex topics. \\
+\noindent This testing report presents a comprehensive evaluation of Shadow Operative, including the following key sections:
+\begin{itemize}
+    \item \textbf{Testing Scope} – Defines the extent and objectives of the testing process.  
+    \item \textbf{Test Cases} – Describes specific scenarios and conditions evaluated during testing.  
+    \item \textbf{Testing Content} – Outlines the areas and characteristics subjected to testing, along with key findings and results.  
+\end{itemize} 
+
+\noindent The report highlights critical insights, performance evaluations, and improvements, demonstrating the educational value of Shadow Operative.
 
 \subsection{Test Overview}
 
@@ -74,7 +82,7 @@
     \hline
     \textbf{utest\_3} & Collision Detection: Verify accurate collision between player, environment, and interactive objects & Player and objects cannot pass through solid obstacles; correct response on collision events \\
     \hline
-    \textbf{utest\_4} & Enemy AI Behaviour: Test patrol routes, detection logic, and state transitions (e.g., alert, idle) & AI responds correctly to player actions and follows expected behavior patterns \\
+    \textbf{utest\_4} & Enemy AI Behaviour: Test patrol routes, detection logic, and state transitions (e.g., alert, idle) & AI responds correctly to player actions and follows expected behaviour patterns \\
     \hline
     \textbf{utest\_5} & Level Load + Transitions: Test smooth transitions between levels and correct loading of level assets & Level data persists, and transitions occur without graphics or gameplay glitches \\
     \hline
@@ -84,17 +92,17 @@
 
 \subsubsection{System Testing}
 
-\begin{tabularx}{\linewidth}{|c|X|X|c|}
+\begin{tabularx}{\linewidth}{|c|X|X|>{\raggedright\arraybackslash}m{2cm}|}
     \hline
     \textbf{Test ID} & \textbf{Description} & \textbf{Test Oracle} & \textbf{Nature} \\
     \hline
-    \textbf{stest\_1} & Graphics and Audio: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag & Graphics match expected design, and audio aligns with gameplay events without delay & Non-Func \\
+    \textbf{stest\_1} & Graphics and Audio: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag & Graphics match expected design, and audio aligns with gameplay events without delay & Non-Functional \\
     \hline
-    \textbf{stest\_2} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Func \\
+    \textbf{stest\_2} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Functional \\
     \hline
-    \textbf{stest\_3} & Gameplay Flow: Test the overall game experience, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Func \& N-F \\
+    \textbf{stest\_3} & Gameplay Flow: Test the overall game experience, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Functional \& Non-Functional \\
     \hline
-    \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Func \\
+    \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Functional \\
     \hline
 \end{tabularx}
 
@@ -164,8 +172,13 @@
     \hline
     \textbf{Test Material Used} & Keyboard, Xbox Controller \\
     \hline
+\end{tabularx}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
     \textbf{Expected Result} &
-    \textbf{Horizontal Movement:}
+     \textbf{Horizontal Movement:}
     \begin{itemize}
         \item The character’s x-coordinate should increase when moving right and decrease when moving left.
         \item Movement should be smooth and responsive.
@@ -178,16 +191,8 @@
     \textbf{Vertical Movement (Jumping onto a Ledge):}
     \begin{itemize}
         \item The character’s y-coordinate should decrease to the ledge height, then stop at that height.
-        \item The character should land on the ledge, with no clipping or unintended behavior.
+        \item The character should land on the ledge, with no clipping or unintended behaviour.
     \end{itemize}
-    \\
-    \hline
-\end{tabularx}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Expected Result} &
     \textbf{Vertical Movement (Falling off a Ledge):}
     \begin{itemize}
         \item The character’s y-coordinate should decrease when falling off the ledge, simulating gravity.
@@ -218,44 +223,7 @@
     \hline
     \textbf{Test ID} & utest\_1 \\
     \hline
-    \textbf{Regression 1 Result} &
-    \textbf{Horizontal Movement:}
-    \begin{itemize}
-        \item The character’s x-coordinate correctly increases when moving right and decreases when moving left. The movement is smooth and responsive, with no lag or stutter.
-    \end{itemize}
-    \textbf{Vertical Movement (Jumping Mid Air):}
-    \begin{itemize}
-        \item The character’s y-coordinate increases when jumping, and the jump height is consistent with the intended design, smoothly reaching the peak before falling.
-    \end{itemize}
-    \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Regression 1 Result} & \textbf{Vertical Movement (Jumping onto a Ledge):}
-    \begin{itemize}
-        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behavior (e.g., hovering or falling through the ledge).
-    \end{itemize}
-    \textbf{Vertical Movement (Falling off a Ledge):}
-    \begin{itemize}
-        \item The character’s y-coordinate decreases when falling off the ledge, and gravity is applied as expected. The fall speed is consistent with the game’s gravity settings and feels natural.
-    \end{itemize}
-    \textbf{Simultaneous Inputs:}
-    \begin{itemize}
-        \item The character moves both horizontally and vertically without delay when both inputs are used. There is no erratic or conflicting movement, and the combined movement feels smooth and fluid.
-    \end{itemize}
-    \textbf{Unexpected Results}
-    \begin{itemize}
-        \item No unexpected Results Occurred
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Pass \\
-    \hline
-    \textbf{Regression 2 Result} &
+    \textbf{Regression 1 \& 2 Results} &
     \textbf{Horizontal Movement:}
     \begin{itemize}
         \item The character’s x-coordinate correctly increases when moving right and decreases when moving left. The movement is smooth and responsive, with no lag or stutter.
@@ -265,8 +233,8 @@
         \item The character’s y-coordinate increases when jumping, and the jump height is consistent with the intended design, smoothly reaching the peak before falling.
     \end{itemize}
     \textbf{Vertical Movement (Jumping onto a Ledge):}
-    \begin{itemize}
-        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behavior (e.g., hovering or falling through the ledge).
+     \begin{itemize}
+        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behaviour (e.g., hovering or falling through the ledge).
     \end{itemize}
     \textbf{Vertical Movement (Falling off a Ledge):}
     \begin{itemize}
@@ -281,12 +249,6 @@
         \item No unexpected Results Occurred
     \end{itemize}
     \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Pass/Fail} & Pass \\
     \hline
@@ -505,7 +467,7 @@
     \hline
     \textbf{Test ID} & utest\_4 \\
     \hline
-    \textbf{Description of test} & This test case verifies the behavior of the enemy AI in a game environment, specifically focusing on their patrol and detection routines. The AI should follow a set patrol path and detect the player within a specified detection radius. \\
+    \textbf{Description of test} & This test case verifies the behaviour of the enemy AI in a game environment, specifically focusing on their patrol and detection routines. The AI should follow a set patrol path and detect the player within a specified detection radius. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l] {
         AI Boss (2.2.4) \\
@@ -518,7 +480,7 @@
     } \\
     \hline
     \textbf{Test procedure} &
-    \textbf{Test enemy patrol behavior}
+    \textbf{Test enemy patrol behaviour}
     \begin{itemize}
         \item Place the enemy in the environment with a predefined patrol route.
         \item Observe the enemy moving smoothly between patrol points while scanning for the player within its field of view.
@@ -553,7 +515,7 @@
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Expected result} &
-    \textbf{Enemy Patrol Behavior:}
+    \textbf{Enemy Patrol Behaviour:}
     \begin{itemize}
         \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
         \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts direction appropriately.
@@ -564,7 +526,7 @@
         \item The enemy immediately enters a detection state when the player enters its field of view.
         \item The detection should be consistent and only occur if the player is fully visible or within the specified visibility range.
     \end{itemize}
-    \textbf{Enemy Behavior When the Player Hides:}
+    \textbf{Enemy Behaviour When the Player Hides:}
     \begin{itemize}
         \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
         \item The enemy investigates the player’s last known position before resuming patrol or searching elsewhere.
@@ -577,7 +539,7 @@
     \textbf{Reaction to Unreachable Players:}
     \begin{itemize}
         \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
-        \item The enemy exhibits appropriate alternative behavior, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
+        \item The enemy exhibits appropriate alternative behaviour, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
     \end{itemize}
     \\
     \hline
@@ -609,7 +571,7 @@
         \item The enemy immediately enters a detection state when the player enters its field of view.
         \item Detection occurs only if the player is fully visible or within the specified visibility range, with no inconsistencies in detection.
     \end{itemize}
-    \textbf{Enemy Behavior When the Player Hides:}
+    \textbf{Enemy Behaviour When the Player Hides:}
     \begin{itemize}
         \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
     \end{itemize}
@@ -657,7 +619,7 @@
         \item Verify that when a quiz is initiated the first question and answers for the first question are rendered properly.
         \item Check that after the last question is answered the quiz UI closes.
     \end{itemize}
-    \textbf{Funciton:}
+    \textbf{Function:}
     \begin{itemize}
         \item Ensure that when an answer is clicked the game checks if the answer is correct or incorrect and notifies the user.
         \item Verify that the user can only move on to the next question after answering the current question.
@@ -1012,7 +974,7 @@
     \hline
     \textbf{Test ID} & uattest\_4 \\
     \hline
-    \textbf{Description of test} & This test case verifies the game's accessibility features, focusing on customizable controls, subtitles, colorblind-friendly options, and audio cues for visually impaired players. \\
+    \textbf{Description of test} & This test case verifies the accessibility features of the game, focusing on customizable controls, subtitles, colour-blind-friendly options, and audio cues for visually impaired players, to ensure that the user can comfortably experience the game. \\
     \hline
     \textbf{Related requirement document details} & N/A \\
     \hline
@@ -1025,11 +987,11 @@
     \end{itemize}
     \textbf{Subtitles}
     \begin{itemize}
-        \item Verify that subtitles are available, accurately synced with dialogues, and customizable in size and color.
+        \item Verify that subtitles are available, accurately synced with dialogues, and customizable in size and colour.
     \end{itemize}
-    \textbf{Colorblind mode:}
+    \textbf{Colour-blind mode:}
     \begin{itemize}
-        \item Enable colorblind-friendly mode and confirm that game elements are distinguishable for various types of colorblindness.
+        \item Enable colour-blind-friendly mode and confirm that game elements are distinguishable for various types of colour-blindness.
     \end{itemize}
     \textbf{Audio Cues:}
     \begin{itemize}
@@ -1039,7 +1001,7 @@
     \hline
     \textbf{Test material used} & Accessibility test checklist, user input logs \\
     \hline
-    \textbf{Expected result} & Players can fully customize controls and subtitle preferences. Colorblind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
+    \textbf{Expected result} & User can fully customize controls and subtitle preferences. Colour-blind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -1068,7 +1030,7 @@
     \begin{itemize}
         \item Cover most elements, sometimes slightly out of time
     \end{itemize}
-    \textbf{Colorblind Mode:}
+    \textbf{Colour-blind Mode:}
     \begin{itemize}
         \item Provides distinguishable elements for most cases but has issues with red-green differentiation
     \end{itemize}
@@ -1082,7 +1044,7 @@
     \hline
     \textbf{Severity (If Fail)} & Moderate \\
     \hline
-    \textbf{Comments} & Additional testing and adjustments needed for red-green colorblind compatibility, subtitle timing, and missing audio cues during boss encounters. \\
+    \textbf{Comments} & Additional testing and adjustments needed for red-green colour-blind compatibility, subtitle timing, and missing audio cues during boss encounters. \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
     \hline
@@ -1194,22 +1156,27 @@
 
 \section{Testing Context}
 
-\noindent To ensure compatibility and coverage across educational environments, the following tools and environments are used for testing the system:
+\noindent To ensure compatibility, accessibility, and coverage across educational environments, the following tools and environments are used for testing the system:
 
 \subsection{Operating Systems}
 
 \begin{itemize}
-    \item Windows 11: Selected due to its widespread use in educational institutions and professional environments. Ensures compatibility for schools and educational labs.
-    \item macOS (15.3 and above): Included as many schools and creative institutions prefer macOS systems for educational and development purposes.
+    \item Windows 11: Selected due to its widespread use in educational institutions and professional environments. Ensures compatibility for schools and educational labs. According to recent statistics, Microsoft Windows holds a market share of approximately 66.7\% in the UK, reflecting its dominance in both educational and professional settings \cite{statista}.
+    \item macOS (15.3 and above): Included as many schools and creative institutions prefer macOS systems for educational and development purposes. macOS accounts for around 23.3\% of the UK market share, demonstrating its popularity in environments that emphasise creative and media-focused curricula \cite{statista}.
 \end{itemize}
+
+The dominance of these two operating systems influences system testing priorities. Ensuring compatibility with both Windows and macOS is crucial to accommodate the technological landscape within educational environments. Given their built-in accessibility features (such as screen readers, magnification tools, and input customisation), both platforms support diverse user needs, which are integral to accessibility testing.
 
 \subsection{Testing Tools and Drivers}
 
 \begin{itemize}
-    \item Unity Editor (2022.3.50f1): Used to test and debug game mechanics, AI behaviors, and user interactions.
-    \item Accessibility Testing Tools: Simulators for colorblindness and screen reader compatibility (e.g., Color Oracle, VoiceOver for macOS).
-    \item Input Device Testing: Keyboard and controller compatibility tests using standard USB and wireless game controllers.
+    \item Unity Editor (2022.3.50f1): Used to test and debug game mechanics, AI behaviours, and user interactions.
+    \item Accessibility Testing Tools: Simulators for colourblindness and screen reader compatibility (e.g., Color Oracle, VoiceOver for macOS). According to Keywords Studios, around 29\% of gamers in the UK identify as having a disability, and 66\% of these players report encountering barriers in gaming environments \cite{keywordsstudios}. Ensuring accessibility testing mitigates these barriers and promotes inclusivity.
+    \item Input Device Testing: Keyboard and controller compatibility tests using standard USB and wireless game controllers. This includes accessibility-focused input devices, such as adaptive controllers, to accommodate players with limited mobility. Scope UK highlights the importance of these options for players with varying needs \cite{scope}.
+    \item Game Feature Accessibility Testing: Incorporates tests for adjustable difficulty settings, subtitles, and customisable controls, which are essential for ensuring inclusivity and usability for a wide audience, including players with and without disabilities. The global importance of accessibility in gaming underscores the necessity for these considerations \cite{keywordsstudios}.
 \end{itemize}
+
+The technological landscape from 2017 to 2023 demonstrates the sustained dominance of Windows and macOS, with Linux and other open-source systems remaining less adopted due to compatibility and software availability concerns. As accessibility continues to gain prominence, the integration of sophisticated accessibility features across these platforms is expected to become more comprehensive and integral to development and testing strategies.
 
 \subsection{Test Failure Severity Levels}
 
@@ -1220,7 +1187,7 @@
     \hline
     \textbf{Critical} & The system crashes or produces incorrect outcomes that prevent gameplay or educational content delivery. Requires immediate attention. \\
     \hline
-    \textbf{High} & Major functionality is disrupted, such as inaccessible accessibility features or broken AI behaviors, affecting core gameplay. \\
+    \textbf{High} & Major functionality is disrupted, such as inaccessible accessibility features or broken AI behaviours, affecting core gameplay. \\
     \hline
     \textbf{Moderate} & Gameplay is impacted but still functional, such as minor UI glitches, missing audio cues, or partial AI inconsistencies. \\
     \hline
@@ -1228,5 +1195,19 @@
     \hline
 \end{tabularx}
 \end{center}
+
+\bibliographystyle{unsrt}
+
+\begin{thebibliography}{}
+\bibitem{statista} 
+Statista. (2023). \emph{Market share of desktop operating systems in the United Kingdom (UK) from 2017 to 2023}. Retrieved from \url{https://www.statista.com/statistics/487002/market-share-of-desktop-operating-systems-uk/}
+
+\bibitem{keywordsstudios} 
+Keywords Studios. (2023). \emph{The Business Case for Accessibility in Gaming}. Retrieved from \url{https://www.keywordsstudios.com/en/about-us/news-events/news/the-business-case-for-accessibility/}
+
+\bibitem{scope} 
+Scope UK. \emph{Accessibility in Gaming Report}. Retrieved from \url{https://www.scope.org.uk/campaigns/research-policy/accessibility-in-gaming/}
+
+\end{thebibliography}
 
 \end{document}
