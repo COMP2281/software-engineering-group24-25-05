@@ -80,18 +80,6 @@
     \hline
     \textbf{utest\_6} & Skill Build Questions: Test that questions display and function correctly during gameplay & The quiz UI opens and closes as expected. Questions and answers are rendered properly. Appropriate feedback is provided after answering a question \\
     \hline
-    \textbf{utest\_7} & Level Objectives: Verify completion of primary and secondary objectives & Objectives track progress and provide correct rewards upon completion \\
-    \hline
-    \textbf{utest\_8} & Sound Effects: Test audio playback for various game events & Correct audio plays at the appropriate volume and timing \\
-    \hline
-    \textbf{utest\_9} & Environmental Effects: Verify rendering of lighting, shadows, and ambient sounds in levels & Effects render without graphical glitches and match the game environment \\
-    \hline
-    \textbf{utest\_10} & Dynamic Question Difficulty: Test adaptive difficulty of quiz questions based on player performance & Question difficulty adjusts dynamically based on performance metrics \\
-    \hline
-    \textbf{utest\_11} & Enemy Health: Test that enemy health decreases correctly when hit by weapons & Enemy health bar updates properly, and enemies die when health reaches zero \\
-    \hline
-    \textbf{utest\_12} & Weapon Mechanics: Test firing, ammo decrement, and reload functionality & Weapons deal appropriate damage, consume ammo, and reload as expected \\
-    \hline
 \end{tabularx}
 
 \subsubsection{System Testing}
@@ -108,21 +96,7 @@
     \hline
     \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Func \\
     \hline
-    \textbf{stest\_5} & Performance and Stability: Test the game's frame rate, memory usage, and stability under different load conditions & Frame rate remains stable, memory usage is within acceptable limits, and no crashes occur & Non-Func \\
-    \hline
-    \textbf{stest\_6} & Adaptive AI: Test AI's ability to adjust difficulty and behavior based on player performance & AI dynamically adjusts gameplay difficulty and tactics to challenge the player & Non-Func \\
-    \hline
-    \textbf{stest\_7} & Educational Content Integration: Test seamless embedding of IBM Skills Build questions into the gameplay & Educational questions appear at appropriate points, and responses impact gameplay as intended & Func \\
-    \hline
-    \textbf{stest\_8} & Game State Persistence: Verify that in-game events and progress persist across sessions & Game state data is correctly saved and restored across multiple sessions & Func \\
-    \hline
-    \textbf{stest\_9} & Input Device Compatibility: Test compatibility with different input devices (keyboard, controller) & Game responds consistently to input across various devices & Func \\
-    \hline
-    \textbf{stest\_10} & Accessibility Features: Test availability and functionality of accessibility features like subtitles and customizable controls & Accessibility options work as intended and improve the user experience & Func \\
-    \hline
 \end{tabularx}
-
-\newpage
 
 \subsubsection{User Acceptance Testing}
 
@@ -141,18 +115,6 @@
     \textbf{uattest\_5} & Quizzes: Test the educational component, ensuring quizzes are engaging, well-integrated, and correctly assessed & Players find the quizzes challenging and educational, with accurate feedback on answers \\
     \hline
     \textbf{uattest\_6} & Chatbot: Test the chatbot's ability to assist users with gameplay tips or educational content & Players receive accurate and helpful responses from the chatbot \\
-    \hline
-    \textbf{uattest\_7} & Visual and Audio Design: Verify the coherence and appeal of the game's graphics and audio elements & Players find the visual style immersive and the audio enhances the experience \\
-    \hline
-    \textbf{uattest\_8} & Educational Content Engagement: Test the player's interaction with IBM Skills Build content & Players report an improved understanding of Skills Build concepts through gameplay \\
-    \hline
-    \textbf{uattest\_9} & User Progress and Rewards: Verify the reward system and progression tracking & Players feel motivated by achievements, and progress is tracked accurately \\
-    \hline
-    \textbf{uattest\_10} & Difficulty Adjustment: Ensure adaptive AI and difficulty settings enhance player experience & Players report that difficulty levels are well-balanced and adapt to their skill level \\
-    \hline
-    \textbf{uattest\_11} & Game Narrative and Storyline: Test the clarity and engagement of the storyline & Players find the storyline compelling and easy to follow \\
-    \hline
-    \textbf{uattest\_12} & Onboarding and Tutorials: Ensure new players understand game mechanics through effective onboarding & Players can learn core mechanics easily and quickly adapt to gameplay \\
     \hline
 \end{tabularx}
 
@@ -255,34 +217,6 @@
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Test ID} & utest\_1 \\
-    \hline
-    \textbf{Expected Result} &
-    \textbf{Horizontal Movement:}
-    \begin{itemize}
-        \item The character’s x-coordinate should increase when moving right and decrease when moving left.
-        \item Movement should be smooth and responsive.
-    \end{itemize}
-    \textbf{Vertical Movement (Jumping Mid Air):}
-    \begin{itemize}
-        \item The character’s y-coordinate should increase when jumping, indicating upward movement.
-        \item The jump height should match the intended design.
-    \end{itemize}
-    \textbf{Vertical Movement (Jumping onto a Ledge):}
-    \begin{itemize}
-        \item The character’s y-coordinate should decrease to the ledge height, then stop at that height.
-        \item The character should land on the ledge, with no clipping or unintended behavior.
-    \end{itemize}
-    \textbf{Vertical Movement (Falling off a Ledge):}
-    \begin{itemize}
-        \item The character’s y-coordinate should decrease when falling off the ledge, simulating gravity.
-        \item The fall speed should be consistent with the game’s gravity settings.
-    \end{itemize}
-    \textbf{Simultaneous Inputs:}
-    \begin{itemize}
-        \item The character should move both horizontally and vertically in response to input without delay.
-        \item No erratic or conflicting movement should occur when both horizontal and vertical inputs are used simultaneously.
-    \end{itemize}
-    \\
     \hline
     \textbf{Regression 1 Result} &
     \textbf{Horizontal Movement:}
@@ -430,7 +364,7 @@
     \hline
     \textbf{Test ID} & utest\_2 \\
     \hline
-    \textbf{Expected result} &
+    \textbf{Result} &
     \textbf{Test loosing heart via getting question wrong}
     \begin{itemize}
         \item Player loses 1 heart.
@@ -532,34 +466,7 @@
     \hline
     \textbf{Test ID} & utest\_3 \\
     \hline
-    \textbf{Expected result} &
-    \textbf{Test player collisions with static objects}
-    \begin{itemize}
-        \item Player character should stop moving upon contact with the static object.
-        \item Player character should be unable to pass through it.
-        \item There should be no clipping or glitching of the character model.
-    \end{itemize}
-    \textbf{Test player collision with dynamic objects}
-    \begin{itemize}
-        \item Player character should either interact with or be blocked by the dynamic object, depending on the object’s movement or state.
-        \item The collision response should appear natural, without any erratic movements.
-    \end{itemize}
-    \textbf{Test player movement near map boundaries}
-    \begin{itemize}
-        \item Player character should not be able to move beyond defined map boundaries.
-        \item The character should stop at the boundary without any visual error, no part of the player model should appear outside the map area.
-    \end{itemize}
-    \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Regression 1 Result} &
+    \textbf{Result} &
     \textbf{Test player collisions with static objects}
     \begin{itemize}
         \item Player character immediately stops upon contact with static objects.
@@ -690,51 +597,13 @@
     \hline
     \textbf{Test ID} & utest\_4 \\
     \hline
-    \textbf{Expected result} &
-    \textbf{Enemy Patrol Behavior:}
-    \begin{itemize}
-        \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
-        \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts direction appropriately.
-        \item The enemy continuously scans for the player within its field of view.
-    \end{itemize}
-    \textbf{Enemy Detection of the Player:}
-    \begin{itemize}
-        \item The enemy immediately enters a detection state when the player enters its field of view.
-        \item The detection should be consistent and only occur if the player is fully visible or within the specified visibility range.
-    \end{itemize}
-    \textbf{Enemy Behavior When the Player Hides:}
-    \begin{itemize}
-        \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
-        \item The enemy investigates the player’s last known position before resuming patrol or searching elsewhere.
-    \end{itemize}
-    \textbf{Edge Cases for Player Visibility:}
-    \begin{itemize}
-        \item The enemy does not detect the player if they are outside its field of view or partially obscured as per game design rules.
-        \item If the player moves quickly through the enemy’s field of view, the enemy reacts briefly but returns to patrol mode if the player disappears from sight.
-    \end{itemize}
-    \textbf{Reaction to Unreachable Players:}
-    \begin{itemize}
-        \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
-        \item The enemy exhibits appropriate alternative behavior, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
-    \end{itemize}
-    \\
-    \hline
     \textbf{Result} &
-    \textbf{Enemy Patrol Behavior:}
+    \textbf{Enemy Patrol Behaviour:}
     \begin{itemize}
         \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
         \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts its direction appropriately.
         \item The enemy continuously scans for the player within its field of view as shown in the console logs.
     \end{itemize}
-    \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Result} &
     \textbf{Enemy Detection of the Player:}
     \begin{itemize}
         \item The enemy immediately enters a detection state when the player enters its field of view.
@@ -1189,8 +1058,6 @@
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Test ID} & uattest\_4 \\
-    \hline
-    \textbf{Expected result} & Players can fully customize controls and subtitle preferences. Colorblind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
     \hline
     \textbf{Result} &
     \textbf{Customizable Controls:}
