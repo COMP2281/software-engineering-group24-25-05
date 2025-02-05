@@ -639,7 +639,7 @@
     \end{itemize}
     \\
     \hline
-    \textbf{Comments} & The order in which levels are completed is given by the story. \\
+    \textbf{Comments} & The order in which levels are completed is decided by how the story of the game was structured. \\
     \hline
     \textbf{Created by} & VE \\
     \hline
@@ -678,7 +678,7 @@
     \hline
     \textbf{Pass/Fail} & Partial Pass \\
     \hline
-    \textbf{Severity (If Fail)} & Critical: Game progression is impeded. \\
+    \textbf{Severity (If Fail)} & Critical: Game progression is impossible. \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -771,7 +771,7 @@
     \hline
     \textbf{Pass/Fail} & Pass \\
     \hline
-    \textbf{Severity (If Fail)} & Critical: If for some reason a question has no correct answers the player cannot progress thus game progression is impeded. \\
+    \textbf{Severity (If Fail)} & Critical: If for some reason a question has no correct answers the player cannot progress thus game progression is impossible. \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -822,7 +822,7 @@
     \textbf{Graphics performance}
     \begin{itemize}
         \item Smooth transitions
-        \item Consistent rendering across platforms
+        \item Consistent rendering across platforms and different resolutions
     \end{itemize}
     \textbf{Audio systems}
     \begin{itemize}
@@ -836,6 +836,37 @@
     \textbf{Created By} & DM \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_1 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Graphics performance}
+    \begin{itemize}
+        \item Smooth transitions
+        \item Consistent rendering across platforms and different resolutions
+    \end{itemize}
+    \textbf{Audio systems}
+    \begin{itemize}
+        \item Audio and sounds effects in sync
+        \item Audio quality remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Textures rendered improperly or out of sync sound effects do not make game progression impossible, just harder. \\
+    \hline
+    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
@@ -902,6 +933,32 @@
 
 \newpage
 
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_2 \\
+    \hline
+    \textbf{Result} &
+    \begin{itemize}
+        \item Smooth and intuitive UI navigation
+        \item Save files can be created and managed
+        \item Game loads properly from a save file
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & High: If you cannot save / load the game; the player has to beat the game in one sitting. If the UI is inaccessible the player cannot change preference settings in the game. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
 \subsubsection{Gameplay Flow}
 
 \begin{center}
@@ -943,6 +1000,8 @@
     \end{itemize}
     \\
     \hline
+    \textbf{Test materials used} & None \\
+    \hline
     \textbf{Comments} & It can be argued that "missions" are analogous with "story of the game", in such a case "keeping the story updated" can be interpreted as book-keeping which missions have been completed. \\
     \hline
     \textbf{Created by} & VE \\
@@ -983,7 +1042,7 @@
     \hline
     \textbf{Pass/Fail} & Pass \\
     \hline
-    \textbf{Severity (If Fail)} & Critical: If the main mission is not set as completed even though the player has finished it game progression is impeded. \\
+    \textbf{Severity (If Fail)} & Critical: If the main mission is not set as completed even though the player has finished it game progression is impossible. \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -999,7 +1058,7 @@
     \hline
     \textbf{Test ID} & stest\_4 \\
     \hline
-    \textbf{Description of test} & Test the interaction between the game character and NPC, including the dialog system, sneaking mechanism, and NPC's reaction to the player. Making it fits the game's story and integrates smoothly into IBM Skills Build-related content. \\
+    \textbf{Description of test} & Test the interaction between the game character and an NPC, including the dialog system, sneaking mechanism, and NPCs' reaction to the player. Making it fit the game's story and integrates smoothly into IBM Skills Build-related content. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l]{
         Educational Engagement (2.2.2) \\
