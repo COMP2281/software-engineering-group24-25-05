@@ -100,7 +100,7 @@
     \hline
     \textbf{stest\_2} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Functional \\
     \hline
-    \textbf{stest\_3} & Gameplay Flow: Test the overall game experience, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Functional \& Non-Functional \\
+    \textbf{stest\_3} & Gameplay Flow: Test the game mechanics, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Functional \& Non-Functional \\
     \hline
     \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Functional \\
     \hline
@@ -142,7 +142,7 @@
     \hline
     \textbf{Related requirement document details} & Movement Mechanics (2.2.8) \\
     \hline
-    \textbf{Prerequisites for Test} & \makecell[l]{
+    \textbf{Prerequisites for test} & \makecell[l]{
         Character controller setup \\
         Basic environment created to navigate, allowing to test horizontal \\ and vertical movement.
     } \\
@@ -594,6 +594,97 @@
 
 \subsubsection{Level Loading / Transitions}
 
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Description of test} & This test case verifies that the levels transition to the next stage once the objective is completed, the correct level is loaded (within a certain time frame), and that the player data persists between levels. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Mission System (2.2.7) \\
+        Combat Mechanics (2.2.9)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Build of the game with at least 3 different levels. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{itemize}
+        \item Player is in a level that is designated as finished.
+        \item Player enters a transition zone for the next stage.
+        \item Assert player is in correct stage and if applicable his state is the same as in the previous level.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test materials used} & None \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item The player is "transported" to the correct stage.
+        \item The assets of the level are loaded correctly.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item The transition from level to level happens in an acceptable time frame ($\leq 5$ seconds).
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item Player has the same health as in previous stage.
+        \item Player has the same amount of ammo as in previous stage.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item If the player enters a transition zone in the last level of the game, the end credits roll, the player is booted to the main screen, all his stats are reset to default.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & The order in which levels are completed is given by the story. \\
+    \hline
+    \textbf{Created by} & VE \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item Levels and their assets are loaded in the correct order.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item Transitions happen in an acceptable time frame.
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item State of the player is kept between levels.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item No transition zone, end sequence can't be triggered.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: Game progression is impeded. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
 \newpage
 
 \subsubsection{SkillBuild Questions}
@@ -761,6 +852,92 @@
 
 \subsubsection{Gameplay Flow}
 
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_3 \\
+    \hline
+    \textbf{Description of test} & Test that the mission and story progression aligns with the current level of the game. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Mission System (2.2.7)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Build of the game with all levels and missions implemented. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Mission System}
+    \begin{itemize}
+        \item Iteratively select all levels to load player into.
+        \item Assert the mission and story progression / flags match the level.
+    \end{itemize}
+    \textbf{Main mission}
+    \begin{itemize}
+        \item Player is loaded into a level.
+        \item Player completes the mission of the current level.
+        \item Assert that the story updates properly even though no transition for the next stage has been triggered.
+    \end{itemize}
+    \textbf{Side objective}
+    \begin{itemize}
+        \item Load player into a level with side objectives.
+        \item Player completes a side objective of the mission.
+        \item Assert that the story is updated accordingly and does not contradict main mission logic.
+    \end{itemize}
+    \textbf{Level transition}
+    \begin{itemize}
+        \item Spawn player at the end of the stage with the main objective not complete.
+        \item Assert that the player cannot proceed to the next stage
+        even though he is in the transition zone.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & It can be argued that "missions" are analogous with "story of the game", in such a case "keeping the story updated" can be interpreted as book-keeping which missions have been completed. \\
+    \hline
+    \textbf{Created by} & VE \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_3 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Mission System}
+    \begin{itemize}
+        \item All missions and flags are set correctly for each level.
+    \end{itemize}
+    \textbf{Main Mission}
+    \begin{itemize}
+        \item The story flags are updated correctly when the main mission is completed.
+    \end{itemize}
+    \textbf{Side objective}
+    \begin{itemize}
+        \item Completion of the side objective is correctly updated and has no effect on main objective.
+    \end{itemize}
+    \textbf{Level transition}
+    \begin{itemize}
+        \item The player can transition to the next stage if the main mission is completed.
+        \item The player cannot transition if the main mission is not completed.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If the main mission is not set as completed even though the player has finished it game progression is impeded. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
 \newpage
 
 \subsubsection{Character Interactions}
@@ -770,7 +947,7 @@
     \hline
     \textbf{Test ID} & stest\_4 \\
     \hline
-    \textbf{Description of test} & Test the interaction between the game character and NPC, including the dialog system, sneaking mechanism, and NPC's reaction to the player.Making it fits the game's story and integrates smoothly into IBM Skills Build-related content. \\
+    \textbf{Description of test} & Test the interaction between the game character and NPC, including the dialog system, sneaking mechanism, and NPC's reaction to the player. Making it fits the game's story and integrates smoothly into IBM Skills Build-related content. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l]{
         Educational Engagement (2.2.2) \\
