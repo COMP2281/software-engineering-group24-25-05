@@ -1360,6 +1360,58 @@
 
 \newpage
 
+\subsubsection{Chatbot}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_6 \\
+    \hline
+    \textbf{Description of test} & The chatbot adapts the difficulty based on the user's performance. \\
+    \hline
+    \textbf{Related requirement document details} & AI Boss (2.2.4) \\
+    \hline
+    \textbf{Prerequisites for test} & AI chatbot is implemented in the game. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item Get multiple questions related to a specific topic incorrect
+        \item Reach the boss battle
+        \item Observe the types of questions asked
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item Get multiple questions related to a specific topic correct
+        \item Reach the boss battle
+        \item Observe the types of questions asked
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item The chatbot should ask easy questions relating to the topic the user was “struggling” to answer.
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item The chatbot should ask more difficult questions about the topic, potentially asking things beyond the scope of the course if the user got everything previously correct.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & No need to test portability, as the behaviour should be system-independent \\
+    \hline
+    \textbf{Created by} & TD \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
 \section{Testing Context}
 
 \noindent To ensure compatibility and coverage across educational environments, the following tools and environments are used for testing the system:
