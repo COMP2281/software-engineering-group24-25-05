@@ -142,7 +142,7 @@
     \hline
     \textbf{Related requirement document details} & Movement Mechanics (2.2.8) \\
     \hline
-    \textbf{Prerequisites for Test} & \makecell[l]{
+    \textbf{Prerequisites for test} & \makecell[l]{
         Character controller setup \\
         Basic environment created to navigate, allowing to test horizontal \\ and vertical movement.
     } \\
@@ -593,6 +593,96 @@
 \newpage
 
 \subsubsection{Level Loading / Transitions}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Description of test} & This test case verifies that the levels transition to the next stage once the objective is completed, the correct level is loaded (within a certain time frame), and that the player data persists between levels. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Mission System (2.2.7) \\
+        Combat Mechanics (2.2.9)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Build of the game with at least 3 different levels. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{itemize}
+        \item Player is in a level that is designated as finished.
+        \item Player enters a transition zone for the next stage.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test materials used} & None \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item The player is "transported" to the correct stage.
+        \item The assets of the level are loaded correctly.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item The transition from level to level happens in an acceptable time frame ($\leq 5$ seconds).
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item Player has the same health as in previous stage.
+        \item Player has the same amount of ammo as in previous stage.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item If the player enters a transition zone in the last level of the game, the end credits roll, the player is booted to the main screen, all his stats are reset to default.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & The order in which levels are completed is given by the story. \\
+    \hline
+    \textbf{Created by} & VE \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item Levels and their assets are loaded in the correct order.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item Transitions happen in an acceptable time frame.
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item State of the player is kept between levels.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item No transition zone, end sequence can't be triggered.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: Game progression is impeded. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
 
 \newpage
 
