@@ -2,7 +2,6 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 
 \usepackage{makecell}
@@ -55,18 +54,11 @@
 
 \section{Introduction and Test Overview}
 
-\noindent Shadow Operative is an educational video game that integrates IBM SkillsBuild content to create an engaging learning platform focused on AI, Cybersecurity, and Data Analytics. The game incorporates IBM SkillsBuild badges and leverages AI-driven adaptive learning to personalise content based on players' performance and progress. This innovative approach combines education with entertainment, fostering a dynamic and enjoyable learning experience. \\
+\subsection{Introduction}
 
-\noindent Players can earn industry-recognized certifications by completing practical, game-based challenges that build valuable skills in high-demand areas. The game dynamically adjusts its difficulty and content to cater to individual learning paths, promoting mastery of complex topics, and encouraging continuous growth. \\
+\noindent Shadow Operative integrates IBM SkillsBuild content into a video game, creating an innovative platform that makes learning about AI, Cybersecurity, and Data Analytics more engaging for younger audiences. The game incorporates IBM SkillsBuild badges and leverages AI-driven adaptive learning to personalize content based on each player's performance and progress. This approach blends education with entertainment, fostering a learning experience that is not only effective but also enjoyable. \\
 
-\noindent This testing report presents a comprehensive evaluation of Shadow Operative, including the following key sections:
-\begin{itemize}
-    \item \textbf{Testing Scope} – Defines the extent and objectives of the testing process.
-    \item \textbf{Test Cases} – Describes specific scenarios and conditions evaluated during testing.
-    \item \textbf{Testing Content} – Outlines the areas and characteristics subjected to testing, along with key findings and results.
-\end{itemize}
-
-\noindent The report highlights critical insights, performance evaluations, and improvements, demonstrating the educational value of Shadow Operative.
+\noindent The integration ensures players can earn recognizable certifications while playing, enhancing their skills in high-demand areas through practical, game-based challenges. As players advance, the game dynamically adjusts difficulty and content, tailoring lessons to their unique needs and encouraging mastery of complex topics. \\
 
 \subsection{Test Overview}
 
@@ -82,29 +74,55 @@
     \hline
     \textbf{utest\_3} & Collision Detection: Verify accurate collision between player, environment, and interactive objects & Player and objects cannot pass through solid obstacles; correct response on collision events \\
     \hline
-    \textbf{utest\_4} & Enemy AI Behaviour: Test patrol routes, detection logic, and state transitions (e.g., alert, idle) & AI responds correctly to player actions and follows expected behaviour patterns \\
+    \textbf{utest\_4} & Enemy AI Behaviour: Test patrol routes, detection logic, and state transitions (e.g., alert, idle) & AI responds correctly to player actions and follows expected behavior patterns \\
     \hline
     \textbf{utest\_5} & Level Load + Transitions: Test smooth transitions between levels and correct loading of level assets & Level data persists, and transitions occur without graphics or gameplay glitches \\
     \hline
-    \textbf{utest\_6} & Skill Build Questions: Test that questions display and function correctly during gameplay & The quiz UI opens and closes as expected. Questions and answers are rendered properly. Appropriate feedback is provided after answering a question \\
+    \textbf{utest\_6} & Skill Build Questions: Test that questions display and function correctly during gameplay & Questions render properly, validate player responses, and provide appropriate feedback \\
+    \hline
+    \textbf{utest\_7} & Level Objectives: Verify completion of primary and secondary objectives & Objectives track progress and provide correct rewards upon completion \\
+    \hline
+    \textbf{utest\_8} & Sound Effects: Test audio playback for various game events & Correct audio plays at the appropriate volume and timing \\
+    \hline
+    \textbf{utest\_9} & Environmental Effects: Verify rendering of lighting, shadows, and ambient sounds in levels & Effects render without graphical glitches and match the game environment \\
+    \hline
+    \textbf{utest\_10} & Dynamic Question Difficulty: Test adaptive difficulty of quiz questions based on player performance & Question difficulty adjusts dynamically based on performance metrics \\
+    \hline
+    \textbf{utest\_11} & Enemy Health: Test that enemy health decreases correctly when hit by weapons & Enemy health bar updates properly, and enemies die when health reaches zero \\
+    \hline
+    \textbf{utest\_12} & Weapon Mechanics: Test firing, ammo decrement, and reload functionality & Weapons deal appropriate damage, consume ammo, and reload as expected \\
     \hline
 \end{tabularx}
 
 \subsubsection{System Testing}
 
-\begin{tabularx}{\linewidth}{|c|X|X|>{\raggedright\arraybackslash}m{2cm}|}
+\begin{tabularx}{\linewidth}{|c|X|X|c|}
     \hline
     \textbf{Test ID} & \textbf{Description} & \textbf{Test Oracle} & \textbf{Nature} \\
     \hline
-    \textbf{stest\_1} & Graphics and Audio: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag & Graphics match expected design, and audio aligns with gameplay events without delay & Non-Functional \\
+    \textbf{stest\_1} & Graphics and Audio: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag & Graphics match expected design, and audio aligns with gameplay events without delay & Non-Func \\
     \hline
-    \textbf{stest\_2} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Functional \\
+    \textbf{stest\_2} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Func \\
     \hline
-    \textbf{stest\_3} & Gameplay Flow: Test the game mechanics, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Functional \& Non-Functional \\
+    \textbf{stest\_3} & Gameplay Flow: Test the overall game experience, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Func \& N-F \\
     \hline
-    \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Functional \\
+    \textbf{stest\_4} & Character Interactions: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Func \\
+    \hline
+    \textbf{stest\_5} & Performance and Stability: Test the game's frame rate, memory usage, and stability under different load conditions & Frame rate remains stable, memory usage is within acceptable limits, and no crashes occur & Non-Func \\
+    \hline
+    \textbf{stest\_6} & Adaptive AI: Test AI's ability to adjust difficulty and behavior based on player performance & AI dynamically adjusts gameplay difficulty and tactics to challenge the player & Non-Func \\
+    \hline
+    \textbf{stest\_7} & Educational Content Integration: Test seamless embedding of IBM Skills Build questions into the gameplay & Educational questions appear at appropriate points, and responses impact gameplay as intended & Func \\
+    \hline
+    \textbf{stest\_8} & Game State Persistence: Verify that in-game events and progress persist across sessions & Game state data is correctly saved and restored across multiple sessions & Func \\
+    \hline
+    \textbf{stest\_9} & Input Device Compatibility: Test compatibility with different input devices (keyboard, controller) & Game responds consistently to input across various devices & Func \\
+    \hline
+    \textbf{stest\_10} & Accessibility Features: Test availability and functionality of accessibility features like subtitles and customizable controls & Accessibility options work as intended and improve the user experience & Func \\
     \hline
 \end{tabularx}
+
+\newpage
 
 \subsubsection{User Acceptance Testing}
 
@@ -124,6 +142,18 @@
     \hline
     \textbf{uattest\_6} & Chatbot: Test the chatbot's ability to assist users with gameplay tips or educational content & Players receive accurate and helpful responses from the chatbot \\
     \hline
+    \textbf{uattest\_7} & Visual and Audio Design: Verify the coherence and appeal of the game's graphics and audio elements & Players find the visual style immersive and the audio enhances the experience \\
+    \hline
+    \textbf{uattest\_8} & Educational Content Engagement: Test the player's interaction with IBM Skills Build content & Players report an improved understanding of Skills Build concepts through gameplay \\
+    \hline
+    \textbf{uattest\_9} & User Progress and Rewards: Verify the reward system and progression tracking & Players feel motivated by achievements, and progress is tracked accurately \\
+    \hline
+    \textbf{uattest\_10} & Difficulty Adjustment: Ensure adaptive AI and difficulty settings enhance player experience & Players report that difficulty levels are well-balanced and adapt to their skill level \\
+    \hline
+    \textbf{uattest\_11} & Game Narrative and Storyline: Test the clarity and engagement of the storyline & Players find the storyline compelling and easy to follow \\
+    \hline
+    \textbf{uattest\_12} & Onboarding and Tutorials: Ensure new players understand game mechanics through effective onboarding & Players can learn core mechanics easily and quickly adapt to gameplay \\
+    \hline
 \end{tabularx}
 
 \newpage
@@ -142,7 +172,7 @@
     \hline
     \textbf{Related requirement document details} & Movement Mechanics (2.2.8) \\
     \hline
-    \textbf{Prerequisites for test} & \makecell[l]{
+    \textbf{Prerequisites for Test} & \makecell[l]{
         Character controller setup \\
         Basic environment created to navigate, allowing to test horizontal \\ and vertical movement.
     } \\
@@ -172,13 +202,8 @@
     \hline
     \textbf{Test Material Used} & Keyboard, Xbox Controller \\
     \hline
-\end{tabularx}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
     \textbf{Expected Result} &
-     \textbf{Horizontal Movement:}
+    \textbf{Horizontal Movement:}
     \begin{itemize}
         \item The character’s x-coordinate should increase when moving right and decrease when moving left.
         \item Movement should be smooth and responsive.
@@ -191,8 +216,16 @@
     \textbf{Vertical Movement (Jumping onto a Ledge):}
     \begin{itemize}
         \item The character’s y-coordinate should decrease to the ledge height, then stop at that height.
-        \item The character should land on the ledge, with no clipping or unintended behaviour.
+        \item The character should land on the ledge, with no clipping or unintended behavior.
     \end{itemize}
+    \\
+    \hline
+\end{tabularx}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Expected Result} &
     \textbf{Vertical Movement (Falling off a Ledge):}
     \begin{itemize}
         \item The character’s y-coordinate should decrease when falling off the ledge, simulating gravity.
@@ -223,7 +256,35 @@
     \hline
     \textbf{Test ID} & utest\_1 \\
     \hline
-    \textbf{Regression 1 \& 2 Results} &
+    \textbf{Expected Result} &
+    \textbf{Horizontal Movement:}
+    \begin{itemize}
+        \item The character’s x-coordinate should increase when moving right and decrease when moving left.
+        \item Movement should be smooth and responsive.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping Mid Air):}
+    \begin{itemize}
+        \item The character’s y-coordinate should increase when jumping, indicating upward movement.
+        \item The jump height should match the intended design.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping onto a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate should decrease to the ledge height, then stop at that height.
+        \item The character should land on the ledge, with no clipping or unintended behavior.
+    \end{itemize}
+    \textbf{Vertical Movement (Falling off a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate should decrease when falling off the ledge, simulating gravity.
+        \item The fall speed should be consistent with the game’s gravity settings.
+    \end{itemize}
+    \textbf{Simultaneous Inputs:}
+    \begin{itemize}
+        \item The character should move both horizontally and vertically in response to input without delay.
+        \item No erratic or conflicting movement should occur when both horizontal and vertical inputs are used simultaneously.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Regression 1 Result} &
     \textbf{Horizontal Movement:}
     \begin{itemize}
         \item The character’s x-coordinate correctly increases when moving right and decreases when moving left. The movement is smooth and responsive, with no lag or stutter.
@@ -232,9 +293,17 @@
     \begin{itemize}
         \item The character’s y-coordinate increases when jumping, and the jump height is consistent with the intended design, smoothly reaching the peak before falling.
     \end{itemize}
-    \textbf{Vertical Movement (Jumping onto a Ledge):}
-     \begin{itemize}
-        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behaviour (e.g., hovering or falling through the ledge).
+    \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Regression 1 Result} & \textbf{Vertical Movement (Jumping onto a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behavior (e.g., hovering or falling through the ledge).
     \end{itemize}
     \textbf{Vertical Movement (Falling off a Ledge):}
     \begin{itemize}
@@ -249,6 +318,41 @@
         \item No unexpected Results Occurred
     \end{itemize}
     \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Regression 2 Result} &
+    \textbf{Horizontal Movement:}
+    \begin{itemize}
+        \item The character’s x-coordinate correctly increases when moving right and decreases when moving left. The movement is smooth and responsive, with no lag or stutter.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping Mid Air):}
+    \begin{itemize}
+        \item The character’s y-coordinate increases when jumping, and the jump height is consistent with the intended design, smoothly reaching the peak before falling.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping onto a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behavior (e.g., hovering or falling through the ledge).
+    \end{itemize}
+    \textbf{Vertical Movement (Falling off a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate decreases when falling off the ledge, and gravity is applied as expected. The fall speed is consistent with the game’s gravity settings and feels natural.
+    \end{itemize}
+    \textbf{Simultaneous Inputs:}
+    \begin{itemize}
+        \item The character moves both horizontally and vertically without delay when both inputs are used. There is no erratic or conflicting movement, and the combined movement feels smooth and fluid.
+    \end{itemize}
+    \textbf{Unexpected Results}
+    \begin{itemize}
+        \item No unexpected Results Occurred
+    \end{itemize}
+    \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Pass/Fail} & Pass \\
     \hline
@@ -326,7 +430,7 @@
     \hline
     \textbf{Test ID} & utest\_2 \\
     \hline
-    \textbf{Result} &
+    \textbf{Expected result} &
     \textbf{Test loosing heart via getting question wrong}
     \begin{itemize}
         \item Player loses 1 heart.
@@ -353,8 +457,6 @@
     \hline
 \end{tabularx}
 \end{center}
-
-\newpage
 
 \subsubsection{Collision Detection}
 
@@ -388,6 +490,12 @@
     \\
     \hline
     \textbf{Test material used} & Keyboard, Xbox Controller \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Expected result} &
     \textbf{Test player collisions with static objects}
@@ -424,7 +532,34 @@
     \hline
     \textbf{Test ID} & utest\_3 \\
     \hline
-    \textbf{Result} &
+    \textbf{Expected result} &
+    \textbf{Test player collisions with static objects}
+    \begin{itemize}
+        \item Player character should stop moving upon contact with the static object.
+        \item Player character should be unable to pass through it.
+        \item There should be no clipping or glitching of the character model.
+    \end{itemize}
+    \textbf{Test player collision with dynamic objects}
+    \begin{itemize}
+        \item Player character should either interact with or be blocked by the dynamic object, depending on the object’s movement or state.
+        \item The collision response should appear natural, without any erratic movements.
+    \end{itemize}
+    \textbf{Test player movement near map boundaries}
+    \begin{itemize}
+        \item Player character should not be able to move beyond defined map boundaries.
+        \item The character should stop at the boundary without any visual error, no part of the player model should appear outside the map area.
+    \end{itemize}
+    \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Regression 1 Result} &
     \textbf{Test player collisions with static objects}
     \begin{itemize}
         \item Player character immediately stops upon contact with static objects.
@@ -463,7 +598,7 @@
     \hline
     \textbf{Test ID} & utest\_4 \\
     \hline
-    \textbf{Description of test} & This test case verifies the behaviour of the enemy AI in a game environment, specifically focusing on their patrol and detection routines. The AI should follow a set patrol path and detect the player within a specified detection radius. \\
+    \textbf{Description of test} & This test case verifies the behavior of the enemy AI in a game environment, specifically focusing on their patrol and detection routines. The AI should follow a set patrol path and detect the player within a specified detection radius. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l] {
         AI Boss (2.2.4) \\
@@ -476,7 +611,7 @@
     } \\
     \hline
     \textbf{Test procedure} &
-    \textbf{Test enemy patrol behaviour}
+    \textbf{Test enemy patrol behavior}
     \begin{itemize}
         \item Place the enemy in the environment with a predefined patrol route.
         \item Observe the enemy moving smoothly between patrol points while scanning for the player within its field of view.
@@ -511,7 +646,7 @@
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
     \textbf{Expected result} &
-    \textbf{Enemy Patrol Behaviour:}
+    \textbf{Enemy Patrol Behavior:}
     \begin{itemize}
         \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
         \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts direction appropriately.
@@ -522,7 +657,7 @@
         \item The enemy immediately enters a detection state when the player enters its field of view.
         \item The detection should be consistent and only occur if the player is fully visible or within the specified visibility range.
     \end{itemize}
-    \textbf{Enemy Behaviour When the Player Hides:}
+    \textbf{Enemy Behavior When the Player Hides:}
     \begin{itemize}
         \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
         \item The enemy investigates the player’s last known position before resuming patrol or searching elsewhere.
@@ -535,7 +670,7 @@
     \textbf{Reaction to Unreachable Players:}
     \begin{itemize}
         \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
-        \item The enemy exhibits appropriate alternative behaviour, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
+        \item The enemy exhibits appropriate alternative behavior, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
     \end{itemize}
     \\
     \hline
@@ -555,19 +690,57 @@
     \hline
     \textbf{Test ID} & utest\_4 \\
     \hline
+    \textbf{Expected result} &
+    \textbf{Enemy Patrol Behavior:}
+    \begin{itemize}
+        \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
+        \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts direction appropriately.
+        \item The enemy continuously scans for the player within its field of view.
+    \end{itemize}
+    \textbf{Enemy Detection of the Player:}
+    \begin{itemize}
+        \item The enemy immediately enters a detection state when the player enters its field of view.
+        \item The detection should be consistent and only occur if the player is fully visible or within the specified visibility range.
+    \end{itemize}
+    \textbf{Enemy Behavior When the Player Hides:}
+    \begin{itemize}
+        \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
+        \item The enemy investigates the player’s last known position before resuming patrol or searching elsewhere.
+    \end{itemize}
+    \textbf{Edge Cases for Player Visibility:}
+    \begin{itemize}
+        \item The enemy does not detect the player if they are outside its field of view or partially obscured as per game design rules.
+        \item If the player moves quickly through the enemy’s field of view, the enemy reacts briefly but returns to patrol mode if the player disappears from sight.
+    \end{itemize}
+    \textbf{Reaction to Unreachable Players:}
+    \begin{itemize}
+        \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
+        \item The enemy exhibits appropriate alternative behavior, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
+    \end{itemize}
+    \\
+    \hline
     \textbf{Result} &
-    \textbf{Enemy Patrol Behaviour:}
+    \textbf{Enemy Patrol Behavior:}
     \begin{itemize}
         \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
         \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts its direction appropriately.
         \item The enemy continuously scans for the player within its field of view as shown in the console logs.
     \end{itemize}
+    \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Result} &
     \textbf{Enemy Detection of the Player:}
     \begin{itemize}
         \item The enemy immediately enters a detection state when the player enters its field of view.
         \item Detection occurs only if the player is fully visible or within the specified visibility range, with no inconsistencies in detection.
     \end{itemize}
-    \textbf{Enemy Behaviour When the Player Hides:}
+    \textbf{Enemy Behavior When the Player Hides:}
     \begin{itemize}
         \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
     \end{itemize}
@@ -593,97 +766,6 @@
 \newpage
 
 \subsubsection{Level Loading / Transitions}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & utest\_5 \\
-    \hline
-    \textbf{Description of test} & This test case verifies that the levels transition to the next stage once the objective is completed, the correct level is loaded (within a certain time frame), and that the player data persists between levels. \\
-    \hline
-    \textbf{Related requirement document details} & \makecell[l]{
-        Mission System (2.2.7) \\
-        Combat Mechanics (2.2.9)
-    } \\
-    \hline
-    \textbf{Prerequisites for test} & Build of the game with at least 3 different levels. \\
-    \hline
-    \textbf{Test procedure} &
-    \begin{itemize}
-        \item Player is in a level that is designated as finished.
-        \item Player enters a transition zone for the next stage.
-        \item Assert player is in correct stage and if applicable his state is the same as in the previous level.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Test materials used} & None \\
-    \hline
-    \textbf{Expected result} &
-    \textbf{Correct stage}
-    \begin{itemize}
-        \item The player is "transported" to the correct stage.
-        \item The assets of the level are loaded correctly.
-    \end{itemize}
-    \textbf{Load time}
-    \begin{itemize}
-        \item The transition from level to level happens in an acceptable time frame ($\leq 5$ seconds).
-    \end{itemize}
-    \textbf{State of the player}
-    \begin{itemize}
-        \item Player has the same health as in previous stage.
-        \item Player has the same amount of ammo as in previous stage.
-    \end{itemize}
-    \textbf{Last stage}
-    \begin{itemize}
-        \item If the player enters a transition zone in the last level of the game, the end credits roll, the player is booted to the main screen, all his stats are reset to default.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Comments} & The order in which levels are completed is decided by how the story of the game was structured. \\
-    \hline
-    \textbf{Created by} & VE \\
-    \hline
-    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
-\noindent \textbf{Results:}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & utest\_5 \\
-    \hline
-    \textbf{Result} &
-    \textbf{Correct stage}
-    \begin{itemize}
-        \item Levels and their assets are loaded in the correct order.
-    \end{itemize}
-    \textbf{Load time}
-    \begin{itemize}
-        \item Transitions happen in an acceptable time frame.
-    \end{itemize}
-    \textbf{State of the player}
-    \begin{itemize}
-        \item State of the player is kept between levels.
-    \end{itemize}
-    \textbf{Last stage}
-    \begin{itemize}
-        \item No transition zone, end sequence can't be triggered.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Partial Pass \\
-    \hline
-    \textbf{Severity (If Fail)} & Critical: Game progression is impossible. \\
-    \hline
-    \textbf{Comments} & None \\
-    \hline
-\end{tabularx}
-\end{center}
 
 \newpage
 
@@ -755,7 +837,7 @@
     \textbf{Function}
     \begin{itemize}
         \item The correct choice of feedback is displayed to the user.
-        \item It is only possible to progress to the next question after answering the current one.
+        \item It is only possible to progress to the next question after answering it.
     \end{itemize}
     \\
     \hline
@@ -812,7 +894,7 @@
     \textbf{Graphics performance}
     \begin{itemize}
         \item Smooth transitions
-        \item Consistent rendering across platforms and different resolutions
+        \item Consistent rendering across platforms
     \end{itemize}
     \textbf{Audio systems}
     \begin{itemize}
@@ -826,37 +908,6 @@
     \textbf{Created By} & DM \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
-\noindent \textbf{Results:}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & stest\_1 \\
-    \hline
-    \textbf{Result} &
-    \textbf{Graphics performance}
-    \begin{itemize}
-        \item Smooth transitions
-        \item Consistent rendering across platforms and different resolutions
-    \end{itemize}
-    \textbf{Audio systems}
-    \begin{itemize}
-        \item Audio and sounds effects in sync
-        \item Audio quality remains consistent
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Pass \\
-    \hline
-    \textbf{Severity (If Fail)} & Moderate: Textures rendered improperly or out of sync sound effects do not make game progression impossible, just harder. \\
-    \hline
-    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
@@ -923,121 +974,7 @@
 
 \newpage
 
-\noindent \textbf{Results:}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & stest\_2 \\
-    \hline
-    \textbf{Result} &
-    \begin{itemize}
-        \item Smooth and intuitive UI navigation
-        \item Save files can be created and managed
-        \item Game loads properly from a save file
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Pass \\
-    \hline
-    \textbf{Severity (If Fail)} & High: If you cannot save / load the game; the player has to beat the game in one sitting. If the UI is inaccessible the player cannot change preference settings in the game. \\
-    \hline
-    \textbf{Comments} & None \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
 \subsubsection{Gameplay Flow}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & stest\_3 \\
-    \hline
-    \textbf{Description of test} & Test that the mission and story progression aligns with the current level of the game. \\
-    \hline
-    \textbf{Related requirement document details} & \makecell[l]{
-        Mission System (2.2.7)
-    } \\
-    \hline
-    \textbf{Prerequisites for test} & Build of the game with all levels and missions implemented. \\
-    \hline
-    \textbf{Test procedure} &
-    \textbf{Mission System}
-    \begin{itemize}
-        \item Iteratively select all levels to load player into.
-        \item Assert the mission and story progression / flags match the level.
-    \end{itemize}
-    \textbf{Main mission}
-    \begin{itemize}
-        \item Player is loaded into a level.
-        \item Player completes the mission of the current level.
-        \item Assert that the story updates properly even though no transition for the next stage has been triggered.
-    \end{itemize}
-    \textbf{Side objective}
-    \begin{itemize}
-        \item Load player into a level with side objectives.
-        \item Player completes a side objective of the mission.
-        \item Assert that the story is updated accordingly and does not contradict main mission logic.
-    \end{itemize}
-    \textbf{Level transition}
-    \begin{itemize}
-        \item Spawn player at the end of the stage with the main objective not complete.
-        \item Assert that the player cannot proceed to the next stage
-        even though he is in the transition zone.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Test materials used} & None \\
-    \hline
-    \textbf{Comments} & It can be argued that "missions" are analogous with "story of the game", in such a case "keeping the story updated" can be interpreted as book-keeping which missions have been completed. \\
-    \hline
-    \textbf{Created by} & VE \\
-    \hline
-    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
-\noindent \textbf{Results:}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & stest\_3 \\
-    \hline
-    \textbf{Result} &
-    \textbf{Mission System}
-    \begin{itemize}
-        \item All missions and flags are set correctly for each level.
-    \end{itemize}
-    \textbf{Main Mission}
-    \begin{itemize}
-        \item The story flags are updated correctly when the main mission is completed.
-    \end{itemize}
-    \textbf{Side objective}
-    \begin{itemize}
-        \item Completion of the side objective is correctly updated and has no effect on main objective.
-    \end{itemize}
-    \textbf{Level transition}
-    \begin{itemize}
-        \item The player can transition to the next stage if the main mission is completed.
-        \item The player cannot transition if the main mission is not completed.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Pass \\
-    \hline
-    \textbf{Severity (If Fail)} & Critical: If the main mission is not set as completed even though the player has finished it game progression is impossible. \\
-    \hline
-    \textbf{Comments} & None \\
-    \hline
-\end{tabularx}
-\end{center}
 
 \newpage
 
@@ -1048,7 +985,7 @@
     \hline
     \textbf{Test ID} & stest\_4 \\
     \hline
-    \textbf{Description of test} & Test the interaction between the game character and an NPC, including the dialog system, sneaking mechanism, and NPCs' reaction to the player. Making it fit the game's story and integrates smoothly into IBM Skills Build-related content. \\
+    \textbf{Description of test} & Test the interaction between the game character and NPC, including the dialog system, sneaking mechanism, and NPC's reaction to the player.Making it fits the game's story and integrates smoothly into IBM Skills Build-related content. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l]{
         Educational Engagement (2.2.2) \\
@@ -1095,7 +1032,7 @@
     \hline
     \textbf{Test ID} & uattest\_1 \\
     \hline
-    \textbf{Description of test} & Testing the overall game experience, including sneaking mechanics, combat system, mission flow, AI, and the way IBM Skills Build content is embedded to ensure the balance of education and entertainment. \\
+    \textbf{Description of test} & Testing the overall game experience, including sneaking mechanics, combat system, mission flow,AI, and the way IBM Skills Build content is embedded to ensure the balance of education and entertainment. \\
     \hline
     \textbf{Related requirement document details} & \makecell[l]{
         Stealth Gameplay (2.2.1) \\
@@ -1103,14 +1040,13 @@
         Educational Engagement (2.2.2)
     } \\
     \hline
-    \textbf{Prerequisites for test} & Executable version of the game (with sneaking, combat, quiz mechanics) with complete level design with missions, enemies, IBM-related challenges and a simple AI. \\
+    \textbf{Prerequisites for test} & Executable version of the game (with sneaking, combat, quiz mechanics) with complete level design with missions, enemies, IBM-related challenges and a simple AI \\
     \hline
     \textbf{Test procedure} &
     \begin{itemize}
         \item Enter a level that includes sneaking and fighting.
-        \item Ensure that there is no delay or abnormality in switching between sneaking, fighting and answering questions.
+        \item Test the smoothness of the game operation to ensure that there is no delay or abnormality in the switching between sneaking, fighting and answering questions.
         \item Observe how IBM Skills Build related questions are triggered to make sure that they do not affect the player's immersion or increase the difficulty of the game too much.
-        \item Ensure quiz sections cannot be triggered while the player is in combat.
     \end{itemize}
     \\
     \hline
@@ -1120,8 +1056,8 @@
     \begin{itemize}
         \item The game is smooth and can run normally.
         \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
+        \item The game's upgraded mechanics will keep the player's interest for educational purposes.
         \item The AI is able to adjust the difficulty of the game.
-        \item Quiz sections are not triggered while the player is in combat.
     \end{itemize}
     \\
     \hline
@@ -1130,33 +1066,6 @@
     \textbf{Created by} & HC \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
-\noindent \textbf{Results:}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & uattest\_1 \\
-    \hline
-    \textbf{Result} &
-     \begin{itemize}
-        \item The game is smooth and can run normally.
-        \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
-        \item The AI is not able to adjust difficulty of the game.
-        \item Quiz sections are not triggered while the player is in combat.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Pass/Fail} & Partial Pass \\
-    \hline
-    \textbf{Severity (If Fail)} & Moderate: Gameplay is impacted and may seem unfair and or inconsistent. \\
-    \hline
-    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
@@ -1276,7 +1185,7 @@
     \hline
     \textbf{Test ID} & uattest\_4 \\
     \hline
-    \textbf{Description of test} & This test case verifies the accessibility features of the game, focusing on customizable controls, subtitles, colour-blind-friendly options, and audio cues for visually impaired players, to ensure that the user can comfortably experience the game. \\
+    \textbf{Description of test} & This test case verifies the game's accessibility features, focusing on customizable controls, subtitles, colorblind-friendly options, and audio cues for visually impaired players. \\
     \hline
     \textbf{Related requirement document details} & N/A \\
     \hline
@@ -1289,11 +1198,11 @@
     \end{itemize}
     \textbf{Subtitles}
     \begin{itemize}
-        \item Verify that subtitles are available, accurately synced with dialogues, and customizable in size and colour.
+        \item Verify that subtitles are available, accurately synced with dialogues, and customizable in size and color.
     \end{itemize}
-    \textbf{Colour-blind mode:}
+    \textbf{Colorblind mode:}
     \begin{itemize}
-        \item Enable colour-blind-friendly mode and confirm that game elements are distinguishable for various types of colour-blindness.
+        \item Enable colorblind-friendly mode and confirm that game elements are distinguishable for various types of colorblindness.
     \end{itemize}
     \textbf{Audio Cues:}
     \begin{itemize}
@@ -1303,7 +1212,7 @@
     \hline
     \textbf{Test material used} & Accessibility test checklist, user input logs \\
     \hline
-    \textbf{Expected result} & User can fully customize controls and subtitle preferences. Colour-blind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
+    \textbf{Expected result} & Players can fully customize controls and subtitle preferences. Colorblind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -1323,6 +1232,8 @@
     \hline
     \textbf{Test ID} & uattest\_4 \\
     \hline
+    \textbf{Expected result} & Players can fully customize controls and subtitle preferences. Colorblind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
+    \hline
     \textbf{Result} &
     \textbf{Customizable Controls:}
     \begin{itemize}
@@ -1332,7 +1243,7 @@
     \begin{itemize}
         \item Cover most elements, sometimes slightly out of time
     \end{itemize}
-    \textbf{Colour-blind Mode:}
+    \textbf{Colorblind Mode:}
     \begin{itemize}
         \item Provides distinguishable elements for most cases but has issues with red-green differentiation
     \end{itemize}
@@ -1346,7 +1257,9 @@
     \hline
     \textbf{Severity (If Fail)} & Moderate \\
     \hline
-    \textbf{Comments} & Additional testing and adjustments needed for red-green colour-blind compatibility, subtitle timing, and missing audio cues during boss encounters. \\
+    \textbf{Comments} & Additional testing and adjustments needed for red-green colorblind compatibility, subtitle timing, and missing audio cues during boss encounters. \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
     \hline
 \end{tabularx}
 \end{center}
@@ -1360,7 +1273,7 @@
     \hline
     \textbf{Test ID} & uattest\_5 \\
     \hline
-    \textbf{Description of test} & Ensure that the quizzes are engaging, well-integrated and correctly assessed. \\
+    \textbf{Description of test} & Ensure the quizzes are engaging, well-integrated and correctly assessed. \\
     \hline
     \textbf{Related requirement document details} & Education Engagement (2.2.2) \\
     \hline
@@ -1447,81 +1360,24 @@
 
 \newpage
 
-\subsubsection{Chatbot}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    \textbf{Test ID} & uattest\_6 \\
-    \hline
-    \textbf{Description of test} & The chatbot adapts the difficulty based on the user's performance. \\
-    \hline
-    \textbf{Related requirement document details} & AI Boss (2.2.4) \\
-    \hline
-    \textbf{Prerequisites for test} & AI chatbot is implemented in the game. \\
-    \hline
-    \textbf{Test procedure} &
-    \textbf{Poor performance}
-    \begin{itemize}
-        \item Get multiple questions related to a specific topic incorrect
-        \item Reach the boss battle
-        \item Observe the types of questions asked
-    \end{itemize}
-    \textbf{Good performance}
-    \begin{itemize}
-        \item Get multiple questions related to a specific topic correct
-        \item Reach the boss battle
-        \item Observe the types of questions asked
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Test material used} & Laptop \\
-    \hline
-    \textbf{Expected result} &
-    \textbf{Poor performance}
-    \begin{itemize}
-        \item The chatbot should ask easy questions relating to the topic the user was “struggling” to answer.
-    \end{itemize}
-    \textbf{Good performance}
-    \begin{itemize}
-        \item The chatbot should ask more difficult questions about the topic, potentially asking things beyond the scope of the course if the user got everything previously correct.
-    \end{itemize}
-    \\
-    \hline
-    \textbf{Comments} & No need to test portability, as the behaviour should be system-independent \\
-    \hline
-    \textbf{Created by} & TD \\
-    \hline
-    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\newpage
-
 \section{Testing Context}
 
-\noindent To ensure compatibility, accessibility, and coverage across educational environments, the following tools and environments are used for testing the system:
+\noindent To ensure compatibility and coverage across educational environments, the following tools and environments are used for testing the system:
 
 \subsection{Operating Systems}
 
 \begin{itemize}
-    \item Windows 11: Selected due to its widespread use in educational institutions and professional environments. Ensures compatibility for schools and educational labs. According to recent statistics, Microsoft Windows holds a market share of approximately 66.7\% in the UK, reflecting its dominance in both educational and professional settings \cite{statista}.
-    \item macOS (15.3 and above): Included as many schools and creative institutions prefer macOS systems for educational and development purposes. macOS accounts for around 23.3\% of the UK market share, demonstrating its popularity in environments that emphasise creative and media-focused curricula \cite{statista}.
+    \item Windows 11: Selected due to its widespread use in educational institutions and professional environments. Ensures compatibility for schools and educational labs.
+    \item macOS (15.3 and above): Included as many schools and creative institutions prefer macOS systems for educational and development purposes.
 \end{itemize}
-
-The dominance of these two operating systems influences system testing priorities. Ensuring compatibility with both Windows and macOS is crucial to accommodate the technological landscape within educational environments. Given their built-in accessibility features (such as screen readers, magnification tools, and input customisation), both platforms support diverse user needs, which are integral to accessibility testing.
 
 \subsection{Testing Tools and Drivers}
 
 \begin{itemize}
-    \item Unity Editor (2022.3.50f1): Used to test and debug game mechanics, AI behaviours, and user interactions.
-    \item Accessibility Testing Tools: Simulators for colourblindness and screen reader compatibility (e.g., Color Oracle, VoiceOver for macOS). According to Keywords Studios, around 29\% of gamers in the UK identify as having a disability, and 66\% of these players report encountering barriers in gaming environments \cite{keywordsstudios}. Ensuring accessibility testing mitigates these barriers and promotes inclusivity.
-    \item Input Device Testing: Keyboard and controller compatibility tests using standard USB and wireless game controllers. This includes accessibility-focused input devices, such as adaptive controllers, to accommodate players with limited mobility. Scope UK highlights the importance of these options for players with varying needs \cite{scope}.
-    \item Game Feature Accessibility Testing: Incorporates tests for adjustable difficulty settings, subtitles, and customisable controls, which are essential for ensuring inclusivity and usability for a wide audience, including players with and without disabilities. The global importance of accessibility in gaming underscores the necessity for these considerations \cite{keywordsstudios}.
+    \item Unity Editor (2022.3.50f1): Used to test and debug game mechanics, AI behaviors, and user interactions.
+    \item Accessibility Testing Tools: Simulators for colorblindness and screen reader compatibility (e.g., Color Oracle, VoiceOver for macOS).
+    \item Input Device Testing: Keyboard and controller compatibility tests using standard USB and wireless game controllers.
 \end{itemize}
-
-The technological landscape from 2017 to 2023 demonstrates the sustained dominance of Windows and macOS, with Linux and other open-source systems remaining less adopted due to compatibility and software availability concerns. As accessibility continues to gain prominence, the integration of sophisticated accessibility features across these platforms is expected to become more comprehensive and integral to development and testing strategies.
 
 \subsection{Test Failure Severity Levels}
 
@@ -1532,7 +1388,7 @@ The technological landscape from 2017 to 2023 demonstrates the sustained dominan
     \hline
     \textbf{Critical} & The system crashes or produces incorrect outcomes that prevent gameplay or educational content delivery. Requires immediate attention. \\
     \hline
-    \textbf{High} & Major functionality is disrupted, such as inaccessible accessibility features or broken AI behaviours, affecting core gameplay. \\
+    \textbf{High} & Major functionality is disrupted, such as inaccessible accessibility features or broken AI behaviors, affecting core gameplay. \\
     \hline
     \textbf{Moderate} & Gameplay is impacted but still functional, such as minor UI glitches, missing audio cues, or partial AI inconsistencies. \\
     \hline
@@ -1540,19 +1396,5 @@ The technological landscape from 2017 to 2023 demonstrates the sustained dominan
     \hline
 \end{tabularx}
 \end{center}
-
-\bibliographystyle{unsrt}
-
-\begin{thebibliography}{}
-\bibitem{statista}
-Statista. (2023). \emph{Market share of desktop operating systems in the United Kingdom (UK) from 2017 to 2023}. Retrieved from \url{https://www.statista.com/statistics/487002/market-share-of-desktop-operating-systems-uk/}
-
-\bibitem{keywordsstudios}
-Keywords Studios. (2023). \emph{The Business Case for Accessibility in Gaming}. Retrieved from \url{https://www.keywordsstudios.com/en/about-us/news-events/news/the-business-case-for-accessibility/}
-
-\bibitem{scope}
-Scope UK. \emph{Accessibility in Gaming Report}. Retrieved from \url{https://www.scope.org.uk/campaigns/research-policy/accessibility-in-gaming/}
-
-\end{thebibliography}
 
 \end{document}
