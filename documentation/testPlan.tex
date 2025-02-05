@@ -701,27 +701,79 @@
     \textbf{Prerequisites for test} & Skills Build question bank is populated with questions and answers for each course. \\
     \hline
     \textbf{Test procedure} &
-    \textbf{Display:}
+    \textbf{Display}
     \begin{itemize}
         \item Verify that when a quiz is initiated the first question and answers for the first question are rendered properly.
-        \item Check that after the last question is answered the quiz UI closes.
+        \item Assert that after the last question is answered the quiz UI closes.
     \end{itemize}
-    \textbf{Function:}
+    \textbf{Function}
     \begin{itemize}
         \item Ensure that when an answer is clicked the game checks if the answer is correct or incorrect and notifies the user.
-        \item Verify that the user can only move on to the next question after answering the current question.
+        \item Assert that the user can only move on to the next question after answering the current question.
+    \end{itemize}
+    \textbf{Correctness}
+    \begin{itemize}
+        \item Assert that the internal question bank has no irregularities.
     \end{itemize}
     \\
     \hline
     \textbf{Test material used} & Skills Build question bank \\
     \hline
-    \textbf{Expected result (test oracle)} & The quiz UI opens and closes as expected. Questions and answers are rendered properly. Appropriate feedback is provided after answering a question. \\
+    \textbf{Expected result (test oracle)} &
+    \textbf{Display}
+    \begin{itemize}
+        \item The quiz UI opens and closes properly.
+        \item Questions and answers are rendered properly.
+    \end{itemize}
+    \textbf{Function}
+    \begin{itemize}
+        \item Appropriate feedback is provided after answering a question.
+    \end{itemize}
+    \textbf{Correctness}
+    \begin{itemize}
+        \item The question bank has all the correct answers marked as correct, otherwise marked as incorrect.
+    \end{itemize}
+    \\
     \hline
     \textbf{Comments} & Integration, engagement and correctness of quizzes is assessed in uattest\_5. \\
     \hline
     \textbf{Created by} & BM \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_6 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Display}
+    \begin{itemize}
+        \item The quiz UI opens and closes as expected.
+        \item Questions and answers are rendered properly.
+    \end{itemize}
+    \textbf{Function}
+    \begin{itemize}
+        \item The correct choice of feedback is displayed to the user.
+    \end{itemize}
+    \textbf{Correctness}
+    \begin{itemize}
+        \item The question bank has all the correct answers marked as correct, otherwise marked as incorrect.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If for some reason a question has no correct answers the player cannot progress thus game progression is impeded. \\
+    \hline
+    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
@@ -1007,8 +1059,9 @@
     \textbf{Test procedure} &
     \begin{itemize}
         \item Enter a level that includes sneaking and fighting.
-        \item Test the smoothness of the game operation to ensure that there is no delay or abnormality in the switching between sneaking, fighting and answering questions.
+        \item Test the smoothness of the game operation to ensure that there is no delay or abnormality in switching between sneaking, fighting and answering questions.
         \item Observe how IBM Skills Build related questions are triggered to make sure that they do not affect the player's immersion or increase the difficulty of the game too much.
+        \item Ensure quiz sections cannot be triggered while the player is in combat.
     \end{itemize}
     \\
     \hline
@@ -1018,8 +1071,8 @@
     \begin{itemize}
         \item The game is smooth and can run normally.
         \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
-        \item The game's upgraded mechanics will keep the player's interest for educational purposes.
         \item The AI is able to adjust the difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
     \end{itemize}
     \\
     \hline
@@ -1028,6 +1081,33 @@
     \textbf{Created by} & HC \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_1 \\
+    \hline
+    \textbf{Result} &
+     \begin{itemize}
+        \item The game is smooth and can run normally.
+        \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
+        \item The AI is not able to adjust difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Gameplay is impacted and may seem unfair and or inconsistent. \\
+    \hline
+    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
