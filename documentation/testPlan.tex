@@ -796,25 +796,27 @@
         Stylised Cold War Graphics (2.2.6)
     } \\
     \hline
-    \textbf{Prerequisites for test} & Game is installed, graphics and audio are (partially) implemented, audio / display devices available, performance monitoring tools. \\
+    \textbf{Prerequisites for test} & Game is installed, graphics and audio are (partially) implemented, audio / display devices available\\
     \hline
     \textbf{Test procedure} &
     \textbf{Graphics Performance:}
     \begin{itemize}
+        \item Load and navigate through the game
         \item Verify consistent performance during complex scene transitions
         \item Verify rendering at multiple resolutions
     \end{itemize}
     \textbf{Audio systems performance}
     \begin{itemize}
+        \item Navigate through the game and test each mechanic iteratively
         \item Check sound effects synchronize with animations
-        \item Verify audio quality during transitions
+        \item Verify audio quality during transitions and gameplay
     \end{itemize}
     \\
     \hline
     \textbf{Test material used} & \makecell[l]{
-        Multiple devices \\
+        Multiple audio output devices \& display devices \\
         Audio monitoring tools \\
-        Performance profiler
+        Graphics monitoring tools
     }
     \\
     \hline
@@ -893,19 +895,22 @@
     \textbf{Test procedure} &
     \textbf{UI Navigation Flow:}
     \begin{itemize}
-        \item Check navigation works correctly between all menu screens (main menu, options, save/load screens)
+        \item Load different menu screens (Main menu, pause screen)
+        \item Check navigation works correctly between all menu screens (main menu, options, save/load screens, pause/resume)
         \item Test menu responsiveness and input handling across different input methods
     \end{itemize}
     \textbf{Save system validation:}
     \begin{itemize}
+        \item Load and navigate through the game
         \item Test automatic save functionality throughout different parts of the game
-        \item Verify manual save operations across different parts
-        \item Validate correct restoration of game progress
+        \item Test manual save operations across different parts 
     \end{itemize}
     \textbf{Load System Verification:}
     \begin{itemize}
+        \item Load saved files menu
+        \item Validate correct restoration of game progress
         \item Test loading saves from different saves
-        \item Verify handling of corrupted or incompatible save files
+        \item Ensure correct handling of corrupted save files
     \end{itemize}
     \\
     \hline
@@ -915,9 +920,16 @@
     } \\
     \hline
     \textbf{Expected result} &
+    \textbf{UI Navigation Flow}
     \begin{itemize}
         \item Smooth and intuitive UI navigation
+    \end{itemize}
+    \textbf{Save system validation}
+    \begin{itemize}
         \item Reliable save file creation and management
+    \end{itemize}
+    \textbf{Load System Verification}
+    \begin{itemize}
         \item Accurate game state restoration when loading
     \end{itemize}
     \\
@@ -941,9 +953,16 @@
     \textbf{Test ID} & stest\_2 \\
     \hline
     \textbf{Result} &
+    \textbf{UI Navigation Flow}
     \begin{itemize}
         \item Smooth and intuitive UI navigation
+    \end{itemize}
+    \textbf{Save system validation}
+    \begin{itemize}
         \item Save files can be created and managed
+    \end{itemize}
+    \textbf{Load System Verification}
+    \begin{itemize}
         \item Game loads properly from a save file
     \end{itemize}
     \\
