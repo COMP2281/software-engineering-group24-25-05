@@ -19,10 +19,15 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Tectonic
+      - name: Build Documentation
         run: |
           cd documentation
           tectonic requirements.tex
+
+      - name: Build Test Plan
+        run: |
+          cd documentation
+          tectonic testPlan.tex
 
       - name: Find and Zip Log Files
         if: failure()
@@ -37,9 +42,18 @@ jobs:
           name: latex-logs
           path: documentation/logs.zip
 
-      - name: Upload Artifacts
+      - name: Upload Requirements
         uses: actions/upload-artifact@v4
         with:
           name: requirements
           path: |
             documentation/requirements.pdf
+
+      - name: Upload Test Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: testPlan
+          path: |
+            documentation/testPlan.pdf
+
+
