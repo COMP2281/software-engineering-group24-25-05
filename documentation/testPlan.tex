@@ -1141,7 +1141,7 @@
     \hline
     \textbf{Related requirement document details} & \makecell[l]{
         Stealth Gameplay (2.2.1) \\
-        AI BOSS (2.2.3) \\
+        AI Boss (2.2.3) \\
         Educational Engagement (2.2.2)\\
         Mission System (2.2.4)
     } \\
@@ -1216,35 +1216,32 @@
     \textbf{Description of test} & Test that the game's user interface is fully functional to ensure that each function works smoothly. The Q\&A interface fits the overall style of the game and ensures that players can use and experience the IBM Skills Build content smoothly. \\
     \hline
     \textbf{Related requirement document details} &
-    \begin{minipage}{\linewidth}
         \begin{itemize}\setlength{\itemsep}{2pt}
             \item Pause Screen (2.2.3)
             \item Stylised Cold War Graphics (2.2.6)
         \end{itemize}
-    \end{minipage} \\
+    \\
     \hline
     \textbf{Prerequisites for test} & Complete UI design and interaction logic has been implemented. In-game question and answer interface, mission menu, pause menu, and other functions are available. \\
     \hline
     \textbf{Test procedure} &
-    \begin{minipage}{\linewidth}
         \begin{itemize}\setlength{\itemsep}{2pt}
             \item Enter the main interface of the game, check if the navigation menu is clear and the main functions are easy to find.
             \item Enter the mission level and check whether the UI feedback (such as mission guidelines, blood level, props information) is intuitive.
             \item Enter the IBM Skills Build question interface and check whether the interaction is smooth and the UI design is in line with the overall style of the game.
             \item Repeat testing of the buttons in the user interface to test their stability and whether they can interact with each other properly.
         \end{itemize}
-    \end{minipage} \\
+    \\
     \hline
     \textbf{Test material used} & Laptop \\
     \hline
     \textbf{Expected result} &
-    \begin{minipage}{\linewidth}
         \begin{itemize}\setlength{\itemsep}{2pt}
             \item The main menu of the game, the mission interface and the answer interface have the same style, and the operation is intuitive.
             \item UI feedback is timely; important information will not be obscured by other interface elements.
             \item The function of buttons in the UI runs normally and stably and can interact with other buttons.
         \end{itemize}
-    \end{minipage} \\
+    \\
     \hline
     \textbf{Comments} & None \\
     \hline
@@ -1254,8 +1251,6 @@
     \hline
 \end{tabularx}
 \end{center}
-
-
 
 \noindent \textbf{Results:}
 
@@ -1281,8 +1276,6 @@
     \hline
 \end{tabularx}
 \end{center}
-
-
 
 \newpage
 
@@ -1340,6 +1333,36 @@
     \textbf{Created by} & TD \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_3 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Performance}
+    \begin{itemize}
+        \item Game runs at an acceptable frame rate ($\geq 60$), with minimal changes in frame rate when performing actions.
+        \item There are no perceptible frame rate drops
+    \end{itemize}
+    \textbf{Stability}
+    \begin{itemize}
+        \item System resource usage remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If the system resource usage keeps increasing the game will crash. \\
+    \hline
+    \textbf{Comments} & None \\
     \hline
 \end{tabularx}
 \end{center}
@@ -1575,6 +1598,36 @@
     \hline
 \end{tabularx}
 \end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_6 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item The chatbot asks easy questions relating to the topic the user was “struggling” to answer.
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item The chatbot asks more difficult questions about the topic, also asks things beyond the scope of the course if the user got everything previously correct.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: The gameplay is affected being either too easy or too hard if the chatbot can't adapt. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
 
 \newpage
 
