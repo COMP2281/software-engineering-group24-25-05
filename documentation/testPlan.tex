@@ -704,17 +704,13 @@
     \textbf{Test procedure} &
     \textbf{Display}
     \begin{itemize}
-        \item Verify that when a quiz is initiated the first question and answers for the first question are rendered properly.
-        \item Assert that after the last question is answered the quiz UI closes.
+        \item Check that the quiz UI opens when a quiz is initiated and closes when the quiz is complete.
+        \item Verify that the questions and answers are rendered correctly.
     \end{itemize}
     \textbf{Function}
     \begin{itemize}
-        \item Ensure that when an answer is clicked the game checks if the answer is correct or incorrect and notifies the user.
+        \item Ensure that when an answer is clicked the game checks if the answer is correct or incorrect and notifies the user accordingly.
         \item Assert that the user can only move on to the next question after answering the current question.
-    \end{itemize}
-    \textbf{Correctness}
-    \begin{itemize}
-        \item Assert that the internal question bank has no irregularities.
     \end{itemize}
     \\
     \hline
@@ -723,20 +719,17 @@
     \textbf{Expected result} &
     \textbf{Display}
     \begin{itemize}
-        \item The quiz UI opens and closes properly.
-        \item Questions and answers are rendered properly.
+        \item The quiz UI opens and closes appropriately.
+        \item Questions and answers are rendered correctly.
     \end{itemize}
     \textbf{Function}
     \begin{itemize}
         \item Appropriate feedback is provided after answering a question.
-    \end{itemize}
-    \textbf{Correctness}
-    \begin{itemize}
-        \item The question bank has all the correct answers marked as correct, otherwise marked as incorrect.
+        \item User progresses after answering a question.
     \end{itemize}
     \\
     \hline
-    \textbf{Comments} & Integration, engagement and correctness of quizzes is assessed in uattest\_5. \\
+    \textbf{Comments} & Integration, engagement and correctness of quizzes are assessed in uattest\_5. \\
     \hline
     \textbf{Created by} & BM \\
     \hline
@@ -763,10 +756,7 @@
     \textbf{Function}
     \begin{itemize}
         \item The correct choice of feedback is displayed to the user.
-    \end{itemize}
-    \textbf{Correctness}
-    \begin{itemize}
-        \item The question bank has all the correct answers marked as correct, otherwise marked as incorrect.
+        \item It is only possible to progress to the next question after answering it.
     \end{itemize}
     \\
     \hline
@@ -1448,7 +1438,7 @@
     \hline
     \textbf{Test ID} & uattest\_5 \\
     \hline
-    \textbf{Description of test} & Ensure that the quizzes are engaging, well-integrated and correctly assessed. \\
+    \textbf{Description of test} & Ensure the quizzes are engaging, well-integrated and correctly assessed. \\
     \hline
     \textbf{Related requirement document details} & Education Engagement (2.2.2) \\
     \hline
@@ -1458,7 +1448,6 @@
 
     \textbf{Engaging:}
     \begin{itemize}
-        \item Check that the user loses health when they answer a question incorrectly.
         \item Verify that both audio and visual feedback are provided after correct and incorrect answers.
     \end{itemize}
     \textbf{Well-integrated:}
@@ -1469,21 +1458,67 @@
     \textbf{Correctly assessed:}
     \begin{itemize}
         \item Check that the questions relate to the course selected.
-        \item Confirm that each question has 3 incorrect answers and 1 correct answer.
-        \item Check that the correct answer is shown when the user answers incorrectly.
-        \item Verify that answering correctly moves the user to the next question.
+        \item Answer a question incorrectly and check that the correct answer is shown.
     \end{itemize}
     \\
     \hline
     \textbf{Test material used} & Skills Build question bank \\
     \hline
-    \textbf{Expected result} & The user finds the quizzes engaging and educational, with accurate feedback on answers. \\
+    \textbf{Expected result} & 
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item Audio and visual feedback is provided after answering correctly or incorrectly.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item There is a smooth transition from gameplay to the quiz and vice versa.
+        \item The quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item The questions relate to the course selected.
+        \item The correct answer is shown when the user answers incorrectly.
+    \end{itemize} 
+    \\
     \hline
     \textbf{Comments} & Ensure edge cases such as a player losing all their health during a quiz are handled. \\
     \hline
     \textbf{Created by} & BM \\
     \hline
     \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_5 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item Audio and visual feedback is provided after answering correctly or incorrectly making the quizzes more engaging.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item There is a smooth transition from gameplay to the quiz and from the quiz to gameplay.
+        \item The quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item The questions relate to the course selected.
+        \item The correct answer is shown when the user answers incorrectly, helping them learn from their mistakes.
+    \end{itemize} 
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate for engagement and integration but High for correctly assessed as it would affect core gameplay if it fails. \\
+    \hline
+    \textbf{Comments} & None. \\
     \hline
 \end{tabularx}
 \end{center}
