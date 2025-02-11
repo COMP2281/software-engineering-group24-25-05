@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float acceleration = 5f;
     private PlayerInput playerInput;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -27,7 +28,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
-        rb.velocity = new Vector2(movement.x * moveSpeed, rb.velocity.y);
+
+        float targetX = movement.x * moveSpeed;
+        float newX = Mathf.Lerp(rb.velocity.x, targetX, acceleration * Time.deltaTime);
+
+        rb.velocity = new Vector2(newX, rb.velocity.y);
 
         if (playerInput.actions["Jump"].triggered && isGrounded)
         {
