@@ -11,11 +11,13 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private Animator animator;
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -38,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        // Update animator parameters
+        animator.SetFloat("Speed", Mathf.Abs(newX));
+        animator.SetBool("IsJumping", !isGrounded);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
