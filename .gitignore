@@ -25,6 +25,7 @@ ExportedObj/
 
 # Unity3D generated meta files
 *.pidb.meta
+*.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
@@ -32,3 +33,16 @@ sysinfo.txt
 .DS_Store
 documentation/requirements.pdf
 documentation/testPlan.pdf
+
+game/Library/Artifacts
+game/Library/Bee
+game/Library/BurstCache/JIT
+game/Library/GridBrush
+game/Library/PackageCache
+game/Library/PackageManager
+game/Library/ScriptAssemblies
+game/Library/Search
+game/Library/ShaderCache
+game/Library
+game/Logs
+game/Temp

@@ -1,0 +1,26 @@
+{
+	"entries": [
+		{
+			"question": "What is the capital of France?",
+			"answer": "Paris",
+			"possible_answers": [
+				"Paris",
+				"London",
+				"Berlin",
+				"Madrid"
+			],
+			"difficulty": 2
+		},
+		{
+			"question": "What is 2 + 2?",
+			"answer": "4",
+			"possible_answers": [
+				"3",
+				"4",
+				"5",
+				"6"
+			],
+			"difficulty": 1
+		}
+	]
+}
