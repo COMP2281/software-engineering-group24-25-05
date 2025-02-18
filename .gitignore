@@ -34,15 +34,6 @@ sysinfo.txt
 documentation/requirements.pdf
 documentation/testPlan.pdf
 
-game/Library/Artifacts
-game/Library/Bee
-game/Library/BurstCache/JIT
-game/Library/GridBrush
-game/Library/PackageCache
-game/Library/PackageManager
-game/Library/ScriptAssemblies
-game/Library/Search
-game/Library/ShaderCache
 game/Library
 game/Logs
 game/Temp
