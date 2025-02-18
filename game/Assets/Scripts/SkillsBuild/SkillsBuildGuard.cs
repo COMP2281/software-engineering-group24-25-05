@@ -15,6 +15,8 @@ public class SkillsBuildGuard : MonoBehaviour
         Debug.Log("Debug!");
 
         spriteRenderer.color = Color.red;
+
+        this.PrintQuestions();
     }
 
     public void PrintQuestions()
