@@ -31,3 +31,4 @@
 
 # Builds
 /Game/*.apk
+.DS_Store
