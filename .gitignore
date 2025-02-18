@@ -31,3 +31,7 @@
 
 # Builds
 /Game/*.apk
+
+# Ignore the Log files
+
+/Game/*.log
