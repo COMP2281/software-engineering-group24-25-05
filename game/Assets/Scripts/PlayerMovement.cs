@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // Add this line to import the PlayerInput class
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -35,6 +35,15 @@ public class PlayerMovement : MonoBehaviour
         float newX = Mathf.Lerp(rb.velocity.x, targetX, acceleration * Time.deltaTime);
 
         rb.velocity = new Vector2(newX, rb.velocity.y);
+
+        if (movement.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (movement.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
         if (playerInput.actions["Jump"].triggered && isGrounded)
         {
