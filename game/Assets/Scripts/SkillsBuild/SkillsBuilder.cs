@@ -6,7 +6,14 @@ public class SkillsBuilder : MonoBehaviour
 {
     public static SkillsBuilder Instance { get; private set; }
 
+    // IBM SkillsBuild question entries
     private List<SkillsBuildEntry> skillEntries = new List<SkillsBuildEntry>();
+
+    // Number of attempts for skillEntries[i]
+    private List<int> attemmpts = new List<int>();
+
+    // Number of correct answers for skillEntries[i]
+    private List<int> correct = new List<int>();
 
     private void Awake()
     {
@@ -22,6 +29,11 @@ public class SkillsBuilder : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        Instance.LoadSkills();
+    }
+
     public void LoadSkills()
     {
         SkillsBuildDataLoader loader = new SkillsBuildDataLoader();
@@ -29,7 +41,7 @@ public class SkillsBuilder : MonoBehaviour
         this.skillEntries = loader.LoadEntries(path);
     }
 
-    public void PrintQuestions()
+    public void DebugLogQuestions()
     {
         Debug.Log($"Number of questions: {skillEntries.Count}");
         foreach (var entry in skillEntries)
