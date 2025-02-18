@@ -36,15 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(newX, rb.velocity.y);
 
-        if (movement.x < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else if (movement.x > 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
         if (playerInput.actions["Jump"].triggered && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
