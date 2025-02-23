@@ -39,3 +39,6 @@
 # macOS system files
 .DS_Store
 /game/.DS_Store
+
+documentation/requirements.pdf
+documentation/testPlan.pdf
