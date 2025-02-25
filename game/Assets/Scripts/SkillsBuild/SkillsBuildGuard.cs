@@ -6,14 +6,11 @@ public class SkillsBuildGuard : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("Guard Start");
         this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void OnMouseDown()
     {
-        Debug.Log("Debug!");
-
         spriteRenderer.color = Color.red;
 
         this.PrintQuestions();
@@ -21,7 +18,6 @@ public class SkillsBuildGuard : MonoBehaviour
 
     public void PrintQuestions()
     {
-        Debug.Log("Printing Questions");
-        SkillsBuilder.Instance.DebugLogQuestions();
+        SkillsBuilder.Instance.DebugLogEntries();
     }
 }

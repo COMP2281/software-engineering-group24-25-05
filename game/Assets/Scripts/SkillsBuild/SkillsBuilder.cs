@@ -48,7 +48,7 @@ public class SkillsBuilder : MonoBehaviour
         this.skillEntries = loader.LoadEntries(path);
     }
 
-    public void GetRandomQuestion(QuestionRequestMode mode)
+    public SkillsBuildEntry GetRandomQuestion(QuestionRequestMode mode)
     {
         int numElements = this.skillEntries.Count;
         int index = -1;
@@ -87,15 +87,28 @@ public class SkillsBuilder : MonoBehaviour
                     }
                 }
         }
+
+        return this.skillEntries[index];
     }
 
-    public void DebugLogQuestions()
+    public void DebugLogEntries()
     {
+        string log = "";
+
         Debug.Log($"Number of questions: {skillEntries.Count}");
         foreach (var entry in skillEntries)
         {
-            Debug.Log($"Question: {entry.question}");
+            log += "SkillsBuildEntry:\n";
+            log += $"  > Question: {entry.question}\n";
+            log += "  > Possible Answers:\n";
+
+            foreach (var answer in entry.possible_answers)
+            {
+                log += $"    > {answer}\n";
+            }
         }
+
+        Debug.Log(log);
     }
 
     public List<SkillsBuildEntry> GetEntries()
