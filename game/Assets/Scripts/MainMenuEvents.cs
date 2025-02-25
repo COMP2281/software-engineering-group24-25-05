@@ -40,7 +40,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("Play Game Button Clicked");
         // Hide the start screen by setting its display style to none
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     private void OnAllButtonClick(ClickEvent evt)
