@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+public enum QuestionRequestMode
+{
+    Random, // Uniformly random question
+    WeightedIncorrect, // Weighted towards frequently incorrect questions
+    WeightedCorrect, // Weighted towards frequently correct questions
+}
+
 public class SkillsBuilder : MonoBehaviour
 {
     public static SkillsBuilder Instance { get; private set; }
@@ -10,7 +17,7 @@ public class SkillsBuilder : MonoBehaviour
     private List<SkillsBuildEntry> skillEntries = new List<SkillsBuildEntry>();
 
     // Number of attempts for skillEntries[i]
-    private List<int> attemmpts = new List<int>();
+    private List<int> attempts = new List<int>();
 
     // Number of correct answers for skillEntries[i]
     private List<int> correct = new List<int>();
@@ -41,6 +48,47 @@ public class SkillsBuilder : MonoBehaviour
         this.skillEntries = loader.LoadEntries(path);
     }
 
+    public void GetRandomQuestion(QuestionRequestMode mode)
+    {
+        int numElements = this.skillEntries.Count;
+        int index = -1;
+
+        switch (mode)
+        {
+            case QuestionRequestMode.Random:
+                {
+                    index = Random.Range(0, numElements);
+                    break;
+                }
+            case QuestionRequestMode.WeightedCorrect:
+                {
+                    List<int> prefixSum = new List<int>(numElements);
+
+                    for (int i = 0; i < numElements; i++)
+                    {
+                        prefixSum.Add(this.correct[i]);
+                    }
+
+                    index = this.RandomThresholdSearch(prefixSum);
+                    break;
+                }
+            case QuestionRequestMode.WeightedIncorrect:
+                {
+                    {
+                        List<int> prefixSum = new List<int>(numElements);
+
+                        for (int i = 0; i < numElements; i++)
+                        {
+                            prefixSum.Add(this.attempts[i] - this.correct[i]);
+                        }
+
+                        index = this.RandomThresholdSearch(prefixSum);
+                        break;
+                    }
+                }
+        }
+    }
+
     public void DebugLogQuestions()
     {
         Debug.Log($"Number of questions: {skillEntries.Count}");
@@ -54,4 +102,21 @@ public class SkillsBuilder : MonoBehaviour
     {
         return skillEntries;
     }
+
+    int RandomThresholdSearch(List<int> prefixSum)
+    {
+        int numElements = prefixSum.Count;
+        int threshold = Random.Range(0, prefixSum[numElements - 1]);
+
+        for (int i = 0; i < numElements; i++)
+        {
+            if (prefixSum[i] >= threshold)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }
