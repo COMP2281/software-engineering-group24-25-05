@@ -29,6 +29,7 @@ public class MainMenuEvents : MonoBehaviour
         {
             _menuButtons.Add(button);
             button.RegisterCallback<ClickEvent>(OnAllButtonClick);
+            button.RegisterCallback<MouseEnterEvent>(OnButtonHover);
         });
 
         // Initialize the audio source
@@ -43,6 +44,11 @@ public class MainMenuEvents : MonoBehaviour
     }
 
     private void OnAllButtonClick(ClickEvent evt)
+    {
+        _audioSource.Play();
+    }
+
+    private void OnButtonHover(MouseEnterEvent evt)
     {
         _audioSource.Play();
     }
