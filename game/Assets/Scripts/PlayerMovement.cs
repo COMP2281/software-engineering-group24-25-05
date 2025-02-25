@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 6.5f; // Just enough to allow to jump 2 grid high
+    [SerializeField] private float jumpForce = 6.5f;
     [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float jumpHoldForce = 4f; // increased from 3f
-    [SerializeField] private float jumpHoldDuration = 0.3f; // increased from 0.2f
+    [SerializeField] private float jumpHoldForce = 4f;
+    [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     
     private PlayerInput playerInput;
@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalScale;
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
+
+    private float horizontalVelocityBeforeLanding;
 
     void Awake()
     {
@@ -85,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
 
+        // Store horizontal velocity before landing
+        if (!isGrounded)
+        {
+            horizontalVelocityBeforeLanding = rb.velocity.x;
+        }
     }
 
     void StartCrouch()
@@ -113,6 +120,8 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            // Reapply horizontal velocity to maintain momentum
+            rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
         }
     }
 
