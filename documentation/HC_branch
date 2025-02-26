@@ -1,0 +1,216 @@
+\subsubsection{Character Interactions}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_4 \\
+    \hline
+    \textbf{Description of test} & Test the Character Interaction conforms to the game design and that the player is able to interact with NPCs, items, and the environment without difficulty.
+    Ensure that the core game functionality (quest system, puzzle interactions, character animations, etc.) works correctly, and that there are no serious bugs affecting the progress of the game.\\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Educational Engagement (2.2.2) \\
+        Mission System (2.2.7)\\
+        Stealth Gameplay（2.2.1）
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & A preliminary complete question bank for teaching IBM knowledge .A simplified version of the game with full character interaction mechanics for testing basic functionality. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{itemize}
+        \item Start the game and enter the section that contains the NPC and try the mission objectives.
+        \item Engage in dialogue with the NPC and observe whether the IBM Skills Build questions are triggered naturally.
+        \item Observe whether the character interactions including accepting tasks, interacting with the environment, communicating with enemies, check if they run smoothly and affect the progress of the game normally.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \begin{itemize}
+        \item NPC interaction text is on-topic and does not introduce learning content out of the blue.
+        \item Players are able to effectively access IBM-related issues through character interactions and can influence the progress of the game.
+        \item The character's basic movement commands can cause interactions with NPCs, such as sneak and be found, also the dialogue with NPC works normally.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\noindent \textbf{Results:}
+\begin{center}
+\begin{tabularx}{\linewidth}{|l|X|}
+    \hline
+    \textbf{Test ID} & stest\_4 \\ 
+    \hline
+    \textbf{Result} &  
+    \begin{itemize}
+        \item Interaction can be triggered in any situation as desired..
+        \item Game features (quest system, puzzle interactions, character animations, etc.) are functioning correctly and there are no serious errors affecting the game's progress.
+    \end{itemize} \\ 
+    \hline
+    \textbf{Pass/Fail} & Pass \\ 
+    \hline
+    \textbf{Severity (If Fail)} & Critical: Failure of an INTERACTION to trigger as expected can severely affect the game experience and progress, resulting in the game not functioning properly. \\ 
+    \hline
+    \textbf{Comments} & None \\ 
+    \hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Gameplay Experience}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_1 \\
+    \hline
+    \textbf{Description of test} & Test player experience of the test game, focused on the implementation of the core functionality of the game, the impact of the AI bosses on the difficulty of the game, and the immersion in the story of the game.. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Stealth Gameplay (2.2.1) \\
+        AI BOSS (2.2.3) \\
+        Educational Engagement (2.2.2)\\
+        Mission System (2.2.4)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Executable version of the game (with sneaking, combat, quiz mechanics) with complete level design with missions, enemies, IBM-related challenges and a simple AI. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{itemize}
+        \item Enter a level that includes sneaking and fighting.
+        \item Ensure that there is no delay or abnormality in switching between sneaking, fighting and answering questions.
+        \item Observe how IBM Skills Build related questions are triggered to make sure that they do not affect the player's immersion or increase the difficulty of the game too much.
+        \item Ensure quiz sections cannot be triggered while the player is in combat.
+        \item -Observe whether the AI BOSS is moderating the difficulty reasonably well.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \begin{itemize}
+        \item Every basic function can be implemented.
+        \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
+        \item The AI is able to adjust the difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_1 \\
+    \hline
+    \textbf{Result} &
+     \begin{itemize}
+        \item The game is smooth and can run normally,every basic function can be implemented.
+        \item Players can sneak and fight without problems, and the learning content does not spoil the game experience.
+        \item AI bosses can not reasonably adjust the difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Gameplay is impacted and may seem unfair and or inconsistent because of the AI BOSS functionality doesn't work as expected. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\subsubsection{User Interface}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|p{3cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_2 \\
+    \hline
+    \textbf{Description of test} & Test that the game's user interface is fully functional to ensure that each function works smoothly. The Q\&A interface fits the overall style of the game and ensures that players can use and experience the IBM Skills Build content smoothly. \\
+    \hline
+    \textbf{Related requirement document details} &  
+    \begin{minipage}{\linewidth}
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item Pause Screen (2.2.3)
+            \item Stylised Cold War Graphics (2.2.6)
+        \end{itemize}
+    \end{minipage} \\
+    \hline
+    \textbf{Prerequisites for test} & Complete UI design and interaction logic has been implemented. In-game question and answer interface, mission menu, pause menu, and other functions are available. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{minipage}{\linewidth}
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item Enter the main interface of the game, check if the navigation menu is clear and the main functions are easy to find.
+            \item Enter the mission level and check whether the UI feedback (such as mission guidelines, blood level, props information) is intuitive.
+            \item Enter the IBM Skills Build question interface and check whether the interaction is smooth and the UI design is in line with the overall style of the game.
+            \item Repeat testing of the buttons in the user interface to test their stability and whether they can interact with each other properly.
+        \end{itemize}
+    \end{minipage} \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \begin{minipage}{\linewidth}
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item The main menu of the game, the mission interface and the answer interface have the same style, and the operation is intuitive.
+            \item UI feedback is timely; important information will not be obscured by other interface elements.
+            \item The function of buttons in the UI runs normally and stably and can interact with other buttons.
+        \end{itemize}
+    \end{minipage} \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_2 \\
+    \hline
+    \textbf{Result} &
+     \begin{itemize}
+        \item Buttons on UI pages are easy to click and function as expected.
+        \item The art style has consistency with the game vibe doesn't ruin the experience.
+        \item All functionality of UI works normally in any case.
+        \item The menu UI has all basic functions of the game.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: UI functionality meets the expectation. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+\newpage
