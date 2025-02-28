@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private PhysicsMaterial2D noFriction2D;
     
     private PlayerInput playerInput;
     private Rigidbody2D rb;
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
+        capsuleCollider.sharedMaterial = noFriction2D;
     }
 
     void Update()
