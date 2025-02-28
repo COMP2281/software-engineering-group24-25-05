@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
 
-    private float horizontalVelocityBeforeLanding;
-
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -91,12 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
-
-        // Store horizontal velocity before landing
-        if (!isGrounded)
-        {
-            horizontalVelocityBeforeLanding = rb.velocity.x;
-        }
     }
 
     void StartCrouch()
