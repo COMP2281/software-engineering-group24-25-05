@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHoldForce = 4f;
     [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 0.1f;
     
     private PlayerInput playerInput;
     private Rigidbody2D rb;
@@ -76,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
             if (isCrouching)
                 StopCrouch();
         }
+
+        CheckGrounded();
     }
 
     void FixedUpdate()
@@ -115,21 +119,8 @@ public class PlayerMovement : MonoBehaviour
         capsuleCollider.offset = originalColliderOffset;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void CheckGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            // Reapply horizontal velocity to maintain momentum
-            rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
     }
 }
