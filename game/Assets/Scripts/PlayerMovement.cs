@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
 
+    private bool jumpHeld; // NEW FIELD
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -50,22 +52,9 @@ public class PlayerMovement : MonoBehaviour
             jumpTimeCounter = jumpHoldDuration;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        if (playerInput.actions["Jump"].IsPressed() && isJumping)
-        {
-            if (jumpTimeCounter > 0 && rb.velocity.y > 0) // Only apply force while moving up
-            {
-                rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-        if (playerInput.actions["Jump"].WasReleasedThisFrame())
-        {
-            isJumping = false;
-        }
+        
+        // Capture jump input for use in FixedUpdate.
+        jumpHeld = playerInput.actions["Jump"].IsPressed();
 
         if (playerInput.actions["Crouch"].IsPressed())
         {
@@ -83,6 +72,17 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // NEW: Process jump hold force in FixedUpdate for smoother physics.
+        if (isJumping && jumpHeld && jumpTimeCounter > 0)
+        {
+            rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
+            jumpTimeCounter -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            isJumping = false;
+        }
+        
         Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
