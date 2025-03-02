@@ -16951,7 +16951,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   groundCheckDistance: 1.1
-  noFriction2D: {fileID: 0}
 --- !u!50 &495635194
 Rigidbody2D:
   serializedVersion: 4
@@ -16968,7 +16967,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5a7443b2f78810749934c44e7f8d7bd9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -17085,7 +17084,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 495635192}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5a7443b2f78810749934c44e7f8d7bd9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

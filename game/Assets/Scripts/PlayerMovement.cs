@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     // 2 units tall so we need to check for at least 1.0
     // anything in the 1.0 to 1.1 range works fine
     [SerializeField] private float groundCheckDistance = 1.1f;
-    [SerializeField] private PhysicsMaterial2D noFriction2D;
 
     private PlayerInput playerInput;
     private Rigidbody2D rb;
@@ -47,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         // can't default initialize the field, this is
         // the next best thing
         groundLayer = LayerMask.GetMask("GroundLayer");
-        capsuleCollider.sharedMaterial = noFriction2D;
     }
 
     void Update()
