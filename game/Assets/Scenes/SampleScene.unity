@@ -1214,7 +1214,7 @@ GameObject:
   - component: {fileID: 433629218}
   - component: {fileID: 433629217}
   - component: {fileID: 433629216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ForeGround
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -16941,10 +16941,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d12bdfd2152a874daab893bb95f310f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 5
+  moveSpeed: 7
+  jumpForce: 7
   acceleration: 5
-  maxSlopeAngle: 45
+  jumpHoldForce: 4
+  jumpHoldDuration: 0.3
+  crouchSpeedMultiplier: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckDistance: 1.1
 --- !u!50 &495635194
 Rigidbody2D:
   serializedVersion: 4
@@ -16961,7 +16967,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5a7443b2f78810749934c44e7f8d7bd9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -17078,7 +17084,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 495635192}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5a7443b2f78810749934c44e7f8d7bd9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
