@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 269233011}
   - component: {fileID: 269233012}
   - component: {fileID: 269233013}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Foreground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1044,6 +1044,11 @@ MonoBehaviour:
   jumpHoldForce: 3
   jumpHoldDuration: 0.4
   crouchSpeedMultiplier: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckDistance: 1
+  noFriction2D: {fileID: 0}
 --- !u!50 &495635194
 Rigidbody2D:
   serializedVersion: 4
