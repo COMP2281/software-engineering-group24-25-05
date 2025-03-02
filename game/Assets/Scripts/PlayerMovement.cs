@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 6.5f;
+    [SerializeField] private float jumpForce = 7.0f;
     [SerializeField] private float acceleration = 5f;
     [SerializeField] private float jumpHoldForce = 4f;
     [SerializeField] private float jumpHoldDuration = 0.3f;
@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     // the casting starts from the center of the player which is
     // 2 units tall so we need to check for at least 1.0
     // anything in the 1.0 to 1.1 range works fine
-    [SerializeField] private float groundCheckDistance = 1.0f;
+    [SerializeField] private float groundCheckDistance = 1.1f;
     [SerializeField] private PhysicsMaterial2D noFriction2D;
 
     private PlayerInput playerInput;

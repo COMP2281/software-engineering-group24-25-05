@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 // Code from https://youtu.be/_jtj73lu2Ko?si=qFlQrmGtG8tRAwfv
 
 public class MainMenuEvents : MonoBehaviour
 {
-    private VisualElement startScreen;
     private Button startGameButton;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
@@ -19,7 +19,6 @@ public class MainMenuEvents : MonoBehaviour
         var root = uiDocument.rootVisualElement;
 
         // Retrieve the start screen and button by their name
-        startScreen = root.Q<VisualElement>("startScreen");
         startGameButton = root.Q<Button>("startGameButton");
 
         // Register the button click event
@@ -30,6 +29,7 @@ public class MainMenuEvents : MonoBehaviour
         {
             _menuButtons.Add(button);
             button.RegisterCallback<ClickEvent>(OnAllButtonClick);
+            button.RegisterCallback<MouseEnterEvent>(OnButtonHover);
         });
 
         // Initialize the audio source
@@ -40,10 +40,15 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("Play Game Button Clicked");
         // Hide the start screen by setting its display style to none
-        startScreen.style.display = DisplayStyle.None;
+        SceneManager.LoadScene("SampleScene");
     }
 
     private void OnAllButtonClick(ClickEvent evt)
+    {
+        _audioSource.Play();
+    }
+
+    private void OnButtonHover(MouseEnterEvent evt)
     {
         _audioSource.Play();
     }
