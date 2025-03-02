@@ -12,9 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundCheckDistance = 0.1f;
+    // the casting starts from the center of the player which is
+    // 2 units tall so we need to check for at least 1.0
+    // anything in the 1.0 to 1.1 range works fine
+    [SerializeField] private float groundCheckDistance = 1.0f;
     [SerializeField] private PhysicsMaterial2D noFriction2D;
-    
+
     private PlayerInput playerInput;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -41,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // can't default initialize the field, this is
+        // the next best thing
+        groundLayer = LayerMask.GetMask("GroundLayer");
         capsuleCollider.sharedMaterial = noFriction2D;
     }
 
@@ -52,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTimeCounter = jumpHoldDuration;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        
+
         // Capture jump input for use in FixedUpdate.
         jumpHeld = playerInput.actions["Jump"].IsPressed();
 
@@ -82,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = false;
         }
-        
+
         Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
