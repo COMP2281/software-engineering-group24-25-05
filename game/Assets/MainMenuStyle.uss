@@ -18,7 +18,7 @@
 }
 
 .button {
-    font-size: 100px;
+    font-size: 75px;
     color: rgb(254, 240, 193);
     background-color: rgb(58, 94, 91);
     -unity-text-align: middle-left;
@@ -35,8 +35,9 @@
 }
 
 .menu {
-    width: 40%;
+    width: 45%;
     height: 100%;
+    margin-right: 20px;
 }
 
 .image-container {

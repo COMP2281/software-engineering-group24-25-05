@@ -6,12 +6,8 @@ using UnityEngine.SceneManagement;
 
 // Code from https://youtu.be/_jtj73lu2Ko?si=qFlQrmGtG8tRAwfv
 
-public class MainMenuEvents : MonoBehaviour
+public class SettingsMenuEvents : MonoBehaviour
 {
-    private Button artificialIntelligenceButton;
-    private Button dataAnalyticsButton;
-    private Button cyberSecurityButton;
-    private Button settingsButton;
     private Button backButton;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
@@ -23,17 +19,11 @@ public class MainMenuEvents : MonoBehaviour
         var root = uiDocument.rootVisualElement;
 
         // Retrieve the buttons by their name
-        artificialIntelligenceButton = root.Q<Button>("artificialIntelligenceButton");
-        dataAnalyticsButton = root.Q<Button>("dataAnalyticsButton");
-        cyberSecurityButton = root.Q<Button>("cyberSecurityButton");
-        settingsButton = root.Q<Button>("settingsButton");
-        backButton = root.Q<Button>("backButton");
+        backButton = root.Q<Button>("BackButton");
 
         // Register the button click event
-        artificialIntelligenceButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
-        dataAnalyticsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
-        cyberSecurityButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
-        settingsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SettingsScene"));
+        backButton.RegisterCallback<ClickEvent>(evt => LoadScene("MainMenu"));
+
 
         // Retrieve all buttons in the menu
         root.Query<Button>().ForEach(button =>
