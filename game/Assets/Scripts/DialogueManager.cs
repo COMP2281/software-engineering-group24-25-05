@@ -1,14 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public GameObject dialogueBox;
-    public Button nextButton;
 
     private string[] dialogueLines = {
         "Welcome to the game!",
@@ -18,37 +15,111 @@ public class DialogueManager : MonoBehaviour
         "Good luck, agent!"
     };
 
-    private int currentLineIndex = 0;
+    private int currentLine = 0;
+    private bool isWaitingAfterLine = false;
+    private bool isTyping = false;
+    private Coroutine typeLineCoroutine;
+    private Coroutine waitCoroutine; // Add this to track the wait coroutine
 
     void Start()
     {
         dialogueBox.SetActive(true);
-        nextButton.onClick.AddListener(DisplayNextLine);
-        DisplayNextLine(); // Show first line
+        DisplayNextLine();
     }
 
-IEnumerator TypeSentence(string sentence)
-{
-    dialogueText.text = "";
-    foreach (char letter in sentence.ToCharArray())
+    void Update()
     {
-        dialogueText.text += letter;
-        yield return new WaitForSeconds(0.05f); // Adjust speed
+        // If Enter is pressed while text is typing, complete the text instantly
+        if (Input.GetKeyDown(KeyCode.Return) && isTyping)
+        {
+            CompleteTyping();
+        }
+        // If Enter is pressed after a line is fully displayed, show the next line
+        else if (Input.GetKeyDown(KeyCode.Return) && isWaitingAfterLine)
+        {
+            DisplayNextLine();
+        }
     }
-}
 
-void DisplayNextLine()
-{
-    if (currentLineIndex < dialogueLines.Length)
+    void CompleteTyping()
     {
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(dialogueLines[currentLineIndex]));
-        currentLineIndex++;
+        if (typeLineCoroutine != null)
+        {
+            StopCoroutine(typeLineCoroutine);
+            typeLineCoroutine = null;
+        }
+        
+        // Display the full line
+        dialogueText.text = dialogueLines[currentLine];
+        
+        isTyping = false;
+        isWaitingAfterLine = true;
+        
+        // Start waiting for 3 seconds before automatically displaying the next line
+        if (waitCoroutine != null)
+            StopCoroutine(waitCoroutine);
+        waitCoroutine = StartCoroutine(WaitForNextLine());
     }
-    else
+
+    void DisplayNextLine()
+    {
+        // Reset waiting state
+        isWaitingAfterLine = false;
+        
+        // Stop any existing wait coroutine
+        if (waitCoroutine != null)
+        {
+            StopCoroutine(waitCoroutine);
+            waitCoroutine = null;
+        }
+        
+        currentLine++;
+        if (currentLine >= dialogueLines.Length)
+        {
+            EndDialogue();
+            return;
+        }
+        
+        // Start typing the next line
+        typeLineCoroutine = StartCoroutine(TypeLine(dialogueLines[currentLine]));
+    }
+
+    void EndDialogue()
     {
         dialogueBox.SetActive(false);
     }
-}
 
+    IEnumerator TypeLine(string line)
+    {
+        isTyping = true;
+        dialogueText.text = "";
+        
+        foreach (char letter in line.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(0.05f);
+        }
+        
+        isTyping = false;
+        isWaitingAfterLine = true;
+        
+        // Start waiting for 3 seconds before automatically displaying the next line
+        waitCoroutine = StartCoroutine(WaitForNextLine());
+    }
+    
+    IEnumerator WaitForNextLine()
+    {
+        float timer = 0;
+        while (timer < 3f && !Input.GetKeyDown(KeyCode.Return))
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
+        // Only auto-advance if 3 seconds passed and Enter wasn't pressed
+        if (!Input.GetKeyDown(KeyCode.Return))
+        {
+            DisplayNextLine();
+        }
+    }
 }
