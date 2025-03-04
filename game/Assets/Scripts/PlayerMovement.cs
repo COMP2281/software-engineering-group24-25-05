@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();

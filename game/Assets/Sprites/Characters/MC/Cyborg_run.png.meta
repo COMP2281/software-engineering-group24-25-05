@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 45d0b8f7a6f7c471d88a4ef41839853b
+=======
+guid: 1c7eda72c12dc429bb15c84278e27e4c
+>>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,10 +104,17 @@ TextureImporter:
       name: Cyborg_run_0
       rect:
         serializedVersion: 2
+<<<<<<< Updated upstream
         x: 5
         y: 0
         width: 20
         height: 32
+=======
+        x: 0
+        y: 0
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +122,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 1b402a3bd707140ca8a03a023c5a594f
       internalID: 64118721
+=======
+      spriteID: b74b5a2e582f3447eaedb688e1443199
+      internalID: 1522916786
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -121,10 +137,17 @@ TextureImporter:
       name: Cyborg_run_1
       rect:
         serializedVersion: 2
+<<<<<<< Updated upstream
         x: 52
         y: 0
         width: 19
         height: 31
+=======
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +155,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 2ddcb738a044f471e9b9818ff166e6ba
       internalID: -932178503
+=======
+      spriteID: 809a1f477c3574f7b840d7b1e0b2a88a
+      internalID: -15070266
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -142,10 +170,17 @@ TextureImporter:
       name: Cyborg_run_2
       rect:
         serializedVersion: 2
+<<<<<<< Updated upstream
         x: 98
         y: 0
         width: 28
         height: 31
+=======
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +188,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: cb81f98b463c44e91b8b939e5b456d80
       internalID: -48176624
+=======
+      spriteID: f35d400cf775c4cafbf646ebcd57a0c7
+      internalID: -2124767269
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -165,8 +205,13 @@ TextureImporter:
         serializedVersion: 2
         x: 144
         y: 0
+<<<<<<< Updated upstream
         width: 32
         height: 32
+=======
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +219,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 5a6b7a491de9243ecb2b606977b3a6e4
       internalID: 1299396651
+=======
+      spriteID: 079b36dc54e544c5abe99e6dbd309cb2
+      internalID: 234793620
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -184,10 +234,17 @@ TextureImporter:
       name: Cyborg_run_4
       rect:
         serializedVersion: 2
+<<<<<<< Updated upstream
         x: 195
         y: 0
         width: 23
         height: 31
+=======
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +252,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: dfcd8a6f1a056403e8c64e2b2cee8362
       internalID: 1813370076
+=======
+      spriteID: 1b60c7a6e3bf04a78adc06c4f02b49cd
+      internalID: -919389300
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -205,10 +267,17 @@ TextureImporter:
       name: Cyborg_run_5
       rect:
         serializedVersion: 2
+<<<<<<< Updated upstream
         x: 246
         y: 0
         width: 19
         height: 31
+=======
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+>>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +285,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 8860995b2a13248d28ac32175e2d3cce
       internalID: 657192613
+=======
+      spriteID: e7bbe30085b7e403fa73b53c913877ed
+      internalID: -1239933588
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -233,12 +307,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+<<<<<<< Updated upstream
       Cyborg_run_0: 64118721
       Cyborg_run_1: -932178503
       Cyborg_run_2: -48176624
       Cyborg_run_3: 1299396651
       Cyborg_run_4: 1813370076
       Cyborg_run_5: 657192613
+=======
+      Cyborg_run_0: 1522916786
+      Cyborg_run_1: -15070266
+      Cyborg_run_2: -2124767269
+      Cyborg_run_3: 234793620
+      Cyborg_run_4: -919389300
+      Cyborg_run_5: -1239933588
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
