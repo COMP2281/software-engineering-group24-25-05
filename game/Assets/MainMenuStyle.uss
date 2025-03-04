@@ -44,6 +44,7 @@
     width: 50%;
     align-items: center;
     justify-content: center;
+    background-color: rgb(105, 184, 178);
 }
 
 .button:hover {
@@ -55,5 +56,21 @@
 }
 
 .main-menu {
-    background-color: rgb(254, 240, 204);
+    background-color: rgb(236, 224, 182);
+}
+
+.pause-menu {
+    background-color: rgb(0, 0, 0);
+    border-top-width: 20px;
+    border-right-width: 20px;
+    border-bottom-width: 20px;
+    border-left-width: 20px;
+    margin-top: 250px;
+    margin-right: 250px;
+    margin-bottom: 250px;
+    margin-left: 250px;
+    border-left-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
 }
