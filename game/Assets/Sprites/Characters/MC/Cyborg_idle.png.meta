@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: c2358f8bef0d940da879ec268080b9a4
-=======
-guid: e9fc57e0b46b94afab02c64fdc167bcc
->>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,17 +100,10 @@ TextureImporter:
       name: Cyborg_idle_0
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 3
         y: 0
         width: 19
         height: 35
-=======
-        x: 0
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,13 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: 5b4e16dfe325543a597dcb6056603722
       internalID: 284987195
-=======
-      spriteID: f6cd2eda3df624333a8430d7deabca4b
-      internalID: -107555814
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -137,17 +121,10 @@ TextureImporter:
       name: Cyborg_idle_1
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 51
         y: 0
         width: 19
         height: 35
-=======
-        x: 48
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,13 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: e2958f91b4b964e548f54fee11a6609f
       internalID: 591496136
-=======
-      spriteID: 29b39d2c7a4ef4bccb27c26218eedb89
-      internalID: 355856720
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -170,17 +142,10 @@ TextureImporter:
       name: Cyborg_idle_2
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 98
         y: 0
         width: 20
         height: 35
-=======
-        x: 96
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,13 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: 1e4b19325ddcc4df48ac36f16a8fe28c
       internalID: 1296434954
-=======
-      spriteID: 7d2d6dc0f29884039a95a7cc7733f5a2
-      internalID: 1924515790
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -203,17 +163,10 @@ TextureImporter:
       name: Cyborg_idle_3
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 146
         y: 0
         width: 20
         height: 35
-=======
-        x: 144
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,13 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: 265adf52bfb5a48adbfeee622fd8d8db
       internalID: -1201158014
-=======
-      spriteID: 1f8d227d6e2214396b7757b9254e5291
-      internalID: -789174969
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -243,17 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-<<<<<<< Updated upstream
       Cyborg_idle_0: 284987195
       Cyborg_idle_1: 591496136
       Cyborg_idle_2: 1296434954
       Cyborg_idle_3: -1201158014
-=======
-      Cyborg_idle_0: -107555814
-      Cyborg_idle_1: 355856720
-      Cyborg_idle_2: 1924515790
-      Cyborg_idle_3: -789174969
->>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: 7f2674f0efc754e9fbd20b812b71314d
-=======
-guid: b2cecd8b201b3476bbada752172fdf55
->>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,17 +100,10 @@ TextureImporter:
       name: Cyborg_hurt_0
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 3
         y: 0
         width: 19
         height: 35
-=======
-        x: 0
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,13 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: c78d8832b7e2f41dc9224933827532fd
       internalID: -2081800893
-=======
-      spriteID: 8e86440aaca154ad99d8346477b1b93b
-      internalID: -135386288
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -137,17 +121,10 @@ TextureImporter:
       name: Cyborg_hurt_1
       rect:
         serializedVersion: 2
-<<<<<<< Updated upstream
         x: 49
         y: 0
         width: 21
         height: 35
-=======
-        x: 48
-        y: 0
-        width: 48
-        height: 48
->>>>>>> Stashed changes
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,13 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
       spriteID: a19965f4bf7d64185a1806b194eac911
       internalID: -516318279
-=======
-      spriteID: 54d18f6e35a53442bba60b65c3722209
-      internalID: -1167735583
->>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -177,13 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-<<<<<<< Updated upstream
       Cyborg_hurt_0: -2081800893
       Cyborg_hurt_1: -516318279
-=======
-      Cyborg_hurt_0: -135386288
-      Cyborg_hurt_1: -1167735583
->>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
