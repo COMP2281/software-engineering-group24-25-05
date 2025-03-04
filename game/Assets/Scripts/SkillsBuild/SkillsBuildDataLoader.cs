@@ -7,8 +7,8 @@ using UnityEngine;
 public class SkillsBuildEntry
 {
     public string question;
-    public string answer;
     public string[] possible_answers;
+    public int answer;
     public int difficulty;
 }
 
