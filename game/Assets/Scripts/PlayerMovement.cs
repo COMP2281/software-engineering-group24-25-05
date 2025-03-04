@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro; // if needed for dialogue manager
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 7.0f;
+    [SerializeField] private float jumpForce = 6.5f;
     [SerializeField] private float acceleration = 5f;
     [SerializeField] private float jumpHoldForce = 4f;
     [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
-    [SerializeField] private LayerMask groundLayer;
-    // the casting starts from the center of the player which is
-    // 2 units tall so we need to check for at least 1.0
-    // anything in the 1.0 to 1.1 range works fine
-    [SerializeField] private float groundCheckDistance = 1.1f;
-
+    [SerializeField] private DialogueManager dialogueManager;
+    
     private PlayerInput playerInput;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -29,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
 
-    private bool jumpHeld; // NEW FIELD
+    private float horizontalVelocityBeforeLanding;
 
     void Awake()
     {
@@ -43,22 +40,37 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // can't default initialize the field, this is
-        // the next best thing
-        groundLayer = LayerMask.GetMask("GroundLayer");
+        
     }
 
     void Update()
     {
+        // Block all input if dialogue is open
+        if (dialogueManager.dialogueBox.activeSelf)
+            return;
+
         if (playerInput.actions["Jump"].triggered && isGrounded && !isCrouching)
         {
             isJumping = true;
             jumpTimeCounter = jumpHoldDuration;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-
-        // Capture jump input for use in FixedUpdate.
-        jumpHeld = playerInput.actions["Jump"].IsPressed();
+        if (playerInput.actions["Jump"].IsPressed() && isJumping)
+        {
+            if (jumpTimeCounter > 0 && rb.velocity.y > 0) // Only apply force while moving up
+            {
+                rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+        if (playerInput.actions["Jump"].WasReleasedThisFrame())
+        {
+            isJumping = false;
+        }
 
         if (playerInput.actions["Crouch"].IsPressed())
         {
@@ -70,22 +82,13 @@ public class PlayerMovement : MonoBehaviour
             if (isCrouching)
                 StopCrouch();
         }
-
-        CheckGrounded();
     }
 
     void FixedUpdate()
     {
-        // NEW: Process jump hold force in FixedUpdate for smoother physics.
-        if (isJumping && jumpHeld && jumpTimeCounter > 0)
-        {
-            rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
-            jumpTimeCounter -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            isJumping = false;
-        }
+        // Skip movement if dialogue is open
+        if (dialogueManager.dialogueBox.activeSelf)
+            return;
 
         Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
@@ -93,6 +96,12 @@ public class PlayerMovement : MonoBehaviour
 
         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
+
+        // Store horizontal velocity before landing
+        if (!isGrounded)
+        {
+            horizontalVelocityBeforeLanding = rb.velocity.x;
+        }
     }
 
     void StartCrouch()
@@ -116,8 +125,21 @@ public class PlayerMovement : MonoBehaviour
         capsuleCollider.offset = originalColliderOffset;
     }
 
-    void CheckGrounded()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            // Reapply horizontal velocity to maintain momentum
+            rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
