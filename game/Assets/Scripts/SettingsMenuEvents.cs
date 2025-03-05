@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 public class SettingsMenuEvents : MonoBehaviour
 {
     private Button backButton;
+    private Button audioButton;
+    private Button videoButton;
+    private Button controlsButton;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
     
@@ -20,6 +23,9 @@ public class SettingsMenuEvents : MonoBehaviour
 
         // Retrieve the buttons by their name
         backButton = root.Q<Button>("BackButton");
+        audioButton = root.Q<Button>("AudioButton");
+        videoButton = root.Q<Button>("VideoButton");
+        controlsButton = root.Q<Button>("ControlsButton");
 
         // Register the button click event
         backButton.RegisterCallback<ClickEvent>(evt => LoadScene("MainMenu"));
@@ -51,5 +57,19 @@ public class SettingsMenuEvents : MonoBehaviour
     private void OnButtonHover(MouseEnterEvent evt)
     {
         _audioSource.Play();
+    }
+
+    // Function to display the correct settings menu based on the button clicked
+    private void DisplaySettingsMenu(string menuName)
+    {
+        // Hide all settings menus
+        foreach (var button in _menuButtons)
+        {
+            button.style.display = DisplayStyle.None;
+        }
+
+        // Display the selected settings menu
+        var selectedMenu = _menuButtons.Find(button => button.name == menuName);
+        selectedMenu.style.display = DisplayStyle.Flex;
     }
 }
