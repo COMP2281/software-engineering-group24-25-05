@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro; // if needed for dialogue manager
 
 public class PlayerMovement : MonoBehaviour
@@ -14,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private DialogueManager dialogueManager;
     
-    private PlayerInput playerInput;
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool isJumping;
@@ -30,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         originalScale = transform.localScale;
@@ -49,13 +46,13 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        if (playerInput.actions["Jump"].triggered && isGrounded && !isCrouching)
+        if (UserInput.Instace.JumpPressed && isGrounded && !isCrouching)
         {
             isJumping = true;
             jumpTimeCounter = jumpHoldDuration;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        if (playerInput.actions["Jump"].IsPressed() && isJumping)
+        if (UserInput.Instace.JumpHeld && isJumping)
         {
             if (jumpTimeCounter > 0 && rb.velocity.y > 0) // Only apply force while moving up
             {
@@ -67,12 +64,12 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = false;
             }
         }
-        if (playerInput.actions["Jump"].WasReleasedThisFrame())
+        if (UserInput.Instace.JumpReleased)
         {
             isJumping = false;
         }
 
-        if (playerInput.actions["Crouch"].IsPressed())
+        if (UserInput.Instace.CrouchHold)
         {
             if (!isCrouching)
                 StartCrouch();
@@ -90,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector2 movement = UserInput.Instace.MovementInput;
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
