@@ -52,7 +52,7 @@ public class SettingsMenuEvents : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
 
         // Set ControlsButton as active at the start
-        SetActiveButton(controlsButton);
+        controlsButton.Focus();
     }
     
     private void OnDestroy()
@@ -63,23 +63,6 @@ public class SettingsMenuEvents : MonoBehaviour
         }
     }
 
-    // Function to set the active button
-    private void SetActiveButton(Button activeButton)
-    {
-        // Set the button to be active
-        foreach (var button in _menuButtons)
-        {
-            if (button == activeButton)
-            {
-                button.AddToClassList("active");
-            }
-            else
-            {
-                button.RemoveFromClassList("active");
-            }
-        }
-    }
-
     private void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -87,11 +70,6 @@ public class SettingsMenuEvents : MonoBehaviour
 
     private void OnAllButtonClick(ClickEvent evt)
     {
-        Button clickedButton = evt.currentTarget as Button;
-        if (clickedButton != null)
-        {
-            SetActiveButton(clickedButton);
-        }
         _audioSource.Play();
     }
 
