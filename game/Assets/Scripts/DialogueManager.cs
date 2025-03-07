@@ -10,8 +10,6 @@ public class DialogueManager : MonoBehaviour
     private string[] dialogueLines = {
         "Welcome to the game!",
         "Your mission is to steal the secret documents from the enemy base.",
-        "You can move with the arrow keys or WASD.",
-        "Press the space bar to jump.",
         "Good luck, agent!"
     };
 
