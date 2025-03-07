@@ -18,7 +18,7 @@ public class SettingsMenuEvents : MonoBehaviour
     private Button crouchButton;
     private Button rightButton;
     private Button leftButton;
-    private Button deviceToggleButton;  // New button to toggle between keyboard/controller
+    private Button deviceToggleButton;
     
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
@@ -65,31 +65,23 @@ public class SettingsMenuEvents : MonoBehaviour
             deviceToggleButton.text = "Current: Keyboard & Mouse";
             deviceToggleButton.clicked += ToggleControlScheme;
         }
-        else
-        {
-            Debug.LogWarning("DeviceToggleButton not found in the UI. Please add it to your UXML.");
-        }
         
-        // Find rebind overlay elements - this will now look for the elements added by UXMLLoader
+        // Find rebind overlay elements
         rebindOverlay = root.Q<VisualElement>("RebindOverlay");
         rebindText = root.Q<Label>("RebindText");
         
         if (rebindOverlay != null)
         {
             rebindOverlay.style.display = DisplayStyle.None;
-            Debug.Log("Found rebind overlay");
-        }
-        else
-        {
-            Debug.LogError("Rebind overlay not found! Make sure UXMLLoader has added it to the UI tree.");
         }
         
-        // Get reference to PlayerInput component - usually this would be on a player GameObject
-        // For now, we'll find it in the scene (you may need to adjust based on your setup)
         playerInput = FindObjectOfType<PlayerInput>();
         if (playerInput != null)
         {
             inputActions = playerInput.actions;
+            
+            // Set the correct initial control scheme name from the actual available schemes
+            currentControlScheme = GetKeyboardControlSchemeName();
             
             // Load any saved bindings
             LoadBindings();
@@ -97,15 +89,11 @@ public class SettingsMenuEvents : MonoBehaviour
             // Set up the control change buttons
             SetupControlButton(jumpButton, "Jump");
             SetupControlButton(crouchButton, "Crouch");
-            SetupControlButton(rightButton, "Move", GetCorrectBindingIndex("Move", "rightButton")); // Assuming right is the positive x binding
-            SetupControlButton(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));  // Assuming left is the negative x binding
+            SetupControlButton(rightButton, "Move", GetCorrectBindingIndex("Move", "rightButton"));
+            SetupControlButton(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));
             
             // Update the button labels to show current bindings
             UpdateControlLabels();
-        }
-        else
-        {
-            Debug.LogError("PlayerInput not found in scene!");
         }
 
         // Retrieve all buttons in the menu
@@ -118,16 +106,40 @@ public class SettingsMenuEvents : MonoBehaviour
 
         // Initialize the audio source
         _audioSource = GetComponent<AudioSource>();
+
+        // Set ControlsButton as active at the start
+        SetActiveButton(controlsButton);
+    }
+
+    // Function to set the active button
+    private void SetActiveButton(Button activeButton)
+    {
+        // Set the button to be active
+        foreach (var button in _menuButtons)
+        {
+            if (button == activeButton)
+            {
+                button.AddToClassList("active");
+            }
+            else
+            {
+                button.RemoveFromClassList("active");
+            }
+        }
     }
 
     private void LoadScene(string sceneName)
     {
-        Debug.Log("Loading Scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 
     private void OnAllButtonClick(ClickEvent evt)
     {
+        Button clickedButton = evt.currentTarget as Button;
+        if (clickedButton != null)
+        {
+            SetActiveButton(clickedButton);
+        }
         _audioSource.Play();
     }
 
@@ -139,21 +151,24 @@ public class SettingsMenuEvents : MonoBehaviour
     // Toggle between keyboard and controller control schemes
     private void ToggleControlScheme()
     {
-        if (currentControlScheme == "MouseKeyboard")
+        if (currentControlScheme == GetKeyboardControlSchemeName())
         {
-            currentControlScheme = "Gamepad";
+            currentControlScheme = GetGamepadControlSchemeName();
             if (deviceToggleButton != null)
                 deviceToggleButton.text = "Current: Controller";
         }
         else
         {
-            currentControlScheme = "MouseKeyboard";
+            currentControlScheme = GetKeyboardControlSchemeName();
             if (deviceToggleButton != null)
                 deviceToggleButton.text = "Current: Keyboard & Mouse";
         }
         
-        // Update all control labels for the new scheme
-        UpdateControlLabels();
+        // Reset the SetupControlButton for movement bindings to ensure we get the correct indices for the new scheme
+        SetupControlButton(rightButton, "Move", GetCorrectBindingIndex("Move", "rightButton"));
+        SetupControlButton(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));
+        SetupControlButton(jumpButton, "Jump", GetCorrectBindingIndex("Jump", jumpButton.name));
+        SetupControlButton(crouchButton, "Crouch", GetCorrectBindingIndex("Crouch", crouchButton.name));
         
         // Play button sound
         if (_audioSource != null)
@@ -221,83 +236,107 @@ public class SettingsMenuEvents : MonoBehaviour
                     button.text = $"Change {GetActionDisplayName(actionName, button.name)}: {bindingDisplayString}";
                 }
             }
-            else
-            {
-                Debug.LogWarning($"Action '{actionName}' not found in input actions");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Button or inputActions is null");
         }
     }
     
     private string GetBindingForControlScheme(InputAction action, string controlScheme)
     {
-        Debug.Log($"Searching for binding for action '{action.name}' in control scheme '{controlScheme}'");
-        
         // Find a binding that matches the control scheme
         for (int i = 0; i < action.bindings.Count; i++)
         {
             var binding = action.bindings[i];
             
-            // Check if this binding matches the control scheme we want
+            // Check if this binding matches the control scheme we want with case-insensitive comparison
             if (!binding.isComposite && 
-                (string.IsNullOrEmpty(binding.groups) || binding.groups.Contains(controlScheme)))
+                (string.IsNullOrEmpty(binding.groups) || 
+                 ContainsIgnoreCase(binding.groups, controlScheme)))
             {
-                Debug.Log($"Found binding: {binding.path} (override: {binding.overridePath})");
                 // Return the effective binding path
                 return !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
             }
         }
         
-        Debug.LogWarning($"No binding found for action '{action.name}' in control scheme '{controlScheme}'");
         // Default if not found
         return "Not bound";
     }
     
-    // Helper to get binding display for composite bindings
+    // Helper to get binding display for composite bindings with case-insensitive comparisons
     private string GetCompositeBindingDisplayString(InputAction action, string compositePart, string controlScheme)
     {
-        // Find the composite binding that matches our control scheme
+        // Try a different approach to find the correct binding for each control scheme
+        bool isGamepad = controlScheme.ToLower().Contains("gamepad") || controlScheme.ToLower().Contains("controller");
+        
+        // Find a binding part with the right name that belongs to the right device
         for (int i = 0; i < action.bindings.Count; i++)
         {
             var binding = action.bindings[i];
-            if (binding.isComposite && 
-                (string.IsNullOrEmpty(binding.groups) || binding.groups.Contains(controlScheme)))
+            
+            // Skip if not a part of composite
+            if (!binding.isPartOfComposite) continue;
+                
+            // Check if the binding name matches what we want
+            if (string.Equals(binding.name, compositePart, System.StringComparison.OrdinalIgnoreCase))
             {
-                // Found the correct composite, now find the part we want
-                for (int j = i + 1; j < action.bindings.Count; j++)
+                string path = !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
+                
+                // Check if this matches our current device type
+                bool isGamepadBinding = path.ToLower().Contains("gamepad");
+                
+                if ((isGamepad && isGamepadBinding) || (!isGamepad && !isGamepadBinding))
                 {
-                    var partBinding = action.bindings[j];
-                    if (!partBinding.isPartOfComposite)
-                        break; // We've gone past the composite parts
-                        
-                    if (partBinding.name.ToLower() == compositePart.ToLower())
+                    return path;
+                }
+            }
+        }
+
+        // If not found above, try the original approach but with better scheme checking
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            
+            // For a composite binding, the group may be on the composite itself rather than each part
+            if (binding.isComposite)
+            {
+                bool matchesScheme = string.IsNullOrEmpty(binding.groups) || 
+                                     ContainsIgnoreCase(binding.groups, controlScheme);
+                
+                if (matchesScheme)
+                {
+                    // Found the correct composite, now find the part we want
+                    for (int j = i + 1; j < action.bindings.Count; j++)
                     {
-                        // Return the override path if it exists, otherwise the original path
-                        return !string.IsNullOrEmpty(partBinding.overridePath) ? partBinding.overridePath : partBinding.path;
+                        var partBinding = action.bindings[j];
+                        if (!partBinding.isPartOfComposite)
+                            break; // We've gone past the composite parts
+                        
+                        if (string.Equals(partBinding.name, compositePart, System.StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Return the override path if it exists, otherwise the original path
+                            return !string.IsNullOrEmpty(partBinding.overridePath) ? partBinding.overridePath : partBinding.path;
+                        }
                     }
                 }
             }
         }
         
-        // Default if not found
         return "Not bound";
     }
-    
+
     private void StartRebinding(string actionName, int bindingIndex = 0)
     {
         InputAction action = inputActions.FindAction(actionName);
         if (action != null)
         {
-            // Use the supplied bindingIndex instead of re-calculating it
+            // Use the supplied bindingIndex
             int correctBindingIndex = bindingIndex;
             if(correctBindingIndex < 0)
             {
-                Debug.LogError($"Could not find binding for action {actionName} in control scheme {currentControlScheme}");
                 return;
             }
+            
+            // For composite parts we need special handling
+            var bindingIsCompositePart = correctBindingIndex > 0 && correctBindingIndex < action.bindings.Count && 
+                                        action.bindings[correctBindingIndex].isPartOfComposite;
             
             // Store the action and binding index for use in callbacks
             actionToRebind = action;
@@ -310,37 +349,47 @@ public class SettingsMenuEvents : MonoBehaviour
             if (rebindOverlay != null)
             {
                 rebindOverlay.style.display = DisplayStyle.Flex;
-                rebindText.text = $"Press any {(currentControlScheme == "Gamepad" ? "button" : "key")} for {actionName}...";
+                string actionText = actionName;
+                
+                // For composite parts, show the specific direction
+                if (bindingIsCompositePart)
+                {
+                    string partName = action.bindings[correctBindingIndex].name;
+                    actionText = $"{actionName} {partName}";
+                }
+                
+                rebindText.text = $"Press any {(currentControlScheme.ToLower().Contains("gamepad") ? "button" : "key")} for {actionText}...";
             }
             
-            // Debug information
-            Debug.Log($"Starting rebind for {actionName}, binding index: {correctBindingIndex}, current path: {action.bindings[correctBindingIndex].effectivePath}");
-            
-            // Configure the rebinding operation based on the current control scheme
+            // Configure the rebinding operation
             var rebindOperation = action.PerformInteractiveRebinding(correctBindingIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
                 .OnMatchWaitForAnother(0.1f)
                 .WithoutGeneralizingPathOfSelectedControl();
                 
-            if (currentControlScheme == "MouseKeyboard")
+            // Add device constraints based on the current control scheme
+            bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
+                            currentControlScheme.ToLower().Contains("controller");
+                            
+            if (!isGamepad) // Keyboard/Mouse
             {
-                rebindOperation = rebindOperation.WithControlsHavingToMatchPath("<Keyboard>")
-                                                .WithControlsExcluding("<Gamepad>");
+                rebindOperation = rebindOperation
+                    .WithControlsHavingToMatchPath("<Keyboard>")
+                    .WithControlsExcluding("<Gamepad>");
             }
-            else if (currentControlScheme == "Gamepad")
+            else // Gamepad
             {
-                rebindOperation = rebindOperation.WithControlsHavingToMatchPath("<Gamepad>")
-                                                .WithControlsExcluding("<Keyboard>");
+                rebindOperation = rebindOperation
+                    .WithControlsHavingToMatchPath("<Gamepad>")
+                    .WithControlsExcluding("<Keyboard>");
             }
                 
             // Complete the rebinding operation setup
             this.rebindOperation = rebindOperation
                 .OnComplete(operation => {
-                    Debug.Log($"Rebind complete. New binding: {action.bindings[correctBindingIndex].overridePath}");
                     RebindComplete();
                 })
                 .OnCancel(operation => {
-                    Debug.Log("Rebind cancelled");
                     RebindCancelled();
                 })
                 .Start();
@@ -355,7 +404,8 @@ public class SettingsMenuEvents : MonoBehaviour
             for (int i = 0; i < action.bindings.Count; i++)
             {
                 if (action.bindings[i].isComposite && 
-                    (string.IsNullOrEmpty(action.bindings[i].groups) || action.bindings[i].groups.Contains(controlScheme)))
+                    (string.IsNullOrEmpty(action.bindings[i].groups) || 
+                     ContainsIgnoreCase(action.bindings[i].groups, controlScheme)))
                 {
                     // Return the index of the composite itself
                     return i;
@@ -368,7 +418,8 @@ public class SettingsMenuEvents : MonoBehaviour
             for (int i = 0; i < action.bindings.Count; i++)
             {
                 if (!action.bindings[i].isComposite && !action.bindings[i].isPartOfComposite &&
-                    (string.IsNullOrEmpty(action.bindings[i].groups) || action.bindings[i].groups.Contains(controlScheme)))
+                    (string.IsNullOrEmpty(action.bindings[i].groups) || 
+                     ContainsIgnoreCase(action.bindings[i].groups, controlScheme)))
                 {
                     return i;
                 }
@@ -460,35 +511,60 @@ public class SettingsMenuEvents : MonoBehaviour
     {
         InputAction action = inputActions.FindAction(actionName);
         if (action == null)
+        {
             return 0;
+        }
             
         if (actionName != "Move") 
         {
             // For normal actions, find the binding matching current control scheme
-            return FindBindingIndexForControlScheme(action, actionName, currentControlScheme);
+            int bindingIndex = FindBindingIndexForControlScheme(action, actionName, currentControlScheme);
+            return bindingIndex;
         }
             
-        // For Move action, find the composite binding for current control scheme,
-        // then determine the part index based on the button
-        int compositeIndex = FindBindingIndexForControlScheme(action, actionName, currentControlScheme);
-        if (compositeIndex == -1)
-            return 0;
-            
-        // Find the parts of this composite
+        // For Move action with composite bindings, we handle it differently
+        
+        // First determine what part we need
         string partName = buttonName == "rightButton" ? "right" : "left";
         
-        for (int i = compositeIndex + 1; i < action.bindings.Count; i++)
+        // Check if we're using gamepad
+        bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
+                        currentControlScheme.ToLower().Contains("controller");
+                        
+        // First search specifically for the right device type
+        for (int i = 0; i < action.bindings.Count; i++)
         {
             var binding = action.bindings[i];
-            if (!binding.isPartOfComposite)
-                break;
-                
+            
+            // Skip non-composite parts
+            if (!binding.isPartOfComposite) continue;
+            
+            // Check if this is the part we want
             if (binding.name.ToLower() == partName.ToLower())
+            {
+                // Check if it belongs to the right device type
+                string path = !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
+                bool isGamepadBinding = path.ToLower().Contains("gamepad");
+                
+                if ((isGamepad && isGamepadBinding) || (!isGamepad && !isGamepadBinding))
+                {
+                    return i;
+                }
+            }
+        }
+        
+        // If we didn't find a device-specific match, fall back to just finding the right part
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isPartOfComposite && binding.name.ToLower() == partName.ToLower())
+            {
                 return i;
+            }
         }
         
         // Default value if not matching
-        return 0;
+        return -1;
     }
 
     // Helper method to get display names for buttons
@@ -502,5 +578,47 @@ public class SettingsMenuEvents : MonoBehaviour
         }
         
         return actionName;
+    }
+
+    // Helper methods to get the actual control scheme names from the asset
+    private string GetKeyboardControlSchemeName()
+    {
+        if (inputActions == null) return "MouseKeyboard";
+        
+        foreach (var scheme in inputActions.controlSchemes)
+        {
+            // Check if this scheme contains keyboard
+            if (scheme.name.ToLower().Contains("key") || 
+                scheme.name.ToLower().Contains("mouse") || 
+                scheme.name.ToLower().Contains("keyboard"))
+            {
+                return scheme.name;
+            }
+        }
+        return "MouseKeyboard"; // Default
+    }
+
+    private string GetGamepadControlSchemeName()
+    {
+        if (inputActions == null) return "Gamepad";
+        
+        foreach (var scheme in inputActions.controlSchemes)
+        {
+            // Check if this scheme is for gamepad
+            if (scheme.name.ToLower().Contains("gamepad") || 
+                scheme.name.ToLower().Contains("controller") || 
+                scheme.name.ToLower().Contains("joystick"))
+            {
+                return scheme.name;
+            }
+        }
+        return "Gamepad"; // Default
+    }
+
+    // Add a helper method for case-insensitive string contains
+    private bool ContainsIgnoreCase(string source, string toCheck)
+    {
+        return source != null && toCheck != null && 
+               source.IndexOf(toCheck, System.StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

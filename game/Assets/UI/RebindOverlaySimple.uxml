@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="RebindOverlay" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.8); position: absolute; left: 0; top: 0; right: 0; bottom: 0; justify-content: center; align-items: center;">
-        <ui:VisualElement name="RebindPanel" style="background-color: rgb(48, 48, 48); border-radius: 10px; padding: 20px; min-width: 300px; min-height: 150px; justify-content: center; align-items: center;">
-            <ui:Label text="Press any key..." display-tooltip-when-elided="true" name="RebindText" style="font-size: 24px; color: rgb(255, 255, 255); -unity-text-align: middle-center; margin-bottom: 10px;" />
-            <ui:Label text="Press ESC to cancel" display-tooltip-when-elided="true" style="color: rgb(192, 192, 192); font-size: 14px; -unity-text-align: middle-center;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>

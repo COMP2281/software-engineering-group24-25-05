@@ -55,6 +55,14 @@
     color: rgb(0, 0, 0);
 }
 
+.button:active {
+    background-color: rgb(236, 224, 182);
+    scale: 0.98 0.98;
+    transform-origin: left;
+    transition-duration: 0.2s;
+    color: rgb(0, 0, 0);
+}
+
 .main-menu {
     background-color: rgb(236, 224, 182);
 }
