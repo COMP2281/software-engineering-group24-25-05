@@ -17016,12 +17016,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  jumpForce: 7
+  jumpForce: 5.5
+  doubleJumpForce: 6
   acceleration: 5
-  jumpHoldForce: 4
-  jumpHoldDuration: 0.3
   crouchSpeedMultiplier: 0.5
   dialogueManager: {fileID: 1912517954}
+  fallGravityScale: 2
+  coyoteTime: 0.15
+  jumpBufferTime: 0.1
+  fastFallSpeed: 5
+  jumpCooldown: 0.1
 --- !u!50 &495635194
 Rigidbody2D:
   serializedVersion: 4
