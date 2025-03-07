@@ -291,9 +291,9 @@ public class SettingsMenuEvents : MonoBehaviour
         InputAction action = inputActions.FindAction(actionName);
         if (action != null)
         {
-            // Find the correct binding index for the current control scheme
-            int correctBindingIndex = FindBindingIndexForControlScheme(action, actionName, currentControlScheme);
-            if (correctBindingIndex == -1)
+            // Use the supplied bindingIndex instead of re-calculating it
+            int correctBindingIndex = bindingIndex;
+            if(correctBindingIndex < 0)
             {
                 Debug.LogError($"Could not find binding for action {actionName} in control scheme {currentControlScheme}");
                 return;
