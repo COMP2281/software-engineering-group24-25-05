@@ -14,8 +14,7 @@ public class UserInput : MonoBehaviour
     public bool JumpReleased { get; private set; }
     public bool CrouchHold { get; private set; }
     public bool MenuOpenCloseInput { get; private set; }
-    // public bool DialogueAdvanceInput { get; private set; }
-    // public bool Interact { get; private set; }
+    public bool SubmitInput { get; private set; }
 
 
     private PlayerInput _playerInput;
@@ -24,8 +23,8 @@ public class UserInput : MonoBehaviour
     private InputAction _jumpAction;
     private InputAction _crouchAction;
     private InputAction _menuOpenCloseAction;
-    // private InputAction _dialogueAdvanceAction;
-    // private InputAction _interactAction;
+    private InputAction _SubmitAction;
+    
 
 
 
@@ -56,7 +55,8 @@ public class UserInput : MonoBehaviour
         _jumpAction = _playerInput.actions["Jump"];
         _crouchAction = _playerInput.actions["Crouch"];
         _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
-        // _dialogueAdvanceAction = _playerInput.actions["DialogueAdvance"];
+        _SubmitAction = _playerInput.actions["Submit"];
+    
         // _interactAction = _playerInput.actions["Interact"];
     }
 
@@ -68,6 +68,7 @@ public class UserInput : MonoBehaviour
         JumpReleased = _jumpAction.WasReleasedThisFrame();
         CrouchHold = _crouchAction.IsPressed();
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
+        SubmitInput = _SubmitAction.WasPressedThisFrame();
         // DialogueAdvanceInput = _dialogueAdvanceAction.WasPressedThisFrame();
         // Interact = _interactAction.WasPressedThisFrame();
     }
