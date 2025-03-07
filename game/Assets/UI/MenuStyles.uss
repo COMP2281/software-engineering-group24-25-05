@@ -1,0 +1,23 @@
+/* Existing styles */
+
+.rebind-button {
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+    background-color: rgb(64, 64, 64);
+    border-width: 2px;
+    border-radius: 10px;
+    margin: 10px;
+    transition-duration: 0.2s;
+    color: rgb(255, 255, 255);
+}
+
+.rebind-button:hover {
+    background-color: rgb(80, 80, 80);
+    scale: 1.05;
+}
+
+.rebind-button:active {
+    background-color: rgb(100, 100, 100);
+    scale: 0.95;
+}

@@ -1,0 +1,22 @@
+.rebind-panel {
+    background-color: #303030;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rebind-text {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 10px;
+    -unity-text-align: middle-center;
+}
+
+.rebind-cancel-text {
+    font-size: 14px;
+    color: #c0c0c0;
+    -unity-text-align: middle-center;
+}

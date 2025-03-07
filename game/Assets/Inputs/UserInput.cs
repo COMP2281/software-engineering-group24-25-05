@@ -37,6 +37,9 @@ public class UserInput : MonoBehaviour
         }
 
         _playerInput = GetComponent<PlayerInput>();
+        
+        // Load any saved bindings
+        LoadSavedBindings();
 
         SetupInputActions();
     }
@@ -67,5 +70,15 @@ public class UserInput : MonoBehaviour
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
         // DialogueAdvanceInput = _dialogueAdvanceAction.WasPressedThisFrame();
         // Interact = _interactAction.WasPressedThisFrame();
+    }
+
+    private void LoadSavedBindings()
+    {
+        if (PlayerPrefs.HasKey("InputBindings"))
+        {
+            string rebinds = PlayerPrefs.GetString("InputBindings");
+            Debug.Log("Loading saved input bindings: " + rebinds);
+            _playerInput.actions.LoadBindingOverridesFromJson(rebinds);
+        }
     }
 }
