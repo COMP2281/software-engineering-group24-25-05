@@ -29,6 +29,14 @@
                 <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" />
                 <ui:Button text="Current: Keyboard &amp; Mouse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeviceToggleButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
+            
+            <!-- Video Settings Panel -->
+            <ui:VisualElement name="videoPanel" class="settings-panel" style="flex-grow: 1; display: none;">
+                <ui:Label text="Resolution" style="font-size: 18px; color: white; margin-bottom: 10px;" />
+                <ui:DropdownField name="resolutionDropdown" style="width: 300px; margin-bottom: 20px;" />
+                <ui:Toggle label="Fullscreen" name="fullscreenToggle" style="width: 300px; margin-bottom: 20px; color: white;" />
+                <ui:Button text="Apply" name="applyVideoButton" class="button" style="width: 150px; align-self: center;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
     

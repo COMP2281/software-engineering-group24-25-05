@@ -25,8 +25,14 @@ public class PauseMenu : MonoBehaviour {
     // Controls panel
     private VisualElement controlsPanel;
     
+    // Video panel
+    private VisualElement videoPanel;
+    
     // Reference to our shared controls component
     private ChangeControls changeControls;
+    
+    // Reference to our shared video settings component
+    private VideoSettings videoSettings;
 
     // Reference to UserInput
     private UserInput userInput;
@@ -34,6 +40,9 @@ public class PauseMenu : MonoBehaviour {
     void Start() {
         // Get reference to UserInput singleton
         userInput = UserInput.Instance;
+        
+        // Get reference to VideoSettings singleton
+        videoSettings = VideoSettings.Instance;
 
         // Load the UXML and USS
         pauseMenuDocument = GetComponent<UIDocument>();
@@ -80,6 +89,12 @@ public class PauseMenu : MonoBehaviour {
             changeControls = gameObject.AddComponent<ChangeControls>();
             changeControls.Initialize(root, FindObjectOfType<PlayerInput>());
         }
+        
+        // Video panel setup
+        videoPanel = root.Q<VisualElement>("videoPanel");
+        if (videoPanel != null) {
+            videoPanel.style.display = DisplayStyle.None;
+        }
 
         // Retrieve all buttons in the menu for general hover/click sounds
         root.Query<Button>().ForEach(button =>
@@ -109,6 +124,9 @@ public class PauseMenu : MonoBehaviour {
                 } else if (controlsPanel != null && controlsPanel.style.display == DisplayStyle.Flex) {
                     // If in controls panel, go back to settings submenu
                     ShowSettingsMenu();
+                } else if (videoPanel != null && videoPanel.style.display == DisplayStyle.Flex) {
+                    // If in video panel, go back to settings submenu
+                    ShowSettingsMenu();
                 } else {
                     // Otherwise resume the game
                     Resume();
@@ -130,6 +148,7 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
         if (settingsSubmenu != null) settingsSubmenu.style.display = DisplayStyle.None;
         if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
+        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
         Time.timeScale = 0.0f;
         isPaused = true;
     }
@@ -143,6 +162,7 @@ public class PauseMenu : MonoBehaviour {
         if (settingsSubmenu != null) {
             settingsSubmenu.style.display = DisplayStyle.Flex;
             controlsPanel.style.display = DisplayStyle.None;
+            if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
         }
     }
 
@@ -150,12 +170,15 @@ public class PauseMenu : MonoBehaviour {
         if (controlsPanel != null) {
             controlsPanel.style.display = DisplayStyle.Flex;
             settingsSubmenu.style.display = DisplayStyle.None;
+            if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
         }
     }
 
     private void ShowVideoPanel() {
-        // For now just log that this is not implemented
-        Debug.Log("Video settings not yet implemented");
+        if (videoSettings != null && pauseMenuDocument != null) {
+            videoSettings.ShowVideoPanel(pauseMenuDocument.rootVisualElement);
+            settingsSubmenu.style.display = DisplayStyle.None;
+        }
     }
 
     private void ShowAudioPanel() {
@@ -167,6 +190,7 @@ public class PauseMenu : MonoBehaviour {
         // Hide settings submenu and controls panel
         if (settingsSubmenu != null) settingsSubmenu.style.display = DisplayStyle.None;
         if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
+        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
         
         // Show main pause menu
         var mainMenuContainer = pauseMenuDocument.rootVisualElement.Q<VisualElement>("menuContainer");
