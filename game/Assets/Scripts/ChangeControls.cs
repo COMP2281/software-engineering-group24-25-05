@@ -261,6 +261,13 @@ public class ChangeControls : MonoBehaviour
 
     private void StartRebinding(string actionName, int bindingIndex = 0)
     {
+        // Make sure we have valid input actions before attempting to rebind
+        if (inputActions == null)
+        {
+            Debug.LogError("Input actions asset is null. Cannot start rebinding.");
+            return;
+        }
+
         InputAction action = inputActions.FindAction(actionName);
         if (action != null)
         {
@@ -268,6 +275,14 @@ public class ChangeControls : MonoBehaviour
             int correctBindingIndex = bindingIndex;
             if(correctBindingIndex < 0)
             {
+                Debug.LogWarning($"Invalid binding index {correctBindingIndex} for action {actionName}");
+                return;
+            }
+            
+            // Ensure the binding index is valid for this action
+            if (correctBindingIndex >= action.bindings.Count)
+            {
+                Debug.LogWarning($"Binding index {correctBindingIndex} is out of range for action {actionName}");
                 return;
             }
             
@@ -295,44 +310,99 @@ public class ChangeControls : MonoBehaviour
                     actionText = $"{actionName} {partName}";
                 }
                 
-                rebindText.text = $"Press any {(currentControlScheme.ToLower().Contains("gamepad") ? "button" : "key")} for {actionText}...";
+                if (rebindText != null)
+                {
+                    rebindText.text = $"Press any {(currentControlScheme.ToLower().Contains("gamepad") ? "button" : "key")} for {actionText}...";
+                }
             }
             
-            // Configure the rebinding operation
-            var rebindOperation = action.PerformInteractiveRebinding(correctBindingIndex)
-                .WithCancelingThrough("<Keyboard>/escape")
-                .OnMatchWaitForAnother(0.1f)
-                .WithoutGeneralizingPathOfSelectedControl();
-                
-            // Add device constraints based on the current control scheme
-            bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
-                            currentControlScheme.ToLower().Contains("controller");
-                            
-            if (!isGamepad) // Keyboard/Mouse
+            try
             {
-                rebindOperation = rebindOperation
-                    .WithControlsHavingToMatchPath("<Keyboard>")
-                    .WithControlsExcluding("<Gamepad>");
+                // Configure the rebinding operation
+                var rebindOperation = action.PerformInteractiveRebinding(correctBindingIndex)
+                    .WithCancelingThrough("<Keyboard>/escape")
+                    .OnMatchWaitForAnother(0.1f)
+                    .WithoutGeneralizingPathOfSelectedControl();
+                    
+                // Add device constraints based on the current control scheme
+                bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
+                                currentControlScheme.ToLower().Contains("controller");
+                                
+                if (!isGamepad) // Keyboard/Mouse
+                {
+                    rebindOperation = rebindOperation
+                        .WithControlsHavingToMatchPath("<Keyboard>")
+                        .WithControlsExcluding("<Gamepad>");
+                }
+                else // Gamepad
+                {
+                    rebindOperation = rebindOperation
+                        .WithControlsHavingToMatchPath("<Gamepad>")
+                        .WithControlsExcluding("<Keyboard>");
+                }
+                    
+                // Complete the rebinding operation setup with clean error handling
+                this.rebindOperation = rebindOperation
+                    .OnComplete(operation => {
+                        try {
+                            RebindComplete();
+                        } catch (System.Exception e) {
+                            Debug.LogError($"Error during rebind completion: {e.Message}");
+                            SafeCleanup();
+                        }
+                    })
+                    .OnCancel(operation => {
+                        try {
+                            RebindCancelled();
+                        } catch (System.Exception e) {
+                            Debug.LogError($"Error during rebind cancellation: {e.Message}");
+                            SafeCleanup();
+                        }
+                    })
+                    .Start();
             }
-            else // Gamepad
+            catch (System.Exception e)
             {
-                rebindOperation = rebindOperation
-                    .WithControlsHavingToMatchPath("<Gamepad>")
-                    .WithControlsExcluding("<Keyboard>");
+                Debug.LogError($"Error starting rebinding operation: {e.Message}");
+                SafeCleanup();
             }
-                
-            // Complete the rebinding operation setup
-            this.rebindOperation = rebindOperation
-                .OnComplete(operation => {
-                    RebindComplete();
-                })
-                .OnCancel(operation => {
-                    RebindCancelled();
-                })
-                .Start();
         }
     }
     
+    // A safe cleanup method to be called whenever we encounter an exception
+    private void SafeCleanup()
+    {
+        if (rebindOperation != null)
+        {
+            try
+            {
+                rebindOperation.Dispose();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error disposing rebind operation: {e.Message}");
+            }
+            rebindOperation = null;
+        }
+        
+        if (actionToRebind != null)
+        {
+            try
+            {
+                actionToRebind.Enable();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error enabling action: {e.Message}");
+            }
+        }
+        
+        if (rebindOverlay != null)
+        {
+            rebindOverlay.style.display = DisplayStyle.None;
+        }
+    }
+
     private int FindBindingIndexForControlScheme(InputAction action, string actionName, string controlScheme)
     {
         if (actionName == "Move")
@@ -369,11 +439,15 @@ public class ChangeControls : MonoBehaviour
     private void RebindComplete()
     {
         // Clean up the rebinding operation
-        rebindOperation.Dispose();
-        rebindOperation = null;
+        if (rebindOperation != null)
+        {
+            rebindOperation.Dispose();
+            rebindOperation = null;
+        }
         
         // Re-enable the action
-        actionToRebind.Enable();
+        if (actionToRebind != null)
+            actionToRebind.Enable();
         
         // Hide the overlay
         if (rebindOverlay != null)
@@ -392,11 +466,15 @@ public class ChangeControls : MonoBehaviour
     private void RebindCancelled()
     {
         // Clean up the rebinding operation
-        rebindOperation.Dispose();
-        rebindOperation = null;
+        if (rebindOperation != null)
+        {
+            rebindOperation.Dispose();
+            rebindOperation = null;
+        }
         
         // Re-enable the action
-        actionToRebind.Enable();
+        if (actionToRebind != null)
+            actionToRebind.Enable();
         
         // Hide the overlay
         if (rebindOverlay != null)
@@ -405,20 +483,43 @@ public class ChangeControls : MonoBehaviour
     
     public void SaveBindings()
     {
-        // Save bindings to player preferences
-        var bindingOverridesJson = inputActions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("InputBindings", bindingOverridesJson);
-        PlayerPrefs.Save();
+        try
+        {
+            if (inputActions != null)
+            {
+                // Save bindings to player preferences
+                var bindingOverridesJson = inputActions.SaveBindingOverridesAsJson();
+                if (!string.IsNullOrEmpty(bindingOverridesJson))
+                {
+                    PlayerPrefs.SetString("InputBindings", bindingOverridesJson);
+                    PlayerPrefs.Save();
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error saving bindings: {e.Message}");
+        }
     }
     
     public void LoadBindings()
     {
-        // Load bindings from player preferences if available
-        if (PlayerPrefs.HasKey("InputBindings"))
+        try
         {
-            string bindingOverridesJson = PlayerPrefs.GetString("InputBindings");
-            inputActions.LoadBindingOverridesFromJson(bindingOverridesJson);
-            UpdateControlLabels();
+            // Load bindings from player preferences if available
+            if (PlayerPrefs.HasKey("InputBindings") && inputActions != null)
+            {
+                string bindingOverridesJson = PlayerPrefs.GetString("InputBindings");
+                if (!string.IsNullOrEmpty(bindingOverridesJson))
+                {
+                    inputActions.LoadBindingOverridesFromJson(bindingOverridesJson);
+                    UpdateControlLabels();
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error loading bindings: {e.Message}");
         }
     }
     

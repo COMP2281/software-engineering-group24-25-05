@@ -28,7 +28,13 @@ public class PauseMenu : MonoBehaviour {
     // Reference to our shared controls component
     private ChangeControls changeControls;
 
+    // Reference to UserInput
+    private UserInput userInput;
+
     void Start() {
+        // Get reference to UserInput singleton
+        userInput = UserInput.Instance;
+
         // Load the UXML and USS
         pauseMenuDocument = GetComponent<UIDocument>();
         var root = pauseMenuDocument.rootVisualElement;
@@ -94,7 +100,8 @@ public class PauseMenu : MonoBehaviour {
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Escape)) {
+        // Use UserInput instead of direct input detection
+        if(userInput.MenuOpenCloseInput) {
             if(isPaused) {
                 if (settingsSubmenu != null && settingsSubmenu.style.display == DisplayStyle.Flex) {
                     // If in settings submenu, go back to main pause menu

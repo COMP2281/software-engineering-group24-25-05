@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class UserInput : MonoBehaviour
 {
 
-    public static UserInput Instace;
+    public static UserInput Instance;
 
     public Vector2 MovementInput { get; private set; }
     public bool JumpPressed { get; private set; }
@@ -30,9 +30,9 @@ public class UserInput : MonoBehaviour
 
     private void Awake()
     {
-        if (Instace == null)
+        if (Instance == null)
         {
-            Instace = this;
+            Instance = this;
         }
 
         _playerInput = GetComponent<PlayerInput>();

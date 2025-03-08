@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
         // Check for Submit input through UserInput singleton
-        bool currentSubmitState = UserInput.Instace.SubmitInput;
+        bool currentSubmitState = UserInput.Instance.SubmitInput;
         
         // Submit was pressed this frame
         if (currentSubmitState && !previousSubmitState)
@@ -121,14 +121,14 @@ public class DialogueManager : MonoBehaviour
     IEnumerator WaitForNextLine()
     {
         float timer = 0;
-        while (timer < 3f && !UserInput.Instace.SubmitInput)
+        while (timer < 3f && !UserInput.Instance.SubmitInput)
         {
             timer += Time.deltaTime;
             yield return null;
         }
         
         // Only auto-advance if 3 seconds passed and Submit wasn't pressed
-        if (!UserInput.Instace.SubmitInput)
+        if (!UserInput.Instance.SubmitInput)
         {
             DisplayNextLine();
         }

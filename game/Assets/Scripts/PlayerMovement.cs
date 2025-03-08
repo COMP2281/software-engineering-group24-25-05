@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Manage jump buffer
-        if (UserInput.Instace.JumpPressed) {
+        if (UserInput.Instance.JumpPressed) {
             jumpBufferCounter = jumpBufferTime;
         } else {
             jumpBufferCounter -= Time.deltaTime;
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Crouch handling
-        if (UserInput.Instace.CrouchHold) {
+        if (UserInput.Instance.CrouchHold) {
             if (!isCrouching)
                 StartCrouch();
         }
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        Vector2 movement = UserInput.Instace.MovementInput;
+        Vector2 movement = UserInput.Instance.MovementInput;
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
