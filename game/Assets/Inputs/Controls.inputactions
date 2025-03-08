@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "f1b726cf-42b2-4637-b5d6-ef1bc5850894",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -199,22 +208,22 @@
                 },
                 {
                     "name": "",
-                    "id": "e64f01e0-6c61-43f9-b015-16402bf7d423",
-                    "path": "<Gamepad>/start",
+                    "id": "3fc4b464-2b03-4991-aabf-04e0b6e4ff9a",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";MouseKeyboard",
                     "action": "MenuOpenClose",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3fc4b464-2b03-4991-aabf-04e0b6e4ff9a",
-                    "path": "<Keyboard>/escape",
+                    "id": "d2874490-7161-423c-b47e-d2fccc7220c5",
+                    "path": "*/{Menu}",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";MouseKeyboard",
+                    "groups": ";Gamepad",
                     "action": "MenuOpenClose",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -238,6 +247,17 @@
                     "processors": "",
                     "groups": ";MouseKeyboard",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6fb5118-002b-40de-b271-1743507f8b92",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";MouseKeyboard;Gamepad",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
