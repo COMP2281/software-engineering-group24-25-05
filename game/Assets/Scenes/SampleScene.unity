@@ -17024,7 +17024,7 @@ MonoBehaviour:
   fallGravityScale: 2
   coyoteTime: 0.15
   jumpBufferTime: 0.1
-  fastFallSpeed: 5
+  fastFallSpeed: 10
   jumpCooldown: 0.1
 --- !u!50 &495635194
 Rigidbody2D:
