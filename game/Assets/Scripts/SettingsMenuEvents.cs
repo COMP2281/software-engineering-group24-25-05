@@ -21,8 +21,9 @@ public class SettingsMenuEvents : MonoBehaviour
     // Reference to our shared controls component
     private ChangeControls changeControls;
     
-    // Reference to our shared video settings component
+    // Reference to our shared settings components
     private VideoSettings videoSettings;
+    private AudioSettings audioSettings;
     
     // UI Elements
     private VisualElement controlsPanel;
@@ -33,8 +34,9 @@ public class SettingsMenuEvents : MonoBehaviour
     
     void OnEnable()
     {
-        // Get reference to VideoSettings singleton
+        // Get references to singleton settings managers
         videoSettings = VideoSettings.Instance;
+        audioSettings = AudioSettings.Instance;
         
         // Load the UXML and USS
         uiDocument = GetComponent<UIDocument>();
@@ -154,6 +156,12 @@ public class SettingsMenuEvents : MonoBehaviour
         if (audioPanel != null)
         {
             audioPanel.style.display = DisplayStyle.Flex;
+            
+            // Initialize audio settings
+            if (audioSettings != null)
+            {
+                audioSettings.InitializeUI(uiDocument.rootVisualElement);
+            }
         }
         else
         {

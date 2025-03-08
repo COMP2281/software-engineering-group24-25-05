@@ -37,6 +37,22 @@
                 <ui:Toggle label="Fullscreen" name="fullscreenToggle" style="width: 300px; margin-bottom: 20px; color: white;" />
                 <ui:Button text="Apply" name="applyVideoButton" class="button" style="width: 150px; align-self: center;" />
             </ui:VisualElement>
+            
+            <!-- Audio Settings Panel -->
+            <ui:VisualElement name="audioPanel" class="settings-panel" style="flex-grow: 1; display: none;">
+                <ui:Label text="Audio Settings" style="font-size: 24px; color: white; margin-bottom: 20px;" />
+                
+                <ui:Label text="Master Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="masterVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Label text="Music Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="musicVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Label text="SFX Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="sfxVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Button text="Apply" name="applyAudioButton" class="button" style="width: 150px; align-self: center;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
     
