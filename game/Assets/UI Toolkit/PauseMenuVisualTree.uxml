@@ -1,17 +1,66 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=807a2b5bfa39f4b479fbe2a51d82c27d&amp;type=3#MainMenuStyle" />
     <ui:VisualElement class="pause-menu" style="flex-grow: 1;">
-        <ui:VisualElement class="title-container" style="flex-grow: 1;">
+        <ui:VisualElement name="VisualElement" class="title-container" style="flex-grow: 1;">
             <ui:Label tabindex="-1" text="Game Paused" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title" />
         </ui:VisualElement>
         <ui:VisualElement class="content" style="flex-grow: 1;">
-            <ui:VisualElement class="menu" style="flex-grow: 1;">
-                <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="resumeButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-                <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="settingsButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-                <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-                <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exitButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <!-- Main Pause Menu -->
+            <ui:VisualElement name="menuContainer" class="menu" style="flex-grow: 1; justify-content: flex-start;">
+                <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="resumeButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; justify-content: flex-start; -unity-text-align: middle-center;" />
+                <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="settingsButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: middle-center;" />
+                <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: middle-center;" />
+                <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exitButton" class="button" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: middle-center;" />
             </ui:VisualElement>
-            <ui:VisualElement class="image-container" style="flex-grow: 1;" />
+            
+            <!-- Settings Submenu -->
+            <ui:VisualElement name="settingsSubmenu" class="menu" style="flex-grow: 1; display: none;">
+                <ui:Button text="Controls" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ControlsButton" class="button active" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="Video" parse-escape-sequences="true" display-tooltip-when-elided="true" name="VideoButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="Audio" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AudioButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            </ui:VisualElement>
+            
+            <!-- Controls Panel -->
+            <ui:VisualElement name="controlsPanel" style="flex-grow: 1; display: none;">
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="jumpButton" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crouchButton" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" />
+                <ui:Button text="Current: Keyboard &amp; Mouse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeviceToggleButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            </ui:VisualElement>
+            
+            <!-- Video Settings Panel -->
+            <ui:VisualElement name="videoPanel" class="settings-panel" style="flex-grow: 1; display: none;">
+                <ui:Label text="Resolution" style="font-size: 18px; color: white; margin-bottom: 10px;" />
+                <ui:DropdownField name="resolutionDropdown" style="width: 300px; margin-bottom: 20px;" />
+                <ui:Toggle label="Fullscreen" name="fullscreenToggle" style="width: 300px; margin-bottom: 20px; color: white;" />
+                <ui:Button text="Apply" name="applyVideoButton" class="button" style="width: 150px; align-self: center;" />
+            </ui:VisualElement>
+            
+            <!-- Audio Settings Panel -->
+            <ui:VisualElement name="audioPanel" class="settings-panel" style="flex-grow: 1; display: none;">
+                <ui:Label text="Audio Settings" style="font-size: 24px; color: white; margin-bottom: 20px;" />
+                
+                <ui:Label text="Master Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="masterVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Label text="Music Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="musicVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Label text="SFX Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
+                <ui:Slider name="sfxVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
+                
+                <ui:Button text="Apply" name="applyAudioButton" class="button" style="width: 150px; align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    
+    <!-- Rebind Overlay -->
+    <ui:VisualElement name="RebindOverlay" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.8); position: absolute; left: 0; top: 0; right: 0; bottom: 0; justify-content: center; align-items: center; display: none;">
+        <ui:VisualElement name="RebindPanel" style="background-color: rgb(48, 48, 48); border-radius: 10px; padding: 20px; min-width: 300px; min-height: 150px; justify-content: center; align-items: center;">
+            <ui:Label text="Press any key..." display-tooltip-when-elided="true" name="RebindText" style="font-size: 24px; color: rgb(255, 255, 255); -unity-text-align: middle-center; margin-bottom: 10px;" />
+            <ui:Label text="Press ESC to cancel" display-tooltip-when-elided="true" style="color: rgb(192, 192, 192); font-size: 14px; -unity-text-align: middle-center;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

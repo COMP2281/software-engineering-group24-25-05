@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro; // if needed for dialogue manager
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 6.5f;
+    [SerializeField] private float jumpForce = 11f;
+    [SerializeField] private float doubleJumpForce = 10f; // Slightly smaller force for double jump
     [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float jumpHoldForce = 4f;
-    [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private DialogueManager dialogueManager;
     
-    private PlayerInput playerInput;
+    // Simplified jump parameters
+    [SerializeField] private float fallGravityScale = 2.2f;  
+    [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private float fastFallSpeed = 12f;
+    [SerializeField] private float jumpCooldown = 0.1f;
+    
     private Rigidbody2D rb;
     private bool isGrounded;
-    private bool isJumping;
-    private float jumpTimeCounter;
+    private bool canDoubleJump; // Track double jump availability
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
+    private float jumpCooldownCounter;
+    private float defaultGravityScale;
 
     private bool isCrouching;
     private CapsuleCollider2D capsuleCollider;
@@ -30,12 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         originalScale = transform.localScale;
         originalColliderSize = capsuleCollider.size;
         originalColliderOffset = capsuleCollider.offset;
+        defaultGravityScale = rb.gravityScale;
     }
 
     void Start()
@@ -49,38 +56,73 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        if (playerInput.actions["Jump"].triggered && isGrounded && !isCrouching)
-        {
-            isJumping = true;
-            jumpTimeCounter = jumpHoldDuration;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-        if (playerInput.actions["Jump"].IsPressed() && isJumping)
-        {
-            if (jumpTimeCounter > 0 && rb.velocity.y > 0) // Only apply force while moving up
-            {
-                rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-        if (playerInput.actions["Jump"].WasReleasedThisFrame())
-        {
-            isJumping = false;
+        // Manage jump cooldown
+        if (jumpCooldownCounter > 0) {
+            jumpCooldownCounter -= Time.deltaTime;
         }
 
-        if (playerInput.actions["Crouch"].IsPressed())
-        {
+        // Manage coyote time and reset double jump when grounded
+        if (isGrounded) {
+            coyoteTimeCounter = coyoteTime;
+            canDoubleJump = true; // Reset double jump when on ground
+        } else {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // Manage jump buffer
+        if (UserInput.Instance.JumpPressed) {
+            jumpBufferCounter = jumpBufferTime;
+        } else {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        // First jump - when grounded or in coyote time
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isCrouching && jumpCooldownCounter <= 0f) {
+            PerformJump(jumpForce);
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+        }
+        // Double jump - when already in air and double jump is available
+        else if (jumpBufferCounter > 0f && !isGrounded && canDoubleJump && jumpCooldownCounter <= 0f) {
+            PerformJump(doubleJumpForce);
+            canDoubleJump = false; // Use up the double jump
+            jumpBufferCounter = 0f;
+        }
+
+        // Crouch handling
+        if (UserInput.Instance.CrouchHold) {
             if (!isCrouching)
                 StartCrouch();
         }
-        else
-        {
+        else {
             if (isCrouching)
                 StopCrouch();
+        }
+        
+        // Apply fall gravity
+        ApplyJumpPhysics();
+    }
+
+    // Helper method to perform jump with given force
+    private void PerformJump(float force) {
+        rb.velocity = new Vector2(rb.velocity.x, 0f); // Clear existing Y velocity
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        jumpCooldownCounter = jumpCooldown;
+    }
+
+    private void ApplyJumpPhysics() {
+        // Falling - apply enhanced gravity but cap maximum fall speed
+        if (rb.velocity.y < 0) {
+            rb.gravityScale = fallGravityScale;
+            
+            // Cap fall speed
+            if (rb.velocity.y < -fastFallSpeed) {
+                rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed);
+            }
+        }
+        // Reset to default for rising
+        else {
+            rb.gravityScale = defaultGravityScale;
         }
     }
 
@@ -90,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector2 movement = UserInput.Instance.MovementInput;
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
