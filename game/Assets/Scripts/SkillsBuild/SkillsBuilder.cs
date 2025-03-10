@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Linq;
 
 public enum QuestionRequestMode
 {
@@ -16,11 +17,14 @@ public class SkillsBuilder : MonoBehaviour
     // IBM SkillsBuild question entries
     private List<SkillsBuildEntry> skillEntries = new List<SkillsBuildEntry>();
 
-    // Number of attempts for skillEntries[i]
-    private List<int> attempts = new List<int>();
+    // // Number of attempts for skillEntries[i]
+    // private List<int> attempts;
+    //
+    // // Number of correct answers for skillEntries[i]
+    // private List<int> correct;
+    private List<double> entryWeights;
 
-    // Number of correct answers for skillEntries[i]
-    private List<int> correct = new List<int>();
+    private Unity.Mathematics.Random prng;
 
     private void Awake()
     {
@@ -39,6 +43,10 @@ public class SkillsBuilder : MonoBehaviour
     public void Start()
     {
         Instance.LoadSkills();
+
+        var v = System.DateTime.Now.Ticks;
+        var seed = (uint)(v ^ (v >> 7) ^ (v >> 17));
+        this.prng = new Unity.Mathematics.Random(seed);
     }
 
     public void LoadSkills()
@@ -46,49 +54,76 @@ public class SkillsBuilder : MonoBehaviour
         SkillsBuildDataLoader loader = new SkillsBuildDataLoader();
         string path = Path.Combine(Application.streamingAssetsPath, "SkillsBuild/sample_questions.json");
         this.skillEntries = loader.LoadEntries(path);
+
+        this.entryWeights = new List<double>(this.skillEntries.Count);
+        this.entryWeights.AddRange(Enumerable.Repeat(1.0, this.skillEntries.Count));
     }
 
-    public SkillsBuildEntry GetRandomQuestion(QuestionRequestMode mode)
+    public SkillsBuildEntry GetQuestion(int index)
+    {
+        return this.skillEntries[index];
+    }
+
+    public int GetRandomQuestionIndex(QuestionRequestMode mode)
     {
         int numElements = this.skillEntries.Count;
-        int index = -1;
 
-        switch (mode)
+        double cumsum = 0.0;
+        List<double> prefixSum = new List<double>(numElements);
+
+        for (int i = 0; i < numElements; i++)
         {
-            case QuestionRequestMode.Random:
-                {
-                    index = Random.Range(0, numElements);
-                    break;
-                }
-            case QuestionRequestMode.WeightedCorrect:
-                {
-                    List<int> prefixSum = new List<int>(numElements);
-
-                    for (int i = 0; i < numElements; i++)
-                    {
-                        prefixSum.Add(this.correct[i]);
-                    }
-
-                    index = this.RandomThresholdSearch(prefixSum);
-                    break;
-                }
-            case QuestionRequestMode.WeightedIncorrect:
-                {
-                    {
-                        List<int> prefixSum = new List<int>(numElements);
-
-                        for (int i = 0; i < numElements; i++)
-                        {
-                            prefixSum.Add(this.attempts[i] - this.correct[i]);
-                        }
-
-                        index = this.RandomThresholdSearch(prefixSum);
-                        break;
-                    }
-                }
+            cumsum += this.entryWeights[i];
+            prefixSum.Add(cumsum);
         }
 
-        return this.skillEntries[index];
+        double threshold = this.prng.NextDouble(cumsum);
+
+        for (int i = 0; i < numElements; i++)
+        {
+            if (prefixSum[i] >= threshold)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public void QuestionAnswered(int index, bool correct)
+    {
+        // Things we care about:
+        //  - How many times a question has been asked
+        //  - How many times a question has been answered correctly
+        //  - How long ago a question was last asked
+        //
+        //  Applying scaling factors to the entry weight every time a question
+        //  is answered allows us to favour questions accordingly:
+        //   - Every weight is scaled by 1.1
+        //      - Less recently asked questions are more favourable
+        //   - Correctly answered questions are multiplied by 0.7
+        //      - Combined with the previous rule, this gives a 0.77x scale
+        //        factor for correctly answered questions
+        //      - Correctly answered questions are less likely to be shown
+        //   - Incorrectly answered questions are multiplied by 1.2
+        //      - Combined with the first rule, this gives a 1.32x scale factor
+        //      - Incorrectly answered questions are more likely to be shown
+
+        this.entryWeights[index] *= 1.1;
+
+        if (correct)
+        {
+            this.entryWeights[index] *= 0.7;
+        }
+        else
+        {
+            this.entryWeights[index] *= 1.2;
+        }
+
+        Debug.Log("Answering Question:");
+        Debug.Log($"Correct? {correct}");
+        string tmp_weights = string.Join(',', this.entryWeights);
+        Debug.Log($"this.entryWeights: " + tmp_weights);
     }
 
     public void DebugLogEntries()
@@ -115,21 +150,4 @@ public class SkillsBuilder : MonoBehaviour
     {
         return skillEntries;
     }
-
-    int RandomThresholdSearch(List<int> prefixSum)
-    {
-        int numElements = prefixSum.Count;
-        int threshold = Random.Range(0, prefixSum[numElements - 1]);
-
-        for (int i = 0; i < numElements; i++)
-        {
-            if (prefixSum[i] >= threshold)
-            {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
 }

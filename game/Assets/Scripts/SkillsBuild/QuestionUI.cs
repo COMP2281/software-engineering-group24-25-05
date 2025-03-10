@@ -5,14 +5,14 @@ using System;
 
 public class SkillsBuildUI : MonoBehaviour
 {
-    private SkillsBuildEntry currentQuestion;
+    private int currentQuestionIndex;
     public TextMeshProUGUI questionText;
     public Button[] answerButtons;
     public SkillsBuilder skillsBuilder;
 
     void Start()
     {
-        this.currentQuestion = new SkillsBuildEntry();
+        this.currentQuestionIndex = -1;
     }
 
     public void MakeVisible(bool visible = true)
@@ -31,7 +31,9 @@ public class SkillsBuildUI : MonoBehaviour
 
     public void LoadNextQuestion()
     {
-        currentQuestion = this.skillsBuilder.GetRandomQuestion(QuestionRequestMode.Random);
+        // currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex(QuestionRequestMode.Random);
+        currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex(QuestionRequestMode.WeightedIncorrect);
+        SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
 
         this.questionText.text = currentQuestion.question;
 
@@ -56,17 +58,10 @@ public class SkillsBuildUI : MonoBehaviour
 
     private void OnAnswerSelected(int selectedIndex)
     {
-        Debug.Log($"Selected Answer: {selectedIndex}");
+        SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(this.currentQuestionIndex);
+        bool correct = selectedIndex == currentQuestion.answer;
+        this.skillsBuilder.QuestionAnswered(this.currentQuestionIndex, correct);
 
-        Invoke("hideUI", 1.5f);
-
-        if (selectedIndex == this.currentQuestion.answer)
-        {
-            Debug.Log("Correct Answer!");
-        }
-        else
-        {
-            Debug.Log("Incorrect Answer :(");
-        }
+        Invoke("hideUI", 0.75f);
     }
 }
