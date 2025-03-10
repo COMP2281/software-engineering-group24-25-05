@@ -13,6 +13,10 @@ public class MainMenuEvents : MonoBehaviour
     private Button cyberSecurityButton;
     private Button settingsButton;
     private Button backButton;
+    private VisualElement mainMenu;
+    private VisualElement titleContainer;
+    private VisualElement leftContainer;
+    private VisualElement rightContainer;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
     
@@ -28,6 +32,12 @@ public class MainMenuEvents : MonoBehaviour
         cyberSecurityButton = root.Q<Button>("cyberSecurityButton");
         settingsButton = root.Q<Button>("settingsButton");
         backButton = root.Q<Button>("backButton");
+
+        // Retrieve visual elements by their name
+        mainMenu = root.Q<VisualElement>("mainMenu");
+        titleContainer = root.Q<VisualElement>("titleContainer");
+        leftContainer = root.Q<VisualElement>("leftContainer");
+        rightContainer = root.Q<VisualElement>("rightContainer");
 
         // Register the button click event
         artificialIntelligenceButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
@@ -45,10 +55,27 @@ public class MainMenuEvents : MonoBehaviour
 
         // Initialize the audio source
         _audioSource = GetComponent<AudioSource>();
+
+        // Intialize visual element classes
+        mainMenu.AddToClassList("main-menu");
+        titleContainer.AddToClassList("title-container");
+        leftContainer.AddToClassList("left-container");
+        rightContainer.AddToClassList("right-container");
+
+        mainMenu.RemoveFromClassList("main-menu-hidden");
+        titleContainer.RemoveFromClassList("title-container-hidden");
+        leftContainer.RemoveFromClassList("left-container-hidden");
+        rightContainer.RemoveFromClassList("right-container-hidden");
     }
 
     private void LoadScene(string sceneName)
     {
+        // Add transition classes
+        // mainMenu.AddToClassList("main-menu-hidden");
+        // titleContainer.AddToClassList("title-container-hidden");
+        // leftContainer.AddToClassList("left-container-hidden");
+        // rightContainer.AddToClassList("right-container-hidden");
+
         Debug.Log("Loading Scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }

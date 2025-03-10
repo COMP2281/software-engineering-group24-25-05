@@ -1,17 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=807a2b5bfa39f4b479fbe2a51d82c27d&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement name="startScreen" class="main-menu" style="flex-grow: 1;">
-        <ui:VisualElement class="title-container">
-            <ui:Label tabindex="-1" text="SHADOW OPERATIVE" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title" />
+    <ui:VisualElement name="mainMenu" class="main-menu" style="flex-grow: 1; background-color: rgb(254, 240, 193);">
+        <ui:VisualElement name="titleContainer" class="title-container" style="transition-duration: 0.5s;">
+            <ui:Label tabindex="-1" text="SHADOW OPERATIVE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title" />
         </ui:VisualElement>
-        <ui:VisualElement class="content">
-            <ui:VisualElement class="menu">
+        <ui:VisualElement name="content" class="content">
+            <ui:VisualElement name="leftContainer" class="left-container" style="transition-duration: 0.5s; flex-grow: 1;">
                 <ui:Button text="Artificial Intelligence" name="artificialIntelligenceButton" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
                 <ui:Button text="Data Analytics" parse-escape-sequences="true" display-tooltip-when-elided="true" name="dataAnalyticsButton" enable-rich-text="false" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
                 <ui:Button text="Cyber Security" parse-escape-sequences="true" display-tooltip-when-elided="true" name="cyberSecurityButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
                 <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="settingsButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); font-size: 100px;" />
             </ui:VisualElement>
-            <ui:VisualElement class="image-container" style="flex-grow: 1; background-color: rgb(105, 184, 178);" />
+            <ui:VisualElement name="rightContainer" class="right-container" style="transition-duration: 0.5s; flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
