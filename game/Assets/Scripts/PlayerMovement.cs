@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // if needed for dialogue manager
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,7 +31,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalScale;
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
-
+    
+    [SerializeField] private float groundAngleThreshold = 0.7f; // Cosine of ~45 degrees
+    [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
     private float horizontalVelocityBeforeLanding;
 
     void Awake()
@@ -169,19 +170,53 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
         {
-            isGrounded = true;
-            // Reapply horizontal velocity to maintain momentum
-            rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
+            // Check if this is a ground collision by examining contact normals
+            CheckGroundContact(collision);
+            
+            // Reapply horizontal velocity to maintain momentum (only if truly grounded)
+            if (isGrounded) {
+                rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
+        {
+            // Continuously check ground contact while colliding
+            CheckGroundContact(collision);
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
         {
             isGrounded = false;
+        }
+    }
+    
+    private void CheckGroundContact(Collision2D collision)
+    {
+        isGrounded = false;
+        
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            Vector2 normal = collision.GetContact(i).normal;
+            
+            // If normal.y is greater than our threshold, this is ground
+            if (normal.y >= groundAngleThreshold)
+            {
+                isGrounded = true;
+                break;
+            }
+            // We don't need to track wall contact since we're not using it
         }
     }
 }
