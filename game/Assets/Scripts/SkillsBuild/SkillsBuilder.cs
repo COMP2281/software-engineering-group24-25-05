@@ -3,25 +3,11 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 
-public enum QuestionRequestMode
-{
-    Random, // Uniformly random question
-    WeightedIncorrect, // Weighted towards frequently incorrect questions
-    WeightedCorrect, // Weighted towards frequently correct questions
-}
-
 public class SkillsBuilder : MonoBehaviour
 {
     public static SkillsBuilder Instance { get; private set; }
 
-    // IBM SkillsBuild question entries
     private List<SkillsBuildEntry> skillEntries = new List<SkillsBuildEntry>();
-
-    // // Number of attempts for skillEntries[i]
-    // private List<int> attempts;
-    //
-    // // Number of correct answers for skillEntries[i]
-    // private List<int> correct;
     private List<double> entryWeights;
 
     private Unity.Mathematics.Random prng;
@@ -64,7 +50,7 @@ public class SkillsBuilder : MonoBehaviour
         return this.skillEntries[index];
     }
 
-    public int GetRandomQuestionIndex(QuestionRequestMode mode)
+    public int GetRandomQuestionIndex()
     {
         int numElements = this.skillEntries.Count;
 

@@ -10,6 +10,8 @@ public class SkillsBuildUI : MonoBehaviour
     public Button[] answerButtons;
     public SkillsBuilder skillsBuilder;
 
+    private bool active = false;
+
     void Start()
     {
         this.currentQuestionIndex = -1;
@@ -22,6 +24,8 @@ public class SkillsBuildUI : MonoBehaviour
         {
             button.gameObject.SetActive(visible);
         }
+
+        this.active = visible;
     }
 
     private void hideUI()
@@ -31,8 +35,7 @@ public class SkillsBuildUI : MonoBehaviour
 
     public void LoadNextQuestion()
     {
-        // currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex(QuestionRequestMode.Random);
-        currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex(QuestionRequestMode.WeightedIncorrect);
+        currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex();
         SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
 
         this.questionText.text = currentQuestion.question;
@@ -52,7 +55,11 @@ public class SkillsBuildUI : MonoBehaviour
 
             int choiceIndex = i;
             answerButtons[i].onClick.RemoveAllListeners();
-            answerButtons[i].onClick.AddListener(() => OnAnswerSelected(choiceIndex));
+            answerButtons[i].onClick.AddListener(() =>
+                {
+                    if (this.active) { OnAnswerSelected(choiceIndex); }
+                }
+            );
         }
     }
 
@@ -62,6 +69,7 @@ public class SkillsBuildUI : MonoBehaviour
         bool correct = selectedIndex == currentQuestion.answer;
         this.skillsBuilder.QuestionAnswered(this.currentQuestionIndex, correct);
 
+        this.active = false; // Disable further selections
         Invoke("hideUI", 0.75f);
     }
 }
