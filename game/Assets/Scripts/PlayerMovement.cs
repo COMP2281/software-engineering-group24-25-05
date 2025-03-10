@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private DialogueManager dialogueManager;
     
+    // Viewcone reference
+    [SerializeField] private PlayerViewcone playerViewcone;
+    
     // Simplified jump parameters
     [SerializeField] private float fallGravityScale = 2.2f;  
     [SerializeField] private float coyoteTime = 0.15f;
@@ -44,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
         originalColliderSize = capsuleCollider.size;
         originalColliderOffset = capsuleCollider.offset;
         defaultGravityScale = rb.gravityScale;
+        
+        // Get viewcone component if not assigned
+        if (playerViewcone == null)
+            playerViewcone = GetComponent<PlayerViewcone>();
     }
 
     void Start()
