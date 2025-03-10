@@ -17,6 +17,9 @@ public class MainMenuEvents : MonoBehaviour
     private VisualElement titleContainer;
     private VisualElement leftContainer;
     private VisualElement rightContainer;
+    private Label artificialIntelligenceText;
+    private Label dataAnalyticsText;
+    private Label cyberSecurityText;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
     
@@ -38,12 +41,23 @@ public class MainMenuEvents : MonoBehaviour
         titleContainer = root.Q<VisualElement>("titleContainer");
         leftContainer = root.Q<VisualElement>("leftContainer");
         rightContainer = root.Q<VisualElement>("rightContainer");
+        artificialIntelligenceText = root.Q<Label>("artificialIntelligenceText");
+        dataAnalyticsText = root.Q<Label>("dataAnalyticsText");
+        cyberSecurityText = root.Q<Label>("cyberSecurityText");
+
+        // Initially hide all tooltip texts
+        HideAllTooltipTexts();
 
         // Register the button click event
         artificialIntelligenceButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
         dataAnalyticsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
         cyberSecurityButton.RegisterCallback<ClickEvent>(evt => LoadScene("SampleScene"));
         settingsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SettingsScene"));
+
+        // Register specific mouse leave events for specialty buttons
+        artificialIntelligenceButton.RegisterCallback<MouseLeaveEvent>(OnSpecialtyButtonLeave);
+        dataAnalyticsButton.RegisterCallback<MouseLeaveEvent>(OnSpecialtyButtonLeave);
+        cyberSecurityButton.RegisterCallback<MouseLeaveEvent>(OnSpecialtyButtonLeave);
 
         // Retrieve all buttons in the menu
         root.Query<Button>().ForEach(button =>
@@ -88,5 +102,41 @@ public class MainMenuEvents : MonoBehaviour
     private void OnButtonHover(MouseEnterEvent evt)
     {
         _audioSource.Play();
+        
+        // Show appropriate description text based on which button is hovered
+        if (evt.target == artificialIntelligenceButton && artificialIntelligenceText != null)
+        {
+            HideAllTooltipTexts();
+            artificialIntelligenceText.style.display = DisplayStyle.Flex;
+        }
+        else if (evt.target == dataAnalyticsButton && dataAnalyticsText != null)
+        {
+            HideAllTooltipTexts();
+            dataAnalyticsText.style.display = DisplayStyle.Flex;
+        }
+        else if (evt.target == cyberSecurityButton && cyberSecurityText != null)
+        {
+            HideAllTooltipTexts();
+            cyberSecurityText.style.display = DisplayStyle.Flex;
+        }
+    }
+    
+    private void OnSpecialtyButtonLeave(MouseLeaveEvent evt)
+    {
+        // Hide all tooltip texts when mouse leaves any specialty button
+        HideAllTooltipTexts();
+    }
+    
+    private void HideAllTooltipTexts()
+    {
+        // Hide all specialty tooltip texts
+        if (artificialIntelligenceText != null)
+            artificialIntelligenceText.style.display = DisplayStyle.None;
+            
+        if (dataAnalyticsText != null)
+            dataAnalyticsText.style.display = DisplayStyle.None;
+            
+        if (cyberSecurityText != null)
+            cyberSecurityText.style.display = DisplayStyle.None;
     }
 }
