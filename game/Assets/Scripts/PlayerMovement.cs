@@ -39,10 +39,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
     private float horizontalVelocityBeforeLanding;
 
+    // Player facing direction
+    private bool isFacingLeft = false;
+    private SpriteRenderer spriteRenderer;
+
+    // Track previous dialogue state for change detection
+    private bool wasDialogueActiveLastFrame = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
         originalColliderSize = capsuleCollider.size;
         originalColliderOffset = capsuleCollider.offset;
@@ -51,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
         // Get viewcone component if not assigned
         if (playerViewcone == null)
             playerViewcone = GetComponent<PlayerViewcone>();
+            
+        // Subscribe to direction change events
+        if (playerViewcone != null)
+            playerViewcone.OnDirectionChanged += OnPlayerDirectionChanged;
     }
 
     void Start()
@@ -60,8 +72,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Check if dialogue state has changed
+        bool isDialogueActive = dialogueManager.dialogueBox.activeSelf;
+        if (isDialogueActive != wasDialogueActiveLastFrame)
+        {
+            wasDialogueActiveLastFrame = isDialogueActive;
+            
+            // Toggle viewcone based on dialogue state
+            if (playerViewcone != null)
+            {
+                playerViewcone.SetViewconeActive(!isDialogueActive);
+            }
+        }
+
         // Block all input if dialogue is open
-        if (dialogueManager.dialogueBox.activeSelf)
+        if (isDialogueActive)
             return;
 
         // Manage jump cooldown
@@ -141,6 +166,9 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         Vector2 movement = UserInput.Instance.MovementInput;
+        
+        // Remove the control inversion - deleted the code that inverted controls
+        
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
@@ -224,6 +252,35 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
             // We don't need to track wall contact since we're not using it
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe when destroyed to prevent memory leaks
+        if (playerViewcone != null)
+            playerViewcone.OnDirectionChanged -= OnPlayerDirectionChanged;
+    }
+    
+    // Called when the mouse changes sides
+    private void OnPlayerDirectionChanged(bool isMouseOnLeft)
+    {
+        // Update facing direction
+        isFacingLeft = isMouseOnLeft;
+        
+        // Flip the sprite accordingly
+        if (spriteRenderer != null) {
+            spriteRenderer.flipX = isFacingLeft;
+        } else {
+            // If no SpriteRenderer, flip the transform scale instead
+            Vector3 currentScale = transform.localScale;
+            currentScale.x = isFacingLeft ? -Mathf.Abs(originalScale.x) : Mathf.Abs(originalScale.x);
+            transform.localScale = currentScale;
+        }
+        
+        // Make sure the light position is updated immediately
+        if (playerViewcone != null) {
+            playerViewcone.RefreshLightPosition();
         }
     }
 }
