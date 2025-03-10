@@ -28,10 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalVelocityBeforeLanding;
 
+    private Animator animator;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // Make sure the same GameObject has the Animator component
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         originalScale = transform.localScale;
         originalColliderSize = capsuleCollider.size;
@@ -45,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+
         // Block all input if dialogue is open
         if (dialogueManager.dialogueBox.activeSelf)
             return;
@@ -54,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpHoldDuration;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetBool("IsJumping", true);
         }
         if (playerInput.actions["Jump"].IsPressed() && isJumping)
         {
@@ -67,6 +73,25 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = false;
             }
         }
+
+
+        // Example of reading horizontal movement
+        float moveX = Input.GetAxisRaw("Horizontal"); // -1 for left, 0 for none, +1 for right
+
+        // 1) Update the Speed parameter in the Animator
+        animator.SetFloat("Speed", Mathf.Abs(moveX));
+
+        // 2) Flip the character sprite left or right if needed
+        if (moveX > 0)
+            transform.localScale = new Vector3(1, 1, 1);  // face right
+        else if (moveX < 0)
+            transform.localScale = new Vector3(-1, 1, 1); // face left
+
+        // 3) Move the player (this might be in FixedUpdate, but for simplicity):
+        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+
+
+
         if (playerInput.actions["Jump"].WasReleasedThisFrame())
         {
             isJumping = false;
@@ -132,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             // Reapply horizontal velocity to maintain momentum
             rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
+            animator.SetBool("IsJumping", false);
         }
     }
 
