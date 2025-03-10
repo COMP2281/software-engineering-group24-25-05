@@ -1,50 +1,32 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=807a2b5bfa39f4b479fbe2a51d82c27d&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement name="startScreen" class="main-menu" style="flex-grow: 1;">
-        <ui:VisualElement class="title-container">
+    <ui:VisualElement name="startScreen" class="main-menu" style="flex-grow: 1; background-color: rgb(254, 240, 193);">
+        <ui:VisualElement name="titleContainer" class="title-container">
             <ui:Label tabindex="-1" text="SETTINGS" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title" />
         </ui:VisualElement>
-        <ui:VisualElement class="content">
-            <ui:VisualElement class="menu" style="width: 477px;">
+        <ui:VisualElement name="content" class="content">
+            <ui:VisualElement name="leftContainer" class="left-container" style="width: 477px;">
                 <ui:Button text="Controls" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ControlsButton" focusable="true" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 <ui:Button text="Video" parse-escape-sequences="true" display-tooltip-when-elided="true" name="VideoButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 <ui:Button text="Audio" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AudioButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
-
-            <!-- Shared Settings Container - Parent for all settings panels -->
-            <ui:VisualElement name="settingsContainer" class="settings-container" style="flex-grow: 1;">
-                <!-- Controls Panel -->
-                <ui:VisualElement name="controlsPanel" class="settings-panel" style="flex-grow: 1; display: flex;">
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="jumpButton" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crouchButton" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" />
-                    <ui:Button text="Current: Keyboard &amp; Mouse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeviceToggleButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            <ui:VisualElement name="rightContainer" class="right-container" style="flex-grow: 1; align-items: flex-start;">
+                <ui:VisualElement name="controlsPanel" class="settings-panel" style="flex-grow: 1; display: flex; width: 100%; height: 100%;">
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="jumpButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crouchButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Current: Keyboard &amp; Mouse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeviceToggleButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
                 </ui:VisualElement>
-                
-                <!-- Video Settings Panel -->
-                <ui:VisualElement name="videoPanel" class="settings-panel" style="flex-grow: 1; display: none;">
-                    <ui:Label text="Resolution" style="font-size: 18px; color: white; margin-bottom: 10px;" />
-                    <ui:DropdownField name="resolutionDropdown" style="width: 300px; margin-bottom: 20px;" />
-                    <ui:Toggle label="Fullscreen" name="fullscreenToggle" style="width: 300px; margin-bottom: 20px; color: white;" />
-                    <ui:Button text="Apply" name="applyVideoButton" class="button" style="width: 150px; align-self: center;" />
+                <ui:VisualElement name="videoPanel" class="settings-panel" style="flex-grow: 1; display: none; width: 100%; height: 100%;">
+                    <ui:DropdownField label="Resolution" name="resolutionDropdown" style="font-size: 50px; -unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); width: auto; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; -unity-font-style: bold; color: rgb(254, 240, 193);" />
+                    <ui:Toggle label="Fullscreen" name="fullscreenToggle" style="width: auto; margin-bottom: 20px; color: rgb(254, 240, 193); margin-top: 20px; margin-right: 20px; margin-left: 20px; font-size: 50px; -unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); -unity-font-style: bold;" />
                 </ui:VisualElement>
-                
-                <!-- Audio Settings Panel -->
-                <ui:VisualElement name="audioPanel" class="settings-panel" style="flex-grow: 1; display: none;">
-                    <ui:Label text="Audio Settings" style="font-size: 24px; color: white; margin-bottom: 20px;" />
-                    
-                    <ui:Label text="Master Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
-                    <ui:Slider name="masterVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
-                    
-                    <ui:Label text="Music Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
-                    <ui:Slider name="musicVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
-                    
-                    <ui:Label text="SFX Volume" style="font-size: 18px; color: white; margin-bottom: 5px;" />
-                    <ui:Slider name="sfxVolumeSlider" high-value="100" show-input-field="true" style="width: 300px; margin-bottom: 20px;" />
-                    
-                    <ui:Button text="Apply" name="applyAudioButton" class="button" style="width: 150px; align-self: center;" />
+                <ui:VisualElement name="audioPanel" class="settings-panel" style="flex-grow: 1; display: none; width: 100%; height: 100%;">
+                    <ui:Slider label="Master Volume" high-value="100" name="masterVolumeSlider" style="margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; color: rgb(254, 240, 193); -unity-font-style: bold; font-size: 50px;" />
+                    <ui:Slider label="Music Volume " high-value="100" name="musicVolumeSlider" style="margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; color: rgb(254, 240, 193); -unity-font-style: bold; font-size: 50px;" />
+                    <ui:Slider label="SFX Volume    " high-value="100" name="sfxVolumeSlider" style="margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; color: rgb(254, 240, 193); -unity-font-style: bold; font-size: 50px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
