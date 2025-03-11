@@ -1957,10 +1957,12 @@ MonoBehaviour:
   - {fileID: 1678265726}
   - {fileID: 665501293}
   skillsBuilder: {fileID: 1470262475}
-  textColor: {r: 0.68551975, g: 0.6859064, b: 0.745283, a: 1}
-  defaultColor: {r: 0.15459237, g: 0.15984029, b: 0.16981131, a: 1}
-  correctColor: {r: 0.13717864, g: 0.745283, b: 0.10898005, a: 1}
-  incorrectColor: {r: 0.754717, g: 0.0747597, b: 0.17002755, a: 1}
+  defaultTextColor: {r: 0.83183515, g: 0.8504215, b: 0.8773585, a: 1}
+  defaultButtonColor: {r: 0.27100393, g: 0.2745536, b: 0.2830189, a: 1}
+  correctTextColor: {r: 0.21698111, g: 0.20981665, b: 0.21137118, a: 1}
+  incorrectTextColor: {r: 0.21568628, g: 0.21176471, b: 0.21176471, a: 0.89411765}
+  correctButtonColor: {r: 0.05273228, g: 0.745283, b: 0.07289884, a: 1}
+  incorrectButtonColor: {r: 0.754717, g: 0.0747597, b: 0.0747597, a: 1}
 --- !u!212 &1954950682
 SpriteRenderer:
   m_ObjectHideFlags: 0

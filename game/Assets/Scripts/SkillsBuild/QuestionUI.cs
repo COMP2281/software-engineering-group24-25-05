@@ -10,10 +10,12 @@ public class SkillsBuildUI : MonoBehaviour
     public Button[] answerButtons;
     public SkillsBuilder skillsBuilder;
 
-    public Color textColor = Color.black;
-    public Color defaultColor = Color.white;
-    public Color correctColor = Color.green;
-    public Color incorrectColor = Color.red;
+    public Color defaultTextColor = Color.black;
+    public Color defaultButtonColor = Color.white;
+    public Color correctTextColor = Color.black;
+    public Color incorrectTextColor = Color.black;
+    public Color correctButtonColor = Color.green;
+    public Color incorrectButtonColor = Color.red;
 
     private bool active = false;
 
@@ -65,8 +67,8 @@ public class SkillsBuildUI : MonoBehaviour
             buttonWriter.typeWhenReady = false;
             buttonWriter.SetText(currentQuestion.possible_answers[i]);
             buttonWriter.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.textColor;
-            buttonWriter.GetComponentInChildren<Image>().color = this.defaultColor;
+            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.defaultTextColor;
+            buttonWriter.GetComponentInChildren<Image>().color = this.defaultButtonColor;
 
             // NOTE: For some reason this requires a local copy
             int localI = i;
@@ -103,9 +105,19 @@ public class SkillsBuildUI : MonoBehaviour
         bool correct = selectedIndex == currentQuestion.answer;
         this.skillsBuilder.QuestionAnswered(this.currentQuestionIndex, correct);
 
+        TextMeshProUGUI text = this.answerButtons[selectedIndex].GetComponentInChildren<TextMeshProUGUI>();
         Image img = this.answerButtons[selectedIndex].GetComponentInChildren<Image>();
 
-        if (correct) { img.color = correctColor; } else { img.color = incorrectColor; }
+        if (correct)
+        {
+            img.color = correctButtonColor;
+            text.color = this.correctTextColor;
+        }
+        else
+        {
+            img.color = incorrectButtonColor;
+            text.color = this.incorrectTextColor;
+        }
 
         this.active = false; // Disable further selections
         Invoke("hideUI", 1f);
