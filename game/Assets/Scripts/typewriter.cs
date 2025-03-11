@@ -35,10 +35,8 @@ public class UITypeWriter : MonoBehaviour
         this.typingCoroutine = StartCoroutine(TypeRoutine());
     }
 
-    // Called automatically when the GameObject becomes active
     private void OnEnable()
     {
-        // Start typing when the button becomes visible
         if (this.typeWhenReady)
         {
             StartTyping();
