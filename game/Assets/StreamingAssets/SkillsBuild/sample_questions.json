@@ -21,6 +21,17 @@
 			],
 			"answer": 1,
 			"difficulty": 1
+		},
+		{
+			"question": "This is a longer question. It contains a comma, a full stop and a question mark. How cool is that?",
+			"possible_answers": [
+				"Very, Very cool!",
+				"Meh. It's kinda cool",
+				"Not cool in the slightest",
+				"Idk this is a fourth answer"
+			],
+			"answer": 0,
+			"difficulty": 3
 		}
 	]
 }

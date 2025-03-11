@@ -10,6 +10,27 @@ public class SkillsBuildEntry
     public string[] possible_answers;
     public int answer;
     public int difficulty;
+
+    public void Shuffle()
+    {
+        for (int i = 0; i < this.possible_answers.Length; i++)
+        {
+            int idx = UnityEngine.Random.Range(0, i + 1);
+
+            string tmp = possible_answers[idx];
+            possible_answers[idx] = possible_answers[i];
+            possible_answers[i] = tmp;
+
+            if (i == this.answer)
+            {
+                this.answer = idx;
+            }
+            else if (idx == this.answer)
+            {
+                this.answer = i;
+            }
+        }
+    }
 }
 
 [System.Serializable]

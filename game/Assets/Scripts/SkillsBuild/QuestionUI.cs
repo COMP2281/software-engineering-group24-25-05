@@ -45,6 +45,7 @@ public class SkillsBuildUI : MonoBehaviour
     {
         currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex();
         SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
+        currentQuestion.Shuffle();
 
         this.typewriter.typeWhenReady = true;
         this.typewriter.SetText(currentQuestion.question);
