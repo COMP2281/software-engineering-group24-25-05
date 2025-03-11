@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 517252558}
   - component: {fileID: 517252557}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonText1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 563990404}
   - component: {fileID: 563990403}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonText2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 665501295}
   - component: {fileID: 665501294}
   - component: {fileID: 665501293}
+  - component: {fileID: 665501296}
   m_Layer: 5
   m_Name: AnswerButton3
   m_TagString: Untagged
@@ -866,6 +867,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665501291}
   m_CullTransparentMesh: 1
+--- !u!114 &665501296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665501291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314a2a17aa179428cb0d270246e5885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 1437983350}
+  fullText: 
+  timePerCharacter: 0.075
+  typeWhenReady: 0
 --- !u!1 &777194054
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1000,7 @@ GameObject:
   - component: {fileID: 1096844809}
   - component: {fileID: 1096844811}
   - component: {fileID: 1096844810}
+  - component: {fileID: 1096844812}
   m_Layer: 5
   m_Name: QuestionText
   m_TagString: Untagged
@@ -1107,6 +1125,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096844808}
   m_CullTransparentMesh: 1
+--- !u!114 &1096844812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096844808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314a2a17aa179428cb0d270246e5885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 1096844810}
+  fullText: 
+  timePerCharacter: 0.075
+  typeWhenReady: 0
 --- !u!1 &1119306703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1153,7 @@ GameObject:
   - component: {fileID: 1119306707}
   - component: {fileID: 1119306706}
   - component: {fileID: 1119306705}
+  - component: {fileID: 1119306708}
   m_Layer: 5
   m_Name: AnswerButton0
   m_TagString: Untagged
@@ -1228,6 +1263,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119306703}
   m_CullTransparentMesh: 1
+--- !u!114 &1119306708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119306703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314a2a17aa179428cb0d270246e5885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 1469429664}
+  fullText: 
+  timePerCharacter: 0.075
+  typeWhenReady: 0
 --- !u!1 &1437983348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1291,7 @@ GameObject:
   - component: {fileID: 1437983351}
   - component: {fileID: 1437983350}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonText3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,7 +1425,7 @@ GameObject:
   - component: {fileID: 1469429665}
   - component: {fileID: 1469429664}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonText0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1605,6 +1656,7 @@ GameObject:
   - component: {fileID: 1678265728}
   - component: {fileID: 1678265727}
   - component: {fileID: 1678265726}
+  - component: {fileID: 1678265729}
   m_Layer: 5
   m_Name: AnswerButton2
   m_TagString: Untagged
@@ -1714,6 +1766,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678265724}
   m_CullTransparentMesh: 1
+--- !u!114 &1678265729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678265724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314a2a17aa179428cb0d270246e5885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 563990403}
+  fullText: 
+  timePerCharacter: 0.075
+  typeWhenReady: 0
 --- !u!1 &1820268956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,6 +1794,7 @@ GameObject:
   - component: {fileID: 1820268960}
   - component: {fileID: 1820268959}
   - component: {fileID: 1820268958}
+  - component: {fileID: 1820268961}
   m_Layer: 5
   m_Name: AnswerButton1
   m_TagString: Untagged
@@ -1835,6 +1904,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820268956}
   m_CullTransparentMesh: 1
+--- !u!114 &1820268961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820268956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314a2a17aa179428cb0d270246e5885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 517252557}
+  fullText: 
+  timePerCharacter: 0.075
+  typeWhenReady: 0
 --- !u!1 &1954950680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,13 +1950,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da5978d9d36b4c8b9e7aeb8570c41c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 1096844810}
+  typewriter: {fileID: 1096844812}
   answerButtons:
   - {fileID: 1119306705}
   - {fileID: 1820268958}
   - {fileID: 1678265726}
   - {fileID: 665501293}
   skillsBuilder: {fileID: 1470262475}
+  textColor: {r: 0.68551975, g: 0.6859064, b: 0.745283, a: 1}
+  defaultColor: {r: 0.15459237, g: 0.15984029, b: 0.16981131, a: 1}
+  correctColor: {r: 0.13717864, g: 0.745283, b: 0.10898005, a: 1}
+  incorrectColor: {r: 0.754717, g: 0.0747597, b: 0.17002755, a: 1}
 --- !u!212 &1954950682
 SpriteRenderer:
   m_ObjectHideFlags: 0
