@@ -881,7 +881,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 1437983350}
   fullText: 
-  timePerCharacter: 0.075
+  timePerCharacter: 0.05
+  shortPauseMultiplier: 5
+  longPauseMultiplier: 10
+  shortPauseCharacters: 2c003b00
+  longPauseCharacters: 2e003a0021003f00
   typeWhenReady: 0
 --- !u!1 &777194054
 GameObject:
@@ -1139,7 +1143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 1096844810}
   fullText: 
-  timePerCharacter: 0.075
+  timePerCharacter: 0.05
+  shortPauseMultiplier: 5
+  longPauseMultiplier: 10
+  shortPauseCharacters: 2c003b00
+  longPauseCharacters: 2e003a0021003f00
   typeWhenReady: 0
 --- !u!1 &1119306703
 GameObject:
@@ -1277,7 +1285,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 1469429664}
   fullText: 
-  timePerCharacter: 0.075
+  timePerCharacter: 0.05
+  shortPauseMultiplier: 5
+  longPauseMultiplier: 10
+  shortPauseCharacters: 2c003b00
+  longPauseCharacters: 2e003a0021003f00
   typeWhenReady: 0
 --- !u!1 &1437983348
 GameObject:
@@ -1780,7 +1792,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 563990403}
   fullText: 
-  timePerCharacter: 0.075
+  timePerCharacter: 0.05
+  shortPauseMultiplier: 5
+  longPauseMultiplier: 10
+  shortPauseCharacters: 2c003b00
+  longPauseCharacters: 2e003a0021003f00
   typeWhenReady: 0
 --- !u!1 &1820268956
 GameObject:
@@ -1918,7 +1934,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 517252557}
   fullText: 
-  timePerCharacter: 0.075
+  timePerCharacter: 0.05
+  shortPauseMultiplier: 5
+  longPauseMultiplier: 10
+  shortPauseCharacters: 2c003b00
+  longPauseCharacters: 2e003a0021003f00
   typeWhenReady: 0
 --- !u!1 &1954950680
 GameObject:

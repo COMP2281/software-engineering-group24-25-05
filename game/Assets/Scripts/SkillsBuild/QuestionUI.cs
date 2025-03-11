@@ -106,22 +106,44 @@ public class SkillsBuildUI : MonoBehaviour
         bool correct = selectedIndex == currentQuestion.answer;
         this.skillsBuilder.QuestionAnswered(this.currentQuestionIndex, correct);
 
-        TextMeshProUGUI text = this.answerButtons[selectedIndex].GetComponentInChildren<TextMeshProUGUI>();
-        Image img = this.answerButtons[selectedIndex].GetComponentInChildren<Image>();
+        for (int i = 0; i < this.answerButtons.Length; i++)
+        {
+            TextMeshProUGUI text = this.answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            Image img = this.answerButtons[i].GetComponentInChildren<Image>();
 
-        if (correct)
-        {
-            img.color = correctButtonColor;
-            text.color = this.correctTextColor;
-        }
-        else
-        {
-            img.color = incorrectButtonColor;
-            text.color = this.incorrectTextColor;
+            Color imgColor1 = this.defaultButtonColor;
+            Color imgColor2;
+
+            Color textColor1 = this.defaultTextColor;
+            Color textColor2;
+
+            if (i == currentQuestion.answer)
+            {
+                imgColor2 = this.correctButtonColor;
+                textColor2 = this.correctTextColor;
+            }
+            else
+            {
+                imgColor2 = this.incorrectButtonColor;
+                textColor2 = this.incorrectTextColor;
+            }
+
+            // Highlight the selected answer
+            if (i == selectedIndex)
+            {
+                imgColor1 = imgColor2;
+                textColor1 = textColor2;
+            }
+
+            Color imgColor = ColorUtil.BlendColors(imgColor1, imgColor2, 0.3f);
+            Color textColor = ColorUtil.BlendColors(textColor1, textColor2, 0.3f);
+
+            img.color = imgColor;
+            text.color = textColor;
         }
 
         this.active = false; // Disable further selections
-        Invoke("hideUI", 1f);
+        Invoke("hideUI", 1.5f);
     }
 
     private void ClearButtonText(GameObject obj)
