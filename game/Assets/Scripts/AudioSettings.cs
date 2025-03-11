@@ -63,16 +63,16 @@ public class AudioSettings : MonoBehaviour
         var masterSlider = audioPanel.Q<Slider>("masterVolumeSlider");
         var musicSlider = audioPanel.Q<Slider>("musicVolumeSlider");
         var sfxSlider = audioPanel.Q<Slider>("sfxVolumeSlider");
-        var applyButton = audioPanel.Q<Button>("applyAudioButton");
-
+        
         // Set up master volume slider
         if (masterSlider != null)
         {
             masterSlider.value = masterVolume * 100; // Convert to 0-100 range
             masterSlider.RegisterValueChangedCallback(evt => 
             {
-                // Preview the volume change
+                // Apply and save the volume change immediately
                 SetMasterVolume(evt.newValue / 100f);
+                SaveSettings();
             });
         }
 
@@ -82,8 +82,9 @@ public class AudioSettings : MonoBehaviour
             musicSlider.value = musicVolume * 100;
             musicSlider.RegisterValueChangedCallback(evt =>
             {
-                // Preview the volume change
+                // Apply and save the volume change immediately
                 SetMusicVolume(evt.newValue / 100f);
+                SaveSettings();
             });
         }
 
@@ -93,32 +94,11 @@ public class AudioSettings : MonoBehaviour
             sfxSlider.value = sfxVolume * 100;
             sfxSlider.RegisterValueChangedCallback(evt =>
             {
-                // Preview the volume change
+                // Apply and save the volume change immediately
                 SetSFXVolume(evt.newValue / 100f);
+                SaveSettings();
             });
         }
-
-        // Set up apply button
-        if (applyButton != null)
-        {
-            applyButton.clicked += () => ApplySettings(masterSlider, musicSlider, sfxSlider);
-        }
-    }
-
-    private void ApplySettings(Slider masterSlider, Slider musicSlider, Slider sfxSlider)
-    {
-        if (masterSlider == null || musicSlider == null || sfxSlider == null)
-        {
-            Debug.LogError("UI elements not found");
-            return;
-        }
-
-        // Apply and save volume settings
-        SetMasterVolume(masterSlider.value / 100f);
-        SetMusicVolume(musicSlider.value / 100f);
-        SetSFXVolume(sfxSlider.value / 100f);
-        
-        SaveSettings();
     }
 
     public void SetMasterVolume(float volume)

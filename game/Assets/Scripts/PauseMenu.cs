@@ -7,12 +7,16 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour {
     private bool isPaused = false;
+    private bool isTransitioning = false;
+    private Coroutine hideTransitionCoroutine = null;
     private UIDocument pauseMenuDocument;
+    private VisualElement pauseMenu;
     private Button resumeButton;
     private Button settingsButton;
     private Button mainMenuButton;
     private Button exitButton;
     private List<Button> _menuButtons = new List<Button>();
+    private List<Button> _backButtons = new List<Button>();
     private AudioSource _audioSource;
     
     // Settings submenu elements
@@ -20,9 +24,9 @@ public class PauseMenu : MonoBehaviour {
     private Button controlsButton;
     private Button videoButton;
     private Button audioButton;
-    private Button backButton;
     
     // Settings panels
+    private VisualElement mainMenuContainer;
     private VisualElement controlsPanel;
     private VisualElement videoPanel;
     private VisualElement audioPanel;
@@ -47,9 +51,6 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuDocument = GetComponent<UIDocument>();
         var root = pauseMenuDocument.rootVisualElement;
 
-        // Initially hide the pause menu
-        root.style.display = DisplayStyle.None;
-
         // Retrieve the main menu buttons
         resumeButton = root.Q<Button>("resumeButton");
         settingsButton = root.Q<Button>("settingsButton");
@@ -70,30 +71,39 @@ public class PauseMenu : MonoBehaviour {
             controlsButton = settingsSubmenu.Q<Button>("ControlsButton");
             videoButton = settingsSubmenu.Q<Button>("VideoButton");
             audioButton = settingsSubmenu.Q<Button>("AudioButton");
-            backButton = settingsSubmenu.Q<Button>("BackButton");
             
             // Register settings submenu button events
             if (controlsButton != null) controlsButton.RegisterCallback<ClickEvent>(evt => ShowControlsPanel());
             if (videoButton != null) videoButton.RegisterCallback<ClickEvent>(evt => ShowVideoPanel());
             if (audioButton != null) audioButton.RegisterCallback<ClickEvent>(evt => ShowAudioPanel());
-            if (backButton != null) backButton.RegisterCallback<ClickEvent>(evt => BackToMainPauseMenu());
         }
         
         // Settings panels setup
+        mainMenuContainer = root.Q<VisualElement>("menuContainer");
         controlsPanel = root.Q<VisualElement>("controlsPanel");
         videoPanel = root.Q<VisualElement>("videoPanel");
         audioPanel = root.Q<VisualElement>("audioPanel");
+        pauseMenu = root.Q<VisualElement>("pauseMenu");
         
+        // Initially hide the pause menu
+        root.style.display = DisplayStyle.None;
+        pauseMenu.AddToClassList("pause-menu-hidden");
+
         // Initialize with all panels hidden
-        if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
-        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
-        if (audioPanel != null) audioPanel.style.display = DisplayStyle.None;
+        HideAllPanels();
         
         // Initialize the controls manager
         if (controlsPanel != null) {
             changeControls = gameObject.AddComponent<ChangeControls>();
             changeControls.Initialize(root, FindObjectOfType<PlayerInput>());
         }
+
+        // Retrieve all back buttons
+        root.Query<Button>("backButton").ForEach(button =>
+        {
+            _backButtons.Add(button);
+            button.RegisterCallback<ClickEvent>(evt => GoBack());
+        });
 
         // Retrieve all buttons in the menu for general hover/click sounds
         root.Query<Button>().ForEach(button =>
@@ -107,111 +117,106 @@ public class PauseMenu : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnDestroy() {
-        if (changeControls != null) {
-            Destroy(changeControls);
-        }
-    }
-
     private void Update() {
         // Use UserInput instead of direct input detection
         if(userInput.MenuOpenCloseInput) {
             if(isPaused) {
-                if (settingsSubmenu != null && settingsSubmenu.style.display == DisplayStyle.Flex) {
-                    // If in settings submenu, go back to main pause menu
-                    BackToMainPauseMenu();
-                } else if (controlsPanel != null && controlsPanel.style.display == DisplayStyle.Flex) {
-                    // If in controls panel, go back to settings submenu
-                    ShowSettingsMenu();
-                } else if (videoPanel != null && videoPanel.style.display == DisplayStyle.Flex) {
-                    // If in video panel, go back to settings submenu
-                    ShowSettingsMenu();
-                } else if (audioPanel != null && audioPanel.style.display == DisplayStyle.Flex) {
-                    // If in audio panel, go back to settings submenu
-                    ShowSettingsMenu();
-                } else {
-                    // Otherwise resume the game
-                    Resume();
-                }
+                GoBack();
             } else {
                 Pause();
             }
         }
     }
 
+    private void GoBack() {
+        if (settingsSubmenu.style.display == DisplayStyle.Flex) {
+            BackToMainPauseMenu();
+        } else if (controlsPanel.style.display == DisplayStyle.Flex) {
+            ShowSettingsMenu();
+        } else if (videoPanel.style.display == DisplayStyle.Flex) {
+            ShowSettingsMenu();
+        } else if (audioPanel.style.display == DisplayStyle.Flex) {
+            ShowSettingsMenu();
+        } else {
+            Resume();
+        }
+    }
+
     private void Resume() {
-        pauseMenuDocument.rootVisualElement.style.display = DisplayStyle.None;
+        // Add transition class first
+        pauseMenu.AddToClassList("pause-menu-hidden");
         Time.timeScale = 1.0f;
         isPaused = false;
+        isTransitioning = true;
+        
+        // Start coroutine to hide menu after transition and store the reference
+        if (hideTransitionCoroutine != null) {
+            StopCoroutine(hideTransitionCoroutine);
+        }
+        hideTransitionCoroutine = StartCoroutine(HideUIAfterTransition());
+    }
+
+    private IEnumerator HideUIAfterTransition() {
+        // Wait for transition to complete (0.6 seconds)
+        yield return new WaitForSecondsRealtime(0.6f);
+        
+        // Now hide the element completely
+        pauseMenuDocument.rootVisualElement.style.display = DisplayStyle.None;
+        isTransitioning = false;
+        hideTransitionCoroutine = null;
     }
 
     private void Pause() {
+        // If we're in the middle of hiding the menu, cancel that transition
+        if (isTransitioning && hideTransitionCoroutine != null) {
+            StopCoroutine(hideTransitionCoroutine);
+            hideTransitionCoroutine = null;
+            isTransitioning = false;
+            pauseMenu.RemoveFromClassList("pause-menu-hidden");
+        }
+
         // Show main pause menu, hide submenus
         pauseMenuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
-        if (settingsSubmenu != null) settingsSubmenu.style.display = DisplayStyle.None;
-        if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
-        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
-        if (audioPanel != null) audioPanel.style.display = DisplayStyle.None;
+        HideAllPanels();
+        mainMenuContainer.style.display = DisplayStyle.Flex;
+        pauseMenu.RemoveFromClassList("pause-menu-hidden");
         Time.timeScale = 0.0f;
         isPaused = true;
     }
 
+    private void HideAllPanels() {
+        mainMenuContainer.style.display = DisplayStyle.None;
+        settingsSubmenu.style.display = DisplayStyle.None;
+        controlsPanel.style.display = DisplayStyle.None;
+        videoPanel.style.display = DisplayStyle.None;
+        audioPanel.style.display = DisplayStyle.None;
+    }
+
     private void ShowSettingsMenu() {
-        // Hide main pause menu elements except the root
-        var mainMenuContainer = pauseMenuDocument.rootVisualElement.Q<VisualElement>("menuContainer");
-        if (mainMenuContainer != null) mainMenuContainer.style.display = DisplayStyle.None;
-        
-        // Show settings submenu
-        if (settingsSubmenu != null) {
-            settingsSubmenu.style.display = DisplayStyle.Flex;
-            controlsPanel.style.display = DisplayStyle.None;
-            if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
-            if (audioPanel != null) audioPanel.style.display = DisplayStyle.None;
-        }
+        HideAllPanels();        
+        settingsSubmenu.style.display = DisplayStyle.Flex;
+    }
+
+    private void BackToMainPauseMenu() {
+        HideAllPanels();
+        mainMenuContainer.style.display = DisplayStyle.Flex;
     }
 
     private void ShowControlsPanel() {
         HideAllPanels();
-        if (controlsPanel != null) {
-            controlsPanel.style.display = DisplayStyle.Flex;
-            settingsSubmenu.style.display = DisplayStyle.None;
-        }
+        controlsPanel.style.display = DisplayStyle.Flex;
     }
 
     private void ShowVideoPanel() {
         HideAllPanels();
-        if (videoSettings != null && pauseMenuDocument != null) {
-            if (videoPanel != null) videoPanel.style.display = DisplayStyle.Flex;
-            videoSettings.InitializeUI(pauseMenuDocument.rootVisualElement);
-            settingsSubmenu.style.display = DisplayStyle.None;
-        }
+        videoPanel.style.display = DisplayStyle.Flex;
+        videoSettings.InitializeUI(pauseMenuDocument.rootVisualElement);
     }
 
     private void ShowAudioPanel() {
         HideAllPanels();
-        if (audioSettings != null && pauseMenuDocument != null) {
-            if (audioPanel != null) audioPanel.style.display = DisplayStyle.Flex;
-            audioSettings.InitializeUI(pauseMenuDocument.rootVisualElement);
-            settingsSubmenu.style.display = DisplayStyle.None;
-        }
-    }
-
-    private void HideAllPanels() {
-        if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
-        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
-        if (audioPanel != null) audioPanel.style.display = DisplayStyle.None;
-    }
-
-    private void BackToMainPauseMenu() {
-        // Hide settings submenu and controls panel
-        if (settingsSubmenu != null) settingsSubmenu.style.display = DisplayStyle.None;
-        if (controlsPanel != null) controlsPanel.style.display = DisplayStyle.None;
-        if (videoPanel != null) videoPanel.style.display = DisplayStyle.None;
-        if (audioPanel != null) audioPanel.style.display = DisplayStyle.None;
-        
-        // Show main pause menu
-        var mainMenuContainer = pauseMenuDocument.rootVisualElement.Q<VisualElement>("menuContainer");
-        if (mainMenuContainer != null) mainMenuContainer.style.display = DisplayStyle.Flex;
+        audioPanel.style.display = DisplayStyle.Flex;
+        audioSettings.InitializeUI(pauseMenuDocument.rootVisualElement);
     }
 
     private void LoadScene(string sceneName) {

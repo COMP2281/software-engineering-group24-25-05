@@ -84,7 +84,6 @@ public class VideoSettings : MonoBehaviour
         
         var resolutionDropdown = videoPanel.Q<DropdownField>("resolutionDropdown");
         var fullscreenToggle = videoPanel.Q<Toggle>("fullscreenToggle");
-        var applyButton = videoPanel.Q<Button>("applyVideoButton");
         
         if (resolutionDropdown != null)
         {
@@ -113,16 +112,17 @@ public class VideoSettings : MonoBehaviour
                 resolutionDropdown.choices = options;
                 resolutionDropdown.index = options.Count - 1;
             }
+            
+            // Register event to apply settings when resolution changes
+            resolutionDropdown.RegisterValueChangedCallback(evt => ApplySettings(resolutionDropdown, fullscreenToggle));
         }
         
         if (fullscreenToggle != null)
         {
             fullscreenToggle.value = isFullscreen;
-        }
-        
-        if (applyButton != null)
-        {
-            applyButton.clicked += () => ApplySettings(resolutionDropdown, fullscreenToggle);
+            
+            // Register event to apply settings when fullscreen toggle changes
+            fullscreenToggle.RegisterValueChangedCallback(evt => ApplySettings(resolutionDropdown, fullscreenToggle));
         }
     }
     
