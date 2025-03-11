@@ -110,3 +110,65 @@
     translate: 0 -1049px;
     opacity: 0;
 }
+
+/* Locked button style - normal state */
+.locked-button {
+    transition: all 0.2s;
+    position: relative;
+}
+
+/* Locked button hover state */
+.locked-button:hover {
+    cursor: not-allowed;
+    background-color: rgb(224, 81, 50);
+    color: rgb(254, 240, 193);
+}
+
+/* Unlocked button style */
+.unlocked-button {
+    transition: all 0.2s;
+}
+
+/* Lock icon styling */
+.lock-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+}
+
+/* Notification popup styling */
+.notification-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    min-width: 300px;
+    min-height: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-popup.visible {
+    opacity: 1;
+}
+
+.notification-popup.hiding {
+    opacity: 0;
+}
