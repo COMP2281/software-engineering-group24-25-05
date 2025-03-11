@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // Make sure the same GameObject has the Animator component
+        animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         originalScale = transform.localScale;
         originalColliderSize = capsuleCollider.size;
@@ -75,19 +75,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        // Example of reading horizontal movement
-        float moveX = Input.GetAxisRaw("Horizontal"); // -1 for left, 0 for none, +1 for right
+        // Reading horizontal movement
+        float moveX = Input.GetAxisRaw("Horizontal");
 
-        // 1) Update the Speed parameter in the Animator
+        // Update the Speed parameter in the Animator
         animator.SetFloat("Speed", Mathf.Abs(moveX));
 
-        // 2) Flip the character sprite left or right if needed
+        // Flip the character sprite left or right to face certain direction
         if (moveX > 0)
-            transform.localScale = new Vector3(1, 1, 1);  // face right
+            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);  // face right
         else if (moveX < 0)
-            transform.localScale = new Vector3(-1, 1, 1); // face left
+            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z); // face left
 
-        // 3) Move the player (this might be in FixedUpdate, but for simplicity):
+        // Move the player
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
 
 
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
 
-        // Store horizontal velocity before landing
+        // Storing horizontal velocity before landing
         if (!isGrounded)
         {
             horizontalVelocityBeforeLanding = rb.velocity.x;
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            // Reapply horizontal velocity to maintain momentum
+            // Reappling horizontal velocity to maintain momentum
             rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
             animator.SetBool("IsJumping", false);
         }
