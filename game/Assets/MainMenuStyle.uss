@@ -8,6 +8,12 @@
     flex-grow: 1;
 }
 
+.title-container-hidden {
+    translate: 0 -300px;
+    opacity: 1;
+    flex-grow: 1;
+}
+
 .title {
     -unity-font-style: bold;
     color: rgb(254, 240, 193);
@@ -59,12 +65,23 @@
     flex-grow: 1;
 }
 
+.left-container-hidden {
+    translate: -700px 0;
+    flex-grow: 1;
+}
+
 .right-container {
     width: 50%;
     align-items: center;
     justify-content: center;
     background-color: rgb(105, 184, 178);
     flex-grow: 1;
+}
+
+.right-container-hidden {
+    flex-grow: 1;
+    background-color: rgb(105, 184, 178);
+    translate: 850px 0;
 }
 
 .main-menu {
@@ -82,77 +99,14 @@
     margin-right: 250px;
     margin-bottom: 250px;
     margin-left: 250px;
-    border-left-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
+    border-left-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
     flex-grow: 1;
-    opacity: 0.75;
 }
 
 .pause-menu-hidden {
     translate: 0 -1049px;
-    opacity: 0;
-}
-
-/* Locked button style - normal state */
-.locked-button {
-    transition: all 0.2s;
-    position: relative;
-}
-
-/* Locked button hover state */
-.locked-button:hover {
-    cursor: not-allowed;
-    background-color: rgb(224, 81, 50);
-    color: rgb(254, 240, 193);
-}
-
-/* Unlocked button style */
-.unlocked-button {
-    transition: all 0.2s;
-}
-
-/* Lock icon styling */
-.lock-icon {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    right: 10px;
-    bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    -unity-text-align: middle-center;
-}
-
-/* Notification popup styling */
-.notification-popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
-    font-size: 18px;
-    -unity-text-align: middle-center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    min-width: 300px;
-    min-height: 80px;
-    justify-content: center;
-    align-items: center;
-}
-
-.notification-popup.visible {
-    opacity: 1;
-}
-
-.notification-popup.hiding {
     opacity: 0;
 }
