@@ -1,44 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using TMPro; // if needed for dialogue manager
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 6.5f;
+    [SerializeField] private float jumpForce = 11f;
+    [SerializeField] private float doubleJumpForce = 10f; // Slightly smaller force for double jump
     [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float jumpHoldForce = 4f;
-    [SerializeField] private float jumpHoldDuration = 0.3f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private DialogueManager dialogueManager;
     
-    private PlayerInput playerInput;
+    // Viewcone reference
+    [SerializeField] private PlayerViewcone playerViewcone;
+    
+    // Simplified jump parameters
+    [SerializeField] private float fallGravityScale = 2.2f;  
+    [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private float fastFallSpeed = 12f;
+    [SerializeField] private float jumpCooldown = 0.1f;
+    
     private Rigidbody2D rb;
     private bool isGrounded;
-    private bool isJumping;
-    private float jumpTimeCounter;
+    private bool canDoubleJump; // Track double jump availability
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
+    private float jumpCooldownCounter;
+    private float defaultGravityScale;
 
     private bool isCrouching;
     private CapsuleCollider2D capsuleCollider;
     private Vector3 originalScale;
     private Vector2 originalColliderSize;
     private Vector2 originalColliderOffset;
-
+    
+    [SerializeField] private float groundAngleThreshold = 0.7f; // Cosine of ~45 degrees
+    [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
     private float horizontalVelocityBeforeLanding;
+
 
     private Animator animator;
 
+    // Player facing direction
+    private bool isFacingLeft = false;
+    private SpriteRenderer spriteRenderer;
+
+    // Track previous dialogue state for change detection
+    private bool wasDialogueActiveLastFrame = false;
+
     void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
         originalColliderSize = capsuleCollider.size;
         originalColliderOffset = capsuleCollider.offset;
+        defaultGravityScale = rb.gravityScale;
+        
+        // Get viewcone component if not assigned
+        if (playerViewcone == null)
+            playerViewcone = GetComponent<PlayerViewcone>();
+            
+        // Subscribe to direction change events
+        if (playerViewcone != null)
+            playerViewcone.OnDirectionChanged += OnPlayerDirectionChanged;
     }
 
     void Start()
@@ -49,63 +77,90 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        // Check if dialogue state has changed
+        bool isDialogueActive = dialogueManager.dialogueBox.activeSelf;
+        if (isDialogueActive != wasDialogueActiveLastFrame)
+        {
+            wasDialogueActiveLastFrame = isDialogueActive;
+            
+            // Toggle viewcone based on dialogue state
+            if (playerViewcone != null)
+            {
+                playerViewcone.SetViewconeActive(!isDialogueActive);
+            }
+        }
 
         // Block all input if dialogue is open
-        if (dialogueManager.dialogueBox.activeSelf)
+        if (isDialogueActive)
             return;
 
-        if (playerInput.actions["Jump"].triggered && isGrounded && !isCrouching)
-        {
-            isJumping = true;
-            jumpTimeCounter = jumpHoldDuration;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetBool("IsJumping", true);
-        }
-        if (playerInput.actions["Jump"].IsPressed() && isJumping)
-        {
-            if (jumpTimeCounter > 0 && rb.velocity.y > 0) // Only apply force while moving up
-            {
-                rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
+        // Manage jump cooldown
+        if (jumpCooldownCounter > 0) {
+            jumpCooldownCounter -= Time.deltaTime;
         }
 
-
-        // Reading horizontal movement
-        float moveX = Input.GetAxisRaw("Horizontal");
-
-        // Update the Speed parameter in the Animator
-        animator.SetFloat("Speed", Mathf.Abs(moveX));
-
-        // Flip the character sprite left or right to face certain direction
-        if (moveX > 0)
-            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);  // face right
-        else if (moveX < 0)
-            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z); // face left
-
-        // Move the player
-        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
-
-
-
-        if (playerInput.actions["Jump"].WasReleasedThisFrame())
-        {
-            isJumping = false;
+        // Manage coyote time and reset double jump when grounded
+        if (isGrounded) {
+            coyoteTimeCounter = coyoteTime;
+            canDoubleJump = true; // Reset double jump when on ground
+        } else {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (playerInput.actions["Crouch"].IsPressed())
-        {
+        // Manage jump buffer
+        if (UserInput.Instance.JumpPressed) {
+            jumpBufferCounter = jumpBufferTime;
+        } else {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        // First jump - when grounded or in coyote time
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isCrouching && jumpCooldownCounter <= 0f) {
+            PerformJump(jumpForce);
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+        }
+        // Double jump - when already in air and double jump is available
+        else if (jumpBufferCounter > 0f && !isGrounded && canDoubleJump && jumpCooldownCounter <= 0f) {
+            PerformJump(doubleJumpForce);
+            canDoubleJump = false; // Use up the double jump
+            jumpBufferCounter = 0f;
+        }
+
+        // Crouch handling
+        if (UserInput.Instance.CrouchHold) {
             if (!isCrouching)
                 StartCrouch();
         }
-        else
-        {
+        else {
             if (isCrouching)
                 StopCrouch();
+        }
+        
+        // Apply fall gravity
+        ApplyJumpPhysics();
+    }
+
+    // Helper method to perform jump with given force
+    private void PerformJump(float force) {
+        rb.velocity = new Vector2(rb.velocity.x, 0f); // Clear existing Y velocity
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        jumpCooldownCounter = jumpCooldown;
+    }
+
+    private void ApplyJumpPhysics() {
+        // Falling - apply enhanced gravity but cap maximum fall speed
+        if (rb.velocity.y < 0) {
+            rb.gravityScale = fallGravityScale;
+            
+            // Cap fall speed
+            if (rb.velocity.y < -fastFallSpeed) {
+                rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed);
+            }
+        }
+        // Reset to default for rising
+        else {
+            rb.gravityScale = defaultGravityScale;
         }
     }
 
@@ -115,7 +170,10 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueManager.dialogueBox.activeSelf)
             return;
 
-        Vector2 movement = playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector2 movement = UserInput.Instance.MovementInput;
+        
+        // Remove the control inversion - deleted the code that inverted controls
+        
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
@@ -152,20 +210,82 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
         {
-            isGrounded = true;
-            // Reappling horizontal velocity to maintain momentum
-            rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
-            animator.SetBool("IsJumping", false);
+            // Check if this is a ground collision by examining contact normals
+            CheckGroundContact(collision);
+            
+            // Reapply horizontal velocity to maintain momentum (only if truly grounded)
+            if (isGrounded) {
+                rb.velocity = new Vector2(horizontalVelocityBeforeLanding, rb.velocity.y);
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
+        {
+            // Continuously check ground contact while colliding
+            CheckGroundContact(collision);
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Check if collision is with a ground layer object
+        if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
         {
             isGrounded = false;
+        }
+    }
+    
+    private void CheckGroundContact(Collision2D collision)
+    {
+        isGrounded = false;
+        
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            Vector2 normal = collision.GetContact(i).normal;
+            
+            // If normal.y is greater than our threshold, this is ground
+            if (normal.y >= groundAngleThreshold)
+            {
+                isGrounded = true;
+                break;
+            }
+            // We don't need to track wall contact since we're not using it
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe when destroyed to prevent memory leaks
+        if (playerViewcone != null)
+            playerViewcone.OnDirectionChanged -= OnPlayerDirectionChanged;
+    }
+    
+    // Called when the mouse changes sides
+    private void OnPlayerDirectionChanged(bool isMouseOnLeft)
+    {
+        // Update facing direction
+        isFacingLeft = isMouseOnLeft;
+        
+        // Flip the sprite accordingly
+        if (spriteRenderer != null) {
+            spriteRenderer.flipX = isFacingLeft;
+        } else {
+            // If no SpriteRenderer, flip the transform scale instead
+            Vector3 currentScale = transform.localScale;
+            currentScale.x = isFacingLeft ? -Mathf.Abs(originalScale.x) : Mathf.Abs(originalScale.x);
+            transform.localScale = currentScale;
+        }
+        
+        // Make sure the light position is updated immediately
+        if (playerViewcone != null) {
+            playerViewcone.RefreshLightPosition();
         }
     }
 }

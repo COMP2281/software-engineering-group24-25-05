@@ -10,8 +10,6 @@ public class DialogueManager : MonoBehaviour
     private string[] dialogueLines = {
         "Welcome to the game!",
         "Your mission is to steal the secret documents from the enemy base.",
-        "You can move with the arrow keys or WASD.",
-        "Press the space bar to jump.",
         "Good luck, agent!"
     };
 
@@ -19,26 +17,39 @@ public class DialogueManager : MonoBehaviour
     private bool isWaitingAfterLine = false;
     private bool isTyping = false;
     private Coroutine typeLineCoroutine;
-    private Coroutine waitCoroutine; // Add this to track the wait coroutine
+    private Coroutine waitCoroutine;
+    
+    // Track previous input state to detect button press
+    private bool previousSubmitState = false;
 
     void Start()
     {
         dialogueBox.SetActive(true);
         DisplayNextLine();
     }
-
+    
     void Update()
     {
-        // If Enter is pressed while text is typing, complete the text instantly
-        if (Input.GetKeyDown(KeyCode.Return) && isTyping)
+        // Check for Submit input through UserInput singleton
+        bool currentSubmitState = UserInput.Instance.SubmitInput;
+        
+        // Submit was pressed this frame
+        if (currentSubmitState && !previousSubmitState)
         {
-            CompleteTyping();
+            // If text is typing, complete the text instantly
+            if (isTyping)
+            {
+                CompleteTyping();
+            }
+            // If a line is fully displayed, show the next line
+            else if (isWaitingAfterLine)
+            {
+                DisplayNextLine();
+            }
         }
-        // If Enter is pressed after a line is fully displayed, show the next line
-        else if (Input.GetKeyDown(KeyCode.Return) && isWaitingAfterLine)
-        {
-            DisplayNextLine();
-        }
+        
+        // Update previous state for next frame
+        previousSubmitState = currentSubmitState;
     }
 
     void CompleteTyping()
@@ -110,14 +121,14 @@ public class DialogueManager : MonoBehaviour
     IEnumerator WaitForNextLine()
     {
         float timer = 0;
-        while (timer < 3f && !Input.GetKeyDown(KeyCode.Return))
+        while (timer < 3f && !UserInput.Instance.SubmitInput)
         {
             timer += Time.deltaTime;
             yield return null;
         }
         
-        // Only auto-advance if 3 seconds passed and Enter wasn't pressed
-        if (!Input.GetKeyDown(KeyCode.Return))
+        // Only auto-advance if 3 seconds passed and Submit wasn't pressed
+        if (!UserInput.Instance.SubmitInput)
         {
             DisplayNextLine();
         }
