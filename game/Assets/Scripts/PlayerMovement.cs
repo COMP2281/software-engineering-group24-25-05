@@ -39,9 +39,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
     private float horizontalVelocityBeforeLanding;
 
-
-    private Animator animator;
-
     // Player facing direction
     private bool isFacingLeft = false;
     private SpriteRenderer spriteRenderer;
@@ -52,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
@@ -76,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         // Check if dialogue state has changed
         bool isDialogueActive = dialogueManager.dialogueBox.activeSelf;
         if (isDialogueActive != wasDialogueActiveLastFrame)
@@ -180,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
 
-        // Storing horizontal velocity before landing
+        // Store horizontal velocity before landing
         if (!isGrounded)
         {
             horizontalVelocityBeforeLanding = rb.velocity.x;
