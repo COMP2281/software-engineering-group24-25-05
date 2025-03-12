@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform[] waypoints; // Patrol waypoints
+    public Transform[] waypoints; 
     public float speed = 2f; // Enemy moving speed
     private int currentWaypointIndex = 0; // Patrol index
 
@@ -10,99 +10,88 @@ public class EnemyAI : MonoBehaviour
     private Vector2 movementDirection;
 
     // Vision parameters
-    public float viewRange = 20f; // Vision range (how far the enemy can see)
-    public float viewAngle = 60f; // Vision angle (how wide the vision is)
-    public LayerMask viewMask; // Layer mask to specify what the enemy can detect in its vision
+    public float viewRange = 20f; 
+    public float viewAngle = 60f; 
+    public LayerMask viewMask; 
     private bool isChasing = false; // Whether the enemy is chasing the player
-    public Transform player; // Player object reference
+    public Transform player; 
 
     // UI part (still needs to be completed)
-    public GameObject questionUI; // Answering UI
+    public GameObject questionUI; 
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component for movement
+        rb = GetComponent<Rigidbody2D>(); 
         if (waypoints.Length > 0)
-            transform.position = waypoints[0].position; // Set the initial position to the first waypoint
+            transform.position = waypoints[0].position; //initial position of the first waypoint
     }
 
     void Update()
     {
         if (isChasing)
         {
-            ChasePlayer(); // Start chasing the player
+            ChasePlayer(); 
         }
         else
         {
-            Patrol(); // Patrol the waypoints
-            CheckForPlayer(); // Check if the player is in the enemy's vision range
+            Patrol(); 
+            CheckForPlayer(); 
         }
 
-        UpdateViewDirection(); // Update the enemy's vision direction to follow the movement direction
+        UpdateViewDirection(); 
     }
 
-    // Patrol behavior
     void Patrol()
     {
         if (waypoints.Length == 0) return;
 
         Transform targetWaypoint = waypoints[currentWaypointIndex];
-        movementDirection = (targetWaypoint.position - transform.position).normalized; // Calculate direction to the next waypoint
+        movementDirection = (targetWaypoint.position - transform.position).normalized; 
 
-        rb.linearVelocity = movementDirection * speed; // Move the enemy towards the next waypoint
+        rb.linearVelocity = movementDirection * speed; // Move towards the next waypoint
 
-        // Switch to the next waypoint when the enemy reaches the current one
         if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.2f)
         {
             currentWaypointIndex++;
             if (currentWaypointIndex >= waypoints.Length)
-                currentWaypointIndex = 0; // Loop back to the first waypoint
+                currentWaypointIndex = 0; // Loop back
         }
     }
 
-    // Check if the player is within the enemy's vision range
     void CheckForPlayer()
     {
-        // Calculate the direction to the player
         Vector3 dirToPlayer = player.position - transform.position;
 
-        // Calculate the angle between the enemy's forward direction and the direction to the player
         float angleToPlayer = Vector3.Angle(transform.up, dirToPlayer); 
 
-        // Debug: Print the angle and distance to the player for checking
         Debug.Log("Angle to player: " + angleToPlayer);
         Debug.Log("Distance to player: " + dirToPlayer.magnitude);
 
-        // Check if the player is within the vision range and the angle to the player is within the vision angle
         if (dirToPlayer.magnitude < viewRange && angleToPlayer < viewAngle / 2)
         {
-            // Use a raycast to check if there are obstacles between the enemy and the player
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer.normalized, viewRange, viewMask);
 
-            // Debug: Print the raycast hit information for checking
             if (hit.collider != null)
             {
                 Debug.Log("Raycast hit: " + hit.collider.name);
             }
 
-            // If the raycast hits the player, start chasing the player
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                isChasing = true; // Set chasing state to true
+                isChasing = true; 
                 Debug.Log("Chasing player...");
             }
         }
     }
 
-    // Chasing behavior when the enemy starts following the player
     void ChasePlayer()
     {
-        Vector2 dirToPlayer = (player.position - transform.position).normalized; // Calculate direction to the player
-        rb.linearVelocity = dirToPlayer * speed; // Move towards the player
+        Vector2 dirToPlayer = (player.position - transform.position).normalized; 
+        rb.linearVelocity = dirToPlayer * speed; // Move toward player
 
         Debug.Log("Chasing player...");
 
-        // Check if the enemy has reached the player (you can adjust the distance as needed)
+        // check if reached player
         if (Vector2.Distance(transform.position, player.position) < 1.5f)
         {
             Debug.Log("Player reached! Triggering UI.");
@@ -115,11 +104,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (questionUI != null)
         {
-            questionUI.SetActive(true); // Display the UI
+            questionUI.SetActive(true); // Display the UI then
         }
     }
 
-    // Trigger event when the enemy collides with the player
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -130,16 +118,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // Update the enemy's vision direction to follow the movement direction
     void UpdateViewDirection()
     {
-        // Get the enemy's current movement direction
         Vector3 moveDirection = rb.linearVelocity.normalized;
 
-        // If the enemy is moving, update its facing direction (vision direction)
         if (moveDirection.magnitude > 0)
         {
-            transform.up = moveDirection; // Update the enemy's facing direction (vision direction)
+            transform.up = moveDirection; 
         }
     }
 }
