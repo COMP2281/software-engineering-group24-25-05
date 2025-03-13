@@ -1,0 +1,1045 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{makecell}
+\usepackage{tabularx}
+% center shit vertically
+\def\tabularxcolumn#1{m{#1}}
+
+% \usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\title{Technical Report for Shadow Operative}
+\date{\today}
+
+\author{
+    Ben Magowan \\
+    \texttt{vcwx72}
+    \and
+    Danial Maqbool \\
+    \texttt{gkzv63}
+    \and
+    Will Morgan \\
+    \texttt{sghp78}
+    \and
+    Edmond Vajda \\
+    \texttt{njql73} \\
+    \and
+    Sami Lodi \\
+    \texttt{hqcb32}
+    \and
+    Heria Chen \\
+    \texttt{qzxl76}
+    \and
+    Toby Davis \\
+    \texttt{cltz62}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+    \text{Group Number 05} \\
+    \text{Version 1.0.1}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+\subsection{Main Motivation and Goals}
+
+\noindent Shadow Operative is a Project which gracefully integrates IBM Skills Build in order to provide users a more fun and interactive way of learning from the IBM Courses. This goal is approached by incorporating fun gameplay mechanics to balance the amount of learning material the user encounters. The balancing of educational content with gameplay is seamless, this is supported by having an AI create a compelling and realistic environment akin to the game inspiration CounterSpy. \\
+
+\noindent The project benefits individuals who currently learn using IBM Skills Build, including self-learners and educational institutions looking for interactive tools to complement their curriculum. Gamifying the learning process can further the audience and effectiveness of the IBM Skills Build course with younger users in mind. \\
+
+\noindent The client for this project is IBM, represented by John McManara, who leads the IBM UK University Programs and serves as an IBM Master Inventor. IBM’s overarching goal is to increase the engagement of Skills Build content. This project aligns with IBM’s strategic aim to integrate cutting-edge solutions into its educational offerings.
+
+\subsection{Instructions on Installation and Setup}
+
+\noindent The game is accessible through an online platform. Users can play the game via their web browser without needing downloads or additional installations. \\
+
+\noindent Instructions to access the game:
+
+\begin{enumerate}
+    \item Open a web browser.
+    \item Navigate to the game’s hosting website via \textbf{<INSERT URL HERE>}
+    \item Click on the level that you wish to play.
+    \item Follow the in-game instructions to begin playing.
+\end{enumerate}
+
+\noindent For optimal performance, it is recommended to use a modern web browser with a stable internet connection. If users encounter any issues, they should refer to section 3.4 of this technical report.
+
+\newpage
+
+\subsection{Status of Behavioural Requirements}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 1.1} \\
+    \hline
+    Description of Requirement & Player should be able to use Cover to avoid detection when in line of sight \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Functionality performs as expected in all tested scenarios.
+    \end{itemize} \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 1.2} \\
+    \hline
+    Description of Requirement & Trigger guards when making noise near guards \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item When the player moves within a radius of guard whilst unseen yet, Guards are not able to detect them.
+        \item This is as Guards having noise detection may complicate gameplay in combination with other guard mechanics.
+    \end{itemize} \\
+    \hline
+    Extent to Met/Unmet & Not Implemented \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 1.3} \\
+    \hline
+    Description of Requirement & Player crouches to avoid guard detection \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 1.4} \\
+    \hline
+    Description of Requirement & Player alerts guards when spotted \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 1.5} \\
+    \hline
+    Description of Requirement & Guard returns to patrol after losing sight of player \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Changed
+    \begin{itemize}
+        \item When guard detect a player, there is an immediate transition to a quiz screen.
+        \item Resulting in no chase to occur which guard can loose sight of player.
+    \end{itemize}
+    \\
+    \hline
+    Extent to Met/Unmet & Removed \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 2.1} \\
+    \hline
+    Description of Requirement & Player steals classified documents \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Modified
+    \begin{itemize}
+        \item The requirement was modified to remove the coin rewarding mechanic as well as alerting nearby guards when a player answers the question wrong.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 2.2} \\
+    \hline
+    Description of Requirement & Quiz at the end of the level \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 3.1} \\
+    \hline
+    Description of Requirement & Pause Menu so player can take a break from the game \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 3.2} \\
+    \hline
+    Description of Requirement & Player accessing game settings via the pause screen \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 4.1} \\
+    \hline
+    Description of Requirement & Player Testing player stealth gameplay skills \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Behaviour requirement 4.1 was removed as core motivation of the game is to test more so on IBM Skills content rather than player stealth gameplay.
+        \item Removing this requirement would lead to the AI boss adapting to IBM Skills rather than stealth.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Removed \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 4.2} \\
+    \hline
+    Description of Requirement & Level final quiz adjustment \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 4.3} \\
+    \hline
+    Description of Requirement & Level Combat mechanics adjustments \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Combat mechanics removed from the gameplay so no need for Final boss to test combat mechanics.
+        \item Combat was removed to focus more on teaching and quiz quality aspects of the game.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 5.1} \\
+    \hline
+    Description of Requirement & Background music for immersive atmosphere \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 5.2} \\
+    \hline
+    Description of Requirement & Sound effects for in-game actions \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 5.3} \\
+    \hline
+    Description of Requirement & Adaptive music for boss encounters \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 5.4} \\
+    \hline
+    Description of Requirement & Environmental sound effects \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 6.1} \\
+    \hline
+    Description of Requirement & Cold war era background \& atmosphere \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 6.2} \\
+    \hline
+    Description of Requirement & Enemy Uniforms \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Changed
+    \begin{itemize}
+        \item Enemies no longer have red uniforms to symbolize the Soviet Union insignias due to the sci-fi aspect of the game and allowing the enemies to be robots.
+        \item Having robots quiz an intruder made more sense than a human who would most likely recognise a person who did not belong in the building.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 6.3} \\
+    \hline
+    Description of Requirement & Indication when entering a room with objects indicating next steps in level \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 7.1} \\
+    \hline
+    Description of Requirement & Receiving mission objective \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 7.2} \\
+    \hline
+    Description of Requirement & Unlocking a reward for completing a mission \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Rewarded with IBM Badge corresponding to the game level player completes
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 7.3} \\
+    \hline
+    Description of Requirement & Unlocking a new playable chapter in game \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 7.4} \\
+    \hline
+    Description of Requirement & Player completing secondary objective \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Changed
+    \begin{itemize}
+        \item Secondary mission is to collect documents.
+        \item This allows experienced players to ignore collecting documents and go straight to final quiz to complete level.
+        \item Inexperienced players are able to complete secondary missions and collect documents to gain knowledge necessary to complete main objective.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 8.1} \\
+    \hline
+    Description of Requirement & Player character movement \\
+    \hline
+    Status of Behaviour Requirement & Implemented \\
+    \hline
+    Changed? &
+    Unchanged \\
+    \hline
+    Extent to Met/Unmet & Fully Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 8.2} \\
+    \hline
+    Description of Requirement & Player character sprinting movement \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Running movement has been implemented. Sprinting is not implemented due to priority of characters moving faster is less necessary due to map size and other gameplay content which do not require sprinting to complete.
+        \item There are no timed movement challenges in levels.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 8.3} \\
+    \hline
+    Description of Requirement & Player character dodge mechanic \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Removed as in unnecessary due to the removal of combat mechanics
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 8.4} \\
+    \hline
+    Description of Requirement & Player is able to take fall damage \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Removed to maintain a smoother gameplay experience and reduce unnecessary player frustration
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.1} \\
+    \hline
+    Description of Requirement & Player can shoot enemies \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Removed \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.2} \\
+    \hline
+    Description of Requirement & Enemies can be removed \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because it did not make sense in-game to remove the robots within the context.
+        \item Enemies could also stay to allow players to test themselves on content on purpose in preparation for the level final quiz.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Removed \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.3} \\
+    \hline
+    Description of Requirement & Player character melee attack \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.4} \\
+    \hline
+    Description of Requirement & Player gun ammo consumption \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.5} \\
+    \hline
+    Description of Requirement & Player character can use grenade attack \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Behaviour Code & \textbf{BR 9.6} \\
+    \hline
+    Description of Requirement & Player character can take hit from enemy \\
+    \hline
+    Status of Behaviour Requirement & Removed \\
+    \hline
+    Changed? &
+    Unchanged
+    \begin{itemize}
+        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
+    \end{itemize}\\
+    \hline
+    Extent to Met/Unmet & Not Met \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Technical Development}
+
+\subsection{Source Materials}
+
+\subsubsection{Educational Foundations}
+
+\noindent A key foundation of our project is the IBM SkillsBuild platform, which was provided by the client as the primary source of educational content. This platform offers structured learning materials in areas such as AI, Cybersecurity, and Data Analytics. The courses and digital badges from Skills Build serve as the basis for the in-game question bank, ensuring that the educational content aligns with industry-relevant skills. By embedding these challenges into the gameplay, Shadow Operative merges interactive learning with entertainment, allowing for knowledge retention and engagement. \\
+
+\noindent To enhance the educational experience, the game integrates adaptive learning technologies. The client emphasised the need for a dynamic difficulty system, ensuring that players receive challenges suited to their progress. To achieve this, the game employs player performance tracking, where the difficulty of questions adjusts dynamically based on previous answers. If a player struggles with a topic, the game introduces more foundational questions before progressing to advanced ones, optimising both engagement and comprehension. This approach is informed by established educational models, such as Bloom’s Taxonomy, which structures learning objectives based on cognitive complexity. \\
+
+\noindent The client provided courses outlining key learning objectives and industry-relevant topics, which helped refine the question bank and ensure that the educational content met their expectations.
+
+\subsubsection{Game Design Influences}
+
+\noindent Shadow Operative draws inspiration from existing games that emphasise stealth and engagement to refine its structure and mechanics. The client specifically provided CounterSpy as the primary reference for the game's setting and design. This Cold War-era stealth game directly influenced Shadow Operative’s visual style, mechanics, and overall atmosphere. However, unlike CounterSpy, Shadow Operative integrates educational elements into its core gameplay, transforming the espionage theme into a learning-driven experience. \\
+
+\noindent Additional game design influences include:
+
+\begin{itemize}
+    \item This War of Mine provides insights into stealth mechanics, art style, and thematic depth; Shadow Operative adapts these elements for an educational experience suitable for younger audiences.
+    \item Kahoot! provides a model for question-based engagement, while Shadow Operative enhances it by embedding learning challenges within an immersive storyline instead of standalone quizzes.
+\end{itemize}
+
+\subsubsection{Technical Framework}
+
+\noindent The game is developed using Unity, leveraging its 2D engine for efficient and seamless gameplay. The development follows best practices in game design, incorporating principles from Karl Kapp’s The Gamification of Learning and Instruction to enhance engagement and motivation. \\
+
+\noindent Additionally, accessibility and user engagement are key priorities, with customisable controls ensuring inclusivity for different players. Users can remap key bindings and adjust input settings to suit their preferences, allowing for greater flexibility in gameplay. This feature enhances accessibility for players with different control preferences and ensures a comfortable experience across various input methods. \\
+
+\noindent By combining client-provided educational content, industry-aligned learning objectives, established game mechanics, and adaptive AI-driven learning, Shadow Operative offers a unique approach to skill development. The integration of these diverse source materials ensures an engaging, inclusive, and effective learning experience for all players.
+
+
+\newpage
+
+\subsection{System Architecture}
+
+\subsubsection{Technologies}
+
+\begin{enumerate}
+    \item \textbf{Unity Engine}
+    \begin{itemize}
+        \item \textbf{Unity Editor}: development environment for creating, editing and managing projects and their scenes, assets and scripts; also has the ability to debug
+        \item \textbf{Unity UI}: framework for creating user interfaces (buttons, panels, text, etc.); it is event driven
+        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically
+        \item \textbf{NVIDIA PhysX}: default physics engine in Unity, primarily used for character controllers and collision detection
+        \item \textbf{Sprite Sheet}: used for creating animations for dynamic \textbf{GameObjects}; Unity supports the conversion of such a sheet into usable sprites for animation
+    \end{itemize}
+    \item \textbf{Storage}
+    \begin{itemize}
+        \item \textbf{JSON}: file format chosen for retrieving player data between sessions and for storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by the Unity Engine
+    \end{itemize}
+    \item \textbf{Programming Languages}
+    \begin{itemize}
+        \item \textbf{C\#}: language used for writing scripts for \textbf{GameObjects} in the Unity Engine which dictate their behaviour
+    \end{itemize}
+    \item \textbf{Version Control System}
+    \begin{itemize}
+        \item \textbf{git}: standard across many other software development projects
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Platforms}
+
+\begin{enumerate}
+    \item \textbf{Operating Systems}
+    \begin{itemize}
+        \item \textbf{Windows 11}: used for development and testing
+        \item \textbf{Linux}, \textbf{MacOS} and \textbf{ChromeOS}: used for testing; may be used for development if a developer chooses to do so / has a preference for the operating system
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsubsection{Software Development Process}
+
+\noindent The chosen software development life cycle is the \textbf{Incremental Model} which divides the project into smaller, manageable portions (increments). Each increment builds upon the previous one. \\
+
+\noindent Its emphasis is on \textbf{gradual progress} which allows iterative feedback and testing.
+
+\newpage
+
+\subsubsection{Design Principles and Patterns}
+
+\newpage
+
+\subsubsection{High Level Overview}
+
+\newpage
+
+\subsection{System Usability and User Experience}
+
+\subsubsection{Customizable Controls and Controller Support}
+
+\noindent To enhance accessibility, Shadow Operative includes customizable controls, allowing players to adjust input settings based on their preferences. Additionally, controller support has been implemented, ensuring a seamless experience for users who prefer or need to use gamepads over traditional keyboard and mouse inputs. Default controller mappings were refined based on user feedback to maintain intuitive and responsive gameplay.
+
+\subsubsection{Minimalist UI Design for Clarity}
+
+\noindent A minimalist UI approach was adopted to reduce visual clutter and keep players focused on the gameplay. The interface presents only essential information, such as mission objectives, stealth indicators, and educational prompts, in a non-intrusive manner. This ensures that players remain immersed in the game while still having access to critical information when needed. The UI design follows established usability principles, such as consistency in iconography, clear typography, and an intuitive menu structure.
+
+\subsubsection{Tutorial and Progressive Learning}
+
+\noindent A dedicated tutorial level was implemented to introduce game mechanics gradually. This slow-paced introduction allows players to learn core mechanics step by step, preventing them from feeling overwhelmed. The tutorial also reinforces the game’s educational aspects by integrating learning elements seamlessly into the initial gameplay experience.
+
+\subsubsection{Dynamic Difficulty Adjustments}
+
+\noindent User testing revealed that the initial difficulty adjustment system was too harsh—players who answered a question incorrectly were immediately downgraded to easy difficulty, while correct answers led to overly difficult challenges. To improve this:
+
+\begin{itemize}
+    \item A wider range of difficulty levels was introduced to allow for smoother progression.
+    \item Adjustments were made to the adaptive difficulty algorithm to create a more gradual shift between question complexities, ensuring a balanced challenge for all players.
+\end{itemize}
+
+\subsubsection{Video and Performance Settings}
+
+\noindent To ensure compatibility with lower-end hardware, the game includes adjustable video settings. Players experiencing performance issues can modify graphical settings to optimize performance, making the game accessible to a wider audience without sacrificing usability.
+
+\subsubsection{User Feedback and Iterative Improvements}
+
+\noindent Usability and UX improvements were guided by user feedback collected through observational testing and structured interviews with testers. Testers were observed while playing to identify usability pain points, such as unclear UI elements or frustrating difficulty spikes. Following these observations, interviews were conducted to gather direct insights into their experience, including what aspects they found challenging or enjoyable. Based on this feedback, key refinements were made, such as:
+
+\begin{itemize}
+    \item Refine difficulty scaling to avoid frustration.
+    \item Enhancing tutorial clarity to improve learning effectiveness.
+    \item Expanding customization options for both controls and performance settings.
+\end{itemize}
+
+\newpage
+
+\section{Use Instructions}
+
+\subsection{Installation}
+
+\subsubsection{Player Installation Requirements}
+
+\begin{itemize}
+    \item No installation required. The game runs directly in your web browser.
+    \item Ensure your browser has JavaScript enabled
+\end{itemize}
+
+\subsubsection{Developer Installation Requirements}
+
+\begin{itemize}
+    \item Download Unity Hub from the Unity website
+    \item Install Unity version \textbf{2022.3.50f1}
+    \item Clone the game repository from \href{https://github.com/COMP2281/software-engineering-group24-25-05/tree/main/game}{here}
+    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the cloned repository
+\end{itemize}
+
+\subsubsection{System Requirements}
+
+\begin{tabularx}{\linewidth}{|X|X|X|}
+    \hline
+    Computing Components & Minimum Specs & Recommended Specs \\
+    \hline
+    CPU & Dual-core 2.0 GHz or equivalent & Quad-core 3.0 GHz or equivalent \\
+    \hline
+    RAM & 4 GB & 8 GB \\
+    \hline
+    Browser & Chrome, Firefox, Edge & Latest Versions \\
+    \hline
+    GPU & Graphics card with WebGL 2.0 support & Dedicated graphics card with 2+ GB VRAM \\
+    \hline
+    Storage & 500 MB & 1 GB \\
+    \hline
+    Internet & Stable Connection (3+ Mbps) & Stable Connection (12+ Mbps) \\
+    \hline
+    OS & Windows, MacOS, Linux & Windows \\
+    \hline
+\end{tabularx}
+
+\newpage
+
+\subsection{Deployment}
+
+\subsubsection{Building the Game}
+
+\begin{enumerate}
+    \item Open project in Unity
+    \item Navigate to File → Build Settings
+    \item Select WebGL as platform
+    \item Configure Player settings
+    \begin{itemize}
+        \item Set resolution to responsive
+        \item Select gzip as compression
+    \end{itemize}
+    \item Select build, and pick a folder to save the build in
+\end{enumerate}
+
+\subsubsection{Deploying the Game}
+
+\begin{enumerate}
+    \item Create an account on \textbf{itch.io}
+    \item In the dashboard, select upload new project
+    \item Fill in game details
+    \item Under “Kind of project” pick HTML
+    \item In the “uploads section”
+    \begin{enumerate}
+        \item Zip WebGL build from step 5 in \textbf{Building the Game}
+        \item Upload the ZIP file
+        \item Select "HTML" under "This file will be"
+        \item Check "This file will be played in the browser"
+    \end{enumerate}
+    \item Set game visibility
+    \item Click "Save"
+\end{enumerate}
+
+\subsection{Launching}
+
+\subsubsection{Accessing the Game}
+
+\begin{enumerate}
+    \item Navigate to the game’s URL you have hosted on \textbf{itch.io}
+    \item Allow any browser permissions requested
+\end{enumerate}
+
+\subsubsection{First Time Setup}
+
+\begin{enumerate}
+    \item Adjust audio \& graphic settings using the settings menu
+    \item Complete the game tutorial
+\end{enumerate}
+
+\subsection{Troubleshooting}
+
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    Game doesn't load & Clear browser cache and reload. Ensure WebGL is enabled in the browser. Try a different browser. Check internet connection \\
+    \hline
+    FPS drops & Lower graphics quality in game settings \\
+    \hline
+    Controls not responding & Check if game window is in focus \\
+    \hline
+    "Unsupported Browser" error & Update to latest browser version \\
+    \hline
+    Game crashes or freezes & Refresh the page \\
+    \hline
+\end{tabularx}
+
+\newpage
+
+\section{Maintenance and Implications}
+
+\subsection{Maintenance}
+
+\subsubsection{Code Maintenance}
+
+\begin{itemize}
+    \item Version Control: We use GitHub for code management to ensure that the code submitted by team members undergoes Code Review.
+    \item Modular Design: Split game logic, UI, question bank, character movement, etc., into independent modules for easier debugging and updates.
+    \item Error Logging and Debugging: Record error logs and use log4cpp, Python logging, or Unity Console for debugging to identify and resolve issues.
+\end{itemize}
+
+\subsubsection{Question Bank and Content Updates}
+
+\begin{itemize}
+    \item Store questions in JSON, XML, or a database for easy modification and expansion.
+    \item Implement a regular update mechanism, allowing administrators to import new IBM question banks via the backend to keep the content up to date.
+\end{itemize}
+
+\subsubsection{Automated Testing}
+
+\noindent To reduce maintenance costs, an automated testing system should be established, including:
+
+\begin{itemize}
+    \item Unit Testing: Tests individual modules, such as the quiz system, character movement, and level unlocking.
+    \item Integration Testing: Verifies interactions between different modules, such as UI and game logic interactions, database read/write operations, etc.
+    \item Regression Testing: Automatically checks if core functions are affected after each update.
+\end{itemize}
+
+\subsubsection{Compatibility and Performance Optimization}
+
+\begin{itemize}
+    \item Cross-Platform Support: Since we are using Unity, compatibility tests should be conducted on Windows and Mac.
+    \item Resource Optimization: Compress textures, optimize animation assets, and reduce GPU load to enhance performance and smoothness.
+    \item Regular Testing: Perform monthly regression tests to ensure that new features do not interfere with existing functionality.
+\end{itemize}
+
+\subsubsection{Documentation}
+
+\noindent To define design direction and track progress, development documentation should be maintained:
+
+\begin{itemize}
+    \item Write a README.md file to explain how to compile and run the game.
+    \item Document game architecture, API details, and database structure in detail
+\end{itemize}
+
+\newpage
+
+\subsection{Future Development}
+
+\subsubsection{Expansion of Question Bank}
+
+\begin{itemize}
+    \item Cloud Computing and DevOps
+    \item Machine Learning and Big Data Analysis
+    \item Blockchain and Smart Contracts
+\end{itemize}
+
+\subsubsection{Corporate Collaboration}
+
+\begin{itemize}
+    \item IBM official training, allowing employees to learn AI and security knowledge through gameplay.
+    \item University IT courses, serving as a review tool before exams.
+    \item Corporate recruitment exams, using the game to evaluate AI and security skills in potential candidates.
+\end{itemize}
+
+\subsubsection{Expansion of Storylines and Missions}
+
+\begin{itemize}
+    \item Multiple mission paths: In addition to puzzle-solving and answering questions, players can unlock different side missions, such as cyber warfare, code decryption, and diplomatic negotiations.
+    \item Chapter updates (DLC): New downloadable content can allow players to unlock different scenarios
+\end{itemize}
+
+\subsubsection{Adaptive Learning System}
+
+\begin{itemize}
+    \item \textbf{Dynamic Difficulty Adjustment Based on Player Progress}: The difficulty in the game will be dynamically adjusted based on the player's historical performance. For example, if a player performs well in answering cybersecurity questions, the system can automatically increase the difficulty of the tasks by introducing more challenging content, such as more complex network attack scenarios or multi-step security vulnerability remediation tasks. Conversely, if a player struggles, the system will automatically lower the difficulty and provide more hints and assistance to ensure that the player does not feel frustrated by overly difficult tasks, thus maintaining their motivation to learn.
+    \item \textbf{Personalized Learning Path Recommendation:} The adaptive learning system can customize a personalized learning path based on the player's individual interests and learning pace. For instance, for players who perform well in AI, the system can automatically recommend tasks related to deep learning and machine learning algorithms. On the other hand, for players who are weaker in cybersecurity, the system will recommend more tasks focusing on basic knowledge such as data encryption and intrusion detection. This way, players can focus on improving their weak areas without wasting time on irrelevant tasks.
+\end{itemize}
+
+\newpage
+
+\subsection{Ethical and Societal Impacts}
+
+\noindent Many ethical impacts arise from the current state of the game. Secure storage must be set up to protect user data for the adaptive learning feature collected during development and testing. Early versions may lack sufficient data protection measures which might infringe on user privacy, and AI parts responsible for dynamic difficulty adjustment may display algorithmic bias if they are not properly tuned. \\
+
+\noindent The current state of the system poses significant societal issues as well. Some learners may be left out due to the restrictive initial platform availability which is currently limited to Windows, most early prototypes may still not provide a fully functional learning experience. On the other hand, the system’s incompleteness gives it the potential to be improved iteratively because it can be practically tested early on to raise issues, resulting in a more practical and widely accessible tool. \\
+
+\noindent In a future state, greater measures for protecting user data will have to be incorporated into the game to safeguard users' information. AI systems need to be enhanced and monitored through iterations to reduce biases and ensure fair treatment for all learners. The users need to be provided with information on how their data will be handled, and the system’s personalisation options need to adhere to ethical standards to provide an accountable and responsible approach to adaptive learning. \\
+
+\noindent From a societal perspective, the future state of the game could boost educational engagement by making learning more inclusive and engaging. By introducing fascinating gaming environments around complex subjects such as artificial intelligence, cybersecurity, or data analytics, the system could spark greater interest within these fields. Future evolutions would ideally also work toward bridging those educational gaps and reaching broader audiences, so long as they are enabled for multiple platforms and made under inclusive design principles. Given the Cold War themes articulated through the game, it shall be imperative to handle cultural and historical content with a civility level to avoid propagating biases or distracting from specific historical events. Overall, a well-designed and moral system, could enhance the field of education and positively impact society.
+
+\end{document}
