@@ -3,12 +3,13 @@ using TMPro;
 
 public class ToggleScrollView : MonoBehaviour
 {
-    [SerializeField] private GameObject scrollView;        // Your scroll view UI element
-    [SerializeField] private Transform player;             // Player's Transform
-    [SerializeField] private Transform targetObject;       // The sprite the player should approach (the target object)
-    [SerializeField] private float interactionDistance = 3f;  // Distance at which the prompt appears
+    [SerializeField] private GameObject scrollView;        
+    [SerializeField] private Transform player;             
+    [SerializeField] private Transform targetObject;       
+    [SerializeField] private float interactionDistance = 3f;  
+    [SerializeField] private AudioSource audioSource;      
 
-    private TextMeshProUGUI promptText;   // TMP UI text (prompt message, attached to the sprite)
+    private TextMeshProUGUI promptText;   
     private bool isInRange = false;
 
     private void Start()
@@ -29,6 +30,15 @@ public class ToggleScrollView : MonoBehaviour
         if (promptText != null)
         {
             promptText.gameObject.SetActive(false);  // Hide the prompt at the start
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();  // Try to get AudioSource if not set via inspector
+            if (audioSource == null)
+            {
+                Debug.LogError("AudioSource is missing! Make sure to attach an AudioSource component to this GameObject.");
+            }
         }
     }
 
@@ -55,6 +65,9 @@ public class ToggleScrollView : MonoBehaviour
                 {
                     promptText.gameObject.SetActive(false);  // Hide the prompt text when R is pressed
                 }
+
+                // Play the audio when R is pressed
+                PlayAudio();
             }
         }
         else  // Player is out of range
@@ -88,7 +101,7 @@ public class ToggleScrollView : MonoBehaviour
         if (targetObject != null && promptText != null)
         {
             // Offset the prompt text above the sprite by 2 units (adjust the Y value as needed)
-            Vector3 offsetPosition = targetObject.position + new Vector3(0, 3, 0);  // Adjust the Y offset here
+            Vector3 offsetPosition = targetObject.position + new Vector3(0, 2, 0);  // Adjust the Y offset here
 
             // Set the prompt text position above the sprite
             promptText.transform.position = offsetPosition;
@@ -100,5 +113,18 @@ public class ToggleScrollView : MonoBehaviour
         // Toggle the visibility of the scroll view
         bool newState = !scrollView.activeSelf;
         scrollView.SetActive(newState);
+    }
+
+    private void PlayAudio()
+    {
+        // Check if the audio source is set and if an audio clip is assigned
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();  // Play the audio
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or AudioClip is not set. Make sure an AudioSource with a valid AudioClip is assigned.");
+        }
     }
 }
