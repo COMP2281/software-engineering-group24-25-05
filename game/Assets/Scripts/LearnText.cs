@@ -5,64 +5,93 @@ public class ToggleScrollView : MonoBehaviour
 {
     [SerializeField] private GameObject scrollView;        // Your scroll view UI element
     [SerializeField] private Transform player;             // Player's Transform
-    [SerializeField] private Transform targetObject;       // The object to get close to
-    [SerializeField] private TextMeshProUGUI promptText;   // TMP UI text (prompt message)
-    [SerializeField] private float interactionDistance = 3f;
+    [SerializeField] private Transform targetObject;       // The sprite the player should approach (the target object)
+    [SerializeField] private float interactionDistance = 3f;  // Distance at which the prompt appears
 
-    private AudioSource audioSource;
+    private TextMeshProUGUI promptText;   // TMP UI text (prompt message, attached to the sprite)
     private bool isInRange = false;
 
     private void Start()
     {
-        scrollView.SetActive(false);             // Make sure scroll view is off at the start
-        promptText.gameObject.SetActive(false);  // Hide the prompt at the start
+        // Try to find the prompt text (TextMeshProUGUI) under the targetObject (the sprite)
+        promptText = targetObject.GetComponentInChildren<TextMeshProUGUI>();
 
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
+        if (promptText == null)
         {
-            Debug.LogError("AudioSource is missing! Make sure to add one to this GameObject.");
+            Debug.LogError("Prompt Text is not found on the sprite! Make sure it is a child of the target object and has the TextMeshProUGUI component.");
+        }
+        else
+        {
+            Debug.Log("Prompt Text found: " + promptText.name);
+        }
+
+        scrollView.SetActive(false);             // Make sure scroll view is off at the start
+        if (promptText != null)
+        {
+            promptText.gameObject.SetActive(false);  // Hide the prompt at the start
         }
     }
 
     private void Update()
     {
-        // Check the distance between the player and the target object
+        // Check the distance between the player and the target object (the sprite)
         float distance = Vector3.Distance(player.position, targetObject.position);
 
-        if (distance <= interactionDistance)
+        if (distance <= interactionDistance)  // Player is in range
         {
             if (!isInRange)
             {
                 isInRange = true;
-                promptText.gameObject.SetActive(true);  // Show the prompt when in range
+                if (promptText != null)
+                {
+                    promptText.gameObject.SetActive(true);  // Show the prompt when in range of the sprite
+                }
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))  // Player presses R to toggle the scroll view
             {
                 ToggleScrollViewVisibility();
-                promptText.gameObject.SetActive(false);  // Hide the prompt text when R is pressed
+                if (promptText != null)
+                {
+                    promptText.gameObject.SetActive(false);  // Hide the prompt text when R is pressed
+                }
             }
         }
-        else
+        else  // Player is out of range
         {
             if (isInRange)
             {
                 isInRange = false;
-                promptText.gameObject.SetActive(false);  // Hide the prompt when out of range
-
-                // Auto-close the scroll view if it's open
-                if (scrollView.activeSelf)
+                if (promptText != null)
                 {
-                    scrollView.SetActive(false);
+                    promptText.gameObject.SetActive(false);  // Hide the prompt when out of range
                 }
+            }
+
+            // Auto-close the scroll view if it's open when the player is out of range
+            if (scrollView.activeSelf)
+            {
+                scrollView.SetActive(false);
             }
         }
 
-        // If scroll view is hidden, show the prompt again
+        // If scroll view is hidden, show the prompt again if the player is in range
         if (!scrollView.activeSelf && isInRange)
         {
-            promptText.gameObject.SetActive(true);  // Show the prompt when scroll view is closed and player is in range
+            if (promptText != null)
+            {
+                promptText.gameObject.SetActive(true);  // Show the prompt when scroll view is closed and player is in range
+            }
+        }
+
+        // Position the prompt text slightly above the sprite (target object) in world space
+        if (targetObject != null && promptText != null)
+        {
+            // Offset the prompt text above the sprite by 2 units (adjust the Y value as needed)
+            Vector3 offsetPosition = targetObject.position + new Vector3(0, 3, 0);  // Adjust the Y offset here
+
+            // Set the prompt text position above the sprite
+            promptText.transform.position = offsetPosition;
         }
     }
 
@@ -71,10 +100,5 @@ public class ToggleScrollView : MonoBehaviour
         // Toggle the visibility of the scroll view
         bool newState = !scrollView.activeSelf;
         scrollView.SetActive(newState);
-
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
     }
 }
