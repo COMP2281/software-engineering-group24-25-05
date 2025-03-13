@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField] private float fastFallSpeed = 12f;
     [SerializeField] private float jumpCooldown = 0.1f;
+
+    private Animator animator; // Animator reference
     
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private float groundAngleThreshold = 0.7f; // Cosine of ~45 degrees
     [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
+    [SerializeField] private LayerMask CrouchCheckLayer; // Layers to check for obstacles when uncrouching
     private float horizontalVelocityBeforeLanding;
 
     // Player facing direction
@@ -49,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
@@ -72,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         // Check if dialogue state has changed
         bool isDialogueActive = dialogueManager.dialogueBox.activeSelf;
         if (isDialogueActive != wasDialogueActiveLastFrame)
@@ -134,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
         
         // Apply fall gravity
         ApplyJumpPhysics();
+        // Handling linking animations to movements
+        HandleAnimations();
     }
 
     // Helper method to perform jump with given force
@@ -172,13 +179,51 @@ public class PlayerMovement : MonoBehaviour
         float effectiveSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector2 targetVelocity = new Vector2(movement.x * effectiveSpeed, rb.velocity.y);
 
-        float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
+        // Previous code which momentum led to delayed animation exiting
+        // float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
+        // rb.velocity = new Vector2(newX, rb.velocity.y);
+
+        if (Mathf.Abs(movement.x) > 0.1f) 
+        {
+         // Apply normal movement with  acceleration
+         float newX = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(newX, rb.velocity.y);
+        }
+        else if (isGrounded) 
+        {
+        // Stop movement instantly when grounded and no input
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        }
 
         // Store horizontal velocity before landing
         if (!isGrounded)
         {
             horizontalVelocityBeforeLanding = rb.velocity.x;
+        }
+    }
+
+    private void HandleAnimations()
+    {
+        // Get absolute horizontal velocity
+        float moveInput = Mathf.Abs(rb.velocity.x);
+        // Updating Speed parameter
+        animator.SetFloat("Speed", moveInput); 
+
+        // Jump animation
+        if (!isGrounded)
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
+        if (moveInput < 0.1f && isGrounded)
+        {   
+            // Ensures animation transitions immediately
+            animator.SetFloat("Speed", 0f);
+            // Forces Idle animation if Run lingers
+            animator.Play("Idle"); // Changed from "Player" to "Idle"
         }
     }
 
@@ -195,12 +240,43 @@ public class PlayerMovement : MonoBehaviour
 
     void StopCrouch()
     {
+        // Check if we can safely uncrouch
+        if (!CanUncrouch())
+        {
+            // Can't uncrouch yet, stay crouched
+            return;
+        }
+        
         isCrouching = false;
         float yOffset = (originalColliderSize.y * originalScale.y - originalColliderSize.y * originalScale.y * 0.5f) / 2;
         transform.position += new Vector3(0, yOffset, 0);
         transform.localScale = originalScale;
         capsuleCollider.size = originalColliderSize;
         capsuleCollider.offset = originalColliderOffset;
+    }
+    
+    // Check if it's safe to uncrouch by looking for obstacles above
+    private bool CanUncrouch()
+    {
+        // Calculate the position and size of the box check
+        Vector2 boxCenter = transform.position + new Vector3(0, originalColliderSize.y * 0.75f, 0);
+        Vector2 boxSize = new Vector2(originalColliderSize.x * 0.9f, originalColliderSize.y * 0.5f);
+        
+        // Check for obstacles above the player
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0, CrouchCheckLayer);
+        
+        // Filter out the player's own collider
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider != capsuleCollider && collider.gameObject != gameObject)
+            {
+                // Found an obstacle, can't uncrouch
+                return false;
+            }
+        }
+        
+        // No obstacles found, can uncrouch
+        return true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
