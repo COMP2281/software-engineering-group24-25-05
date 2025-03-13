@@ -14,8 +14,10 @@ public class EnemyAI : MonoBehaviour
     public float viewRange = 10f; // Vision range (tbc)
     public float viewAngle = 60f; // Vision angle (tbc could adjust if needed)
     public Transform player; 
-    public float eyeHeight = 0.5f; // Eye height offset
-    public Vector2 raycastOffset = Vector2.zero; // Raycast offset
+    public float eyeHeight = 0.5f; // Eye height offset for raycast
+    public float viewconeHeight = 0f; // Vertical position for viewcone light (adjust in inspector)
+    public float eyeOffset = 0.5f; // Horizontal offset for the eye position
+    public Transform viewconeLight; // Reference to the viewcone light transform (if any)
 
     // UI part (still needs to be completed)
     public GameObject questionUI; // Answering UI
@@ -32,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     {
         Patrol(); // Patrol the waypoints
         CheckForPlayer(); // Check if the player is in the enemy's vision range
+        UpdateViewDirection(); // Update the view direction based on movement
     }
 
     // Patrol behavior
@@ -42,11 +45,11 @@ public class EnemyAI : MonoBehaviour
         Transform targetWaypoint = waypoints[currentWaypointIndex];
         Vector2 directionToWaypoint = (targetWaypoint.position - transform.position).normalized; 
 
-        // Set sprite direction based on movement
+        // IMPORTANT: Fixed sprite flipping logic to be consistent
         if (directionToWaypoint.x > 0) {
-            spriteRenderer.flipX = true; // Moving right, don't flip
+            spriteRenderer.flipX = true; // Moving right - sprite faces right
         } else if (directionToWaypoint.x < 0) {
-            spriteRenderer.flipX = false; // Moving left, flip sprite
+            spriteRenderer.flipX = false; // Moving left - sprite faces left
         }
 
         // i set enemy could move horizontally only, keep vertical speed unchanged.
@@ -70,11 +73,14 @@ public class EnemyAI : MonoBehaviour
             return;
         }
         
-        // Determine facing direction based on sprite orientation
+        // Get facing direction based on sprite orientation
         Vector2 facingDirection = spriteRenderer.flipX ? Vector2.right : Vector2.left;
         
-        // Setup raycast origin at eye height
-        Vector2 raycastOrigin = (Vector2)transform.position + new Vector2(0, eyeHeight);
+        // Determine horizontal offset sign based on facing direction
+        float offsetSign = facingDirection.x;
+        
+        // Setup raycast origin at eye height and with horizontal offset based on facing direction
+        Vector2 raycastOrigin = (Vector2)transform.position + new Vector2(offsetSign * eyeOffset, eyeHeight);
         
         // Get all colliders hit by the ray
         RaycastHit2D[] hits = Physics2D.RaycastAll(raycastOrigin, facingDirection, viewRange);
@@ -117,12 +123,34 @@ public class EnemyAI : MonoBehaviour
     }   
     void UpdateViewDirection()
     {
-        Vector3 moveDirection = rb.velocity.normalized;
-        if (moveDirection.magnitude > 0)
+        // Get facing direction based on sprite orientation
+        Vector2 facingDirection = spriteRenderer.flipX ? Vector2.right : Vector2.left;
+        
+        // Rotate viewcone light if it exists
+        if (viewconeLight != null)
         {
-            transform.up = moveDirection;
+            // Position the viewcone at the eye position with custom height
+            viewconeLight.localPosition = new Vector3(facingDirection.x * eyeOffset, viewconeHeight, 0);
+            
+            // Use scale to flip
+            viewconeLight.localScale = new Vector3(spriteRenderer.flipX ? 1 : -1, 1, 1);
+            
+            // Adjust rotation to make viewcone face horizontally
+            if (spriteRenderer.flipX) {
+                // Facing right
+                viewconeLight.localRotation = Quaternion.Euler(0, 0, -90); // Rotate to face right horizontally
+            } else {
+                // Facing left
+                viewconeLight.localRotation = Quaternion.Euler(0, 0, 90); // Rotate to face left horizontally
             }
+            
+            // If the above doesn't work, try one of these alternatives:
+            // Option 1: viewconeLight.localRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
+            // Option 2: viewconeLight.localRotation = Quaternion.Euler(0, spriteRenderer.flipX ? 270 : 90, 0);
+            // Option 3: viewconeLight.localRotation = spriteRenderer.flipX ? Quaternion.Euler(90, 0, 0) : Quaternion.Euler(-90, 0, 0);
         }
+    }
+
     void OnDrawGizmos()
     {
         if (spriteRenderer == null) return;
@@ -131,11 +159,11 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, viewRange);
         
-        // Determine facing direction based on sprite orientation
+        // Get facing direction based on sprite orientation
         Vector2 facingDirection = spriteRenderer.flipX ? Vector2.right : Vector2.left;
         
-        // Calculate eye position
-        Vector3 eyePosition = transform.position + new Vector3(0, eyeHeight, 0);
+        // Calculate eye position with both height and horizontal offset
+        Vector3 eyePosition = transform.position + new Vector3(facingDirection.x * eyeOffset, eyeHeight, 0);
         
         // Draw view cone from eye position
         Vector3 rightBoundary = Quaternion.Euler(0, 0, viewAngle / 2) * facingDirection;
@@ -149,5 +177,12 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(eyePosition, 0.1f);
         Gizmos.DrawRay(eyePosition, facingDirection * viewRange);
+        
+        // Also visualize viewcone light position if applicable
+        if (viewconeLight != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(transform.position + new Vector3(facingDirection.x * eyeOffset, viewconeHeight, 0), 0.08f);
+        }
     }
 }
