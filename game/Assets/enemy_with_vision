@@ -1,0 +1,96 @@
+using UnityEngine;
+
+public class EnemyAI : MonoBehaviour
+{
+    public Transform[] waypoints; // patrol waypoint
+    public float speed = 2f; // enemy moving speed
+    private int currentWaypointIndex = 0; // patrol index
+
+    private Rigidbody2D rb;
+    private Vector2 movementDirection;
+
+    public float visionRange = 5f; // How far the enemy can see
+    public float visionAngle = 90f; // The angle of vision in front of the enemy
+
+    private Transform player; // Player's transform
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (waypoints.Length > 0)
+            transform.position = waypoints[0].position; // set the start position
+        player = GameObject.FindWithTag("Player").transform; // Find player by tag
+    }
+
+    void Update()
+    {
+        if (IsPlayerInSight())
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            Patrol();
+        }
+    }
+
+    void Patrol()
+    {
+        if (waypoints.Length == 0) return;
+
+        Transform targetWaypoint = waypoints[currentWaypointIndex];
+        movementDirection = (targetWaypoint.position - transform.position).normalized;
+
+        rb.velocity = movementDirection * speed; // Move towards the waypoint
+
+        if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.2f)
+        {
+            currentWaypointIndex++;
+            if (currentWaypointIndex >= waypoints.Length)
+                currentWaypointIndex = 0;
+        }
+    }
+
+    bool IsPlayerInSight()
+    {
+        // Check the distance to the player
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceToPlayer > visionRange) return false; // Player is too far away
+
+        // Check the angle between the enemy's forward direction and the player
+        Vector2 directionToPlayer = (player.position - transform.position).normalized;
+        float angleToPlayer = Vector2.Angle(transform.up, directionToPlayer);
+
+        // If the player is within the vision range and angle
+        if (angleToPlayer < visionAngle / 2)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, visionRange);
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                return true; // Player is in sight
+            }
+        }
+        return false;
+    }
+
+    void ChasePlayer()
+    {
+        // Direct the enemy towards the player
+        movementDirection = (player.position - transform.position).normalized;
+        rb.velocity = movementDirection * speed; // Move towards the player
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw vision range and angle for debugging
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
+
+        Vector2 visionLine1 = (Quaternion.Euler(0, 0, -visionAngle / 2) * transform.up) * visionRange;
+        Vector2 visionLine2 = (Quaternion.Euler(0, 0, visionAngle / 2) * transform.up) * visionRange;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + visionLine1);
+        Gizmos.DrawLine(transform.position, transform.position + visionLine2);
+    }
+}
