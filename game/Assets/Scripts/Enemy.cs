@@ -144,10 +144,6 @@ public class EnemyAI : MonoBehaviour
                 viewconeLight.localRotation = Quaternion.Euler(0, 0, 90); // Rotate to face left horizontally
             }
             
-            // If the above doesn't work, try one of these alternatives:
-            // Option 1: viewconeLight.localRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
-            // Option 2: viewconeLight.localRotation = Quaternion.Euler(0, spriteRenderer.flipX ? 270 : 90, 0);
-            // Option 3: viewconeLight.localRotation = spriteRenderer.flipX ? Quaternion.Euler(90, 0, 0) : Quaternion.Euler(-90, 0, 0);
         }
     }
 
