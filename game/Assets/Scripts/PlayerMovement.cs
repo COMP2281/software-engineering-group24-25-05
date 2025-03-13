@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private float groundAngleThreshold = 0.7f; // Cosine of ~45 degrees
     [SerializeField] private LayerMask GroundLayer; // Layer for ground objects
+    [SerializeField] private LayerMask CrouchCheckLayer; // Layers to check for obstacles when uncrouching
     private float horizontalVelocityBeforeLanding;
 
     // Player facing direction
@@ -208,22 +209,22 @@ public class PlayerMovement : MonoBehaviour
         // Updating Speed parameter
         animator.SetFloat("Speed", moveInput); 
 
-    // Jump animation
-    if (!isGrounded)
-    {
-        animator.SetBool("Jump", true);
-    }
-    else
-    {
-        animator.SetBool("Jump", false);
-    }
-    if (moveInput < 0.1f && isGrounded)
-{   
-    // Ensures animation transitions immediately
-    animator.SetFloat("Speed", 0f);
-    // Forces Idle animation if Run lingers
-    animator.Play("Player");
-}
+        // Jump animation
+        if (!isGrounded)
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
+        if (moveInput < 0.1f && isGrounded)
+        {   
+            // Ensures animation transitions immediately
+            animator.SetFloat("Speed", 0f);
+            // Forces Idle animation if Run lingers
+            animator.Play("Idle"); // Changed from "Player" to "Idle"
+        }
     }
 
     void StartCrouch()
@@ -239,12 +240,43 @@ public class PlayerMovement : MonoBehaviour
 
     void StopCrouch()
     {
+        // Check if we can safely uncrouch
+        if (!CanUncrouch())
+        {
+            // Can't uncrouch yet, stay crouched
+            return;
+        }
+        
         isCrouching = false;
         float yOffset = (originalColliderSize.y * originalScale.y - originalColliderSize.y * originalScale.y * 0.5f) / 2;
         transform.position += new Vector3(0, yOffset, 0);
         transform.localScale = originalScale;
         capsuleCollider.size = originalColliderSize;
         capsuleCollider.offset = originalColliderOffset;
+    }
+    
+    // Check if it's safe to uncrouch by looking for obstacles above
+    private bool CanUncrouch()
+    {
+        // Calculate the position and size of the box check
+        Vector2 boxCenter = transform.position + new Vector3(0, originalColliderSize.y * 0.75f, 0);
+        Vector2 boxSize = new Vector2(originalColliderSize.x * 0.9f, originalColliderSize.y * 0.5f);
+        
+        // Check for obstacles above the player
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0, CrouchCheckLayer);
+        
+        // Filter out the player's own collider
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider != capsuleCollider && collider.gameObject != gameObject)
+            {
+                // Found an obstacle, can't uncrouch
+                return false;
+            }
+        }
+        
+        // No obstacles found, can uncrouch
+        return true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
