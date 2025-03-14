@@ -853,9 +853,15 @@
 
 \begin{itemize}
     \item Download Unity Hub from the Unity website
-    \item Install Unity version \textbf{2022.3.50f1}
-    \item Clone the game repository from \href{https://github.com/COMP2281/software-engineering-group24-25-05/tree/main/game}{here}
-    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the cloned repository
+    \item Install Unity version \textbf{2022.3.50f1} from \href{https://unity.com/releases/editor/archive}{the unity archive}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{unity_archive.png}
+    \end{center}
+    \item Clone the git repository by entering \textbf{git clone https://github.com/COMP2281/software-engineering-group24-25-05.git} your git CLI
+    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the game repository in the cloned repository
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{add_from_disk.png}
+    \end{center}
 \end{itemize}
 
 \subsubsection{System Requirements}
@@ -887,15 +893,14 @@
 \subsubsection{Building the Game}
 
 \begin{enumerate}
-    \item Open project in Unity
+    \item Open the project in Unity
     \item Navigate to File → Build Settings
-    \item Select WebGL as platform
-    \item Configure Player settings
-    \begin{itemize}
-        \item Set resolution to responsive
-        \item Select gzip as compression
-    \end{itemize}
-    \item Select build, and pick a folder to save the build in
+    \item Select WebGL as platform and click "install with unity hub"
+        \begin{center}
+        \includegraphics[width=0.5\linewidth]{upd_webgl.png}
+    \end{center}
+    \item After WebGL is installed, choose "Switch Platform"
+    \item Select "Build", and pick a folder to save the build in
 \end{enumerate}
 
 \subsubsection{Deploying the Game}
@@ -903,16 +908,19 @@
 \begin{enumerate}
     \item Create an account on \textbf{itch.io}
     \item In the dashboard, select upload new project
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{dashboard.png}
+    \end{center}
     \item Fill in game details
     \item Under “Kind of project” pick HTML
     \item In the “uploads section”
     \begin{enumerate}
         \item Zip WebGL build from step 5 in \textbf{Building the Game}
         \item Upload the ZIP file
-        \item Select "HTML" under "This file will be"
         \item Check "This file will be played in the browser"
     \end{enumerate}
-    \item Set game visibility
+    \item Under frame options, tick fullscreen mode
+    \item Set the game visibility to restricted
     \item Click "Save"
 \end{enumerate}
 
@@ -923,6 +931,7 @@
 \begin{enumerate}
     \item Navigate to the game’s URL you have hosted on \textbf{itch.io}
     \item Allow any browser permissions requested
+    \item Click run game
 \end{enumerate}
 
 \subsubsection{First Time Setup}
@@ -945,6 +954,22 @@
     "Unsupported Browser" error & Update to latest browser version \\
     \hline
     Game crashes or freezes & Refresh the page \\
+    \hline
+    Memory-related crashes & Close other browser tabs. Try on a device with more RAM \\
+    \hline
+    Audio issues & Check if browser's audio is muted. Allow browser permission for audio. Try headphones instead of speakers \\
+    \hline
+    Visual glitches & Update graphics drivers. Disable browser extensions. Turn off hardware acceleration in browser settings \\
+    \hline
+    Loading stuck & Wait longer for initial load. Check for browser pop-up blockers. Try a wired internet connection \\
+    \hline
+    Game window scaling issues & Try fullscreen mode. Adjust display scaling in OS settings \\
+    \hline
+    Mobile-specific issues & Ensure device supports WebGL. Try landscape/portrait orientation. Disable power saving mode \\
+    \hline
+    Can't interact with game elements & Try different input methods (mouse/keyboard/controller). Check if ad blockers are interfering. Disable browser accessibility features \\
+    \hline
+    Black/white screen & Check if JavaScript is enabled. Try disabling browser plugins. Clear browser's site data completely \\
     \hline
 \end{tabularx}
 
