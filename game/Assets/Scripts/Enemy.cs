@@ -108,11 +108,13 @@ public class EnemyAI : MonoBehaviour
         if (validHits.Length > 0)
         {
             var firstHit = validHits[0]; // Get the closest non-self hit
-            Debug.Log($"Hit object: {firstHit.collider.gameObject.name}, Tag: {firstHit.collider.tag}, Distance: {firstHit.distance}");
 
             if (firstHit.collider.CompareTag("Player"))
             {
                 rb.velocity = Vector2.zero; // Stop the enemy's movement
+
+                // Set enemy speed to zero when player is detected
+                rb.velocity = Vector2.zero; // Stop the enemy's movements
                 Debug.Log("Player detected, triggering question!");
                 TriggerQuestionUI(); // Trigger question UI
             }
