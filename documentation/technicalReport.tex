@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
+\singlespacing   % Single spacing
 
 \usepackage{makecell}
 \usepackage{tabularx}
@@ -11,6 +12,8 @@
 \def\tabularxcolumn#1{m{#1}}
 
 % \usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\usepackage{tikz-uml}
 
 \title{Technical Report for Shadow Operative}
 \date{\today}
@@ -51,8 +54,6 @@
 
 \tableofcontents
 
-\newpage
-
 \section{Introduction}
 
 \subsection{Main Motivation and Goals}
@@ -71,7 +72,7 @@
 
 \begin{enumerate}
     \item Open a web browser.
-    \item Navigate to the game’s hosting website via \textbf{<INSERT URL HERE>}
+    \item Navigate to the game’s hosting website via \textbf{https://williammorgan73.itch.io/shadow-operative}
     \item Click on the level that you wish to play.
     \item Follow the in-game instructions to begin playing.
 \end{enumerate}
@@ -753,13 +754,16 @@
     \begin{itemize}
         \item \textbf{Unity Editor}: development environment for creating, editing and managing projects and their scenes, assets and scripts; also has the ability to debug
         \item \textbf{Unity UI}: framework for creating user interfaces (buttons, panels, text, etc.); it is event driven
-        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically
-        \item \textbf{NVIDIA PhysX}: default physics engine in Unity, primarily used for character controllers and collision detection
+        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically, also used to import custom libraries such as UI and shaders
+        \item \textbf{Physics Engine}: default physics engine in Unity, primarily used for character controllers and collision detection
+        \item \textbf{Lighting Engine}: default lighting \textbf{GameObjects} are used to create the "atmosphere" of the game
         \item \textbf{Sprite Sheet}: used for creating animations for dynamic \textbf{GameObjects}; Unity supports the conversion of such a sheet into usable sprites for animation
+        \item \textbf{Sprite Palette}: Unity's built-in software for creating static level assets, such as environment
     \end{itemize}
     \item \textbf{Storage}
     \begin{itemize}
-        \item \textbf{JSON}: file format chosen for retrieving player data between sessions and for storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by the Unity Engine
+        \item \textbf{JSON}: file format chosen for the storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by Unity's library
+        \item \textbf{PlayerPrefs}: used for saving the current status of the player (position, levels completed, questions answered), achieved through the \textbf{PlayerPrefs} class which is provided by Unity's library
     \end{itemize}
     \item \textbf{Programming Languages}
     \begin{itemize}
@@ -779,7 +783,204 @@
         \item \textbf{Windows 11}: used for development and testing
         \item \textbf{Linux}, \textbf{MacOS} and \textbf{ChromeOS}: used for testing; may be used for development if a developer chooses to do so / has a preference for the operating system
     \end{itemize}
+    \item \textbf{Browsers}
+    \begin{itemize}
+        \item \textbf{Firefox}, \textbf{Chrome} and \textbf{Microsoft Edge}: used for testing and optimizing the game for directly hosting it on the web
+    \end{itemize}
 \end{enumerate}
+
+\newpage
+
+\subsubsection{High Level Overview}
+
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+\begin{umlpackage}{Unity Editor}
+\begin{umlpackage}{Game Scene}
+
+\begin{umlpackage}{UI}
+\umlclass[x=-3, y=-6]{Pause Menu} {
+    isPaused : bool \\
+    Buttons: Button[]
+}{
+    Pause() : void \\
+    Resume() : void \\
+    Update() : void \\
+}
+
+\umlclass[x=5, y=-7.5]{ChangeControls} {
+    currControlScheme : string \\
+    playerInput : PlayerInput \\
+    jumpButton : Button \\
+    crouchButton : Button \\
+    leftButton : Button \\
+    rightButton : Button \\
+    deviceToggleButton : Button \\
+}{
+    ToggleControlScheme() : void \\
+    GetKeyboardControlScheme() : string \\
+    GetGamepadControlScheme() : string \\
+    SetupControlButton(b : Button) : void \\
+    UpdateButtonLabel(b : Button) : void \\
+    UpdateControlLabels() : void \\
+}
+
+\umlclass[x=-2, y=-10]{SkillsBuildUI} {
+    answerButtons: Button[] \\
+    skillsBuilder : SkillsBuilder \\
+    currentQuestion : int \\
+    colors : Color[]
+}{
+    MakeVisibile(vis : bool) : void \\
+    LoadNextQuestion() : void \\
+    OnAnswerSelected() : void
+}
+
+\end{umlpackage}
+
+\begin{umlpackage}{Main Character}
+\umlclass[x=-10]{Player} {
+    rigitBody : RigidBody2D \\
+    isGrounded : bool \\
+    isCrouching : bool \\
+    animator : Animator \\
+    viewCone : PlayerViewcone \\
+}{
+    Update() : void \\
+    PerformJump(force : float) : void \\
+    FixedUpdate() : void \\
+    HandleAnimations() : void \\
+    StartCrouch() : void \\
+    StopCrouch() : void \\
+    CheckGroundContact(coll : Collision2D) : void \\
+}
+\umlclass[x=-12,y=-6]{Main Camera} {
+    player : Transform \\
+    velocity : Vec3 \\
+    smoothTime : float \\
+    zoomOutSize : float \\
+}{
+    LateUpdate() : void
+}
+
+\umlclass[x=-10.71,y=-10]{PlayerViewcone} {
+    cone : Light2D \\
+    angle : float \\
+    distance : float \\
+    dir : Transform \\
+}{
+    Update() : void \\
+    UpdateLightPos(angle : float) : void
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Interactions}
+\umlclass[x=-10.1,y=-16.8]{Enemy}{
+    waypoints: Transform[] \\
+    speed : float \\
+    viewRange : float \\
+    viewAngle : float \\
+    eyeOffset : float \\
+    rb : RigidBody2D \\
+    renderer : SpriteRenderer \\
+    playerRef : Transform \\
+}{
+    Update() : void \\
+    Patrol() : void \\
+    CheckForPlayer() : void \\
+    TriggerQuestionUI() : void \\
+    OnTriggerEnter2D(player : Collider2D) : void \\
+}
+
+\umlclass[x=-3,y=-15]{Console}{
+    renderer : SpriteRenderer \\
+    position : Transform \\
+}{
+    Update() : void \\
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Storage}
+\umlclass[x=5,y=-15]{SkillsBuildDataLoader}{
+}{
+    LoadEntries(path : string) : List$<$SkillsBuildEntry$>$
+}
+
+\umlclass[x=2.5,y=-18]{SkillsBuildEntry}{
+    question : string \\
+    answers : string[] \\
+    correctAnswer : int \\
+    difficulty : int
+}{
+    Shuffle() : void
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Levels}
+\umlclass[x=-10.05,y=-22.9]{LevelEndTrigger}{
+}{
+    OnTriggerEnter2D(player : Collider2D) : void
+}
+
+\umlclass[x=-2.5,y=-23.2]{LevelCompleter}{
+    thisLevelType : LevelType \\
+    levelToUnlock : LevelType \\
+}{
+    CompleteLevel() : void
+}
+
+\umlclass[x=5.5,y=-24.4]{LevelManager}{
+    LevelType : enum \\
+    levelUnlockStatus : Dict$<$LevelType, bool$>$ \\
+    levelUnlockStatus : Dict$<$LevelType, string$>$ \\
+}{
+    InitializeLevelData() : void \\
+    IsLevelUnlocked(lvl : LevelType) : bool \\
+    UnlockLevel(lvl : LevelType) : void \\
+    SaveLevelUnlockStatus() : void \\
+    LoadLevelUnlockStatus() : void \\
+    GetSceneName() : string
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Environment}
+
+\umlclass[x=-2,y=2]{Grid} {
+    Cell Size : Vec2 \\
+    Tile Palette : TileSet \\
+}{}
+
+\umlclass[x=4,y=2]{Background} {
+    Backgrounds: PNG[] \\
+}{}
+
+\umlclass[x=4,y=-1]{Lighting} {
+    Lights: Light 2D[] \\
+    GlobalLight: GlobalLight2D \\
+    ShadowCaster: Platform[] \\
+    Platform $\to$ ShadowCaster2D
+}{}
+
+\end{umlpackage}
+\end{umlpackage}
+\end{umlpackage}
+
+\umlassoc[geometry=-|, anchor1=50, anchor2=100, arg1=follows, align1=right]{Main Camera}{Player}
+\umlassoc[geometry=-|, anchor1=30, anchor2=70, arg1=calculates cone, pos1=1, align1=left]{PlayerViewcone}{Player}
+\umlassoc[geometry=-|, arg1=reacts to]{Lighting}{Player}
+\umlassoc[geometry=-|, arg1=checks for collision, pos1=0.97]{Player}{Grid}
+\umlassoc[geometry=-|-, arg1=activates, pos1=2, anchor2=40]{Player}{Pause Menu}
+\umlassoc[geometry=-|-, arg1=triggers, pos1=1.3, anchor1=60, anchor2=-20]{Enemy}{SkillsBuildUI}
+\umlassoc[geometry=-|, arg1=entered through, pos1=0.25]{Pause Menu}{ChangeControls}
+\umlassoc[geometry=-|]{SkillsBuildDataLoader}{SkillsBuildEntry}
+\umlassoc[geometry=|-, anchor1=60, anchor2=-26, arg1=loads questions]{SkillsBuildDataLoader}{SkillsBuildUI}
+\umluniassoc[geometry=|-]{LevelEndTrigger}{LevelCompleter}
+\umluniassoc[geometry=|-, anchor2=195]{LevelCompleter}{LevelManager}
+\umluniassoc[geometry=-|-, arg1=triggers, pos1=1.2, align=right, anchor1=west, anchor2=east, weight=0.4]{Console}{LevelEndTrigger}
+\end{tikzpicture}%
+}
+\end{center}
 
 \newpage
 
@@ -787,17 +988,55 @@
 
 \noindent The chosen software development life cycle is the \textbf{Incremental Model} which divides the project into smaller, manageable portions (increments). Each increment builds upon the previous one. \\
 
-\noindent Its emphasis is on \textbf{gradual progress} which allows iterative feedback and testing.
+\noindent \textbf{Gradual Progress:} Our game comprises multiple components, including core mechanics such as movement, enemy AI,  and IBM Skills Build badge questions. Using the Incremental Model, we can develop each component sequentially, starting with the foundational mechanics. \\
+
+\noindent \textbf{Iterative Feedback and Testing:} After completing each increment, we can conduct testing and gather client or player feedback. This ensures each feature works as intended and aligns with the project goals before integrating it into the overall game. \\
+
+\noindent \textbf{Risk Management:} By addressing straightforward features early in the development process, the Incremental Model reduces risk and ensures a consistent development pace. This strategy allows us to allocate more time and resources to resolving challenges posed by complex features. \\
+
+\noindent \textbf{Flexibility for Changes:} Given the possibility of evolving client requirements or necessary adjustments, the Incremental Model minimizes disruption. Changes can be accommodated without requiring significant rework, as only specific increments need updating, preserving the integrity of prior developments. \\
+
+\noindent \textbf{Early Player Engagement:} The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input. \\
+
+\noindent \textbf{Adaptability to a Small Team:} With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked. \\
+
+\subsubsection{Behaviour Driven Development}
+
+\noindent The Incremental Model and BDD complement each other effectively in the software development process. \\
+
+\noindent Each increment was developed, tested and reviewed. This has aligned well with BDD due to each increment representing the implementation of a behavioural requirement, which in the testing period has been reviewed by the relevant stakeholders. \\
+
+\noindent Due to the low risk and flexibility of the chosen software development process it has allowed us to continually refine and evolve the requirements based on testing results and stakeholder feedback. \\
+
+\noindent BDD has played a key role in the development process by allowing the team to designate increments as the implementation of a requirement and to have a clear goal in mind, and has facilitated good collaboration between the development team and the stakeholders. \\
+
+\noindent Due to the rigorous testing required by BDD it played a significant role in the quality assurance process; our project had to abide by the strict requierements.
 
 \newpage
 
-\subsubsection{Design Principles and Patterns}
+\subsubsection{Applied Design Principles}
 
-\newpage
+\noindent \textbf{Open / Closed Principle}: modules such as the \textbf{SkillsBuild} implementation and the \textbf{Enemy} class implementation are generic, they can be expanded upon through inheritance without having to modify the base class. \\
 
-\subsubsection{High Level Overview}
+\noindent \textbf{Single Responsibility Principle}: has been applied to concepts such as the \textbf{LevelManager}, \textbf{LevelCompleter}, \textbf{LevelEndTrigger}, \textbf{SkillsBuildDataLoader} and the \textbf{PlayerViewcone}. They have only one purpose, offer consistent interaction APIs such that internal changes do not affect outside modules. \\
 
-\newpage
+\noindent \textbf{Interface Segregation Principle}: this is the de facto standard in any Unity project, with the way entities and \textbf{GameObject}s are setup in the \textbf{Unity Editor} they only depend on each other if explicitly stated by the developer. \\
+
+\noindent \textbf{DRY}: unintentionally applied due to the project scale being small and the ratio of code to assets is small \\
+
+\noindent \textbf{KISS}: with the aforementioned point made, we have relied heavily on pre-existing assets (including the vast library offered by the Unity Engine) in order to keep complexity at minimum, the thought being that if the library offers the functionality there is no reason to re-implement it
+
+\subsubsection{Applied Design Patterns}
+
+\noindent \textbf{Component Pattern}: obliged to use it due to Unity's architecture, all of the modules inherit from the \textbf{MonoBehaviour} base class which can be attached to \textbf{GameObject}s in the Unity Editor. \\
+
+\noindent \textbf{Singleton Pattern}: used for event emitters such as \textbf{InputManager}, \textbf{DialogueManager}, \textbf{AudioSettingsManager}, \textbf{LevelManager}, by having a single easily accessible instance the complexity has been reduced; other modules do not have to keep a reference towards such instances. \\
+
+\noindent \textbf{State Pattern}: this pattern has been applied when designing the non-playable characters (enemies), when they have detected the player their state changes from patrolling to chasing and start following the player. \\
+
+\noindent \textbf{Event Aggregator Pattern}: when an enemy catches the player it will trigger the \textbf{SkillsBuild} functionality. \\
+
+\noindent \textbf{Observer Pattern}: the \textbf{LevelEndTrigger} class observes a \textbf{GameObject} such as a Console in order to decide whether to trigger the end of the level.
 
 \subsection{System Usability and User Experience}
 
@@ -813,30 +1052,9 @@
 
 \noindent A dedicated tutorial level was implemented to introduce game mechanics gradually. This slow-paced introduction allows players to learn core mechanics step by step, preventing them from feeling overwhelmed. The tutorial also reinforces the game’s educational aspects by integrating learning elements seamlessly into the initial gameplay experience.
 
-\subsubsection{Dynamic Difficulty Adjustments}
-
-\noindent User testing revealed that the initial difficulty adjustment system was too harsh—players who answered a question incorrectly were immediately downgraded to easy difficulty, while correct answers led to overly difficult challenges. To improve this:
-
-\begin{itemize}
-    \item A wider range of difficulty levels was introduced to allow for smoother progression.
-    \item Adjustments were made to the adaptive difficulty algorithm to create a more gradual shift between question complexities, ensuring a balanced challenge for all players.
-\end{itemize}
-
 \subsubsection{Video and Performance Settings}
 
 \noindent To ensure compatibility with lower-end hardware, the game includes adjustable video settings. Players experiencing performance issues can modify graphical settings to optimize performance, making the game accessible to a wider audience without sacrificing usability.
-
-\subsubsection{User Feedback and Iterative Improvements}
-
-\noindent Usability and UX improvements were guided by user feedback collected through observational testing and structured interviews with testers. Testers were observed while playing to identify usability pain points, such as unclear UI elements or frustrating difficulty spikes. Following these observations, interviews were conducted to gather direct insights into their experience, including what aspects they found challenging or enjoyable. Based on this feedback, key refinements were made, such as:
-
-\begin{itemize}
-    \item Refine difficulty scaling to avoid frustration.
-    \item Enhancing tutorial clarity to improve learning effectiveness.
-    \item Expanding customization options for both controls and performance settings.
-\end{itemize}
-
-\newpage
 
 \section{Use Instructions}
 
@@ -853,9 +1071,15 @@
 
 \begin{itemize}
     \item Download Unity Hub from the Unity website
-    \item Install Unity version \textbf{2022.3.50f1}
-    \item Clone the game repository from \href{https://github.com/COMP2281/software-engineering-group24-25-05/tree/main/game}{here}
-    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the cloned repository
+    \item Install Unity version \textbf{2022.3.50f1} from \href{https://unity.com/releases/editor/archive}{the unity archive}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{images/unity_archive.png}
+    \end{center}
+    \item Clone the git repository by entering \textbf{git clone https://github.com/COMP2281/software-engineering-group24-25-05.git} your git CLI
+    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the game repository in the cloned repository
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{images/add_from_disk.png}
+    \end{center}
 \end{itemize}
 
 \subsubsection{System Requirements}
@@ -880,22 +1104,19 @@
     \hline
 \end{tabularx}
 
-\newpage
-
 \subsection{Deployment}
 
 \subsubsection{Building the Game}
 
 \begin{enumerate}
-    \item Open project in Unity
+    \item Open the project in Unity
     \item Navigate to File → Build Settings
-    \item Select WebGL as platform
-    \item Configure Player settings
-    \begin{itemize}
-        \item Set resolution to responsive
-        \item Select gzip as compression
-    \end{itemize}
-    \item Select build, and pick a folder to save the build in
+    \item Select WebGL as platform and click "install with unity hub"
+        \begin{center}
+        \includegraphics[width=0.3\linewidth]{images/upd_webgl.png}
+    \end{center}
+    \item After WebGL is installed, choose "Switch Platform"
+    \item Select "Build", and pick a folder to save the build in
 \end{enumerate}
 
 \subsubsection{Deploying the Game}
@@ -903,16 +1124,19 @@
 \begin{enumerate}
     \item Create an account on \textbf{itch.io}
     \item In the dashboard, select upload new project
+    \begin{center}
+        \includegraphics[width=0.3\linewidth]{images/dashboard.png}
+    \end{center}
     \item Fill in game details
     \item Under “Kind of project” pick HTML
     \item In the “uploads section”
     \begin{enumerate}
         \item Zip WebGL build from step 5 in \textbf{Building the Game}
         \item Upload the ZIP file
-        \item Select "HTML" under "This file will be"
         \item Check "This file will be played in the browser"
     \end{enumerate}
-    \item Set game visibility
+    \item Under frame options, tick fullscreen mode
+    \item Set the game visibility to restricted
     \item Click "Save"
 \end{enumerate}
 
@@ -921,8 +1145,9 @@
 \subsubsection{Accessing the Game}
 
 \begin{enumerate}
-    \item Navigate to the game’s URL you have hosted on \textbf{itch.io}
+    \item Navigate to the game’s  you have hosted on \textbf{itch.io}
     \item Allow any browser permissions requested
+    \item Click run game
 \end{enumerate}
 
 \subsubsection{First Time Setup}
@@ -946,9 +1171,23 @@
     \hline
     Game crashes or freezes & Refresh the page \\
     \hline
+    Memory-related crashes & Close other browser tabs. Try on a device with more RAM \\
+    \hline
+    Audio issues & Check if browser's audio is muted. Allow browser permission for audio. Try headphones instead of speakers \\
+    \hline
+    Visual glitches & Update graphics drivers. Disable browser extensions. Turn off hardware acceleration in browser settings \\
+    \hline
+    Loading stuck & Wait longer for initial load. Check for browser pop-up blockers. Try a wired internet connection \\
+    \hline
+    Game window scaling issues & Try fullscreen mode. Adjust display scaling in OS settings \\
+    \hline
+    Mobile-specific issues & Ensure device supports WebGL. Try landscape/portrait orientation. Disable power saving mode \\
+    \hline
+    Can't interact with game elements & Try different input methods (mouse/keyboard/controller). Check if ad blockers are interfering. Disable browser accessibility features \\
+    \hline
+    Black/white screen & Check if JavaScript is enabled. Try disabling browser plugins. Clear browser's site data completely \\
+    \hline
 \end{tabularx}
-
-\newpage
 
 \section{Maintenance and Implications}
 
@@ -996,8 +1235,6 @@
     \item Document game architecture, API details, and database structure in detail
 \end{itemize}
 
-\newpage
-
 \subsection{Future Development}
 
 \subsubsection{Expansion of Question Bank}
@@ -1029,8 +1266,6 @@
     \item \textbf{Dynamic Difficulty Adjustment Based on Player Progress}: The difficulty in the game will be dynamically adjusted based on the player's historical performance. For example, if a player performs well in answering cybersecurity questions, the system can automatically increase the difficulty of the tasks by introducing more challenging content, such as more complex network attack scenarios or multi-step security vulnerability remediation tasks. Conversely, if a player struggles, the system will automatically lower the difficulty and provide more hints and assistance to ensure that the player does not feel frustrated by overly difficult tasks, thus maintaining their motivation to learn.
     \item \textbf{Personalized Learning Path Recommendation:} The adaptive learning system can customize a personalized learning path based on the player's individual interests and learning pace. For instance, for players who perform well in AI, the system can automatically recommend tasks related to deep learning and machine learning algorithms. On the other hand, for players who are weaker in cybersecurity, the system will recommend more tasks focusing on basic knowledge such as data encryption and intrusion detection. This way, players can focus on improving their weak areas without wasting time on irrelevant tasks.
 \end{itemize}
-
-\newpage
 
 \subsection{Ethical and Societal Impacts}
 
