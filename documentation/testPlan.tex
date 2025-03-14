@@ -4,7 +4,6 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
-\singlespacing   % Single spacing
 
 \usepackage{makecell}
 \usepackage{tabularx}
@@ -13,9 +12,7 @@
 
 % \usepackage[a4paper, total={6in, 8in}]{geometry}
 
-\usepackage{tikz-uml}
-
-\title{Technical Report for Shadow Operative}
+\title{Test Plan for Shadow Operative}
 \date{\today}
 
 \author{
@@ -54,1227 +51,1648 @@
 
 \tableofcontents
 
-\section{Introduction}
+\newpage
 
-\subsection{Main Motivation and Goals}
+\section{Introduction and Test Overview}
 
-\noindent Shadow Operative is a Project which gracefully integrates IBM Skills Build in order to provide users a more fun and interactive way of learning from the IBM Courses. This goal is approached by incorporating fun gameplay mechanics to balance the amount of learning material the user encounters. The balancing of educational content with gameplay is seamless, this is supported by having an AI create a compelling and realistic environment akin to the game inspiration CounterSpy. \\
+\noindent Shadow Operative is an educational video game that integrates IBM SkillsBuild content to create an engaging learning platform focused on AI, Cybersecurity, and Data Analytics. The game incorporates IBM SkillsBuild badges and leverages AI-driven adaptive learning to personalise content based on players' performance and progress. This innovative approach combines education with entertainment, fostering a dynamic and enjoyable learning experience. \\
 
-\noindent The project benefits individuals who currently learn using IBM Skills Build, including self-learners and educational institutions looking for interactive tools to complement their curriculum. Gamifying the learning process can further the audience and effectiveness of the IBM Skills Build course with younger users in mind. \\
+\noindent Players can earn industry-recognized certifications by completing practical, game-based challenges that build valuable skills in high-demand areas. The game dynamically adjusts its difficulty and content to cater to individual learning paths, promoting mastery of complex topics, and encouraging continuous growth. \\
 
-\noindent The client for this project is IBM, represented by John McManara, who leads the IBM UK University Programs and serves as an IBM Master Inventor. IBM’s overarching goal is to increase the engagement of Skills Build content. This project aligns with IBM’s strategic aim to integrate cutting-edge solutions into its educational offerings.
+\noindent This testing report presents a comprehensive evaluation of Shadow Operative, including the following key sections:
+\begin{itemize}
+    \item \textbf{Testing Scope} – Defines the extent and objectives of the testing process.
+    \item \textbf{Test Cases} – Describes specific scenarios and conditions evaluated during testing.
+    \item \textbf{Testing Content} – Outlines the areas and characteristics subjected to testing, along with key findings and results.
+\end{itemize}
 
-\subsection{Instructions on Installation and Setup}
+\noindent The report highlights critical insights, performance evaluations, and improvements, demonstrating the educational value of Shadow Operative.
 
-\noindent The game is accessible through an online platform. Users can play the game via their web browser without needing downloads or additional installations. \\
+\subsection{Test Overview}
 
-\noindent Instructions to access the game:
+\subsubsection{Unit Testing}
 
-\begin{enumerate}
-    \item Open a web browser.
-    \item Navigate to the game’s hosting website via \textbf{https://williammorgan73.itch.io/shadow-operative}
-    \item Click on the level that you wish to play.
-    \item Follow the in-game instructions to begin playing.
-\end{enumerate}
+\begin{tabularx}{\linewidth}{|c|X|X|}
+    \hline
+    \textbf{Test ID} & \textbf{Description} & \textbf{Test Oracle} \\
+    \hline
+    \textbf{utest\_1} & \textbf{Character Movement}: Test that the character moves correctly in response to input, including sprinting, crouching, and jumping & Expected character movement should match input commands; animations and physics should behave consistently \\
+    \hline
+    \textbf{utest\_2} & \textbf{Health}: Test that health decreases upon taking damage and increases when healing items are used & Health bar reflects correct changes based on game events \\
+    \hline
+    \textbf{utest\_3} & \textbf{Collision Detection}: Verify accurate collision between player, environment, and interactive objects & Player and objects cannot pass through solid obstacles; correct response on collision events \\
+    \hline
+    \textbf{utest\_4} & \textbf{Enemy AI Behaviour}: Test patrol routes, detection logic, and state transitions (e.g., alert, idle) & AI responds correctly to player actions and follows expected behaviour patterns \\
+    \hline
+    \textbf{utest\_5} & \textbf{Level Load + Transitions\textbf{}}: Test smooth transitions between levels and correct loading of level assets & Level data persists, and transitions occur without graphics or gameplay glitches \\
+    \hline
+    \textbf{utest\_6} & \textbf{Skill Build Questions}: Test that questions display and function correctly during gameplay & The quiz UI opens and closes as expected. Questions and answers are rendered properly. Appropriate feedback is provided after answering a question \\
+    \hline
+\end{tabularx}
 
-\noindent For optimal performance, it is recommended to use a modern web browser with a stable internet connection. If users encounter any issues, they should refer to section 3.4 of this technical report.
+\subsubsection{System Testing}
+
+\begin{tabularx}{\linewidth}{|c|X|X|>{\raggedright\arraybackslash}m{2cm}|}
+    \hline
+    \textbf{Test ID} & \textbf{Description} & \textbf{Test Oracle} & \textbf{Nature} \\
+    \hline
+    \textbf{stest\_1} & \textbf{Graphics and Audio}: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag & Graphics match expected design, and audio aligns with gameplay events without delay & Non-Functional \\
+    \hline
+    \textbf{stest\_2} & \textbf{UI Navigation (Saving and Loading)}: Test that the UI allows seamless navigation, and game states save/load correctly & UI responds correctly to input, and saved states are accurately restored & Functional \\
+    \hline
+    \textbf{stest\_3} & \textbf{Gameplay Flow}: Test the game mechanics, including mission progression, level transitions, and story continuity & Gameplay progresses smoothly without logic errors or broken sequences & Functional \& Non-Functional \\
+    \hline
+    \textbf{stest\_4} & \textbf{Character Interactions}: Test interactions between the player and NPCs, objects, and the environment & Characters and objects respond correctly to player interactions with appropriate animations & Functional \\
+    \hline
+\end{tabularx}
+
+\subsubsection{User Acceptance Testing}
+
+\begin{tabularx}{\linewidth}{|c|X|X|}
+    \hline
+    \textbf{Test ID} & \textbf{Description} & \textbf{Test Oracle} \\
+    \hline
+    \textbf{uattest\_1} & \textbf{Gameplay Experience}: Verify that the game provides an engaging, immersive, and challenging experience for players & Players report a fun and balanced experience, with no major gameplay issues \\
+    \hline
+    \textbf{uattest\_2} & \textbf{User Interface}: Test that the UI is intuitive, responsive, and visually appealing & Players can easily navigate menus, interact with elements, and receive feedback \\
+    \hline
+    \textbf{uattest\_3} & \textbf{Performance and Stability}: Ensure the game performs smoothly and remains stable under various conditions & Players experience no frame drops, long load times, or crashes \\
+    \hline
+    \textbf{uattest\_4} & \textbf{Accessibility}: Test that the game is inclusive and accommodates various accessibility needs & Players can use customizable controls, subtitles, and other accessibility features effectively \\
+    \hline
+    \textbf{uattest\_5} & \textbf{Quizzes}: Test the educational component, ensuring quizzes are engaging, well-integrated, and correctly assessed & Players find the quizzes challenging and educational, with accurate feedback on answers \\
+    \hline
+    \textbf{uattest\_6} & \textbf{Chatbot}: Test the chatbot's ability to assist users with gameplay tips or educational content & Players receive accurate and helpful responses from the chatbot \\
+    \hline
+\end{tabularx}
 
 \newpage
 
-\subsection{Status of Behavioural Requirements}
+\section{Test Cases}
 
-\begin{center}
+\subsection{Unit Testing}
+
+\subsubsection{Character Movement}
+
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
-    Behaviour Code & \textbf{BR 1.1} \\
+    \textbf{Test ID} & \textbf{utest\_1} \\
     \hline
-    Description of Requirement & Player should be able to use Cover to avoid detection when in line of sight \\
+    \textbf{Description of test} & This test case verifies the player's movement controls and response within the game environment. The player should be able to move in all directions (left, right), jump, smoothly and responsively. The controls should be intuitive, and the player's movements should be fluid. \\
     \hline
-    Status of Behaviour Requirement & Implemented \\
+    \textbf{Related requirement document details} & Movement Mechanics (2.2.8) \\
     \hline
-    Changed? &
-    Unchanged
+    \textbf{Prerequisites for test} & \makecell[l]{
+        Character controller setup \\
+        Basic environment created to navigate, allowing to test horizontal \\ and vertical movement.
+    } \\
+    \hline
+    \textbf{Test Procedure} &
+    \textbf{Test character’s horizontal movement}
     \begin{itemize}
-        \item Functionality performs as expected in all tested scenarios.
-    \end{itemize} \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 1.2} \\
-    \hline
-    Description of Requirement & Trigger guards when making noise near guards \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
+        \item Move the character left and right using the input system.
+    \end{itemize}
+    \textbf{Test character’s vertical movement by jumping mid-air}
     \begin{itemize}
-        \item When the player moves within a radius of guard whilst unseen yet, Guards are not able to detect them.
-        \item This is as Guards having noise detection may complicate gameplay in combination with other guard mechanics.
-    \end{itemize} \\
-    \hline
-    Extent to Met/Unmet & Not Implemented \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 1.3} \\
-    \hline
-    Description of Requirement & Player crouches to avoid guard detection \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 1.4} \\
-    \hline
-    Description of Requirement & Player alerts guards when spotted \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 1.5} \\
-    \hline
-    Description of Requirement & Guard returns to patrol after losing sight of player \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Changed
+        \item Press jump while the character is in the air.
+    \end{itemize}
+    \textbf{Test character’s vertical movement by jumping onto a ledge}
     \begin{itemize}
-        \item When guard detect a player, there is an immediate transition to a quiz screen.
-        \item Resulting in no chase to occur which guard can loose sight of player.
+        \item Press jump when near a ledge to ensure correct landing mechanics.
+    \end{itemize}
+    \textbf{Test character’s vertical movement by falling off a ledge}
+    \begin{itemize}
+        \item Walk off the edge of a platform and ensure gravity is applied to the character.
+    \end{itemize}
+    \textbf{Test character’s movement with simultaneous inputs}
+    \begin{itemize}
+        \item Press both movement keys (e.g., horizontal and vertical) to ensure combined movement works smoothly.
     \end{itemize}
     \\
     \hline
-    Extent to Met/Unmet & Removed \\
+    \textbf{Test Material Used} & Keyboard, Xbox Controller \\
     \hline
 \end{tabularx}
-\end{center}
 
 \begin{center}
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
-    Behaviour Code & \textbf{BR 2.1} \\
-    \hline
-    Description of Requirement & Player steals classified documents \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Modified
+    \textbf{Expected Result} &
+     \textbf{Horizontal Movement:}
     \begin{itemize}
-        \item The requirement was modified to remove the coin rewarding mechanic as well as alerting nearby guards when a player answers the question wrong.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 2.2} \\
-    \hline
-    Description of Requirement & Quiz at the end of the level \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 3.1} \\
-    \hline
-    Description of Requirement & Pause Menu so player can take a break from the game \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 3.2} \\
-    \hline
-    Description of Requirement & Player accessing game settings via the pause screen \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 4.1} \\
-    \hline
-    Description of Requirement & Player Testing player stealth gameplay skills \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
+        \item The character’s x-coordinate should increase when moving right and decrease when moving left.
+        \item Movement should be smooth and responsive.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping Mid Air):}
     \begin{itemize}
-        \item Behaviour requirement 4.1 was removed as core motivation of the game is to test more so on IBM Skills content rather than player stealth gameplay.
-        \item Removing this requirement would lead to the AI boss adapting to IBM Skills rather than stealth.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Removed \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 4.2} \\
-    \hline
-    Description of Requirement & Level final quiz adjustment \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 4.3} \\
-    \hline
-    Description of Requirement & Level Combat mechanics adjustments \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
+        \item The character’s y-coordinate should increase when jumping, indicating upward movement.
+        \item The jump height should match the intended design.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping onto a Ledge):}
     \begin{itemize}
-        \item Combat mechanics removed from the gameplay so no need for Final boss to test combat mechanics.
-        \item Combat was removed to focus more on teaching and quiz quality aspects of the game.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 5.1} \\
-    \hline
-    Description of Requirement & Background music for immersive atmosphere \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 5.2} \\
-    \hline
-    Description of Requirement & Sound effects for in-game actions \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 5.3} \\
-    \hline
-    Description of Requirement & Adaptive music for boss encounters \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 5.4} \\
-    \hline
-    Description of Requirement & Environmental sound effects \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 6.1} \\
-    \hline
-    Description of Requirement & Cold war era background \& atmosphere \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 6.2} \\
-    \hline
-    Description of Requirement & Enemy Uniforms \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Changed
+        \item The character’s y-coordinate should decrease to the ledge height, then stop at that height.
+        \item The character should land on the ledge, with no clipping or unintended behaviour.
+    \end{itemize}
+    \textbf{Vertical Movement (Falling off a Ledge):}
     \begin{itemize}
-        \item Enemies no longer have red uniforms to symbolize the Soviet Union insignias due to the sci-fi aspect of the game and allowing the enemies to be robots.
-        \item Having robots quiz an intruder made more sense than a human who would most likely recognise a person who did not belong in the building.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 6.3} \\
-    \hline
-    Description of Requirement & Indication when entering a room with objects indicating next steps in level \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 7.1} \\
-    \hline
-    Description of Requirement & Receiving mission objective \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 7.2} \\
-    \hline
-    Description of Requirement & Unlocking a reward for completing a mission \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged
+        \item The character’s y-coordinate should decrease when falling off the ledge, simulating gravity.
+        \item The fall speed should be consistent with the game’s gravity settings.
+    \end{itemize}
+    \textbf{Simultaneous Inputs:}
     \begin{itemize}
-        \item Rewarded with IBM Badge corresponding to the game level player completes
-    \end{itemize}\\
+        \item The character should move both horizontally and vertically in response to input without delay.
+        \item No erratic or conflicting movement should occur when both horizontal and vertical inputs are used simultaneously.
+    \end{itemize}
+    \\
     \hline
-    Extent to Met/Unmet & Met \\
+    \textbf{Comments} & None \\
     \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \textbf{Created by} & WM \\
     \hline
-    Behaviour Code & \textbf{BR 7.3} \\
-    \hline
-    Description of Requirement & Unlocking a new playable chapter in game \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 7.4} \\
-    \hline
-    Description of Requirement & Player completing secondary objective \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Changed
-    \begin{itemize}
-        \item Secondary mission is to collect documents.
-        \item This allows experienced players to ignore collecting documents and go straight to final quiz to complete level.
-        \item Inexperienced players are able to complete secondary missions and collect documents to gain knowledge necessary to complete main objective.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 8.1} \\
-    \hline
-    Description of Requirement & Player character movement \\
-    \hline
-    Status of Behaviour Requirement & Implemented \\
-    \hline
-    Changed? &
-    Unchanged \\
-    \hline
-    Extent to Met/Unmet & Fully Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 8.2} \\
-    \hline
-    Description of Requirement & Player character sprinting movement \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Running movement has been implemented. Sprinting is not implemented due to priority of characters moving faster is less necessary due to map size and other gameplay content which do not require sprinting to complete.
-        \item There are no timed movement challenges in levels.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 8.3} \\
-    \hline
-    Description of Requirement & Player character dodge mechanic \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Removed as in unnecessary due to the removal of combat mechanics
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 8.4} \\
-    \hline
-    Description of Requirement & Player is able to take fall damage \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Removed to maintain a smoother gameplay experience and reduce unnecessary player frustration
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.1} \\
-    \hline
-    Description of Requirement & Player can shoot enemies \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Removed \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.2} \\
-    \hline
-    Description of Requirement & Enemies can be removed \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because it did not make sense in-game to remove the robots within the context.
-        \item Enemies could also stay to allow players to test themselves on content on purpose in preparation for the level final quiz.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Removed \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.3} \\
-    \hline
-    Description of Requirement & Player character melee attack \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.4} \\
-    \hline
-    Description of Requirement & Player gun ammo consumption \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.5} \\
-    \hline
-    Description of Requirement & Player character can use grenade attack \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
-    \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
-    \hline
-    Behaviour Code & \textbf{BR 9.6} \\
-    \hline
-    Description of Requirement & Player character can take hit from enemy \\
-    \hline
-    Status of Behaviour Requirement & Removed \\
-    \hline
-    Changed? &
-    Unchanged
-    \begin{itemize}
-        \item Feature was removed because combat mechanics were not retained in the final gameplay design.
-    \end{itemize}\\
-    \hline
-    Extent to Met/Unmet & Not Met \\
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
     \hline
 \end{tabularx}
 \end{center}
 
 \newpage
 
-\section{Technical Development}
-
-\subsection{Source Materials}
-
-\subsubsection{Educational Foundations}
-
-\noindent A key foundation of our project is the IBM SkillsBuild platform, which was provided by the client as the primary source of educational content. This platform offers structured learning materials in areas such as AI, Cybersecurity, and Data Analytics. The courses and digital badges from Skills Build serve as the basis for the in-game question bank, ensuring that the educational content aligns with industry-relevant skills. By embedding these challenges into the gameplay, Shadow Operative merges interactive learning with entertainment, allowing for knowledge retention and engagement. \\
-
-\noindent To enhance the educational experience, the game integrates adaptive learning technologies. The client emphasised the need for a dynamic difficulty system, ensuring that players receive challenges suited to their progress. To achieve this, the game employs player performance tracking, where the difficulty of questions adjusts dynamically based on previous answers. If a player struggles with a topic, the game introduces more foundational questions before progressing to advanced ones, optimising both engagement and comprehension. This approach is informed by established educational models, such as Bloom’s Taxonomy, which structures learning objectives based on cognitive complexity. \\
-
-\noindent The client provided courses outlining key learning objectives and industry-relevant topics, which helped refine the question bank and ensure that the educational content met their expectations.
-
-\subsubsection{Game Design Influences}
-
-\noindent Shadow Operative draws inspiration from existing games that emphasise stealth and engagement to refine its structure and mechanics. The client specifically provided CounterSpy as the primary reference for the game's setting and design. This Cold War-era stealth game directly influenced Shadow Operative’s visual style, mechanics, and overall atmosphere. However, unlike CounterSpy, Shadow Operative integrates educational elements into its core gameplay, transforming the espionage theme into a learning-driven experience. \\
-
-\noindent Additional game design influences include:
-
-\begin{itemize}
-    \item This War of Mine provides insights into stealth mechanics, art style, and thematic depth; Shadow Operative adapts these elements for an educational experience suitable for younger audiences.
-    \item Kahoot! provides a model for question-based engagement, while Shadow Operative enhances it by embedding learning challenges within an immersive storyline instead of standalone quizzes.
-\end{itemize}
-
-\subsubsection{Technical Framework}
-
-\noindent The game is developed using Unity, leveraging its 2D engine for efficient and seamless gameplay. The development follows best practices in game design, incorporating principles from Karl Kapp’s The Gamification of Learning and Instruction to enhance engagement and motivation. \\
-
-\noindent Additionally, accessibility and user engagement are key priorities, with customisable controls ensuring inclusivity for different players. Users can remap key bindings and adjust input settings to suit their preferences, allowing for greater flexibility in gameplay. This feature enhances accessibility for players with different control preferences and ensures a comfortable experience across various input methods. \\
-
-\noindent By combining client-provided educational content, industry-aligned learning objectives, established game mechanics, and adaptive AI-driven learning, Shadow Operative offers a unique approach to skill development. The integration of these diverse source materials ensures an engaging, inclusive, and effective learning experience for all players.
-
-
-\newpage
-
-\subsection{System Architecture}
-
-\subsubsection{Technologies}
-
-\begin{enumerate}
-    \item \textbf{Unity Engine}
-    \begin{itemize}
-        \item \textbf{Unity Editor}: development environment for creating, editing and managing projects and their scenes, assets and scripts; also has the ability to debug
-        \item \textbf{Unity UI}: framework for creating user interfaces (buttons, panels, text, etc.); it is event driven
-        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically, also used to import custom libraries such as UI and shaders
-        \item \textbf{Physics Engine}: default physics engine in Unity, primarily used for character controllers and collision detection
-        \item \textbf{Lighting Engine}: default lighting \textbf{GameObjects} are used to create the "atmosphere" of the game
-        \item \textbf{Sprite Sheet}: used for creating animations for dynamic \textbf{GameObjects}; Unity supports the conversion of such a sheet into usable sprites for animation
-        \item \textbf{Sprite Palette}: Unity's built-in software for creating static level assets, such as environment
-    \end{itemize}
-    \item \textbf{Storage}
-    \begin{itemize}
-        \item \textbf{JSON}: file format chosen for the storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by Unity's library
-        \item \textbf{PlayerPrefs}: used for saving the current status of the player (position, levels completed, questions answered), achieved through the \textbf{PlayerPrefs} class which is provided by Unity's library
-    \end{itemize}
-    \item \textbf{Programming Languages}
-    \begin{itemize}
-        \item \textbf{C\#}: language used for writing scripts for \textbf{GameObjects} in the Unity Engine which dictate their behaviour
-    \end{itemize}
-    \item \textbf{Version Control System}
-    \begin{itemize}
-        \item \textbf{git}: standard across many other software development projects
-    \end{itemize}
-\end{enumerate}
-
-\subsubsection{Platforms}
-
-\begin{enumerate}
-    \item \textbf{Operating Systems}
-    \begin{itemize}
-        \item \textbf{Windows 11}: used for development and testing
-        \item \textbf{Linux}, \textbf{MacOS} and \textbf{ChromeOS}: used for testing; may be used for development if a developer chooses to do so / has a preference for the operating system
-    \end{itemize}
-    \item \textbf{Browsers}
-    \begin{itemize}
-        \item \textbf{Firefox}, \textbf{Chrome} and \textbf{Microsoft Edge}: used for testing and optimizing the game for directly hosting it on the web
-    \end{itemize}
-\end{enumerate}
-
-\newpage
-
-\subsubsection{High Level Overview}
+\noindent \textbf{Results:} This test revealed two regressions: one with Unity's old Input System and another during the upgrade to the new one. We transitioned to the new Unity Input System to streamline the integration of additional input methods. This upgrade is vital for improving accessibility, a key aspect of an educational game, to ensure it accommodates a diverse audience.
 
 \begin{center}
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}
-\begin{umlpackage}{Unity Editor}
-\begin{umlpackage}{Game Scene}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_1 \\
+    \hline
+    \textbf{Regression 1 \& 2 Results} &
+    \textbf{Horizontal Movement:}
+    \begin{itemize}
+        \item The character’s x-coordinate correctly increases when moving right and decreases when moving left. The movement is smooth and responsive, with no lag or stutter.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping Mid Air):}
+    \begin{itemize}
+        \item The character’s y-coordinate increases when jumping, and the jump height is consistent with the intended design, smoothly reaching the peak before falling.
+    \end{itemize}
+    \textbf{Vertical Movement (Jumping onto a Ledge):}
+     \begin{itemize}
+        \item The character’s y-coordinate correctly decreases to the ledge height, then stops at that height. The character lands on the ledge without clipping, and there is no unintended behaviour (e.g., hovering or falling through the ledge).
+    \end{itemize}
+    \textbf{Vertical Movement (Falling off a Ledge):}
+    \begin{itemize}
+        \item The character’s y-coordinate decreases when falling off the ledge, and gravity is applied as expected. The fall speed is consistent with the game’s gravity settings and feels natural.
+    \end{itemize}
+    \textbf{Simultaneous Inputs:}
+    \begin{itemize}
+        \item The character moves both horizontally and vertically without delay when both inputs are used. There is no erratic or conflicting movement, and the combined movement feels smooth and fluid.
+    \end{itemize}
+    \textbf{Unexpected Results}
+    \begin{itemize}
+        \item No unexpected Results Occurred
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If this test were to fail, gameplay would be severely impacted, rendering the game unplayable and preventing players from progressing or interacting with game elements. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
 
-\begin{umlpackage}{UI}
-\umlclass[x=-3, y=-6]{Pause Menu} {
-    isPaused : bool \\
-    Buttons: Button[]
-}{
-    Pause() : void \\
-    Resume() : void \\
-    Update() : void \\
-}
+\subsubsection{Health}
 
-\umlclass[x=5, y=-7.5]{ChangeControls} {
-    currControlScheme : string \\
-    playerInput : PlayerInput \\
-    jumpButton : Button \\
-    crouchButton : Button \\
-    leftButton : Button \\
-    rightButton : Button \\
-    deviceToggleButton : Button \\
-}{
-    ToggleControlScheme() : void \\
-    GetKeyboardControlScheme() : string \\
-    GetGamepadControlScheme() : string \\
-    SetupControlButton(b : Button) : void \\
-    UpdateButtonLabel(b : Button) : void \\
-    UpdateControlLabels() : void \\
-}
-
-\umlclass[x=-2, y=-10]{SkillsBuildUI} {
-    answerButtons: Button[] \\
-    skillsBuilder : SkillsBuilder \\
-    currentQuestion : int \\
-    colors : Color[]
-}{
-    MakeVisibile(vis : bool) : void \\
-    LoadNextQuestion() : void \\
-    OnAnswerSelected() : void
-}
-
-\end{umlpackage}
-
-\begin{umlpackage}{Main Character}
-\umlclass[x=-10]{Player} {
-    rigitBody : RigidBody2D \\
-    isGrounded : bool \\
-    isCrouching : bool \\
-    animator : Animator \\
-    viewCone : PlayerViewcone \\
-}{
-    Update() : void \\
-    PerformJump(force : float) : void \\
-    FixedUpdate() : void \\
-    HandleAnimations() : void \\
-    StartCrouch() : void \\
-    StopCrouch() : void \\
-    CheckGroundContact(coll : Collision2D) : void \\
-}
-\umlclass[x=-12,y=-6]{Main Camera} {
-    player : Transform \\
-    velocity : Vec3 \\
-    smoothTime : float \\
-    zoomOutSize : float \\
-}{
-    LateUpdate() : void
-}
-
-\umlclass[x=-10.71,y=-10]{PlayerViewcone} {
-    cone : Light2D \\
-    angle : float \\
-    distance : float \\
-    dir : Transform \\
-}{
-    Update() : void \\
-    UpdateLightPos(angle : float) : void
-}
-\end{umlpackage}
-
-\begin{umlpackage}{Interactions}
-\umlclass[x=-10.1,y=-16.8]{Enemy}{
-    waypoints: Transform[] \\
-    speed : float \\
-    viewRange : float \\
-    viewAngle : float \\
-    eyeOffset : float \\
-    rb : RigidBody2D \\
-    renderer : SpriteRenderer \\
-    playerRef : Transform \\
-}{
-    Update() : void \\
-    Patrol() : void \\
-    CheckForPlayer() : void \\
-    TriggerQuestionUI() : void \\
-    OnTriggerEnter2D(player : Collider2D) : void \\
-}
-
-\umlclass[x=-3,y=-15]{Console}{
-    renderer : SpriteRenderer \\
-    position : Transform \\
-}{
-    Update() : void \\
-}
-\end{umlpackage}
-
-\begin{umlpackage}{Storage}
-\umlclass[x=5,y=-15]{SkillsBuildDataLoader}{
-}{
-    LoadEntries(path : string) : List$<$SkillsBuildEntry$>$
-}
-
-\umlclass[x=2.5,y=-18]{SkillsBuildEntry}{
-    question : string \\
-    answers : string[] \\
-    correctAnswer : int \\
-    difficulty : int
-}{
-    Shuffle() : void
-}
-\end{umlpackage}
-
-\begin{umlpackage}{Levels}
-\umlclass[x=-10.05,y=-22.9]{LevelEndTrigger}{
-}{
-    OnTriggerEnter2D(player : Collider2D) : void
-}
-
-\umlclass[x=-2.5,y=-23.2]{LevelCompleter}{
-    thisLevelType : LevelType \\
-    levelToUnlock : LevelType \\
-}{
-    CompleteLevel() : void
-}
-
-\umlclass[x=5.5,y=-24.4]{LevelManager}{
-    LevelType : enum \\
-    levelUnlockStatus : Dict$<$LevelType, bool$>$ \\
-    levelUnlockStatus : Dict$<$LevelType, string$>$ \\
-}{
-    InitializeLevelData() : void \\
-    IsLevelUnlocked(lvl : LevelType) : bool \\
-    UnlockLevel(lvl : LevelType) : void \\
-    SaveLevelUnlockStatus() : void \\
-    LoadLevelUnlockStatus() : void \\
-    GetSceneName() : string
-}
-\end{umlpackage}
-
-\begin{umlpackage}{Environment}
-
-\umlclass[x=-2,y=2]{Grid} {
-    Cell Size : Vec2 \\
-    Tile Palette : TileSet \\
-}{}
-
-\umlclass[x=4,y=2]{Background} {
-    Backgrounds: PNG[] \\
-}{}
-
-\umlclass[x=4,y=-1]{Lighting} {
-    Lights: Light 2D[] \\
-    GlobalLight: GlobalLight2D \\
-    ShadowCaster: Platform[] \\
-    Platform $\to$ ShadowCaster2D
-}{}
-
-\end{umlpackage}
-\end{umlpackage}
-\end{umlpackage}
-
-\umlassoc[geometry=-|, anchor1=50, anchor2=100, arg1=follows, align1=right]{Main Camera}{Player}
-\umlassoc[geometry=-|, anchor1=30, anchor2=70, arg1=calculates cone, pos1=1, align1=left]{PlayerViewcone}{Player}
-\umlassoc[geometry=-|, arg1=reacts to]{Lighting}{Player}
-\umlassoc[geometry=-|, arg1=checks for collision, pos1=0.97]{Player}{Grid}
-\umlassoc[geometry=-|-, arg1=activates, pos1=2, anchor2=40]{Player}{Pause Menu}
-\umlassoc[geometry=-|-, arg1=triggers, pos1=1.3, anchor1=60, anchor2=-20]{Enemy}{SkillsBuildUI}
-\umlassoc[geometry=-|, arg1=entered through, pos1=0.25]{Pause Menu}{ChangeControls}
-\umlassoc[geometry=-|]{SkillsBuildDataLoader}{SkillsBuildEntry}
-\umlassoc[geometry=|-, anchor1=60, anchor2=-26, arg1=loads questions]{SkillsBuildDataLoader}{SkillsBuildUI}
-\umluniassoc[geometry=|-]{LevelEndTrigger}{LevelCompleter}
-\umluniassoc[geometry=|-, anchor2=195]{LevelCompleter}{LevelManager}
-\umluniassoc[geometry=-|-, arg1=triggers, pos1=1.2, align=right, anchor1=west, anchor2=east, weight=0.4]{Console}{LevelEndTrigger}
-\end{tikzpicture}%
-}
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_2 \\
+    \hline
+    \textbf{Description of test} & This test case verifies the health system within the game is affected and responds to stimuli in game. The player should have a number of hearts representing their number of lives remaining. Hearts can be added or taken away depending on certain events in the game. \\
+    \hline
+    \textbf{Related requirement document details} & Combat Mechanics 2.2.9 \\
+    \hline
+    \textbf{Prerequisites for test} & Player character available, quizzes and enemies unlocked. \\
+    \hline
+    \textbf{Test Procedure} &
+    \textbf{Test losing heart via getting question wrong}
+    \begin{itemize}
+        \item Player character chooses an incorrect answer to a question on screen.
+    \end{itemize}
+    \textbf{Test losing heart via getting hit my enemy}
+    \begin{itemize}
+        \item Player character receives damage from the enemy target.
+    \end{itemize}
+    \textbf{Test regaining heart via item}
+    \begin{itemize}
+        \item Player activates an item which restores health.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Enemy prefab, Quizzing system implemented, Game items implemented. \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Test losing heart via getting question wrong}
+    \begin{itemize}
+        \item Player loses 1 heart.
+        \item Player’s health bar has a visual indicator of losing a single heart.
+    \end{itemize}
+    \textbf{Test losing heart via getting hit by enemy}
+    \begin{itemize}
+        \item Player loses 1 heart.
+        \item Player’s health bar has a visual indicator of losing a single heart.
+    \end{itemize}
+    \textbf{Test regaining heart via item}
+    \begin{itemize}
+        \item Player gains 1 heart.
+        \item Heart recovered does not go over max hearts.
+        \item Player’s health bar has a visual indicator of gaining a heart.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & SL \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
 \end{center}
 
 \newpage
 
-\subsubsection{Software Development Process}
+\noindent \textbf{Results:}
 
-\noindent The chosen software development life cycle is the \textbf{Incremental Model} which divides the project into smaller, manageable portions (increments). Each increment builds upon the previous one. \\
-
-\noindent \textbf{Gradual Progress:} Our game comprises multiple components, including core mechanics such as movement, enemy AI,  and IBM Skills Build badge questions. Using the Incremental Model, we can develop each component sequentially, starting with the foundational mechanics. \\
-
-\noindent \textbf{Iterative Feedback and Testing:} After completing each increment, we can conduct testing and gather client or player feedback. This ensures each feature works as intended and aligns with the project goals before integrating it into the overall game. \\
-
-\noindent \textbf{Risk Management:} By addressing straightforward features early in the development process, the Incremental Model reduces risk and ensures a consistent development pace. This strategy allows us to allocate more time and resources to resolving challenges posed by complex features. \\
-
-\noindent \textbf{Flexibility for Changes:} Given the possibility of evolving client requirements or necessary adjustments, the Incremental Model minimizes disruption. Changes can be accommodated without requiring significant rework, as only specific increments need updating, preserving the integrity of prior developments. \\
-
-\noindent \textbf{Early Player Engagement:} The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input. \\
-
-\noindent \textbf{Adaptability to a Small Team:} With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked. \\
-
-\subsubsection{Behaviour Driven Development}
-
-\noindent The Incremental Model and BDD complement each other effectively in the software development process. \\
-
-\noindent Each increment was developed, tested and reviewed. This has aligned well with BDD due to each increment representing the implementation of a behavioural requirement, which in the testing period has been reviewed by the relevant stakeholders. \\
-
-\noindent Due to the low risk and flexibility of the chosen software development process it has allowed us to continually refine and evolve the requirements based on testing results and stakeholder feedback. \\
-
-\noindent BDD has played a key role in the development process by allowing the team to designate increments as the implementation of a requirement and to have a clear goal in mind, and has facilitated good collaboration between the development team and the stakeholders. \\
-
-\noindent Due to the rigorous testing required by BDD it played a significant role in the quality assurance process; our project had to abide by the strict requierements.
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_2 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Test losing heart via getting question wrong}
+    \begin{itemize}
+        \item Player lost 1 heart.
+        \item Player’s health bar has a visual indicator of losing a single heart.
+    \end{itemize}
+    \textbf{Test losing heart via getting hit by enemy}
+    \begin{itemize}
+        \item Player lost 1 heart.
+        \item Player’s health bar had a visual indicator of losing a single heart.
+    \end{itemize}
+    \textbf{Test regaining heart via item}
+    \begin{itemize}
+        \item Player gained 1 heart.
+        \item Heart recovered did not go over max hearts.
+        \item Player’s health bar had a visual indicator of gaining a heart.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Failing this may lead to disruption to gameplay balance. However, this will not disrupt other essential features of the game. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
 
 \newpage
 
-\subsubsection{Applied Design Principles}
+\subsubsection{Collision Detection}
 
-\noindent \textbf{Open / Closed Principle}: modules such as the \textbf{SkillsBuild} implementation and the \textbf{Enemy} class implementation are generic, they can be expanded upon through inheritance without having to modify the base class. \\
-
-\noindent \textbf{Single Responsibility Principle}: has been applied to concepts such as the \textbf{LevelManager}, \textbf{LevelCompleter}, \textbf{LevelEndTrigger}, \textbf{SkillsBuildDataLoader} and the \textbf{PlayerViewcone}. They have only one purpose, offer consistent interaction APIs such that internal changes do not affect outside modules. \\
-
-\noindent \textbf{Interface Segregation Principle}: this is the de facto standard in any Unity project, with the way entities and \textbf{GameObject}s are setup in the \textbf{Unity Editor} they only depend on each other if explicitly stated by the developer. \\
-
-\noindent \textbf{DRY}: unintentionally applied due to the project scale being small and the ratio of code to assets is small \\
-
-\noindent \textbf{KISS}: with the aforementioned point made, we have relied heavily on pre-existing assets (including the vast library offered by the Unity Engine) in order to keep complexity at minimum, the thought being that if the library offers the functionality there is no reason to re-implement it
-
-\subsubsection{Applied Design Patterns}
-
-\noindent \textbf{Component Pattern}: obliged to use it due to Unity's architecture, all of the modules inherit from the \textbf{MonoBehaviour} base class which can be attached to \textbf{GameObject}s in the Unity Editor. \\
-
-\noindent \textbf{Singleton Pattern}: used for event emitters such as \textbf{InputManager}, \textbf{DialogueManager}, \textbf{AudioSettingsManager}, \textbf{LevelManager}, by having a single easily accessible instance the complexity has been reduced; other modules do not have to keep a reference towards such instances. \\
-
-\noindent \textbf{State Pattern}: this pattern has been applied when designing the non-playable characters (enemies), when they have detected the player their state changes from patrolling to chasing and start following the player. \\
-
-\noindent \textbf{Event Aggregator Pattern}: when an enemy catches the player it will trigger the \textbf{SkillsBuild} functionality. \\
-
-\noindent \textbf{Observer Pattern}: the \textbf{LevelEndTrigger} class observes a \textbf{GameObject} such as a Console in order to decide whether to trigger the end of the level.
-
-\subsection{System Usability and User Experience}
-
-\subsubsection{Customizable Controls and Controller Support}
-
-\noindent To enhance accessibility, Shadow Operative includes customizable controls, allowing players to adjust input settings based on their preferences. Additionally, controller support has been implemented, ensuring a seamless experience for users who prefer or need to use gamepads over traditional keyboard and mouse inputs. Default controller mappings were refined based on user feedback to maintain intuitive and responsive gameplay.
-
-\subsubsection{Minimalist UI Design for Clarity}
-
-\noindent A minimalist UI approach was adopted to reduce visual clutter and keep players focused on the gameplay. The interface presents only essential information, such as mission objectives, stealth indicators, and educational prompts, in a non-intrusive manner. This ensures that players remain immersed in the game while still having access to critical information when needed. The UI design follows established usability principles, such as consistency in iconography, clear typography, and an intuitive menu structure.
-
-\subsubsection{Tutorial and Progressive Learning}
-
-\noindent A dedicated tutorial level was implemented to introduce game mechanics gradually. This slow-paced introduction allows players to learn core mechanics step by step, preventing them from feeling overwhelmed. The tutorial also reinforces the game’s educational aspects by integrating learning elements seamlessly into the initial gameplay experience.
-
-\subsubsection{Video and Performance Settings}
-
-\noindent To ensure compatibility with lower-end hardware, the game includes adjustable video settings. Players experiencing performance issues can modify graphical settings to optimize performance, making the game accessible to a wider audience without sacrificing usability.
-
-\section{Use Instructions}
-
-\subsection{Installation}
-
-\subsubsection{Player Installation Requirements}
-
-\begin{itemize}
-    \item No installation required. The game runs directly in your web browser.
-    \item Ensure your browser has JavaScript enabled
-\end{itemize}
-
-\subsubsection{Developer Installation Requirements}
-
-\begin{itemize}
-    \item Download Unity Hub from the Unity website
-    \item Install Unity version \textbf{2022.3.50f1} from \href{https://unity.com/releases/editor/archive}{the unity archive}
-    \begin{center}
-        \includegraphics[width=0.5\linewidth]{images/unity_archive.png}
-    \end{center}
-    \item Clone the git repository by entering \textbf{git clone https://github.com/COMP2281/software-engineering-group24-25-05.git} your git CLI
-    \item In Unity Hub select \textbf{Add} $>$ \textbf{Project From Disk} then select the game repository in the cloned repository
-    \begin{center}
-        \includegraphics[width=0.5\linewidth]{images/add_from_disk.png}
-    \end{center}
-\end{itemize}
-
-\subsubsection{System Requirements}
-
-\begin{tabularx}{\linewidth}{|X|X|X|}
-    \hline
-    Computing Components & Minimum Specs & Recommended Specs \\
-    \hline
-    CPU & Dual-core 2.0 GHz or equivalent & Quad-core 3.0 GHz or equivalent \\
-    \hline
-    RAM & 4 GB & 8 GB \\
-    \hline
-    Browser & Chrome, Firefox, Edge & Latest Versions \\
-    \hline
-    GPU & Graphics card with WebGL 2.0 support & Dedicated graphics card with 2+ GB VRAM \\
-    \hline
-    Storage & 500 MB & 1 GB \\
-    \hline
-    Internet & Stable Connection (3+ Mbps) & Stable Connection (12+ Mbps) \\
-    \hline
-    OS & Windows, MacOS, Linux & Windows \\
-    \hline
-\end{tabularx}
-
-\subsection{Deployment}
-
-\subsubsection{Building the Game}
-
-\begin{enumerate}
-    \item Open the project in Unity
-    \item Navigate to File → Build Settings
-    \item Select WebGL as platform and click "install with unity hub"
-        \begin{center}
-        \includegraphics[width=0.3\linewidth]{images/upd_webgl.png}
-    \end{center}
-    \item After WebGL is installed, choose "Switch Platform"
-    \item Select "Build", and pick a folder to save the build in
-\end{enumerate}
-
-\subsubsection{Deploying the Game}
-
-\begin{enumerate}
-    \item Create an account on \textbf{itch.io}
-    \item In the dashboard, select upload new project
-    \begin{center}
-        \includegraphics[width=0.3\linewidth]{images/dashboard.png}
-    \end{center}
-    \item Fill in game details
-    \item Under “Kind of project” pick HTML
-    \item In the “uploads section”
-    \begin{enumerate}
-        \item Zip WebGL build from step 5 in \textbf{Building the Game}
-        \item Upload the ZIP file
-        \item Check "This file will be played in the browser"
-    \end{enumerate}
-    \item Under frame options, tick fullscreen mode
-    \item Set the game visibility to restricted
-    \item Click "Save"
-\end{enumerate}
-
-\subsection{Launching}
-
-\subsubsection{Accessing the Game}
-
-\begin{enumerate}
-    \item Navigate to the game’s  you have hosted on \textbf{itch.io}
-    \item Allow any browser permissions requested
-    \item Click run game
-\end{enumerate}
-
-\subsubsection{First Time Setup}
-
-\begin{enumerate}
-    \item Adjust audio \& graphic settings using the settings menu
-    \item Complete the game tutorial
-\end{enumerate}
-
-\subsection{Troubleshooting}
-
+\begin{center}
 \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
     \hline
-    Game doesn't load & Clear browser cache and reload. Ensure WebGL is enabled in the browser. Try a different browser. Check internet connection \\
+    \textbf{Test ID} & utest\_3 \\
     \hline
-    FPS drops & Lower graphics quality in game settings \\
+    \textbf{Description of test} & This test case verifies the collision detection between different objects, entities and maps in the game. The player should be restricted from moving outside the map boundaries, and collision objects should intuitively align with the player’s expectations based on natural in-game logic. \\
     \hline
-    Controls not responding & Check if game window is in focus \\
+    \textbf{Related requirement document details} & Movement Mechanics 2.2.8 \\
     \hline
-    "Unsupported Browser" error & Update to latest browser version \\
+    \textbf{Prerequisites for test} & None \\
     \hline
-    Game crashes or freezes & Refresh the page \\
+    \textbf{Test Procedure} &
+    \textbf{Test player collisions with static objects}
+    \begin{itemize}
+        \item Have static objects present in the game world.
+        \item Move the player character towards the object.
+    \end{itemize}
+    \textbf{Test player collision with dynamic objects}
+    \begin{itemize}
+        \item Have dynamic objects present in the game world.
+        \item Move the player character towards the object.
+    \end{itemize}
+    \textbf{Test player movement near map boundaries}
+    \begin{itemize}
+        \item Have player characters and game maps loaded.
+        \item Move the player character towards boundaries (e.g walls) of the map using movement system.
+    \end{itemize}
+    \\
     \hline
-    Memory-related crashes & Close other browser tabs. Try on a device with more RAM \\
+    \textbf{Test material used} & Keyboard, Xbox Controller \\
     \hline
-    Audio issues & Check if browser's audio is muted. Allow browser permission for audio. Try headphones instead of speakers \\
+    \textbf{Expected result} &
+    \textbf{Test player collisions with static objects}
+    \begin{itemize}
+        \item Player character stops moving upon contact with the static object.
+        \item Player character is unable to pass through it.
+        \item There is no clipping or glitching of the character model.
+    \end{itemize}
+    \textbf{Test player collision with dynamic objects}
+    \begin{itemize}
+        \item Player character either interacts with or is blocked by the dynamic object, depending on the object’s movement or state (e.g standing on a moving platform).
+        \item The collision response should appear natural, without any erratic movements.
+    \end{itemize}
+    \textbf{Test player movement near map boundaries}
+    \begin{itemize}
+        \item Player character is unable to move beyond defined map boundaries.
+        \item The character stops at the boundary without any visual error, and no part of the player model appears outside the map area.
+    \end{itemize}
+    \\
     \hline
-    Visual glitches & Update graphics drivers. Disable browser extensions. Turn off hardware acceleration in browser settings \\
+    \textbf{Comments} & None \\
     \hline
-    Loading stuck & Wait longer for initial load. Check for browser pop-up blockers. Try a wired internet connection \\
+    \textbf{Created by} & SL \\
     \hline
-    Game window scaling issues & Try fullscreen mode. Adjust display scaling in OS settings \\
-    \hline
-    Mobile-specific issues & Ensure device supports WebGL. Try landscape/portrait orientation. Disable power saving mode \\
-    \hline
-    Can't interact with game elements & Try different input methods (mouse/keyboard/controller). Check if ad blockers are interfering. Disable browser accessibility features \\
-    \hline
-    Black/white screen & Check if JavaScript is enabled. Try disabling browser plugins. Clear browser's site data completely \\
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
     \hline
 \end{tabularx}
+\end{center}
 
-\section{Maintenance and Implications}
+\newpage
 
-\subsection{Maintenance}
+\noindent \textbf{Results:}
 
-\subsubsection{Code Maintenance}
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_3 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Test player collisions with static objects}
+    \begin{itemize}
+        \item Player character immediately stops upon contact with static objects.
+        \item Player cannot pass through the object under any condition.
+        \item No clipping, glitching, or overlapping of the player model with the static object occurs.
+    \end{itemize}
+    \textbf{Test player collision with dynamic objects}
+    \begin{itemize}
+        \item Player either interacts with or is blocked by the dynamic object.
+        \item Collision response is consistent with game mechanics.
+    \end{itemize}
+    \textbf{Test player movement near map boundaries}
+    \begin{itemize}
+        \item Player is blocked from moving beyond the map boundaries.
+        \item No visual errors occur at the boundaries, player does not clip outside the map.
+    \end{itemize}
+    \textbf{Unexpected Results}
+    \begin{itemize}
+        \item No unexpected results
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & High: Failure would disrupt core movement mechanics and the player may exploit bugs to bypass challenges or become stuck outside of the map. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Enemy AI Behaviour}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_4 \\
+    \hline
+    \textbf{Description of test} & This test case verifies the behaviour of the enemy AI in a game environment, specifically focusing on their patrol and detection routines. The AI should follow a set patrol path and detect the player within a specified detection radius. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l] {
+        AI Boss (2.2.4) \\
+        Combat Mechanics (2.2.9)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & \makecell[l] {
+        Enemy prefab created with AI controller. \\
+        Test environment with patrol routes and obstacles to test pathfinding.
+    } \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Test enemy patrol behaviour}
+    \begin{itemize}
+        \item Place the enemy in the environment with a predefined patrol route.
+        \item Observe the enemy moving smoothly between patrol points while scanning for the player within its field of view.
+        \item Ensure the enemy turns around or adjusts its patrol when it reaches the end of the route or encounters a barrier.
+    \end{itemize}
+    \textbf{Test enemy detection of the player}
+    \begin{itemize}
+        \item Position the player within the enemy’s field of view.
+        \item Verify the enemy enters a detection state when the player is visible.
+        \item Ensure the detection is consistent with the game’s design (e.g., player being fully visible vs. partially obscured).
+    \end{itemize}
+    \textbf{Test edge cases for player visibility}
+    \begin{itemize}
+        \item Position the player at partially obscured locations (e.g., just outside the enemy’s field of view or behind thin obstacles).
+        \item Verify that the enemy does not detect the player unless they are within the intended visibility range or in line of sight.
+        \item Confirm that if the player moves quickly through the enemy’s field of view, the enemy reacts briefly before resuming its patrol.
+    \end{itemize}
+    \textbf{Test reaction to unreachable players}
+    \begin{itemize}
+        \item Place the player in positions the enemy cannot reach (e.g., higher platforms or behind barriers).
+        \item Ensure the enemy does not attempt impossible paths to reach the player.
+        \item Verify the enemy either paces in frustration, searches nearby, or returns to its patrol route after a delay.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Unity Console Logs, Unity Gizmos to see ray casts \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Expected result} &
+    \textbf{Enemy Patrol Behaviour:}
+    \begin{itemize}
+        \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
+        \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts direction appropriately.
+        \item The enemy continuously scans for the player within its field of view.
+    \end{itemize}
+    \textbf{Enemy Detection of the Player:}
+    \begin{itemize}
+        \item The enemy immediately enters a detection state when the player enters its field of view.
+        \item The detection should be consistent and only occur if the player is fully visible or within the specified visibility range.
+    \end{itemize}
+    \textbf{Enemy Behaviour When the Player Hides:}
+    \begin{itemize}
+        \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
+        \item The enemy investigates the player’s last known position before resuming patrol or searching elsewhere.
+    \end{itemize}
+    \textbf{Edge Cases for Player Visibility:}
+    \begin{itemize}
+        \item The enemy does not detect the player if they are outside its field of view or partially obscured as per game design rules.
+        \item If the player moves quickly through the enemy’s field of view, the enemy reacts briefly but returns to patrol mode if the player disappears from sight.
+    \end{itemize}
+    \textbf{Reaction to Unreachable Players:}
+    \begin{itemize}
+        \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
+        \item The enemy exhibits appropriate alternative behaviour, such as pacing, investigating nearby areas, or returning to its patrol route after a short delay.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Created by} & WM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_4 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Enemy Patrol Behaviour:}
+    \begin{itemize}
+        \item The enemy moves smoothly between patrol points without erratic or unexpected movements.
+        \item When reaching the end of the patrol route or encountering a barrier, the enemy turns around or adjusts its direction appropriately.
+        \item The enemy continuously scans for the player within its field of view as shown in the console logs.
+    \end{itemize}
+    \textbf{Enemy Detection of the Player:}
+    \begin{itemize}
+        \item The enemy immediately enters a detection state when the player enters its field of view.
+        \item Detection occurs only if the player is fully visible or within the specified visibility range, with no inconsistencies in detection.
+    \end{itemize}
+    \textbf{Enemy Behaviour When the Player Hides:}
+    \begin{itemize}
+        \item If the player enters a designated stealth area, the enemy does not detect them, even if the enemy is nearby.
+    \end{itemize}
+    \textbf{Edge Cases for Player Visibility:}
+    \begin{itemize}
+        \item The enemy does not detect the player if they are outside its field of view or partially obscured.
+    \end{itemize}
+    \textbf{Reaction to Unreachable Players:}
+    \begin{itemize}
+        \item The enemy does not attempt impossible paths to reach the player in unreachable locations (e.g., on higher platforms or behind barriers).
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate \\
+    \hline
+    \textbf{Comments} & Partial player visibility detection had a few inconsistencies, where the enemy sometimes detected players behind thin obstacles unexpectedly. Further tuning required for AI visibility calculations. \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Level Loading / Transitions}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Description of test} & This test case verifies that the levels transition to the next stage once the objective is completed, the correct level is loaded (within a certain time frame), and that the player data persists between levels. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Mission System (2.2.7) \\
+        Combat Mechanics (2.2.9)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Build of the game with at least 3 different levels. \\
+    \hline
+    \textbf{Test procedure} &
+    \begin{itemize}
+        \item Player is in a level that is designated as finished.
+        \item Player enters a transition zone for the next stage.
+        \item Assert player is in correct stage and if applicable his state is the same as in the previous level.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test materials used} & None \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item The player is "transported" to the correct stage.
+        \item The assets of the level are loaded correctly.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item The transition from level to level happens in an acceptable time frame ($\leq 5$ seconds).
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item Player has the same health as in previous stage.
+        \item Player has the same amount of ammo as in previous stage.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item If the player enters a transition zone in the last level of the game, the end credits roll, the player is booted to the main screen, all his stats are reset to default.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & The order in which levels are completed is decided by how the story of the game was structured. \\
+    \hline
+    \textbf{Created by} & VE \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_5 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Correct stage}
+    \begin{itemize}
+        \item Levels and their assets are loaded in the correct order.
+    \end{itemize}
+    \textbf{Load time}
+    \begin{itemize}
+        \item Transitions happen in an acceptable time frame.
+    \end{itemize}
+    \textbf{State of the player}
+    \begin{itemize}
+        \item State of the player is kept between levels.
+    \end{itemize}
+    \textbf{Last stage}
+    \begin{itemize}
+        \item No transition zone, end sequence can't be triggered.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: Game progression is impossible. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{SkillsBuild Questions}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_6 \\
+    \hline
+    \textbf{Description of test} & Test that questions display and function correctly during gameplay. \\
+    \hline
+    \textbf{Related requirement document details} & Educations Engagement (2.2.2) \\
+    \hline
+    \textbf{Prerequisites for test} & Skills Build question bank is populated with questions and answers for each course. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Display}
+    \begin{itemize}
+        \item Check that the quiz UI opens when a quiz is initiated and closes when the quiz is complete.
+        \item Verify that the questions and answers are rendered correctly.
+    \end{itemize}
+    \textbf{Function}
+    \begin{itemize}
+        \item Ensure that when an answer is clicked the game checks if the answer is correct or incorrect and notifies the user accordingly.
+        \item Assert that the user can only move on to the next question after answering the current question.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Skills Build question bank \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Display}
+    \begin{itemize}
+        \item The quiz UI opens and closes appropriately.
+        \item Questions and answers are rendered correctly.
+    \end{itemize}
+    \textbf{Function}
+    \begin{itemize}
+        \item Appropriate feedback is provided after answering a question.
+        \item User progresses after answering a question.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & Integration, engagement and correctness of quizzes are assessed in uattest\_5. \\
+    \hline
+    \textbf{Created by} & BM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & utest\_6 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Display}
+    \begin{itemize}
+        \item The quiz UI opens and closes as expected.
+        \item Questions and answers are rendered properly.
+    \end{itemize}
+    \textbf{Function}
+    \begin{itemize}
+        \item The correct choice of feedback is displayed to the user.
+        \item It is only possible to progress to the next question after answering it.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If for some reason a question has no correct answers the player cannot progress thus game progression is impossible. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsection{System Testing}
+
+\subsubsection{Graphics / Audio}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_1 \\
+    \hline
+    \textbf{Description of test} & Graphics and Audio: Verify that graphics render smoothly, textures load correctly, and audio plays without distortion or lag \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        SFX (2.2.5) \\
+        Stylised Cold War Graphics (2.2.6)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Game is installed, graphics and audio are (partially) implemented, audio / display devices available\\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Graphics Performance:}
+    \begin{itemize}
+        \item Load and navigate through the game
+        \item Verify consistent performance during complex scene transitions
+        \item Verify rendering at multiple resolutions
+    \end{itemize}
+    \textbf{Audio systems performance}
+    \begin{itemize}
+        \item Navigate through the game and test each mechanic iteratively
+        \item Check sound effects synchronize with animations
+        \item Verify audio quality during transitions and gameplay
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & \makecell[l]{
+        Multiple audio output devices \& display devices \\
+        Audio monitoring tools \\
+        Graphics monitoring tools
+    }
+    \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Graphics performance}
+    \begin{itemize}
+        \item Smooth transitions
+        \item Consistent rendering across platforms and different resolutions
+    \end{itemize}
+    \textbf{Audio systems}
+    \begin{itemize}
+        \item Audio and sounds effects in sync
+        \item Audio quality remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created By} & DM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_1 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Graphics performance}
+    \begin{itemize}
+        \item Smooth transitions
+        \item Consistent rendering across platforms and different resolutions
+    \end{itemize}
+    \textbf{Audio systems}
+    \begin{itemize}
+        \item Audio and sounds effects in sync
+        \item Audio quality remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Textures rendered improperly or out of sync sound effects do not make game progression impossible, just harder. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{UI Navigation (Saving / Loading)}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_2 \\
+    \hline
+    \textbf{Description of test} & UI Navigation (Saving and Loading): Test that the UI allows seamless navigation, and game states save/load correctly \\
+    \hline
+    \textbf{Related requirement document details} & Pause Menu (2.2.3) \\
+    \hline
+    \textbf{Prerequisites for test} & \makecell[l]{
+        Complete UI implementation \\
+        Save/Load system implemented
+    }
+    \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{UI Navigation Flow:}
+    \begin{itemize}
+        \item Load different menu screens (Main menu, pause screen)
+        \item Check navigation works correctly between all menu screens (main menu, options, save/load screens, pause/resume)
+        \item Test menu responsiveness and input handling across different input methods
+    \end{itemize}
+    \textbf{Save system validation:}
+    \begin{itemize}
+        \item Load and navigate through the game
+        \item Test automatic save functionality throughout different parts of the game
+        \item Test manual save operations across different parts
+    \end{itemize}
+    \textbf{Load System Verification:}
+    \begin{itemize}
+        \item Load saved files menu
+        \item Validate correct restoration of game progress
+        \item Test loading saves from different saves
+        \item Ensure correct handling of corrupted save files
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & \makecell[l] {
+        UI interaction logs \\
+        Xbox controller
+    } \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{UI Navigation Flow}
+    \begin{itemize}
+        \item Smooth and intuitive UI navigation
+    \end{itemize}
+    \textbf{Save system validation}
+    \begin{itemize}
+        \item Reliable save file creation and management
+    \end{itemize}
+    \textbf{Load System Verification}
+    \begin{itemize}
+        \item Accurate game state restoration when loading
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & DM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_2 \\
+    \hline
+    \textbf{Result} &
+    \textbf{UI Navigation Flow}
+    \begin{itemize}
+        \item Smooth and intuitive UI navigation
+    \end{itemize}
+    \textbf{Save system validation}
+    \begin{itemize}
+        \item Save files are created and managed
+    \end{itemize}
+    \textbf{Load System Verification}
+    \begin{itemize}
+        \item Game loads properly from a save file
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & High: If you cannot save / load the game; the player has to beat the game in one sitting. If the UI is inaccessible the player cannot change preference settings in the game. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Gameplay Flow}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_3 \\
+    \hline
+    \textbf{Description of test} & Test that the mission and story progression aligns with the current level of the game. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Mission System (2.2.7)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Build of the game with all levels and missions implemented. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Mission System}
+    \begin{itemize}
+        \item Iteratively select all levels to load player into.
+        \item Assert the mission and story progression / flags match the level.
+    \end{itemize}
+    \textbf{Main mission}
+    \begin{itemize}
+        \item Player is loaded into a level.
+        \item Player completes the mission of the current level.
+        \item Assert that the story updates properly even though no transition for the next stage has been triggered.
+    \end{itemize}
+    \textbf{Side objective}
+    \begin{itemize}
+        \item Load player into a level with side objectives.
+        \item Player completes a side objective of the mission.
+        \item Assert that the story is updated accordingly and does not contradict main mission logic.
+    \end{itemize}
+    \textbf{Level transition}
+    \begin{itemize}
+        \item Spawn player at the end of the stage with the main objective not complete.
+        \item Assert that the player cannot proceed to the next stage
+        even though he is in the transition zone.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test materials used} & None \\
+    \hline
+    \textbf{Comments} & It can be argued that "missions" are analogous with "story of the game", in such a case "keeping the story updated" can be interpreted as book-keeping which missions have been completed. \\
+    \hline
+    \textbf{Created by} & VE \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_3 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Mission System}
+    \begin{itemize}
+        \item All missions and flags are set correctly for each level.
+    \end{itemize}
+    \textbf{Main Mission}
+    \begin{itemize}
+        \item The story flags are updated correctly when the main mission is completed.
+    \end{itemize}
+    \textbf{Side objective}
+    \begin{itemize}
+        \item Completion of the side objective is correctly updated and has no effect on main objective.
+    \end{itemize}
+    \textbf{Level transition}
+    \begin{itemize}
+        \item The player transitions to the next stage if the main mission is completed.
+        \item The player cannot transition if the main mission is not completed.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If the main mission is not set as completed even though the player has finished it game progression is impossible. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Character Interactions}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & stest\_4 \\
+    \hline
+    \textbf{Description of test} & Test the Character Interaction conforms to the game design and that the player is able to interact with NPCs, items, and the environment without difficulty.
+    Ensure that the core game functionality (quest system, puzzle interactions, character animations, etc.) works correctly, and that there are no serious bugs affecting the progress of the game.\\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Educational Engagement (2.2.2) \\
+        Mission System (2.2.7) \\
+        Stealth Gameplay (2.2.1)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & A preliminary complete question bank for teaching IBM knowledge. A simplified version of the game with full character interaction mechanics for testing basic functionality. \\
+    \hline
+    \textbf{Test procedure} &
+     \textbf{NPC and environment interaction}
+    \begin{itemize}
+        \item Start the game and enter the section that contains the NPC and try the mission objectives.
+        \item Engage in dialogue with the NPC and observe whether the IBM Skills Build questions are triggered naturally.
+        \item Observe whether the character interactions including accepting tasks, interacting with the environment, communicating with enemies, check if they run smoothly and affect the progress of the game normally.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \begin{itemize}
+        \item NPC interaction text is on-topic and does not introduce learning content out of the blue.
+        \item Players are able to effectively access IBM-related issues through character interactions and can influence the progress of the game.
+        \item The character's basic movement commands can cause interactions with NPCs, such as sneak and be found, also the dialogue with NPC works normally.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\noindent \textbf{Results:}
+\begin{center}
+\begin{tabularx}{\linewidth}{|l|X|}
+    \hline
+    \textbf{Test ID} & stest\_4 \\
+    \hline
+    \textbf{Result} &
+    \textbf{NPC and environment interaction}
+    \begin{itemize}
+        \item Interactions are triggered in any situation as desired..
+        \item Game features (quest system, puzzle interactions, character animations, etc.) are functioning correctly and there are no serious errors affecting the game's progress.
+    \end{itemize} \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: Failure of an INTERACTION to trigger as expected can severely affect the game experience and progress, resulting in the game not functioning properly. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+
+\newpage
+
+\subsection{User Acceptance Testing}
+\subsubsection{Gameplay Experience}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_1 \\
+    \hline
+    \textbf{Description of test} & Test player experience of the test game, focused on the implementation of the core functionality of the game, the impact of the AI bosses on the difficulty of the game, and the immersion in the story of the game.. \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Stealth Gameplay (2.2.1) \\
+        AI Boss (2.2.3) \\
+        Educational Engagement (2.2.2)\\
+        Mission System (2.2.4)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} & Executable version of the game (with sneaking, combat, quiz mechanics) with complete level design with missions, enemies, IBM-related challenges and a simple AI. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Main Functionality and storyline}
+    \begin{itemize}
+        \item Enter a level that includes sneaking and fighting.
+        \item Ensure that there is no delay or abnormality in switching between sneaking, fighting and answering questions.
+        \item Observe how IBM Skills Build related questions are triggered to make sure that they do not affect the player's immersion or increase the difficulty of the game too much.
+        \item Ensure quiz sections cannot be triggered while the player is in combat.
+        \item -Observe whether the AI BOSS is moderating the difficulty reasonably well.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \begin{itemize}
+        \item Every basic function can be implemented.
+        \item Players are able to sneak and fight without any problems, and the learning content does not spoil the game experience.
+        \item The AI is able to adjust the difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_1 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Main Functionality and storyline}
+     \begin{itemize}
+        \item The game is smooth and runs normally, every basic function can be implemented.
+        \item Players can sneak and fight without problems, and the learning content does not spoil the game experience.
+        \item AI bosses can not reasonably adjust the difficulty of the game.
+        \item Quiz sections are not triggered while the player is in combat.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: Gameplay is impacted and may seem unfair and or inconsistent because of the AI BOSS functionality doesn't work as expected. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+\subsubsection{User Interface}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_2 \\
+    \hline
+    \textbf{Description of test} & Test that the game's user interface is fully functional to ensure that each function works smoothly. The Q\&A interface fits the overall style of the game and ensures that players can use and experience the IBM Skills Build content smoothly. \\
+    \hline
+    \textbf{Related requirement document details} &
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item Pause Screen (2.2.3)
+            \item Stylised Cold War Graphics (2.2.6)
+        \end{itemize}
+    \\
+    \hline
+    \textbf{Prerequisites for test} & Complete UI design and interaction logic has been implemented. In-game question and answer interface, mission menu, pause menu, and other functions are available. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{UI art design and functionality}
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item Enter the main interface of the game, check if the navigation menu is clear and the main functions are easy to find.
+            \item Enter the mission level and check whether the UI feedback (such as mission guidelines, blood level, props information) is intuitive.
+            \item Enter the IBM Skills Build question interface and check whether the interaction is smooth and the UI design is in line with the overall style of the game.
+            \item Repeat testing of the buttons in the user interface to test their stability and whether they can interact with each other properly.
+        \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+        \begin{itemize}\setlength{\itemsep}{2pt}
+            \item The main menu of the game, the mission interface and the answer interface have the same style, and the operation is intuitive.
+            \item UI feedback is timely; important information will not be obscured by other interface elements.
+            \item The function of buttons in the UI runs normally and stably and can interact with other buttons.
+        \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & HC \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_2 \\
+    \hline
+    \textbf{Result} &
+    \textbf{UI art design and functionality}
+     \begin{itemize}
+        \item Buttons on UI pages are easy to click and function as expected.
+        \item The art style has consistency with the game vibe doesn't ruin the experience.
+        \item All functionality of UI works normally in any case.
+        \item The menu UI has all basic functions of the game.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: UI functionality meets the expectation. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Performance and Stability}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_3 \\
+    \hline
+    \textbf{Description of test} &
+    Application must perform well on low-end hardware, must not exhibit sudden frame drops when performing and can run indefinitely without hanging, crashing or leaking memory.
+    \\
+    \hline
+    \textbf{Related requirement document details} & \makecell[l]{
+        Risks and Issues (3.1)
+    } \\
+    \hline
+    \textbf{Prerequisites for test} &
+        Build of the game with majority of the features implemented.
+    \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Performance}
+    \begin{itemize}
+        \item Play the game for a while and monitor the average frame rate.
+        \item Check the latency graph for frame drops.
+    \end{itemize}
+    \textbf{Stability}
+    \begin{itemize}
+        \item Play the game for an extended period of time, change levels, settings, difficulty.
+        \item Leave the game idle for an extended period of time, ensure CPU, GPU and memory usage do not increase over time.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop (with integrated graphics) \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Performance}
+    \begin{itemize}
+        \item Game runs at an acceptable frame rate ($\geq 60$), with minimal changes in frame rate when performing actions.
+        \item There are no perceptible frame rate drops
+    \end{itemize}
+    \textbf{Stability}
+    \begin{itemize}
+        \item System resource usage remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & \makecell[l]{
+        It may require more advanced graphical pipeline debugging to identify \\ frame drops. \\ \\
+        Stability testing is time consuming and realistically, this test will not be \\ run for more than 30 minutes at a time.
+    } \\
+    \hline
+    \textbf{Created by} & TD \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_3 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Performance}
+    \begin{itemize}
+        \item Game runs at an acceptable frame rate ($\geq 60$), with minimal changes in frame rate when performing actions.
+        \item There are no perceptible frame rate drops
+    \end{itemize}
+    \textbf{Stability}
+    \begin{itemize}
+        \item System resource usage remains consistent
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Critical: If the system resource usage keeps increasing the game will crash. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Accessibility}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_4 \\
+    \hline
+    \textbf{Description of test} & This test case verifies the accessibility features of the game, focusing on customizable controls, subtitles, colour-blind-friendly options, and audio cues for visually impaired players, to ensure that the user can comfortably experience the game. \\
+    \hline
+    \textbf{Related requirement document details} & N/A \\
+    \hline
+    \textbf{Prerequisites for test} & Accessibility features implemented, game settings menu fully functional \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Customizable controls:}
+    \begin{itemize}
+        \item Check that players can remap all input keys and save their preferences.
+    \end{itemize}
+    \textbf{Subtitles}
+    \begin{itemize}
+        \item Verify that subtitles are available, accurately synced with dialogues, and customizable in size and colour.
+    \end{itemize}
+    \textbf{Colour-blind mode:}
+    \begin{itemize}
+        \item Enable colour-blind-friendly mode and confirm that game elements are distinguishable for various types of colour-blindness.
+    \end{itemize}
+    \textbf{Audio Cues:}
+    \begin{itemize}
+        \item Test that all critical game events have corresponding audio cues.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Accessibility test checklist, user input logs \\
+    \hline
+    \textbf{Expected result} & User can fully customize controls and subtitle preferences. Colour-blind mode offers distinguishable visuals. Audio cues align with game events to assist visually impaired players. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+    \textbf{Created by} & WM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_4 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Customizable Controls:}
+    \begin{itemize}
+        \item Control Scheme changed and functioned as expected
+    \end{itemize}
+    \textbf{Subtitles:}
+    \begin{itemize}
+        \item Cover most elements, sometimes slightly out of time
+    \end{itemize}
+    \textbf{Colour-blind Mode:}
+    \begin{itemize}
+        \item Provides distinguishable elements for most cases but has issues with red-green differentiation
+    \end{itemize}
+    \textbf{Audio Cues:}
+    \begin{itemize}
+        \item Cover most elements, sometimes slightly out of time and a few minor scenarios.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Partial Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate \\
+    \hline
+    \textbf{Comments} & Additional testing and adjustments needed for red-green colour-blind compatibility, subtitle timing, and missing audio cues during boss encounters. \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Quizzes}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_5 \\
+    \hline
+    \textbf{Description of test} & Ensure the quizzes are engaging, well-integrated and correctly assessed. \\
+    \hline
+    \textbf{Related requirement document details} & Education Engagement (2.2.2) \\
+    \hline
+    \textbf{Prerequisites for test} & A functional game that passes utest\_2, utest\_6, utest\_10, utest\_13 and utest\_14. \\
+    \hline
+    \textbf{Test procedure} & Load the game and select a course. Play through the game until a quiz is initiated.
+
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item Verify that both audio and visual feedback are provided after correct and incorrect answers.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item Ensure a smooth transition from gameplay to the quiz and vice versa.
+        \item Check that the quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item Check that the questions relate to the course selected.
+        \item Answer a question incorrectly and check that the correct answer is shown.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Skills Build question bank \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item Audio and visual feedback is provided after answering correctly or incorrectly.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item There is a smooth transition from gameplay to the quiz and vice versa.
+        \item The quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item The questions relate to the course selected.
+        \item The correct answer is shown when the user answers incorrectly.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & Ensure edge cases such as a player losing all their health during a quiz are handled. \\
+    \hline
+    \textbf{Created by} & BM \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_5 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Engaging:}
+    \begin{itemize}
+        \item Audio and visual feedback is provided after answering correctly or incorrectly making the quizzes more engaging.
+    \end{itemize}
+    \textbf{Well-integrated:}
+    \begin{itemize}
+        \item There is a smooth transition from gameplay to the quiz and from the quiz to gameplay.
+        \item The quiz UI matches the game design and theme.
+    \end{itemize}
+    \textbf{Correctly assessed:}
+    \begin{itemize}
+        \item The questions relate to the course selected.
+        \item The correct answer is shown when the user answers incorrectly, helping them learn from their mistakes.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate for engagement and integration but High for correctly assessed as it would affect core gameplay if it fails. \\
+    \hline
+    \textbf{Comments} & None. \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\subsubsection{Chatbot}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_6 \\
+    \hline
+    \textbf{Description of test} & The chatbot adapts the difficulty based on the user's performance. \\
+    \hline
+    \textbf{Related requirement document details} & AI Boss (2.2.4) \\
+    \hline
+    \textbf{Prerequisites for test} & AI chatbot is implemented in the game. \\
+    \hline
+    \textbf{Test procedure} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item Get multiple questions related to a specific topic incorrect
+        \item Reach the boss battle
+        \item Observe the types of questions asked
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item Get multiple questions related to a specific topic correct
+        \item Reach the boss battle
+        \item Observe the types of questions asked
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Test material used} & Laptop \\
+    \hline
+    \textbf{Expected result} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item The chatbot should ask easy questions relating to the topic the user was “struggling” to answer.
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item The chatbot should ask more difficult questions about the topic, potentially asking things beyond the scope of the course if the user got everything previously correct.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Comments} & No need to test portability, as the behaviour should be system-independent \\
+    \hline
+    \textbf{Created by} & TD \\
+    \hline
+    \textbf{Test environment(s)} & Windows 11, Mac OS 15.3, Unity 2022.3.50f1 \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\noindent \textbf{Results:}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}m{4cm}|X|}
+    \hline
+    \textbf{Test ID} & uattest\_6 \\
+    \hline
+    \textbf{Result} &
+    \textbf{Poor performance}
+    \begin{itemize}
+        \item The chatbot asks easy questions relating to the topic the user was “struggling” to answer.
+    \end{itemize}
+    \textbf{Good performance}
+    \begin{itemize}
+        \item The chatbot asks more difficult questions about the topic, also asks things beyond the scope of the course if the user got everything previously correct.
+    \end{itemize}
+    \\
+    \hline
+    \textbf{Pass/Fail} & Pass \\
+    \hline
+    \textbf{Severity (If Fail)} & Moderate: The gameplay is affected being either too easy or too hard if the chatbot can't adapt. \\
+    \hline
+    \textbf{Comments} & None \\
+    \hline
+\end{tabularx}
+\end{center}
+
+
+\newpage
+
+\section{Testing Context}
+
+\noindent To ensure compatibility, accessibility, and coverage across educational environments, the following tools and environments are used for testing the system:
+
+\subsection{Operating Systems}
 
 \begin{itemize}
-    \item Version Control: We use GitHub for code management to ensure that the code submitted by team members undergoes Code Review,.Also we can easily track the submission history to control the version, so the whole system won’t be crashed due to some mistakes..
-    \item Modular Design:  Split game logic, UI, question bank, character movement, etc., into independent modules and allocate them to each group member for easier debugging and updates,besides when an issue is found that has no impact on the whole system, and we can solve it part by part.
-    \item Error Logging and Debugging: Record error logs and use log4cpp, Python logging, or Unity Console for debugging to identify and resolve issues to fix the issue efficiently to make sure the system is maintained.
+    \item Windows 11: Selected due to its widespread use in educational institutions and professional environments. Ensures compatibility for schools and educational labs. According to recent statistics, Microsoft Windows holds a market share of approximately 66.7\% in the UK, reflecting its dominance in both educational and professional settings \cite{statista}.
+    \item macOS (15.3 and above): Included as many schools and creative institutions prefer macOS systems for educational and development purposes. macOS accounts for around 23.3\% of the UK market share, demonstrating its popularity in environments that emphasise creative and media-focused curricula \cite{statista}.
 \end{itemize}
 
-\subsubsection{Question Bank and Content Updates}
+The dominance of these two operating systems influences system testing priorities. Ensuring compatibility with both Windows and macOS is crucial to accommodate the technological landscape within educational environments. Given their built-in accessibility features (such as screen readers, magnification tools, and input customisation), both platforms support diverse user needs, which are integral to accessibility testing.
+
+\subsection{Testing Tools and Drivers}
 
 \begin{itemize}
-    \item Store questions in JSON, XML, or a database for easy modification and expansion and version control , So we can make sure the questions can be updated quickly or adjusted without disrupting the game experience.
-    \item Implement a regular update mechanism, allowing administrators to import new IBM question banks via the backend to keep the content up to date, once a particular part is done update the corresponding questions into the game to keep the experience of the game.
+    \item Unity Editor (2022.3.50f1): Used to test and debug game mechanics, AI behaviours, and user interactions.
+    \item Accessibility Testing Tools: Simulators for colour-blindness and screen reader compatibility (e.g., Colour Oracle, VoiceOver for macOS). According to Keywords Studios, around 29\% of gamers in the UK identify as having a disability, and 66\% of these players report encountering barriers in gaming environments \cite{keywordsstudios}. Ensuring accessibility testing mitigates these barriers and promotes inclusivity.
+    \item Input Device Testing: Keyboard and controller compatibility tests using standard USB and wireless game controllers. This includes accessibility-focused input devices, such as adaptive controllers, to accommodate players with limited mobility. Scope UK highlights the importance of these options for players with varying needs \cite{scope}.
+    \item Game Feature Accessibility Testing: Incorporates tests for adjustable difficulty settings, subtitles, and customisable controls, which are essential for ensuring inclusivity and usability for a wide audience, including players with and without disabilities. The global importance of accessibility in gaming underscores the necessity for these considerations \cite{keywordsstudios}.
 \end{itemize}
 
-\subsubsection{Automated Testing}
+The technological landscape from 2017 to 2023 demonstrates the sustained dominance of Windows and macOS, with Linux and other open-source systems remaining less adopted due to compatibility and software availability concerns. As accessibility continues to gain prominence, the integration of sophisticated accessibility features across these platforms is expected to become more comprehensive and integral to development and testing strategies.
 
+\subsection{Test Failure Severity Levels}
 
-\begin{itemize}
-    \item Unit Testing:  Tests individual modules, such as the quiz system, character movement, and Enemy AI , sneaking mechanism etc.
-    \item Integration Testing: Verifies interactions between different modules, such as UI and game logic interactions, database read/write operations, etc.
-    \item Regression Testing: Automatically checks if core functions are affected after each update.
-\end{itemize}
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|X|}
+    \hline
+    \textbf{Severity Level} & \textbf{Description} \\
+    \hline
+    \textbf{Critical} & The system crashes or produces incorrect outcomes that prevent gameplay or educational content delivery. Requires immediate attention. \\
+    \hline
+    \textbf{High} & Major functionality is disrupted, such as inaccessible accessibility features or broken AI behaviours, affecting core gameplay. \\
+    \hline
+    \textbf{Moderate} & Gameplay is impacted but still functional, such as minor UI glitches, missing audio cues, or partial AI inconsistencies. \\
+    \hline
+    \textbf{Low} & Minor inconveniences that do not significantly impact the user experience, such as aesthetic inconsistencies or delayed animations. \\
+    \hline
+\end{tabularx}
+\end{center}
 
-\subsubsection{Compatibility and Performance Optimization}
+\bibliographystyle{unsrt}
 
-\begin{itemize}
-    \item Cross-Platform Support: Since we are using Unity, compatibility tests should be conducted on Windows and Mac , it is multi-platform.
-    \item Resource Optimization: Compress textures, optimize animation assets, and reduce GPU load to enhance performance and smoothness if needed.
-    \item Regular Testing: Perform monthly regression tests and discuss to ensure that new features do not interfere with existing functionality.
-\end{itemize}
+\begin{thebibliography}{}
+\bibitem{statista}
+Statista. (2023). \emph{Market share of desktop operating systems in the United Kingdom (UK) from 2017 to 2023}. Retrieved from \url{https://www.statista.com/statistics/487002/market-share-of-desktop-operating-systems-uk/}
 
-\subsubsection{Documentation}
+\bibitem{keywordsstudios}
+Keywords Studios. (2023). \emph{The Business Case for Accessibility in Gaming}. Retrieved from \url{https://www.keywordsstudios.com/en/about-us/news-events/news/the-business-case-for-accessibility/}
 
-\begin{itemize}
-    \item Write a README.md file to track the progress of the game ,describe how the functionality works and how to compile and run the game.
-    \item Document game architecture, API details, and database structure in detail.
-\end{itemize}
+\bibitem{scope}
+Scope UK. \emph{Accessibility in Gaming Report}. Retrieved from \url{https://www.scope.org.uk/campaigns/research-policy/accessibility-in-gaming/}
 
-\subsection{Future Development}
-
-\subsubsection{Expansion of Question Bank}
-\noindent For more far-reaching educational significance, we expand the content of the question bank by adding other content from IBM to the question bank for educational significance.
-
-\begin{itemize}
-    \item Cloud Computing and DevOps
-    \item Machine Learning and Big Data Analysis
-    \item Blockchain and Smart Contracts
-\end{itemize}
-
-\subsubsection{Corporate Collaboration}
-\noindent We can work with organisations all around the world to promote our game to those who need it in different areas.
-
-\begin{itemize}
-    \item IBM official training, allowing employees to learn AI and security knowledge through gameplay.
-    \item University IT courses, serving as a review tool before exams.
-    \item Corporate recruitment exams, using the game to evaluate AI and security skills in potential candidates.
-\end{itemize}
-
-\subsubsection{Expansion of Storylines and Missions}
-\noindent DLC can be added at the end of the main storyline, expanding the storyline to provide a more immersive and interesting gameplay experience for the player.
-\begin{itemize}
-    \item Multiple mission paths: In addition to puzzle-solving and answering questions, players can unlock different side missions, such as cyber warfare, code decryption, and diplomatic negotiations.
-    \item Chapter updates (DLC): New downloadable content can allow players to unlock different scenarios
-\end{itemize}
-
-\subsubsection{Adaptive Learning System}
-\noindent Integrate an AI-driven adaptive learning system that dynamically adjusts question difficulty based on the player's weaknesses and learning needs. This system enhances teaching efficiency by personalizing content delivery while simultaneously maintaining an engaging gameplay experience.
-\begin{itemize}
-    \item \textbf{Dynamic Difficulty Adjustment Based on Player Progress}: The difficulty in the game will be dynamically adjusted based on the player's historical performance.  maintaining their motivation to learn.
-    \item \textbf{Personalized Learning Path Recommendation:} The adaptive learning system can customize a personalized learning path based on the player's individual interests and learning pace. So players can focus on improving their weak areas without wasting time on irrelevant tasks.
-\end{itemize}
-
-\subsection{Ethical and Societal Impacts}
-
-\noindent Many ethical impacts arise from the current state of the game. Secure storage must be set up to protect user data for the adaptive learning feature collected during development and testing. Early versions may lack sufficient data protection measures which might infringe on user privacy, and AI parts responsible for dynamic difficulty adjustment may display algorithmic bias if they are not properly tuned. \\
-
-\noindent The current state of the system poses significant societal issues as well. Some learners may be left out due to the restrictive initial platform availability which is currently limited to Windows, most early prototypes may still not provide a fully functional learning experience. On the other hand, the system’s incompleteness gives it the potential to be improved iteratively because it can be practically tested early on to raise issues, resulting in a more practical and widely accessible tool. \\
-
-\noindent In a future state, greater measures for protecting user data will have to be incorporated into the game to safeguard users' information. AI systems need to be enhanced and monitored through iterations to reduce biases and ensure fair treatment for all learners. The users need to be provided with information on how their data will be handled, and the system’s personalisation options need to adhere to ethical standards to provide an accountable and responsible approach to adaptive learning. \\
-
-\noindent From a societal perspective, the future state of the game could boost educational engagement by making learning more inclusive and engaging. By introducing fascinating gaming environments around complex subjects such as artificial intelligence, cybersecurity, or data analytics, the system could spark greater interest within these fields. Future evolutions would ideally also work toward bridging those educational gaps and reaching broader audiences, so long as they are enabled for multiple platforms and made under inclusive design principles. Given the Cold War themes articulated through the game, it shall be imperative to handle cultural and historical content with a civility level to avoid propagating biases or distracting from specific historical events. Overall, a well-designed and moral system, could enhance the field of education and positively impact society.
+\end{thebibliography}
 
 \end{document}
-
