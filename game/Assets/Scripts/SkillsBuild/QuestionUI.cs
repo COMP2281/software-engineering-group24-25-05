@@ -19,6 +19,9 @@ public class SkillsBuildUI : MonoBehaviour
 
     private bool active = false;
 
+    private Action correctAnswerCallback;
+    private Action incorrectAnswerCallback;
+
     void Start()
     {
         this.currentQuestionIndex = -1;
@@ -36,9 +39,24 @@ public class SkillsBuildUI : MonoBehaviour
         this.active = visible;
     }
 
+    public bool IsVisible()
+    {
+        return this.active;
+    }
+
     private void hideUI()
     {
         this.MakeVisible(false);
+    }
+
+    public void SetCorrectAnswerCallback(Action callback)
+    {
+        this.correctAnswerCallback = callback;
+    }
+
+    public void SetIncorrectAnswerCallback(Action callback)
+    {
+        this.incorrectAnswerCallback = callback;
     }
 
     public void LoadNextQuestion()
@@ -140,6 +158,15 @@ public class SkillsBuildUI : MonoBehaviour
 
             img.color = imgColor;
             text.color = textColor;
+        }
+
+        if (correct)
+        {
+            this.correctAnswerCallback.Invoke();
+        }
+        else
+        {
+            this.incorrectAnswerCallback.Invoke();
         }
 
         this.active = false; // Disable further selections
