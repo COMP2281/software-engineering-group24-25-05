@@ -755,13 +755,16 @@
     \begin{itemize}
         \item \textbf{Unity Editor}: development environment for creating, editing and managing projects and their scenes, assets and scripts; also has the ability to debug
         \item \textbf{Unity UI}: framework for creating user interfaces (buttons, panels, text, etc.); it is event driven
-        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically
-        \item \textbf{NVIDIA PhysX}: default physics engine in Unity, primarily used for character controllers and collision detection
+        \item \textbf{Asset Bundles}: framework for packaging and loading assets dynamically, also used to import custom libraries such as UI and shaders
+        \item \textbf{Physics Engine}: default physics engine in Unity, primarily used for character controllers and collision detection
+        \item \textbf{Lighting Engine}: default lighting \textbf{GameObjects} are used to create the "atmosphere" of the game
         \item \textbf{Sprite Sheet}: used for creating animations for dynamic \textbf{GameObjects}; Unity supports the conversion of such a sheet into usable sprites for animation
+        \item \textbf{Sprite Palette}: Unity's built-in software for creating static level assets, such as environment
     \end{itemize}
     \item \textbf{Storage}
     \begin{itemize}
-        \item \textbf{JSON}: file format chosen for retrieving player data between sessions and for storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by the Unity Engine
+        \item \textbf{JSON}: file format chosen for the storage of the \textbf{IBM SkillsBuild} question bank, achieved through the \textbf{JsonUtility} class provided by Unity's library
+        \item \textbf{PlayerPrefs}: used for saving the current status of the player (position, levels completed, questions answered), achieved through the \textbf{PlayerPrefs} class which is provided by Unity's library
     \end{itemize}
     \item \textbf{Programming Languages}
     \begin{itemize}
@@ -781,19 +784,11 @@
         \item \textbf{Windows 11}: used for development and testing
         \item \textbf{Linux}, \textbf{MacOS} and \textbf{ChromeOS}: used for testing; may be used for development if a developer chooses to do so / has a preference for the operating system
     \end{itemize}
+    \item \textbf{Browsers}
+    \begin{itemize}
+        \item \textbf{Firefox}, \textbf{Chrome} and \textbf{Microsoft Edge}: used for testing and optimizing the game for directly hosting it on the web
+    \end{itemize}
 \end{enumerate}
-
-\newpage
-
-\subsubsection{Software Development Process}
-
-\noindent The chosen software development life cycle is the \textbf{Incremental Model} which divides the project into smaller, manageable portions (increments). Each increment builds upon the previous one. \\
-
-\noindent Its emphasis is on \textbf{gradual progress} which allows iterative feedback and testing.
-
-\newpage
-
-\subsubsection{Design Principles and Patterns}
 
 \newpage
 
@@ -987,6 +982,62 @@
 \end{tikzpicture}%
 }
 \end{center}
+
+\newpage
+
+\subsubsection{Software Development Process}
+
+\noindent The chosen software development life cycle is the \textbf{Incremental Model} which divides the project into smaller, manageable portions (increments). Each increment builds upon the previous one. \\
+
+\noindent \textbf{Gradual Progress:} Our game comprises multiple components, including core mechanics such as movement, enemy AI,  and IBM Skills Build badge questions. Using the Incremental Model, we can develop each component sequentially, starting with the foundational mechanics. \\
+
+\noindent \textbf{Iterative Feedback and Testing:} After completing each increment, we can conduct testing and gather client or player feedback. This ensures each feature works as intended and aligns with the project goals before integrating it into the overall game. \\
+
+\noindent \textbf{Risk Management:} By addressing straightforward features early in the development process, the Incremental Model reduces risk and ensures a consistent development pace. This strategy allows us to allocate more time and resources to resolving challenges posed by complex features. \\
+
+\noindent \textbf{Flexibility for Changes:} Given the possibility of evolving client requirements or necessary adjustments, the Incremental Model minimizes disruption. Changes can be accommodated without requiring significant rework, as only specific increments need updating, preserving the integrity of prior developments. \\
+
+\noindent \textbf{Early Player Engagement:} The model allows us to release a playable version of the game before full completion. Early releases enable us to collect valuable feedback from players and the client, refining the game’s direction and functionality based on real-world input. \\
+
+\noindent \textbf{Adaptability to a Small Team:} With a team of seven, the Incremental Model facilitates efficient workload distribution. Team members can focus on specific tasks within each increment, ensuring all participants are engaged and progress is clearly tracked. \\
+
+\subsubsection{Behaviour Driven Development}
+
+\noindent The Incremental Model and BDD complement each other effectively in the software development process. \\
+
+\noindent Each increment was developed, tested and reviewed. This has aligned well with BDD due to each increment representing the implementation of a behavioural requirement, which in the testing period has been reviewed by the relevant stakeholders. \\
+
+\noindent Due to the low risk and flexibility of the chosen software development process it has allowed us to continually refine and evolve the requirements based on testing results and stakeholder feedback. \\
+
+\noindent BDD has played a key role in the development process by allowing the team to designate increments as the implementation of a requirement and to have a clear goal in mind, and has facilitated good collaboration between the development team and the stakeholders. \\
+
+\noindent Due to the rigorous testing required by BDD it played a significant role in the quality assurance process; our project had to abide by the strict requierements.
+
+\newpage
+
+\subsubsection{Applied Design Principles}
+
+\noindent \textbf{Open / Closed Principle}: modules such as the \textbf{SkillsBuild} implementation and the \textbf{Enemy} class implementation are generic, they can be expanded upon through inheritance without having to modify the base class. \\
+
+\noindent \textbf{Single Responsibility Principle}: has been applied to concepts such as the \textbf{LevelManager}, \textbf{LevelCompleter}, \textbf{LevelEndTrigger}, \textbf{SkillsBuildDataLoader} and the \textbf{PlayerViewcone}. They have only one purpose, offer consistent interaction APIs such that internal changes do not affect outside modules. \\
+
+\noindent \textbf{Interface Segregation Principle}: this is the de facto standard in any Unity project, with the way entities and \textbf{GameObject}s are setup in the \textbf{Unity Editor} they only depend on each other if explicitly stated by the developer. \\
+
+\noindent \textbf{DRY}: unintentionally applied due to the project scale being small and the ratio of code to assets is small \\
+
+\noindent \textbf{KISS}: with the aforementioned point made, we have relied heavily on pre-existing assets (including the vast library offered by the Unity Engine) in order to keep complexity at minimum, the thought being that if the library offers the functionality there is no reason to re-implement it
+
+\subsubsection{Applied Design Patterns}
+
+\noindent \textbf{Component Pattern}: obliged to use it due to Unity's architecture, all of the modules inherit from the \textbf{MonoBehaviour} base class which can be attached to \textbf{GameObject}s in the Unity Editor. \\
+
+\noindent \textbf{Singleton Pattern}: used for event emitters such as \textbf{InputManager}, \textbf{DialogueManager}, \textbf{AudioSettingsManager}, \textbf{LevelManager}, by having a single easily accessible instance the complexity has been reduced; other modules do not have to keep a reference towards such instances. \\
+
+\noindent \textbf{State Pattern}: this pattern has been applied when designing the non-playable characters (enemies), when they have detected the player their state changes from patrolling to chasing and start following the player. \\
+
+\noindent \textbf{Event Aggregator Pattern}: when an enemy catches the player it will trigger the \textbf{SkillsBuild} functionality. \\
+
+\noindent \textbf{Observer Pattern}: the \textbf{LevelEndTrigger} class observes a \textbf{GameObject} such as a Console in order to decide whether to trigger the end of the level.
 
 \newpage
 
