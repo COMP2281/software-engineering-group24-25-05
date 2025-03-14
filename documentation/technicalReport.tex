@@ -12,6 +12,8 @@
 
 % \usepackage[a4paper, total={6in, 8in}]{geometry}
 
+\usepackage{tikz-uml}
+
 \title{Technical Report for Shadow Operative}
 \date{\today}
 
@@ -796,6 +798,195 @@
 \newpage
 
 \subsubsection{High Level Overview}
+
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+\begin{umlpackage}{Unity Editor}
+\begin{umlpackage}{Game Scene}
+
+\begin{umlpackage}{UI}
+\umlclass[x=-3, y=-6]{Pause Menu} {
+    isPaused : bool \\
+    Buttons: Button[]
+}{
+    Pause() : void \\
+    Resume() : void \\
+    Update() : void \\
+}
+
+\umlclass[x=5, y=-7.5]{ChangeControls} {
+    currControlScheme : string \\
+    playerInput : PlayerInput \\
+    jumpButton : Button \\
+    crouchButton : Button \\
+    leftButton : Button \\
+    rightButton : Button \\
+    deviceToggleButton : Button \\
+}{
+    ToggleControlScheme() : void \\
+    GetKeyboardControlScheme() : string \\
+    GetGamepadControlScheme() : string \\
+    SetupControlButton(b : Button) : void \\
+    UpdateButtonLabel(b : Button) : void \\
+    UpdateControlLabels() : void \\
+}
+
+\umlclass[x=-2, y=-10]{SkillsBuildUI} {
+    answerButtons: Button[] \\
+    skillsBuilder : SkillsBuilder \\
+    currentQuestion : int \\
+    colors : Color[]
+}{
+    MakeVisibile(vis : bool) : void \\
+    LoadNextQuestion() : void \\
+    OnAnswerSelected() : void
+}
+
+\end{umlpackage}
+
+\begin{umlpackage}{Main Character}
+\umlclass[x=-10]{Player} {
+    rigitBody : RigidBody2D \\
+    isGrounded : bool \\
+    isCrouching : bool \\
+    animator : Animator \\
+    viewCone : PlayerViewcone \\
+}{
+    Update() : void \\
+    PerformJump(force : float) : void \\
+    FixedUpdate() : void \\
+    HandleAnimations() : void \\
+    StartCrouch() : void \\
+    StopCrouch() : void \\
+    CheckGroundContact(coll : Collision2D) : void \\
+}
+\umlclass[x=-12,y=-6]{Main Camera} {
+    player : Transform \\
+    velocity : Vec3 \\
+    smoothTime : float \\
+    zoomOutSize : float \\
+}{
+    LateUpdate() : void
+}
+
+\umlclass[x=-10.71,y=-10]{PlayerViewcone} {
+    cone : Light2D \\
+    angle : float \\
+    distance : float \\
+    dir : Transform \\
+}{
+    Update() : void \\
+    UpdateLightPos(angle : float) : void
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Interactions}
+\umlclass[x=-10.1,y=-16.8]{Enemy}{
+    waypoints: Transform[] \\
+    speed : float \\
+    viewRange : float \\
+    viewAngle : float \\
+    eyeOffset : float \\
+    rb : RigidBody2D \\
+    renderer : SpriteRenderer \\
+    playerRef : Transform \\
+}{
+    Update() : void \\
+    Patrol() : void \\
+    CheckForPlayer() : void \\
+    TriggerQuestionUI() : void \\
+    OnTriggerEnter2D(player : Collider2D) : void \\
+}
+
+\umlclass[x=-3,y=-15]{Console}{
+    renderer : SpriteRenderer \\
+    position : Transform \\
+}{
+    Update() : void \\
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Storage}
+\umlclass[x=5,y=-15]{SkillsBuildDataLoader}{
+}{
+    LoadEntries(path : string) : List$<$SkillsBuildEntry$>$
+}
+
+\umlclass[x=2.5,y=-18]{SkillsBuildEntry}{
+    question : string \\
+    answers : string[] \\
+    correctAnswer : int \\
+    difficulty : int
+}{
+    Shuffle() : void
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Levels}
+\umlclass[x=-10.05,y=-22.9]{LevelEndTrigger}{
+}{
+    OnTriggerEnter2D(player : Collider2D) : void
+}
+
+\umlclass[x=-2.5,y=-23.2]{LevelCompleter}{
+    thisLevelType : LevelType \\
+    levelToUnlock : LevelType \\
+}{
+    CompleteLevel() : void
+}
+
+\umlclass[x=5.5,y=-24.4]{LevelManager}{
+    LevelType : enum \\
+    levelUnlockStatus : Dict$<$LevelType, bool$>$ \\
+    levelUnlockStatus : Dict$<$LevelType, string$>$ \\
+}{
+    InitializeLevelData() : void \\
+    IsLevelUnlocked(lvl : LevelType) : bool \\
+    UnlockLevel(lvl : LevelType) : void \\
+    SaveLevelUnlockStatus() : void \\
+    LoadLevelUnlockStatus() : void \\
+    GetSceneName() : string
+}
+\end{umlpackage}
+
+\begin{umlpackage}{Environment}
+
+\umlclass[x=-2,y=2]{Grid} {
+    Cell Size : Vec2 \\
+    Tile Palette : TileSet \\
+}{}
+
+\umlclass[x=4,y=2]{Background} {
+    Backgrounds: PNG[] \\
+}{}
+
+\umlclass[x=4,y=-1]{Lighting} {
+    Lights: Light 2D[] \\
+    GlobalLight: GlobalLight2D \\
+    ShadowCaster: Platform[] \\
+    Platform $\to$ ShadowCaster2D
+}{}
+
+\end{umlpackage}
+\end{umlpackage}
+\end{umlpackage}
+
+\umlassoc[geometry=-|, anchor1=50, anchor2=100, arg1=follows, align1=right]{Main Camera}{Player}
+\umlassoc[geometry=-|, anchor1=30, anchor2=70, arg1=calculates cone, pos1=1, align1=left]{PlayerViewcone}{Player}
+\umlassoc[geometry=-|, arg1=reacts to]{Lighting}{Player}
+\umlassoc[geometry=-|, arg1=checks for collision, pos1=0.97]{Player}{Grid}
+\umlassoc[geometry=-|-, arg1=activates, pos1=2, anchor2=40]{Player}{Pause Menu}
+\umlassoc[geometry=-|-, arg1=triggers, pos1=1.3, anchor1=60, anchor2=-20]{Enemy}{SkillsBuildUI}
+\umlassoc[geometry=-|, arg1=entered through, pos1=0.25]{Pause Menu}{ChangeControls}
+\umlassoc[geometry=-|]{SkillsBuildDataLoader}{SkillsBuildEntry}
+\umlassoc[geometry=|-, anchor1=60, anchor2=-26, arg1=loads questions]{SkillsBuildDataLoader}{SkillsBuildUI}
+\umluniassoc[geometry=|-]{LevelEndTrigger}{LevelCompleter}
+\umluniassoc[geometry=|-, anchor2=195]{LevelCompleter}{LevelManager}
+\umluniassoc[geometry=-|-, arg1=triggers, pos1=1.2, align=right, anchor1=west, anchor2=east, weight=0.4]{Console}{LevelEndTrigger}
+\end{tikzpicture}%
+}
+\end{center}
 
 \newpage
 
