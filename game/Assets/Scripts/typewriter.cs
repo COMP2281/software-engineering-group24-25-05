@@ -42,6 +42,12 @@ public class UITypeWriter : MonoBehaviour
         this.typingCoroutine = StartCoroutine(TypeRoutine());
     }
 
+    public void Clear()
+    {
+        this.fullText = "";
+        this.textMesh.text = "";
+    }
+
     private void OnEnable()
     {
         if (this.typeWhenReady)

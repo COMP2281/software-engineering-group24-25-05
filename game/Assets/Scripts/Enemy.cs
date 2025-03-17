@@ -115,7 +115,6 @@ public class EnemyAI : MonoBehaviour
 
                 // Set enemy speed to zero when player is detected
                 rb.velocity = Vector2.zero; // Stop the enemy's movements
-                Debug.Log("Player detected, triggering question!");
                 TriggerQuestionUI(); // Trigger question UI
             }
         }
@@ -127,6 +126,8 @@ public class EnemyAI : MonoBehaviour
         {
             if (this.canQuestion)
             {
+                Debug.Log("Player detected, triggering question!");
+
                 this.canQuestion = false;
 
                 this.questionUI.SetCorrectAnswerCallback(() =>

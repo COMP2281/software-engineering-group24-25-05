@@ -63,48 +63,86 @@ public class SkillsBuildUI : MonoBehaviour
     {
         currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex();
         SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
-        currentQuestion.Shuffle();
 
-        this.typewriter.typeWhenReady = true;
-        this.typewriter.SetText(currentQuestion.question);
-        this.typewriter.SetCallback(() =>
+        this.typewriter.Clear();
+        foreach (var button in this.answerButtons)
         {
-            StartButtonRendering(0);
-        });
-
-        int display_answers = Math.Min(currentQuestion.possible_answers.Length,
-                                   answerButtons.Length);
-
-        if (display_answers < currentQuestion.possible_answers.Length)
-        {
-            Debug.Log("Not enough answer buttons to display all possible answers");
+            button.GetComponentInChildren<UITypeWriter>().Clear();
         }
 
-        for (int i = 0; i < display_answers; i++)
+        Action<QuestionAPIResponse> correctCallback = (QuestionAPIResponse aiResponse) =>
         {
-            UITypeWriter buttonWriter = answerButtons[i].GetComponentInChildren<UITypeWriter>();
-            buttonWriter.typeWhenReady = false;
-            buttonWriter.SetText(currentQuestion.possible_answers[i]);
-            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.defaultTextColor;
-            buttonWriter.GetComponentInChildren<Image>().color = this.defaultButtonColor;
+            SkillsBuildEntry aiEntry = new SkillsBuildEntry();
 
-            // NOTE: For some reason this requires a local copy
-            int localI = i;
-            buttonWriter.SetCallback(() =>
+            aiEntry.question = aiResponse.question;
+            aiEntry.answer = 0;
+            aiEntry.possible_answers = new string[aiResponse.answer.incorrect.Length + 1];
+
+            aiEntry.possible_answers[0] = aiResponse.answer.correct;
+
+            for (int i = 0; i < aiResponse.answer.incorrect.Length; i++)
             {
-                StartButtonRendering(localI + 1);
-            });
+                aiEntry.possible_answers[i + 1] = aiResponse.answer.incorrect[i];
+            }
 
-            // NOTE: Button presses are valid while the text is still typing
-            int choiceIndex = i;
-            answerButtons[i].onClick.RemoveAllListeners();
-            answerButtons[i].onClick.AddListener(() =>
+            aiEntry.Shuffle();
+
+            this.skillsBuilder.SetQuestion(currentQuestionIndex, aiEntry);
+
+            Debug.Log($"AI Response: {JsonUtility.ToJson(aiResponse)}");
+            Debug.Log($"Current Question: {JsonUtility.ToJson(aiEntry)}");
+
+            this.typewriter.typeWhenReady = true;
+            this.typewriter.SetText(aiEntry.question);
+            this.typewriter.SetCallback(() =>
+            {
+                StartButtonRendering(0);
+            });
+            this.typewriter.StartTyping();
+
+            int display_answers = Math.Min(aiEntry.possible_answers.Length,
+                                       answerButtons.Length);
+
+            if (display_answers < aiEntry.possible_answers.Length)
+            {
+                Debug.Log("Not enough answer buttons to display all possible answers");
+            }
+
+            for (int i = 0; i < display_answers; i++)
+            {
+                UITypeWriter buttonWriter = answerButtons[i].GetComponentInChildren<UITypeWriter>();
+                buttonWriter.typeWhenReady = false;
+                buttonWriter.SetText(aiEntry.possible_answers[i]);
+                buttonWriter.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.defaultTextColor;
+                buttonWriter.GetComponentInChildren<Image>().color = this.defaultButtonColor;
+
+                // NOTE: For some reason this requires a local copy
+                int localI = i;
+                buttonWriter.SetCallback(() =>
                 {
-                    if (this.active) { OnAnswerSelected(choiceIndex); }
-                }
-            );
-        }
+                    StartButtonRendering(localI + 1);
+                });
+
+                // NOTE: Button presses are valid while the text is still typing
+                int choiceIndex = i;
+                answerButtons[i].onClick.RemoveAllListeners();
+                answerButtons[i].onClick.AddListener(() =>
+                    {
+                        if (this.active) { OnAnswerSelected(choiceIndex); }
+                    }
+                );
+            }
+        };
+
+        Debug.Log("Sending Request");
+        QuestionAPIRequest request = new QuestionAPIRequest(currentQuestion.question);
+        StartCoroutine(
+            request.SendRequest(
+                correctCallback,
+                (string msg) => { Debug.Log($"Error: {msg}"); }
+            )
+        );
     }
 
     private void StartButtonRendering(int currentIndex)
