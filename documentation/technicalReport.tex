@@ -4,13 +4,14 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
-\singlespacing   % Single spacing
+\usepackage{setspace}   % Single spacing
 
 \usepackage{makecell}
 \usepackage{tabularx}
 % center shit vertically
 \def\tabularxcolumn#1{m{#1}}
 
+\singlespacing
 % \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \usepackage{tikz-uml}
@@ -1002,17 +1003,7 @@
 
 \subsubsection{Behaviour Driven Development}
 
-\noindent The Incremental Model and BDD complement each other effectively in the software development process. \\
-
-\noindent Each increment was developed, tested and reviewed. This has aligned well with BDD due to each increment representing the implementation of a behavioural requirement, which in the testing period has been reviewed by the relevant stakeholders. \\
-
-\noindent Due to the low risk and flexibility of the chosen software development process it has allowed us to continually refine and evolve the requirements based on testing results and stakeholder feedback. \\
-
-\noindent BDD has played a key role in the development process by allowing the team to designate increments as the implementation of a requirement and to have a clear goal in mind, and has facilitated good collaboration between the development team and the stakeholders. \\
-
-\noindent Due to the rigorous testing required by BDD it played a significant role in the quality assurance process; our project had to abide by the strict requierements.
-
-\newpage
+The Incremental Model and BDD complement each other effectively in the software development process. Each increment was developed, tested, and reviewed, aligning well with BDD as each increment represented the implementation of a behavioural requirement, which was reviewed by relevant stakeholders during the testing period. The low risk and flexibility of the chosen software development process allowed for continual refinement and evolution of the requirements based on testing results and stakeholder feedback. BDD played a key role by enabling the team to designate increments as the implementation of a requirement with a clear goal in mind, fostering good collaboration between the development team and stakeholders. Furthermore, the rigorous testing required by BDD significantly contributed to the quality assurance process, ensuring the project adhered to strict requirements.
 
 \subsubsection{Applied Design Principles}
 
@@ -1196,24 +1187,23 @@
 \subsubsection{Code Maintenance}
 
 \begin{itemize}
-    \item Version Control: We use GitHub for code management to ensure that the code submitted by team members undergoes Code Review.
-    \item Modular Design: Split game logic, UI, question bank, character movement, etc., into independent modules for easier debugging and updates.
-    \item Error Logging and Debugging: Record error logs and use log4cpp, Python logging, or Unity Console for debugging to identify and resolve issues.
+    \item Version Control: We use GitHub for code management to ensure that the code submitted by team members undergoes Code Review,.Also we can easily track the submission history to control the version, so the whole system won’t be crashed due to some mistakes..
+    \item Modular Design:  Split game logic, UI, question bank, character movement, etc., into independent modules and allocate them to each group member for easier debugging and updates,besides when an issue is found that has no impact on the whole system, and we can solve it part by part.
+    \item Error Logging and Debugging: Record error logs and use log4cpp, Python logging, or Unity Console for debugging to identify and resolve issues to fix the issue efficiently to make sure the system is maintained.
 \end{itemize}
 
 \subsubsection{Question Bank and Content Updates}
 
 \begin{itemize}
-    \item Store questions in JSON, XML, or a database for easy modification and expansion.
-    \item Implement a regular update mechanism, allowing administrators to import new IBM question banks via the backend to keep the content up to date.
+    \item Store questions in JSON, XML, or a database for easy modification and expansion and version control , So we can make sure the questions can be updated quickly or adjusted without disrupting the game experience.
+    \item Implement a regular update mechanism, allowing administrators to import new IBM question banks via the backend to keep the content up to date, once a particular part is done update the corresponding questions into the game to keep the experience of the game.
 \end{itemize}
 
 \subsubsection{Automated Testing}
 
-\noindent To reduce maintenance costs, an automated testing system should be established, including:
 
 \begin{itemize}
-    \item Unit Testing: Tests individual modules, such as the quiz system, character movement, and level unlocking.
+    \item Unit Testing:  Tests individual modules, such as the quiz system, character movement, and Enemy AI , sneaking mechanism etc.
     \item Integration Testing: Verifies interactions between different modules, such as UI and game logic interactions, database read/write operations, etc.
     \item Regression Testing: Automatically checks if core functions are affected after each update.
 \end{itemize}
@@ -1221,23 +1211,22 @@
 \subsubsection{Compatibility and Performance Optimization}
 
 \begin{itemize}
-    \item Cross-Platform Support: Since we are using Unity, compatibility tests should be conducted on Windows and Mac.
-    \item Resource Optimization: Compress textures, optimize animation assets, and reduce GPU load to enhance performance and smoothness.
-    \item Regular Testing: Perform monthly regression tests to ensure that new features do not interfere with existing functionality.
+    \item Cross-Platform Support: Since we are using Unity, compatibility tests should be conducted on Windows and Mac , it is multi-platform.
+    \item Resource Optimization: Compress textures, optimize animation assets, and reduce GPU load to enhance performance and smoothness if needed.
+    \item Regular Testing: Perform monthly regression tests and discuss to ensure that new features do not interfere with existing functionality.
 \end{itemize}
 
 \subsubsection{Documentation}
 
-\noindent To define design direction and track progress, development documentation should be maintained:
-
 \begin{itemize}
-    \item Write a README.md file to explain how to compile and run the game.
-    \item Document game architecture, API details, and database structure in detail
+    \item Write a README.md file to track the progress of the game ,describe how the functionality works and how to compile and run the game.
+    \item Document game architecture, API details, and database structure in detail.
 \end{itemize}
 
 \subsection{Future Development}
 
 \subsubsection{Expansion of Question Bank}
+\noindent For more far-reaching educational significance, we expand the content of the question bank by adding other content from IBM to the question bank for educational significance.
 
 \begin{itemize}
     \item Cloud Computing and DevOps
@@ -1246,6 +1235,7 @@
 \end{itemize}
 
 \subsubsection{Corporate Collaboration}
+\noindent We can work with organisations all around the world to promote our game to those who need it in different areas.
 
 \begin{itemize}
     \item IBM official training, allowing employees to learn AI and security knowledge through gameplay.
@@ -1254,17 +1244,17 @@
 \end{itemize}
 
 \subsubsection{Expansion of Storylines and Missions}
-
+\noindent DLC can be added at the end of the main storyline, expanding the storyline to provide a more immersive and interesting gameplay experience for the player.
 \begin{itemize}
     \item Multiple mission paths: In addition to puzzle-solving and answering questions, players can unlock different side missions, such as cyber warfare, code decryption, and diplomatic negotiations.
     \item Chapter updates (DLC): New downloadable content can allow players to unlock different scenarios
 \end{itemize}
 
 \subsubsection{Adaptive Learning System}
-
+\noindent Integrate an AI-driven adaptive learning system that dynamically adjusts question difficulty based on the player's weaknesses and learning needs. This system enhances teaching efficiency by personalizing content delivery while simultaneously maintaining an engaging gameplay experience.
 \begin{itemize}
-    \item \textbf{Dynamic Difficulty Adjustment Based on Player Progress}: The difficulty in the game will be dynamically adjusted based on the player's historical performance. For example, if a player performs well in answering cybersecurity questions, the system can automatically increase the difficulty of the tasks by introducing more challenging content, such as more complex network attack scenarios or multi-step security vulnerability remediation tasks. Conversely, if a player struggles, the system will automatically lower the difficulty and provide more hints and assistance to ensure that the player does not feel frustrated by overly difficult tasks, thus maintaining their motivation to learn.
-    \item \textbf{Personalized Learning Path Recommendation:} The adaptive learning system can customize a personalized learning path based on the player's individual interests and learning pace. For instance, for players who perform well in AI, the system can automatically recommend tasks related to deep learning and machine learning algorithms. On the other hand, for players who are weaker in cybersecurity, the system will recommend more tasks focusing on basic knowledge such as data encryption and intrusion detection. This way, players can focus on improving their weak areas without wasting time on irrelevant tasks.
+    \item \textbf{Dynamic Difficulty Adjustment Based on Player Progress}: The difficulty in the game will be dynamically adjusted based on the player's historical performance.  maintaining their motivation to learn.
+    \item \textbf{Personalized Learning Path Recommendation:} The adaptive learning system can customize a personalized learning path based on the player's individual interests and learning pace. So players can focus on improving their weak areas without wasting time on irrelevant tasks.
 \end{itemize}
 
 \subsection{Ethical and Societal Impacts}

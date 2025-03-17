@@ -2710,7 +2710,7 @@ PrefabInstance:
     - target: {fileID: 6389369563261910076, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1689369983}
     - target: {fileID: 6389369563261910076, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
       propertyPath: viewconeLight
       value: 
@@ -2723,6 +2723,9 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 62219884}
+    m_RemovedComponents:
+    - {fileID: 6389369563261910076, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
+    - {fileID: 3398034533635469175, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
     m_RemovedComponents:
     - {fileID: 6389369563261910076, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
     - {fileID: 3398034533635469175, guid: 7d4fc7dfd29cb4dd69345577dc8b8920, type: 3}
@@ -29111,7 +29114,7 @@ PrefabInstance:
     - target: {fileID: 8959350656412673916, guid: 60bd77bda191d4934a930070218c43fb, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1689369983}
     - target: {fileID: 8959350656412673916, guid: 60bd77bda191d4934a930070218c43fb, type: 3}
       propertyPath: viewconeLight
       value: 
