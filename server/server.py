@@ -1,6 +1,7 @@
-from openai import OpenAI
 from enum import Enum
+
 from flask import Flask, request
+from openai import OpenAI
 
 CLIENT = OpenAI()
 
