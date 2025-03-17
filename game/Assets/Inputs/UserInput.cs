@@ -15,7 +15,8 @@ public class UserInput : MonoBehaviour
     public bool CrouchHold { get; private set; }
     public bool MenuOpenCloseInput { get; private set; }
     public bool SubmitInput { get; private set; }
-
+    public Vector2 AimInput { get; private set; }
+    public bool UsingController { get; private set; }
 
     private PlayerInput _playerInput;
 
@@ -24,9 +25,7 @@ public class UserInput : MonoBehaviour
     private InputAction _crouchAction;
     private InputAction _menuOpenCloseAction;
     private InputAction _SubmitAction;
-    
-
-
+    private InputAction _aimAction;
 
     private void Awake()
     {
@@ -56,8 +55,7 @@ public class UserInput : MonoBehaviour
         _crouchAction = _playerInput.actions["Crouch"];
         _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
         _SubmitAction = _playerInput.actions["Submit"];
-    
-        // _interactAction = _playerInput.actions["Interact"];
+        _aimAction = _playerInput.actions["Look"];
     }
 
     private void UpdateInputs()
@@ -69,8 +67,12 @@ public class UserInput : MonoBehaviour
         CrouchHold = _crouchAction.IsPressed();
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
         SubmitInput = _SubmitAction.WasPressedThisFrame();
-        // DialogueAdvanceInput = _dialogueAdvanceAction.WasPressedThisFrame();
-        // Interact = _interactAction.WasPressedThisFrame();
+        AimInput = _aimAction.ReadValue<Vector2>();
+
+        if (_playerInput.currentControlScheme != null)
+        {
+            UsingController = _playerInput.currentControlScheme.ToLower().Contains("gamepad");
+        }
     }
 
     private void LoadSavedBindings()
