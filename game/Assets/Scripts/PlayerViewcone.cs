@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal; // For 2D lights in URP
+using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class PlayerViewcone : MonoBehaviour
 {
@@ -37,6 +38,13 @@ public class PlayerViewcone : MonoBehaviour
 
     // Track if viewcone is active
     private bool isViewconeActive = true;
+
+    // Remove controller input settings as they're now handled by the input system
+    [Header("Aim Settings")]
+    [SerializeField] private float controllerDeadzone = 0.2f;
+    [SerializeField] private float mouseSensitivity = 1.0f;
+    
+    private Vector2 lastAimInput = Vector2.zero;
 
     private void Awake()
     {
@@ -78,14 +86,52 @@ public class PlayerViewcone : MonoBehaviour
     {
         if (viewconeLight == null || !isViewconeActive) return;
         
-        // Get mouse position in world space
-        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0;  // Ensure we're on the same Z plane as the player
+        // Get input direction from UserInput manager
+        Vector3 inputDirection;
         
-        // Calculate direction from player to mouse
-        directionToMouse = mouseWorldPos - transform.position;
+        if (UserInput.Instance != null)
+        {
+            Vector2 aimInput = UserInput.Instance.AimInput;
+            bool usingController = UserInput.Instance.UsingController;
+            
+            if (usingController)
+            {
+                // Controller input handling
+                if (aimInput.magnitude > controllerDeadzone)
+                {
+                    lastAimInput = aimInput;
+                    inputDirection = new Vector3(aimInput.x, aimInput.y, 0);
+                }
+                else
+                {
+                    // Keep last direction if under deadzone
+                    inputDirection = new Vector3(lastAimInput.x, lastAimInput.y, 0);
+                }
+            }
+            else
+            {
+                // Mouse input handling - use direct Mouse position from Input System
+                // This ensures we're getting the actual screen position
+                Vector2 mousePosition = Mouse.current.position.ReadValue();
+                Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 0));
+                mouseWorldPos.z = 0;
+                inputDirection = mouseWorldPos - transform.position;
+            }
+        }
+        else
+        {
+            // Fallback if UserInput is not available
+            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0;
+            inputDirection = mouseWorldPos - transform.position;
+        }
         
-        // Check if mouse is on the left side of player
+        if (inputDirection.magnitude < 0.1f) return;
+        
+        // Store the direction for other methods
+        directionToMouse = inputDirection;
+        
+        // Check if input is on the left side of player
         bool newIsMouseOnLeft = directionToMouse.x < 0;
         
         // If direction changed, notify listeners
@@ -97,7 +143,7 @@ public class PlayerViewcone : MonoBehaviour
         // Calculate angle to point the light
         float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
         
-        // Apply angle correction to align with mouse
+        // Apply angle correction to align with input
         float correctedAngle = angle + angleCorrection;
         
         // Update light position based on angle (track system)
