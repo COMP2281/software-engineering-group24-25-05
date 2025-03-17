@@ -27,5 +27,10 @@ else
     pip3 install flask
 fi
 
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo "Error: The OPENAI_API_KEY environment variable is not set."
+    exit 1
+fi
+
 echo "Running the Flask app..."
 flask --app $SCRIPT_DIR/../server/server.py run
