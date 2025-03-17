@@ -105,18 +105,23 @@ public class EnemyAI : MonoBehaviour
         // Filter out self-collisions
         var validHits = hits.Where(hit => hit.collider.gameObject != gameObject).OrderBy(hit => hit.distance).ToArray();
 
-        if (validHits.Length > 0)
+        // Check all hits in order of distance
+        foreach (var hit in validHits)
         {
-            var firstHit = validHits[0]; // Get the closest non-self hit
+            // If we hit a cover object first, the player cannot be seen
+            if (hit.collider.CompareTag("Cover"))
+            {
+                Debug.Log("View blocked by cover");
+                return; // Cover blocks the view - exit without detecting player
+            }
 
-            if (firstHit.collider.CompareTag("Player"))
+            // If we hit the player before any cover, detect them
+            if (hit.collider.CompareTag("Player"))
             {
                 rb.velocity = Vector2.zero; // Stop the enemy's movement
-
-                // Set enemy speed to zero when player is detected
-                rb.velocity = Vector2.zero; // Stop the enemy's movements
                 Debug.Log("Player detected, triggering question!");
                 TriggerQuestionUI(); // Trigger question UI
+                return;
             }
         }
     }
