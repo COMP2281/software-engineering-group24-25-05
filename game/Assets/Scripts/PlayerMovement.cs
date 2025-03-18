@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -380,5 +378,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerViewcone.RefreshLightPosition();
         }
+    }
+
+    public Rigidbody2D GetRigidBody()
+    {
+        return this.rb;
     }
 }
