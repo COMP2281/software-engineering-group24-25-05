@@ -6,7 +6,7 @@ using System;
 public class SkillsBuildUI : MonoBehaviour
 {
     private int currentQuestionIndex;
-    public UITypeWriter typewriter;
+    public UITypeWriter questionTypewriter;
     public Button[] answerButtons;
     public SkillsBuilder skillsBuilder;
 
@@ -43,7 +43,7 @@ public class SkillsBuildUI : MonoBehaviour
 
     public void MakeVisible(bool visible = true)
     {
-        this.typewriter.gameObject.SetActive(visible);
+        this.questionTypewriter.gameObject.SetActive(visible);
 
         foreach (var button in this.answerButtons)
         {
@@ -98,7 +98,7 @@ public class SkillsBuildUI : MonoBehaviour
         currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex();
         SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
 
-        this.typewriter.Clear();
+        this.questionTypewriter.Clear();
         foreach (var button in this.answerButtons)
         {
             button.GetComponentInChildren<UITypeWriter>().Clear();
@@ -107,21 +107,21 @@ public class SkillsBuildUI : MonoBehaviour
         Debug.Log("Sending Request");
 
         // Start the loading spinner
-        this.typewriter.StartSpinner();
+        this.questionTypewriter.StartSpinner();
 
         QuestionAPIRequest request = new QuestionAPIRequest(currentQuestion.question);
         StartCoroutine(
             request.SendRequest(
                 (QuestionAPIResponse response) =>
                 {
-                    this.typewriter.StopSpinner();
+                    this.questionTypewriter.StopSpinner();
                     SkillsBuildEntry entry = ProcessAIResponse(response);
                     UpdateUIEntry(entry);
                 },
                 (string msg) =>
                 {
                     Debug.Log($"Error: {msg}");
-                    this.typewriter.StopSpinner();
+                    this.questionTypewriter.StopSpinner();
                     UpdateUIEntry(currentQuestion);
                 }
             )
@@ -200,6 +200,18 @@ public class SkillsBuildUI : MonoBehaviour
         textComponent.text = "";
     }
 
+    public void ResetColors()
+    {
+        for (int i = 0; i < this.answerButtons.Length; i++)
+        {
+            TextMeshProUGUI text = this.answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            Image img = this.answerButtons[i].GetComponentInChildren<Image>();
+
+            img.color = this.defaultButtonColor;
+            text.color = this.defaultTextColor;
+        }
+    }
+
     SkillsBuildEntry ProcessAIResponse(QuestionAPIResponse aiResponse)
     {
         SkillsBuildEntry aiEntry = new SkillsBuildEntry();
@@ -224,13 +236,13 @@ public class SkillsBuildUI : MonoBehaviour
     {
         this.skillsBuilder.SetQuestion(currentQuestionIndex, entry);
 
-        this.typewriter.typeWhenReady = true;
-        this.typewriter.SetText(entry.question);
-        this.typewriter.SetCallback(() =>
+        this.questionTypewriter.typeWhenReady = true;
+        this.questionTypewriter.SetText(entry.question);
+        this.questionTypewriter.SetCallback(() =>
         {
             StartButtonRendering(0);
         });
-        this.typewriter.StartTyping();
+        this.questionTypewriter.StartTyping();
 
         int display_answers = Math.Min(entry.possible_answers.Length,
                                    answerButtons.Length);
