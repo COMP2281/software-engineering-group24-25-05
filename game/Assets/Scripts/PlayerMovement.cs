@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Skip movement if dialogue is open
-        SkillsBuildUI globalUI = FindObjectOfType<SkillsBuildUI>();
+        QuestionUI globalUI = FindObjectOfType<QuestionUI>();
         if (dialogueManager.dialogueBox.activeSelf || globalUI.IsVisible())
             return;
 

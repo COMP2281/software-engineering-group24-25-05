@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     public Transform viewconeLight; // Reference to the viewcone light transform (if any)
 
     // UI part (still needs to be completed)
-    public SkillsBuildUI questionUI; // Answering UI
+    public QuestionUI questionUI; // Answering UI
 
     void Start()
     {

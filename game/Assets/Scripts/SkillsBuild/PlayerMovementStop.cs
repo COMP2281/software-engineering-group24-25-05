@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovementStop : MonoBehaviour
 {
     [SerializeField] private PlayerMovement movement;
-    [SerializeField] private SkillsBuildUI questionUI;
+    [SerializeField] private QuestionUI questionUI;
 
     public void Update()
     {

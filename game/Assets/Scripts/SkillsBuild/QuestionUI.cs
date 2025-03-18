@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class SkillsBuildUI : MonoBehaviour
+public class QuestionUI : MonoBehaviour
 {
     private int currentQuestionIndex;
     public UITypeWriter questionTypewriter;
