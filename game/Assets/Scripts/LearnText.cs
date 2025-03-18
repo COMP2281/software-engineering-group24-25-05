@@ -58,15 +58,16 @@ public class ToggleScrollView : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.R))  // Player presses R to toggle the scroll view
+            // Use the Input System instead of direct key input
+            if (UserInput.Instance.InteractPressed)  // Player presses the interact button
             {
                 ToggleScrollViewVisibility();
                 if (promptText != null)
                 {
-                    promptText.gameObject.SetActive(false);  // Hide the prompt text when R is pressed
+                    promptText.gameObject.SetActive(false);  // Hide the prompt text when interact is pressed
                 }
 
-                // Play the audio when R is pressed
+                // Play the audio when interact is pressed
                 PlayAudio();
             }
         }

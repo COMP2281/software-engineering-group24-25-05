@@ -17,6 +17,7 @@ public class UserInput : MonoBehaviour
     public bool SubmitInput { get; private set; }
     public Vector2 AimInput { get; private set; }
     public bool UsingController { get; private set; }
+    public bool InteractPressed { get; private set; }
 
     private PlayerInput _playerInput;
 
@@ -26,6 +27,7 @@ public class UserInput : MonoBehaviour
     private InputAction _menuOpenCloseAction;
     private InputAction _SubmitAction;
     private InputAction _aimAction;
+    private InputAction _interactAction;
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class UserInput : MonoBehaviour
         _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
         _SubmitAction = _playerInput.actions["Submit"];
         _aimAction = _playerInput.actions["Look"];
+        _interactAction = _playerInput.actions["Interact"];
     }
 
     private void UpdateInputs()
@@ -68,6 +71,7 @@ public class UserInput : MonoBehaviour
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
         SubmitInput = _SubmitAction.WasPressedThisFrame();
         AimInput = _aimAction.ReadValue<Vector2>();
+        InteractPressed = _interactAction.WasPressedThisFrame();
 
         if (_playerInput.currentControlScheme != null)
         {

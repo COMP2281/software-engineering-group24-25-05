@@ -26,6 +26,7 @@ public class ChangeControls : MonoBehaviour
     private Button crouchButton;
     private Button rightButton;
     private Button leftButton;
+    private Button interactButton;
     private Button deviceToggleButton;
     
     // Button callback
@@ -54,6 +55,7 @@ public class ChangeControls : MonoBehaviour
         crouchButton = root.Q<Button>("crouchButton");
         rightButton = root.Q<Button>("rightButton");
         leftButton = root.Q<Button>("leftButton");
+        interactButton = root.Q<Button>("interactButton");
         deviceToggleButton = root.Q<Button>("DeviceToggleButton");
         
         // Setup device toggle if it exists
@@ -79,6 +81,7 @@ public class ChangeControls : MonoBehaviour
             SetupControlButton(crouchButton, "Crouch");
             SetupControlButton(rightButton, "Move", GetCorrectBindingIndex("Move", "rightButton"));
             SetupControlButton(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));
+            SetupControlButton(interactButton, "Interact", GetCorrectBindingIndex("Interact", interactButton.name));
             
             // Update the button labels to show current bindings
             UpdateControlLabels();
@@ -106,6 +109,7 @@ public class ChangeControls : MonoBehaviour
         SetupControlButton(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));
         SetupControlButton(jumpButton, "Jump", GetCorrectBindingIndex("Jump", jumpButton.name));
         SetupControlButton(crouchButton, "Crouch", GetCorrectBindingIndex("Crouch", crouchButton.name));
+        SetupControlButton(interactButton, "Interact", GetCorrectBindingIndex("Interact", interactButton.name));
     }
     
     private void SetupControlButton(Button button, string actionName, int bindingIndex = 0)
@@ -135,6 +139,7 @@ public class ChangeControls : MonoBehaviour
             UpdateButtonLabel(crouchButton, "Crouch", GetCorrectBindingIndex("Crouch", "crouchButton"));
             UpdateButtonLabel(rightButton, "Move", GetCorrectBindingIndex("Move", "rightButton"));
             UpdateButtonLabel(leftButton, "Move", GetCorrectBindingIndex("Move", "leftButton"));
+            UpdateButtonLabel(interactButton, "Interact", GetCorrectBindingIndex("Interact", interactButton.name));
         }
     }
     
