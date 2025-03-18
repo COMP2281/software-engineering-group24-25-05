@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class ChangeControls : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class ChangeControls : MonoBehaviour
     // Button callback
     public delegate void ButtonCallback();
     private ButtonCallback onRebindComplete;
+
+    private bool rebindInProgress = false;
+    private bool isDestroying = false;
     
     public void Initialize(
         VisualElement root,
@@ -85,6 +89,27 @@ public class ChangeControls : MonoBehaviour
             
             // Update the button labels to show current bindings
             UpdateControlLabels();
+        }
+
+        // Listen for scene changes to cancel rebinding
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        // Cancel any rebinding in progress when scene unloads
+        if (rebindInProgress)
+        {
+            CancelRebinding();
+        }
+    }
+    
+    private void OnDisable()
+    {
+        // Cancel any rebinding in progress when object is disabled
+        if (rebindInProgress)
+        {
+            CancelRebinding();
         }
     }
 
@@ -271,6 +296,21 @@ public class ChangeControls : MonoBehaviour
 
     private void StartRebinding(string actionName, int bindingIndex = 0)
     {
+        // Prevent starting a new rebind if one is already in progress
+        if (rebindInProgress)
+        {
+            Debug.LogWarning("Attempt to start rebinding while another is in progress");
+            return;
+        }
+
+        // Check if we've reached the maximum rebind attempts for this scene
+        if (UserInput.Instance != null && !UserInput.Instance.RegisterRebindAttempt())
+        {
+            Debug.LogWarning("Too many rebind attempts. Resetting input system.");
+            UserInput.Instance.ResetInputSystem();
+            return;
+        }
+
         // Make sure we have valid input actions before attempting to rebind
         if (inputActions == null)
         {
@@ -329,6 +369,8 @@ public class ChangeControls : MonoBehaviour
                     rebindText.text = $"Press any {(isGamepadScheme ? "button" : "key")} for {actionText}...";
                 }
             }
+
+            rebindInProgress = true;
             
             try
             {
@@ -355,38 +397,47 @@ public class ChangeControls : MonoBehaviour
                 // Complete the rebinding operation setup with clean error handling
                 this.rebindOperation = rebindOperation
                     .OnComplete(operation => {
+                        if (isDestroying) return; // Don't process if being destroyed
+                        
                         try {
-                            // IMPORTANT: Capture the path FIRST before doing anything else with the operation
+                            // Make a local copy of the path to avoid issues with the operation being disposed
                             string newBindingPath = null;
                             
-                            try {
-                                // Store the path before we do anything that might dispose the operation
-                                if (operation.selectedControl != null) {
-                                    newBindingPath = operation.selectedControl.path;
-                                    Debug.Log($"Selected control path: {newBindingPath}");
-                                }
-                            }
-                            catch (System.Exception pathEx) {
-                                Debug.LogError($"Error getting selected control path: {pathEx.Message}");
-                                // Continue anyway - will use null path which we can check
+                            if (operation != null && operation.selectedControl != null) {
+                                newBindingPath = operation.selectedControl.path;
+                                Debug.Log($"Selected control path: {newBindingPath}");
                             }
                             
-                            // For non-composite bindings, we need to handle it specially
-                            if (!bindingIsCompositePart && actionName != "Move" && !string.IsNullOrEmpty(newBindingPath)) {
-                                // Apply the binding manually to ensure we only change the correct control scheme
-                                ApplyControlSchemeSpecificBinding(action, newBindingPath, isGamepadScheme);
+                            // Store binding details locally before disposing the operation
+                            InputAction localAction = actionToRebind;
+                            int localBindingIndex = this.bindingIndex;
+                            bool isLocalGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
+                                               currentControlScheme.ToLower().Contains("controller");
+                            bool isLocalCompositePart = bindingIsCompositePart;
+                            
+                            // Dispose the operation before applying the binding to avoid race conditions
+                            if (rebindOperation != null)
+                            {
+                                rebindOperation.Dispose();
+                                rebindOperation = null;
                             }
                             
-                            // Don't dispose here - let the RebindComplete method handle it
-                            RebindComplete();
+                            // Only then apply the binding
+                            if (newBindingPath != null && localAction != null && !isLocalCompositePart && actionName != "Move") {
+                                ApplyControlSchemeSpecificBinding(localAction, newBindingPath, isLocalGamepad);
+                            }
+                            
+                            CompleteRebind();
                         } catch (System.Exception e) {
-                            Debug.LogError($"Error during rebind completion: {e.Message}");
+                            Debug.LogError($"Error during rebind completion: {e.Message}\n{e.StackTrace}");
                             SafeCleanup();
                         }
                     })
                     .OnCancel(operation => {
+                        if (isDestroying) return; // Don't process if being destroyed
+                        
                         try {
-                            RebindCancelled();
+                            CancelRebinding();
                         } catch (System.Exception e) {
                             Debug.LogError($"Error during rebind cancellation: {e.Message}");
                             SafeCleanup();
@@ -424,10 +475,6 @@ public class ChangeControls : MonoBehaviour
     {
         Debug.Log($"Applying new binding for {action.name}, path: {newBindingPath}, isGamepad: {isGamepad}");
         
-        // Save all current binding overrides to JSON
-        string allBindingsJson = inputActions.SaveBindingOverridesAsJson();
-        Debug.Log($"Current binding overrides: {allBindingsJson}");
-        
         try
         {
             // Create a totally separate path for keyboard vs gamepad bindings
@@ -453,14 +500,11 @@ public class ChangeControls : MonoBehaviour
             
             if (bindingIndex >= 0)
             {
-                // First, clear ALL previous overrides for this specific action
-                action.RemoveAllBindingOverrides();
-                
-                // Then only apply the new override to the specific binding index
+                // IMPORTANT: Don't clear ALL binding overrides, just apply the new one
+                // This ensures we keep the other control scheme's bindings
                 action.ApplyBindingOverride(bindingIndex, newBindingPath);
                 
-                // Now, reload the remaining binding overrides from our saved JSON
-                // This will restore all other action bindings that we didn't modify
+                // Now, save all binding overrides
                 var bindingOverridesSaved = inputActions.SaveBindingOverridesAsJson();
                 PlayerPrefs.SetString("InputBindings", bindingOverridesSaved);
                 PlayerPrefs.Save();
@@ -482,35 +526,7 @@ public class ChangeControls : MonoBehaviour
     // A safe cleanup method to be called whenever we encounter an exception
     private void SafeCleanup()
     {
-        if (rebindOperation != null)
-        {
-            try
-            {
-                rebindOperation.Dispose();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"Error disposing rebind operation: {e.Message}");
-            }
-            rebindOperation = null;
-        }
-        
-        if (actionToRebind != null)
-        {
-            try
-            {
-                actionToRebind.Enable();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"Error enabling action: {e.Message}");
-            }
-        }
-        
-        if (rebindOverlay != null)
-        {
-            rebindOverlay.style.display = DisplayStyle.None;
-        }
+        CancelRebinding();
     }
 
     private int FindBindingIndexForControlScheme(InputAction action, string actionName, string controlScheme)
@@ -559,22 +575,30 @@ public class ChangeControls : MonoBehaviour
         throw new System.Exception($"No binding found for action '{actionName}' in scheme '{controlScheme}'");
     }
     
-    private void RebindComplete()
+    private void CompleteRebind()
     {
-        // Clean up the rebinding operation
-        if (rebindOperation != null)
-        {
-            rebindOperation.Dispose();
-            rebindOperation = null;
-        }
-        
         // Re-enable the action
         if (actionToRebind != null)
-            actionToRebind.Enable();
+        {
+            try
+            {
+                actionToRebind.Enable();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error enabling action: {e.Message}");
+            }
+        }
         
         // Hide the overlay
         if (rebindOverlay != null)
+        {
             rebindOverlay.style.display = DisplayStyle.None;
+        }
+        
+        // Reset state
+        rebindInProgress = false;
+        actionToRebind = null;
         
         // Update the control labels
         UpdateControlLabels();
@@ -583,25 +607,79 @@ public class ChangeControls : MonoBehaviour
         SaveBindings();
         
         // Call the callback
-        onRebindComplete?.Invoke();
+        if (onRebindComplete != null)
+        {
+            try
+            {
+                onRebindComplete.Invoke();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error in rebind complete callback: {e.Message}");
+            }
+        }
     }
     
-    private void RebindCancelled()
+    private void CancelRebinding()
     {
-        // Clean up the rebinding operation
         if (rebindOperation != null)
         {
-            rebindOperation.Dispose();
+            try
+            {
+                // Properly cancel the operation
+                rebindOperation.Cancel();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error cancelling rebind operation: {e.Message}");
+            }
+            
+            try
+            {
+                // Then dispose it
+                rebindOperation.Dispose();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error disposing rebind operation: {e.Message}");
+            }
             rebindOperation = null;
         }
         
         // Re-enable the action
-        if (actionToRebind != null)
-            actionToRebind.Enable();
+        if (actionToRebind != null && !isDestroying)
+        {
+            try
+            {
+                actionToRebind.Enable();
+                actionToRebind = null;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error enabling action: {e.Message}");
+            }
+        }
         
         // Hide the overlay
         if (rebindOverlay != null)
+        {
             rebindOverlay.style.display = DisplayStyle.None;
+        }
+        
+        rebindInProgress = false;
+    }
+
+    private void RebindComplete()
+    {
+        // This method is now replaced by CompleteRebind which is called after
+        // safely disposing the rebinding operation
+        CompleteRebind();
+    }
+    
+    private void RebindCancelled()
+    {
+        // This method is now replaced by CancelRebinding for better safety
+        CancelRebinding();
     }
     
     public void SaveBindings()
@@ -616,6 +694,7 @@ public class ChangeControls : MonoBehaviour
                 {
                     PlayerPrefs.SetString("InputBindings", bindingOverridesJson);
                     PlayerPrefs.Save();
+                    Debug.Log($"Saved bindings: {bindingOverridesJson}");
                 }
             }
         }
@@ -635,6 +714,7 @@ public class ChangeControls : MonoBehaviour
                 string bindingOverridesJson = PlayerPrefs.GetString("InputBindings");
                 if (!string.IsNullOrEmpty(bindingOverridesJson))
                 {
+                    Debug.Log($"Loading bindings: {bindingOverridesJson}");
                     // Load the saved binding overrides
                     inputActions.LoadBindingOverridesFromJson(bindingOverridesJson);
                     UpdateControlLabels();
@@ -649,6 +729,17 @@ public class ChangeControls : MonoBehaviour
     
     public void OnDestroy()
     {
+        isDestroying = true;
+        
+        // Remove scene unloaded listener
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        
+        // Cancel any ongoing rebinding when destroyed
+        if (rebindInProgress)
+        {
+            CancelRebinding();
+        }
+
         // Clean up any ongoing rebinding operation
         if (rebindOperation != null)
         {
@@ -764,5 +855,39 @@ public class ChangeControls : MonoBehaviour
             }
         }
         throw new System.Exception("No gamepad/controller scheme found.");
+    }
+
+    // Add this new method to improve binding management
+    public void ResetBindingsForCurrentControlScheme()
+    {
+        if (inputActions == null) return;
+        
+        bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
+                         currentControlScheme.ToLower().Contains("controller");
+        
+        foreach (var actionMap in inputActions.actionMaps)
+        {
+            foreach (var action in actionMap.actions)
+            {
+                for (int i = 0; i < action.bindings.Count; i++)
+                {
+                    var binding = action.bindings[i];
+                    if (binding.isComposite || binding.isPartOfComposite)
+                        continue;
+                    
+                    bool isGamepadBinding = binding.path.ToLower().Contains("gamepad");
+                    // Only reset bindings for the current control scheme
+                    if ((isGamepad && isGamepadBinding) || (!isGamepad && !isGamepadBinding))
+                    {
+                        action.RemoveBindingOverride(i);
+                    }
+                }
+            }
+        }
+        
+        // Save the updated bindings
+        SaveBindings();
+        UpdateControlLabels();
+        Debug.Log($"Reset bindings for {(isGamepad ? "gamepad" : "keyboard/mouse")} control scheme");
     }
 }
