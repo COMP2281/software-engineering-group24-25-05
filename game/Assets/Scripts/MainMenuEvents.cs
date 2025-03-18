@@ -13,7 +13,7 @@ public class MainMenuEvents : MonoBehaviour
     private Button dataAnalyticsButton;
     private Button cyberSecurityButton;
     private Button settingsButton;
-    private Button backButton;
+    private Button exitButton;
     private VisualElement mainMenu;
     private VisualElement titleContainer;
     private VisualElement leftContainer;
@@ -44,7 +44,7 @@ public class MainMenuEvents : MonoBehaviour
         dataAnalyticsButton = root.Q<Button>("dataAnalyticsButton");
         cyberSecurityButton = root.Q<Button>("cyberSecurityButton");
         settingsButton = root.Q<Button>("settingsButton");
-        backButton = root.Q<Button>("backButton");
+        exitButton = root.Q<Button>("exitButton");
 
         // Retrieve visual elements by their name
         mainMenu = root.Q<VisualElement>("mainMenu");
@@ -65,6 +65,7 @@ public class MainMenuEvents : MonoBehaviour
         dataAnalyticsButton.RegisterCallback<ClickEvent>(evt => ShowLockedLevelPopup(LevelManager.LevelType.DataAnalytics));
         cyberSecurityButton.RegisterCallback<ClickEvent>(evt => ShowLockedLevelPopup(LevelManager.LevelType.CyberSecurity));
         settingsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SettingsScene"));
+        exitButton.RegisterCallback<ClickEvent>(evt => Application.Quit());
 
         // Register specific mouse leave events for specialty buttons
         tutorialButton.RegisterCallback<MouseLeaveEvent>(OnSpecialtyButtonLeave);
