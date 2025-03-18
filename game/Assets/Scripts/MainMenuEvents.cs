@@ -124,12 +124,6 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        // Add transition classes
-        // mainMenu.AddToClassList("main-menu-hidden");
-        // titleContainer.AddToClassList("title-container-hidden");
-        // leftContainer.AddToClassList("left-container-hidden");
-        // rightContainer.AddToClassList("right-container-hidden");
-
         Debug.Log("Loading Scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
