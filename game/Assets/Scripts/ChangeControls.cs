@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class ChangeControls : MonoBehaviour
 {
@@ -321,32 +322,42 @@ public class ChangeControls : MonoBehaviour
         InputAction action = inputActions.FindAction(actionName);
         if (action != null)
         {
-            // Use the supplied bindingIndex
-            int correctBindingIndex = bindingIndex;
-            if(correctBindingIndex < 0)
-            {
-                Debug.LogWarning($"Invalid binding index {correctBindingIndex} for action {actionName}");
-                return;
-            }
-            
-            // Ensure the binding index is valid for this action
-            if (correctBindingIndex >= action.bindings.Count)
-            {
-                Debug.LogWarning($"Binding index {correctBindingIndex} is out of range for action {actionName}");
-                return;
-            }
-            
             // Store info about the binding we're rebinding
             bool isGamepadScheme = currentControlScheme.ToLower().Contains("gamepad") || 
                                   currentControlScheme.ToLower().Contains("controller");
             
+            Debug.Log($"Starting rebind for {actionName} using {(isGamepadScheme ? "gamepad" : "keyboard")} scheme.");
+            
+            // For Move action or composite parts, use the provided binding index
+            if (actionName == "Move" || 
+                (bindingIndex > 0 && bindingIndex < action.bindings.Count && action.bindings[bindingIndex].isPartOfComposite))
+            {
+                // Use the supplied bindingIndex for composite parts
+                if (bindingIndex < 0 || bindingIndex >= action.bindings.Count)
+                {
+                    Debug.LogWarning($"Invalid binding index {bindingIndex} for action {actionName}");
+                    return;
+                }
+            }
+            else
+            {
+                // For standard actions, explicitly find the correct binding for the current device type
+                bindingIndex = FindBindingIndexForDeviceType(action, isGamepadScheme);
+                if (bindingIndex < 0)
+                {
+                    Debug.LogWarning($"Could not find a binding for action {actionName} for {(isGamepadScheme ? "gamepad" : "keyboard")}");
+                    return;
+                }
+                Debug.Log($"Selected binding index {bindingIndex} for {actionName}");
+            }
+            
             // For composite parts we need special handling
-            var bindingIsCompositePart = correctBindingIndex > 0 && correctBindingIndex < action.bindings.Count && 
-                                        action.bindings[correctBindingIndex].isPartOfComposite;
+            var bindingIsCompositePart = bindingIndex > 0 && bindingIndex < action.bindings.Count && 
+                                        action.bindings[bindingIndex].isPartOfComposite;
             
             // Store the action and binding index for use in callbacks
             actionToRebind = action;
-            this.bindingIndex = correctBindingIndex;
+            this.bindingIndex = bindingIndex;
             
             // Disable the action before rebinding
             action.Disable();
@@ -360,12 +371,16 @@ public class ChangeControls : MonoBehaviour
                 // For composite parts, show the specific direction
                 if (bindingIsCompositePart)
                 {
-                    string partName = action.bindings[correctBindingIndex].name;
+                    string partName = action.bindings[bindingIndex].name;
                     actionText = $"{actionName} {partName}";
                 }
                 
                 if (rebindText != null)
                 {
+                    string bindPath = action.bindings[bindingIndex].path;
+                    string overridePath = action.bindings[bindingIndex].overridePath;
+                    
+                    Debug.Log($"Rebinding: Current path = {bindPath}, Override = {overridePath}");
                     rebindText.text = $"Press any {(isGamepadScheme ? "button" : "key")} for {actionText}...";
                 }
             }
@@ -375,23 +390,25 @@ public class ChangeControls : MonoBehaviour
             try
             {
                 // Configure the rebinding operation
-                var rebindOperation = action.PerformInteractiveRebinding(correctBindingIndex)
+                var rebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                     .WithCancelingThrough("<Keyboard>/escape")
                     .OnMatchWaitForAnother(0.1f)
                     .WithoutGeneralizingPathOfSelectedControl();
                     
-                // Add device constraints based on the current control scheme
+                // Add stronger device constraints based on the current control scheme
                 if (!isGamepadScheme) // Keyboard/Mouse
                 {
                     rebindOperation = rebindOperation
                         .WithControlsHavingToMatchPath("<Keyboard>")
-                        .WithControlsExcluding("<Gamepad>");
+                        .WithControlsExcluding("<Gamepad>")
+                        .WithControlsExcluding("<Joystick>");
                 }
                 else // Gamepad
                 {
                     rebindOperation = rebindOperation
                         .WithControlsHavingToMatchPath("<Gamepad>")
-                        .WithControlsExcluding("<Keyboard>");
+                        .WithControlsExcluding("<Keyboard>")
+                        .WithControlsExcluding("<Mouse>");
                 }
                     
                 // Complete the rebinding operation setup with clean error handling
@@ -422,9 +439,31 @@ public class ChangeControls : MonoBehaviour
                                 rebindOperation = null;
                             }
                             
+                            // Double-check the binding path matches the expected device type
+                            bool isBindingForGamepad = IsGamepadPath(newBindingPath);
+                            if (isLocalGamepad != isBindingForGamepad) {
+                                Debug.LogWarning($"Selected control type mismatch: Expected {(isLocalGamepad ? "gamepad" : "keyboard")} " +
+                                              $"but got {(isBindingForGamepad ? "gamepad" : "keyboard")} control. Skipping.");
+                                CompleteRebind();
+                                return;
+                            }
+                            
                             // Only then apply the binding
-                            if (newBindingPath != null && localAction != null && !isLocalCompositePart && actionName != "Move") {
-                                ApplyControlSchemeSpecificBinding(localAction, newBindingPath, isLocalGamepad);
+                            if (newBindingPath != null && localAction != null)
+                            {
+                                if (!isLocalCompositePart && actionName != "Move") {
+                                    // For regular bindings, use our scheme-specific binding method
+                                    ApplyControlSchemeSpecificBinding(localAction, newBindingPath, isLocalGamepad);
+                                }
+                                else if (isLocalCompositePart || actionName == "Move") {
+                                    // For composite bindings, directly apply to the specific part
+                                    localAction.ApplyBindingOverride(localBindingIndex, newBindingPath);
+                                    // Save after applying
+                                    var bindingOverridesSaved = inputActions.SaveBindingOverridesAsJson();
+                                    PlayerPrefs.SetString("InputBindings", bindingOverridesSaved);
+                                    PlayerPrefs.Save();
+                                    Debug.Log($"Applied composite binding override: {newBindingPath} to index {localBindingIndex}");
+                                }
                             }
                             
                             CompleteRebind();
@@ -452,6 +491,49 @@ public class ChangeControls : MonoBehaviour
             }
         }
     }
+    
+    // Helper method to find the binding index for the current device type
+    private int FindBindingIndexForDeviceType(InputAction action, bool isGamepad)
+    {
+        // First try to find a binding that explicitly matches the device type
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isComposite || binding.isPartOfComposite)
+                continue;
+            
+            string path = !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
+            bool bindingIsGamepad = IsGamepadPath(path);
+            
+            if (isGamepad == bindingIsGamepad) {
+                Debug.Log($"Found matching binding at index {i}: {path} (isGamepad: {bindingIsGamepad})");
+                return i;
+            }
+        }
+        
+        // If no explicit match, try using control scheme groups
+        string schemeName = isGamepad ? GetGamepadControlSchemeName() : GetKeyboardControlSchemeName();
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isComposite || binding.isPartOfComposite)
+                continue;
+                
+            if (MatchesControlScheme(binding.groups, schemeName)) {
+                Debug.Log($"Found scheme-matched binding at index {i}: {binding.path} (scheme: {binding.groups})");
+                return i;
+            }
+        }
+        
+        // If still no match, return the first non-composite binding as fallback
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!action.bindings[i].isComposite && !action.bindings[i].isPartOfComposite)
+                return i;
+        }
+        
+        return -1; // No suitable binding found
+    }
 
     // Improve the scheme-matching logic to be more exact
     private bool MatchesControlScheme(string bindingGroups, string schemeName)
@@ -470,38 +552,32 @@ public class ChangeControls : MonoBehaviour
         return false;
     }
 
-    // Replace the ApplyControlSchemeSpecificBinding method with a more fundamental approach
+    // Replace the ApplyControlSchemeSpecificBinding method with a more robust approach
     private void ApplyControlSchemeSpecificBinding(InputAction action, string newBindingPath, bool isGamepad)
     {
         Debug.Log($"Applying new binding for {action.name}, path: {newBindingPath}, isGamepad: {isGamepad}");
         
         try
         {
-            // Create a totally separate path for keyboard vs gamepad bindings
-            // This ensures they're completely independent
+            // Get the scheme name based on device type
             string currentScheme = isGamepad ? GetGamepadControlSchemeName() : GetKeyboardControlSchemeName();
             
-            // Find the specific control path that matches our scheme AND action
-            int bindingIndex = -1;
-            for (int i = 0; i < action.bindings.Count; i++)
+            // Validate that the binding path is appropriate for the target control scheme
+            bool isBindingPathForGamepad = IsGamepadPath(newBindingPath);
+            
+            // If we're trying to bind a gamepad input to keyboard or vice versa, block it
+            if (isGamepad != isBindingPathForGamepad)
             {
-                var binding = action.bindings[i];
-                if (binding.isComposite || binding.isPartOfComposite)
-                    continue;
-                    
-                // Check if this is a binding for our current device type
-                bool isBindingForGamepad = binding.path.ToLower().Contains("gamepad");
-                if ((isGamepad && isBindingForGamepad) || (!isGamepad && !isBindingForGamepad))
-                {
-                    bindingIndex = i;
-                    break;
-                }
+                Debug.LogWarning($"Binding path {newBindingPath} doesn't match scheme type (gamepad: {isGamepad}). Skipping.");
+                return;
             }
+            
+            // Use our enhanced method to find the exact binding index for this device type
+            int bindingIndex = FindExactBindingIndexForScheme(action, isGamepad);
             
             if (bindingIndex >= 0)
             {
-                // IMPORTANT: Don't clear ALL binding overrides, just apply the new one
-                // This ensures we keep the other control scheme's bindings
+                // Apply the new binding override only to this specific binding
                 action.ApplyBindingOverride(bindingIndex, newBindingPath);
                 
                 // Now, save all binding overrides
@@ -521,6 +597,114 @@ public class ChangeControls : MonoBehaviour
         {
             Debug.LogError($"Error applying control scheme binding: {e.Message}");
         }
+    }
+    
+    // Add a method to find the exact binding index for a specific scheme/device type
+    private int FindExactBindingIndexForScheme(InputAction action, bool isGamepad)
+    {
+        string schemeName = isGamepad ? GetGamepadControlSchemeName() : GetKeyboardControlSchemeName();
+        
+        // First try to find a binding that explicitly matches the scheme name
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isComposite || binding.isPartOfComposite)
+                continue;
+                
+            if (MatchesControlScheme(binding.groups, schemeName))
+            {
+                Debug.Log($"Found exact scheme match at binding index {i}: {binding.path} for scheme {schemeName}");
+                return i;
+            }
+        }
+        
+        // Next, try to find a binding based on the device type path
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isComposite || binding.isPartOfComposite)
+                continue;
+                
+            string path = !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
+            bool bindingIsGamepad = IsGamepadPath(path);
+            
+            // If it's a keyboard binding without a specific scheme, only match it when we're looking for keyboard
+            if (!isGamepad && !bindingIsGamepad && 
+                (string.IsNullOrEmpty(binding.groups) || !binding.groups.Contains(GetGamepadControlSchemeName())))
+            {
+                Debug.Log($"Found keyboard-specific binding at index {i}: {path}");
+                return i;
+            }
+            
+            // If it's a gamepad binding without a specific scheme, only match it when we're looking for gamepad
+            if (isGamepad && bindingIsGamepad &&
+                (string.IsNullOrEmpty(binding.groups) || !binding.groups.Contains(GetKeyboardControlSchemeName())))
+            {
+                Debug.Log($"Found gamepad-specific binding at index {i}: {path}");
+                return i;
+            }
+        }
+        
+        // If nothing specific found, look for first binding of the right device type
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (binding.isComposite || binding.isPartOfComposite)
+                continue;
+                
+            string path = !string.IsNullOrEmpty(binding.overridePath) ? binding.overridePath : binding.path;
+            bool bindingIsGamepad = IsGamepadPath(path);
+            
+            if (isGamepad == bindingIsGamepad)
+            {
+                Debug.Log($"Found device-type match (fallback) at binding index {i}: {path}");
+                return i;
+            }
+        }
+        
+        // Last resort - first non-composite binding
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!action.bindings[i].isComposite && !action.bindings[i].isPartOfComposite)
+            {
+                Debug.Log($"Using first available binding (last resort) at index {i}");
+                return i;
+            }
+        }
+        
+        return -1; // No suitable binding found
+    }
+    
+    // Enhance the IsGamepadPath method to be more comprehensive
+    private bool IsGamepadPath(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return false;
+        
+        string lowerPath = path.ToLower();
+        
+        // Check for various gamepad-related strings
+        return lowerPath.Contains("gamepad") || 
+               lowerPath.Contains("joystick") || 
+               lowerPath.Contains("dualshock") || 
+               lowerPath.Contains("dualsense") || 
+               lowerPath.Contains("xbox") ||
+               lowerPath.Contains("ps4") || 
+               lowerPath.Contains("ps5") ||
+               lowerPath.Contains("nintendo") ||
+               lowerPath.Contains("controller");
+    }
+
+    // Add a keyboard-specific path detection method
+    private bool IsKeyboardPath(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return false;
+        
+        string lowerPath = path.ToLower();
+        
+        return lowerPath.Contains("keyboard") || 
+               lowerPath.Contains("<key>") ||
+               lowerPath.Contains("mouse") || 
+               (!IsGamepadPath(lowerPath) && !lowerPath.Contains("touch"));
     }
 
     // A safe cleanup method to be called whenever we encounter an exception
@@ -865,21 +1049,65 @@ public class ChangeControls : MonoBehaviour
         bool isGamepad = currentControlScheme.ToLower().Contains("gamepad") || 
                          currentControlScheme.ToLower().Contains("controller");
         
+        // Log what we're about to reset
+        Debug.Log($"Resetting bindings for {(isGamepad ? "gamepad" : "keyboard/mouse")} control scheme");
+        
         foreach (var actionMap in inputActions.actionMaps)
         {
             foreach (var action in actionMap.actions)
             {
+                if (action.bindings.Count == 0) continue;
+                
+                // Keep track of composite bindings we're processing
+                int? currentCompositeIndex = null;
+                bool currentCompositeIsForCurrentScheme = false;
+                
                 for (int i = 0; i < action.bindings.Count; i++)
                 {
                     var binding = action.bindings[i];
-                    if (binding.isComposite || binding.isPartOfComposite)
-                        continue;
                     
-                    bool isGamepadBinding = binding.path.ToLower().Contains("gamepad");
-                    // Only reset bindings for the current control scheme
-                    if ((isGamepad && isGamepadBinding) || (!isGamepad && !isGamepadBinding))
+                    // Start of a new composite binding
+                    if (binding.isComposite)
+                    {
+                        currentCompositeIndex = i;
+                        // Check if this composite is for our current scheme
+                        bool matchesControlScheme = MatchesControlScheme(binding.groups, currentControlScheme);
+                        bool isGamepadBinding = binding.path.ToLower().Contains("gamepad");
+                        
+                        // Determine if this composite binding belongs to our current control scheme
+                        currentCompositeIsForCurrentScheme = matchesControlScheme || 
+                            ((isGamepad && isGamepadBinding) || (!isGamepad && !isGamepadBinding));
+                        
+                        // Reset the composite binding if it matches the current scheme
+                        if (currentCompositeIsForCurrentScheme)
+                        {
+                            action.RemoveBindingOverride(i);
+                        }
+                        continue;
+                    }
+                    
+                    // Handle composite parts
+                    if (binding.isPartOfComposite && currentCompositeIndex.HasValue)
+                    {
+                        // Only reset composite parts if the parent composite matches our scheme
+                        if (currentCompositeIsForCurrentScheme)
+                        {
+                            action.RemoveBindingOverride(i);
+                        }
+                        continue;
+                    }
+                    
+                    // Handle regular (non-composite) bindings
+                    currentCompositeIndex = null;
+                    
+                    // Check if this binding belongs to our current device type
+                    bool matchesScheme = MatchesControlScheme(binding.groups, currentControlScheme);
+                    bool isForGamepad = binding.path.ToLower().Contains("gamepad");
+                    
+                    if (matchesScheme || ((isGamepad && isForGamepad) || (!isGamepad && !isForGamepad)))
                     {
                         action.RemoveBindingOverride(i);
+                        Debug.Log($"Reset binding for action: {action.name}, binding: {binding.path}");
                     }
                 }
             }
@@ -888,6 +1116,6 @@ public class ChangeControls : MonoBehaviour
         // Save the updated bindings
         SaveBindings();
         UpdateControlLabels();
-        Debug.Log($"Reset bindings for {(isGamepad ? "gamepad" : "keyboard/mouse")} control scheme");
+        Debug.Log($"Completed resetting bindings for {(isGamepad ? "gamepad" : "keyboard/mouse")} control scheme");
     }
 }
