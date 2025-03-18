@@ -105,17 +105,23 @@ public class SkillsBuildUI : MonoBehaviour
         }
 
         Debug.Log("Sending Request");
+
+        // Start the loading spinner
+        this.typewriter.StartSpinner();
+
         QuestionAPIRequest request = new QuestionAPIRequest(currentQuestion.question);
         StartCoroutine(
             request.SendRequest(
                 (QuestionAPIResponse response) =>
                 {
+                    this.typewriter.StopSpinner();
                     SkillsBuildEntry entry = ProcessAIResponse(response);
                     UpdateUIEntry(entry);
                 },
                 (string msg) =>
                 {
                     Debug.Log($"Error: {msg}");
+                    this.typewriter.StopSpinner();
                     UpdateUIEntry(currentQuestion);
                 }
             )
@@ -216,7 +222,6 @@ public class SkillsBuildUI : MonoBehaviour
 
     void UpdateUIEntry(SkillsBuildEntry entry)
     {
-
         this.skillsBuilder.SetQuestion(currentQuestionIndex, entry);
 
         this.typewriter.typeWhenReady = true;

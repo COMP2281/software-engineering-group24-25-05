@@ -56,6 +56,9 @@ public class QuestionAPIRequest
     {
         Debug.Log("Running Thing");
 
+        // DEBUG: WAIT 5 SECONDS
+        yield return new WaitForSeconds(5.0f);
+
         WWWForm form = new WWWForm();
         form.AddField("question", this.question);
 

@@ -139,8 +139,8 @@ public class EnemyAI : MonoBehaviour
                 // TODO: What to do if answer is incorrect?
             });
 
-            this.questionUI.LoadNextQuestion();
             this.questionUI.MakeVisible(true);
+            this.questionUI.LoadNextQuestion();
         }
     }
 
