@@ -22,10 +22,6 @@ public class EnemyAI : MonoBehaviour
     // UI part (still needs to be completed)
     public SkillsBuildUI questionUI; // Answering UI
 
-    public float minQuestionTime = 5.0f;
-    private float timeSinceQuestion = 0.0f;
-    private bool canQuestion = true;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component for movement
@@ -42,7 +38,6 @@ public class EnemyAI : MonoBehaviour
         Patrol(); // Patrol the waypoints
         CheckForPlayer(); // Check if the player is in the enemy's vision range
         UpdateViewDirection(); // Update the view direction based on movement
-        UpdateQuestionStatus();
     }
 
     // Patrol behavior
@@ -122,37 +117,30 @@ public class EnemyAI : MonoBehaviour
 
     void TriggerQuestionUI()
     {
-        if (this.questionUI != null)
+        if (this.questionUI.GetCanQuestion())
         {
-            if (this.canQuestion)
+            Debug.Log("Player detected, triggering question!");
+
+            this.questionUI.SetCanQuestion(false);
+
+            this.questionUI.SetCorrectAnswerCallback(() =>
             {
-                Debug.Log("Player detected, triggering question!");
+                Debug.Log("Correct Answer!");
+                this.questionUI.SetTimeSinceQuestion(0);
 
-                this.canQuestion = false;
+                // TODO: What to do if answer is correct?
+            });
 
-                this.questionUI.SetCorrectAnswerCallback(() =>
-                {
-                    Debug.Log("Correct Answer!");
-                    this.timeSinceQuestion = 0;
+            this.questionUI.SetIncorrectAnswerCallback(() =>
+            {
+                Debug.Log("Incorrect Answer!");
+                this.questionUI.SetTimeSinceQuestion(0);
 
-                    // TODO: What to do if answer is correct?
-                });
+                // TODO: What to do if answer is incorrect?
+            });
 
-                this.questionUI.SetIncorrectAnswerCallback(() =>
-                {
-                    Debug.Log("Incorrect Answer!");
-                    this.timeSinceQuestion = 0;
-
-                    // TODO: What to do if answer is incorrect?
-                });
-
-                this.questionUI.LoadNextQuestion();
-                this.questionUI.MakeVisible(true);
-            }
-        }
-        else
-        {
-            Debug.Log("No QuestionUI instance");
+            this.questionUI.LoadNextQuestion();
+            this.questionUI.MakeVisible(true);
         }
     }
 
@@ -190,16 +178,6 @@ public class EnemyAI : MonoBehaviour
                 viewconeLight.localRotation = Quaternion.Euler(0, 0, 90); // Rotate to face left horizontally
             }
 
-        }
-    }
-
-    void UpdateQuestionStatus()
-    {
-        this.timeSinceQuestion += Time.deltaTime;
-
-        if (!this.questionUI.IsVisible() && this.timeSinceQuestion > this.minQuestionTime)
-        {
-            this.canQuestion = true;
         }
     }
 

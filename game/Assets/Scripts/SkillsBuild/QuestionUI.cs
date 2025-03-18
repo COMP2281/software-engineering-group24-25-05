@@ -22,9 +22,23 @@ public class SkillsBuildUI : MonoBehaviour
     private Action correctAnswerCallback;
     private Action incorrectAnswerCallback;
 
+    public float minQuestionTime = 5.0f;
+    private float timeSinceQuestion = 0.0f;
+    private bool canQuestion = true;
+
     void Start()
     {
         this.currentQuestionIndex = -1;
+    }
+
+    void Update()
+    {
+        this.timeSinceQuestion += Time.deltaTime;
+
+        if (!this.active && this.timeSinceQuestion > this.minQuestionTime)
+        {
+            this.canQuestion = true;
+        }
     }
 
     public void MakeVisible(bool visible = true)
@@ -47,6 +61,26 @@ public class SkillsBuildUI : MonoBehaviour
     private void hideUI()
     {
         this.MakeVisible(false);
+    }
+
+    public void SetTimeSinceQuestion(float time)
+    {
+        this.timeSinceQuestion = time;
+    }
+
+    public float GetTimeSinceQuestion()
+    {
+        return this.timeSinceQuestion;
+    }
+
+    public void SetCanQuestion(bool can)
+    {
+        this.canQuestion = can;
+    }
+
+    public bool GetCanQuestion()
+    {
+        return this.canQuestion;
     }
 
     public void SetCorrectAnswerCallback(Action callback)
