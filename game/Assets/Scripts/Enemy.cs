@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour
             // If we hit a cover object first, the player cannot be seen
             if (hit.collider.CompareTag("Cover"))
             {
-                Debug.Log("View blocked by cover");
+                // Debug.Log("View blocked by cover");
                 return; // Cover blocks the view - exit without detecting player
             }
 

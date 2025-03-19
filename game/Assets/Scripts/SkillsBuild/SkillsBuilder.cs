@@ -18,7 +18,9 @@ public class SkillsBuilder : MonoBehaviour
         {
             // Keep the instance alive between scenes
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            // I am going to make the very bold assumption that this is fine
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -78,7 +80,7 @@ public class SkillsBuilder : MonoBehaviour
             }
         }
 
-        return -1;
+        return numElements - 1;
     }
 
     public void QuestionAnswered(int index, bool correct)
