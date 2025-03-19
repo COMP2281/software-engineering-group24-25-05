@@ -13,10 +13,11 @@
             </ui:VisualElement>
             <ui:VisualElement name="rightContainer" class="right-container" style="flex-grow: 1; align-items: flex-start;">
                 <ui:VisualElement name="controlsPanel" class="settings-panel" style="flex-grow: 1; display: flex; width: 100%; height: 100%;">
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="jumpButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crouchButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" class="button" style="height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="jumpButton" class="button" style="height: -1%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crouchButton" class="button" style="height: 10%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" class="button" style="height: 10%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" class="button" style="height: -1%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
+                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="interactButton" class="button" style="height: 10%; font-size: 50px; background-color: rgba(58, 94, 91, 0); text-overflow: ellipsis;" />
                     <ui:Button text="Current: Keyboard &amp; Mouse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeviceToggleButton" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; height: 20%; font-size: 50px; background-color: rgba(58, 94, 91, 0);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="videoPanel" class="settings-panel" style="flex-grow: 1; display: none; width: 100%; height: 100%;">

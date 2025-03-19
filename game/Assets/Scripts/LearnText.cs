@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
+using System.Text.RegularExpressions;
 
 public class ToggleScrollView : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class ToggleScrollView : MonoBehaviour
 
     private TextMeshProUGUI promptText;   
     private bool isInRange = false;
+    private string interactBindingText = "Interact";
 
     private void Start()
     {
@@ -40,6 +43,9 @@ public class ToggleScrollView : MonoBehaviour
                 Debug.LogError("AudioSource is missing! Make sure to attach an AudioSource component to this GameObject.");
             }
         }
+
+        // Get the current interact binding
+        UpdateInteractBindingText();
     }
 
     private void Update()
@@ -55,18 +61,21 @@ public class ToggleScrollView : MonoBehaviour
                 if (promptText != null)
                 {
                     promptText.gameObject.SetActive(true);  // Show the prompt when in range of the sprite
+                    // Update the text to show the current binding
+                    promptText.text = $"Press {interactBindingText} to read";
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.R))  // Player presses R to toggle the scroll view
+            // Use the Input System instead of direct key input
+            if (UserInput.Instance.InteractPressed)  // Player presses the interact button
             {
                 ToggleScrollViewVisibility();
                 if (promptText != null)
                 {
-                    promptText.gameObject.SetActive(false);  // Hide the prompt text when R is pressed
+                    promptText.gameObject.SetActive(false);  // Hide the prompt text when interact is pressed
                 }
 
-                // Play the audio when R is pressed
+                // Play the audio when interact is pressed
                 PlayAudio();
             }
         }
@@ -105,6 +114,119 @@ public class ToggleScrollView : MonoBehaviour
 
             // Set the prompt text position above the sprite
             promptText.transform.position = offsetPosition;
+        }
+    }
+
+    // Get the current binding for the Interact action and convert it to human-readable format
+    private void UpdateInteractBindingText()
+    {
+        if (UserInput.Instance != null)
+        {
+            var playerInput = UserInput.Instance.GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                var inputActions = playerInput.actions;
+                if (inputActions != null)
+                {
+                    var interactAction = inputActions.FindAction("Interact");
+                    if (interactAction != null)
+                    {
+                        // Get the active binding based on the current control scheme
+                        bool usingGamepad = UserInput.Instance.UsingController;
+                        
+                        // Find appropriate binding for current device
+                        int bindingIndex = 0;
+                        for (int i = 0; i < interactAction.bindings.Count; i++)
+                        {
+                            var binding = interactAction.bindings[i];
+                            if (binding.isComposite || binding.isPartOfComposite)
+                                continue;
+                                
+                            bool isGamepadBinding = binding.path.ToLower().Contains("gamepad");
+                            if ((usingGamepad && isGamepadBinding) || (!usingGamepad && !isGamepadBinding))
+                            {
+                                bindingIndex = i;
+                                break;
+                            }
+                        }
+                        
+                        // Get the binding path
+                        string bindingPath = interactAction.bindings[bindingIndex].effectivePath;
+                        string fullDisplayString = InputControlPath.ToHumanReadableString(bindingPath);
+                        
+                        // Clean up the display string to remove device information
+                        interactBindingText = CleanBindingDisplayText(fullDisplayString, usingGamepad);
+                    }
+                }
+            }
+        }
+    }
+    
+    // Clean up the binding display text to show just the key name without device prefix
+    private string CleanBindingDisplayText(string displayText, bool isGamepad)
+    {
+        if (string.IsNullOrEmpty(displayText))
+            return "Interact";
+            
+        if (isGamepad)
+        {
+            // For gamepad, keep the button name but remove unnecessary text
+            // Replace "Gamepad " with just "Button "
+            displayText = displayText.Replace("Gamepad ", "");
+            
+            // Some gamepad buttons have special names we want to keep as-is
+            return displayText;
+        }
+        else
+        {
+            // For keyboard/mouse, extract just the key name
+            // Remove the "[Keyboard]" or other device prefix
+            int bracketIndex = displayText.IndexOf(']');
+            if (bracketIndex >= 0 && bracketIndex + 1 < displayText.Length)
+            {
+                return displayText.Substring(bracketIndex + 1).Trim();
+            }
+            
+            // Fallback if the format is different
+            string pattern = @"[\[\(].*?[\]\)]";
+            return Regex.Replace(displayText, pattern, "").Trim();
+        }
+    }
+
+    // Listen for control binding changes
+    private void OnEnable()
+    {
+        if (UserInput.Instance != null)
+        {
+            var playerInput = UserInput.Instance.GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                playerInput.onControlsChanged += OnControlsChanged;
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (UserInput.Instance != null)
+        {
+            var playerInput = UserInput.Instance.GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                playerInput.onControlsChanged -= OnControlsChanged;
+            }
+        }
+    }
+
+    private void OnControlsChanged(PlayerInput input)
+    {
+        // Update the binding text when controls change
+        UpdateInteractBindingText();
+        
+        // If prompt is visible, update it
+        if (isInRange && promptText != null && promptText.gameObject.activeSelf)
+        {
+            promptText.text = $"Press {interactBindingText} to read";
         }
     }
 
