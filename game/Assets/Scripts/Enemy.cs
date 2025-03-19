@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -117,13 +118,13 @@ public class EnemyAI : MonoBehaviour
 
                 // Set enemy speed to zero when player is detected
                 rb.velocity = Vector2.zero; // Stop the enemy's movements
-                TriggerQuestionUI(); // Trigger question UI
+                TriggerQuestionUI(hit.collider.gameObject); // Trigger question UI
                 return;
             }
         }
     }
 
-    void TriggerQuestionUI()
+    void TriggerQuestionUI(GameObject player)
     {
         if (this.questionUI.GetCanQuestion())
         {
@@ -145,6 +146,14 @@ public class EnemyAI : MonoBehaviour
                 this.questionUI.SetTimeSinceQuestion(0);
 
                 // TODO: What to do if answer is incorrect?
+                // player dies!
+
+                // this is absolutely horrid
+                // yanderedev levels of bad code
+                if(SceneManager.GetActiveScene().name == "SampleScene")
+                    player.transform.position = new Vector3(0, -3, 0);
+                else if(SceneManager.GetActiveScene().name == "TutorialLevel")
+                    player.transform.position = new Vector3(0, -3, 0);
             });
 
             this.questionUI.ResetAll();
@@ -158,7 +167,7 @@ public class EnemyAI : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             rb.velocity = Vector2.zero; // Stop the enemy's movement
-            TriggerQuestionUI();
+            TriggerQuestionUI(other.gameObject);
         }
     }
     void UpdateViewDirection()
