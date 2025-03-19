@@ -29,7 +29,6 @@ public class SettingsMenuEvents : MonoBehaviour
     private VisualElement controlsPanel;
     private VisualElement videoPanel;
     private VisualElement audioPanel;
-    private VisualElement settingsContainer;
     private UIDocument uiDocument;
     
     void OnEnable()
@@ -49,7 +48,6 @@ public class SettingsMenuEvents : MonoBehaviour
         controlsButton = root.Q<Button>("ControlsButton");
 
         // Get references to panels
-        settingsContainer = root.Q<VisualElement>("settingsContainer");
         controlsPanel = root.Q<VisualElement>("controlsPanel");
         videoPanel = root.Q<VisualElement>("videoPanel");
         audioPanel = root.Q<VisualElement>("audioPanel");
@@ -104,11 +102,7 @@ public class SettingsMenuEvents : MonoBehaviour
     
     // Function to display the controls panel
     private void ShowControlsPanel()
-    {
-        // Reset all button styles
-        ResetButtonStyles();
-        controlsButton.AddToClassList("active");
-        
+    {   
         // Hide all panels first
         HideAllPanels();
         
@@ -122,10 +116,6 @@ public class SettingsMenuEvents : MonoBehaviour
     // Function to display the video settings panel
     private void ShowVideoPanel()
     {
-        // Reset all button styles
-        ResetButtonStyles();
-        videoButton.AddToClassList("active");
-        
         // Hide all panels first
         HideAllPanels();
         
@@ -144,11 +134,7 @@ public class SettingsMenuEvents : MonoBehaviour
     
     // Function to display the audio settings panel
     private void ShowAudioPanel()
-    {
-        // Reset all button styles
-        ResetButtonStyles();
-        audioButton.AddToClassList("active");
-        
+    {   
         // Hide all panels first
         HideAllPanels();
         
@@ -167,14 +153,6 @@ public class SettingsMenuEvents : MonoBehaviour
         {
             Debug.Log("Audio settings panel not found in UI");
         }
-    }
-    
-    // Reset the style of all navigation buttons
-    private void ResetButtonStyles()
-    {
-        controlsButton.RemoveFromClassList("active");
-        videoButton.RemoveFromClassList("active");
-        audioButton.RemoveFromClassList("active");
     }
     
     // Hide all content panels

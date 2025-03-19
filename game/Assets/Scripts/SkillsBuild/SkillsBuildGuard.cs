@@ -3,7 +3,7 @@ using UnityEngine;
 public class SkillsBuildGuard : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    public SkillsBuildUI skillsBuildUI;
+    public QuestionUI skillsBuildUI;
 
     public void Start()
     {

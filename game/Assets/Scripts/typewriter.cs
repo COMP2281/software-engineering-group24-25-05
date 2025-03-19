@@ -17,6 +17,13 @@ public class UITypeWriter : MonoBehaviour
     public char[] longPauseCharacters = new[] { '.', ':', '!', '?' };
 
     public bool typeWhenReady;
+    public bool showSpinner = false;
+
+    public string[] spinnerText = new string[] {
+        ".", "..", "...", "....", ".....",
+        "......",
+        ".....", "....", "...", "..", ".",
+    };
 
     private Action callback = null;
 
@@ -42,6 +49,12 @@ public class UITypeWriter : MonoBehaviour
         this.typingCoroutine = StartCoroutine(TypeRoutine());
     }
 
+    public void Clear()
+    {
+        this.fullText = "";
+        this.textMesh.text = "";
+    }
+
     private void OnEnable()
     {
         if (this.typeWhenReady)
@@ -57,6 +70,29 @@ public class UITypeWriter : MonoBehaviour
         {
             StopCoroutine(this.typingCoroutine);
             this.typingCoroutine = null;
+        }
+    }
+
+    public void StartSpinner()
+    {
+        this.showSpinner = true;
+        StartCoroutine(this.SpinnerRoutine());
+    }
+
+    public void StopSpinner()
+    {
+        this.showSpinner = false;
+    }
+
+    private IEnumerator SpinnerRoutine()
+    {
+        int i = 0;
+
+        while (this.showSpinner)
+        {
+            this.textMesh.text = this.spinnerText[i % this.spinnerText.Length];
+            i += 1;
+            yield return new WaitForSeconds(0.075f);
         }
     }
 

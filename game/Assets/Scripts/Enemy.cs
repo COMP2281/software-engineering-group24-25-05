@@ -20,11 +20,7 @@ public class EnemyAI : MonoBehaviour
     public Transform viewconeLight; // Reference to the viewcone light transform (if any)
 
     // UI part (still needs to be completed)
-    public SkillsBuildUI questionUI; // Answering UI
-
-    public float minQuestionTime = 5.0f;
-    private float timeSinceQuestion = 0.0f;
-    private bool canQuestion = true;
+    public QuestionUI questionUI; // Answering UI
 
     void Start()
     {
@@ -42,7 +38,6 @@ public class EnemyAI : MonoBehaviour
         Patrol(); // Patrol the waypoints
         CheckForPlayer(); // Check if the player is in the enemy's vision range
         UpdateViewDirection(); // Update the view direction based on movement
-        UpdateQuestionStatus();
     }
 
     // Patrol behavior
@@ -111,7 +106,7 @@ public class EnemyAI : MonoBehaviour
             // If we hit a cover object first, the player cannot be seen
             if (hit.collider.CompareTag("Cover"))
             {
-                Debug.Log("View blocked by cover");
+                // Debug.Log("View blocked by cover");
                 return; // Cover blocks the view - exit without detecting player
             }
 
@@ -119,7 +114,9 @@ public class EnemyAI : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 rb.velocity = Vector2.zero; // Stop the enemy's movement
-                Debug.Log("Player detected, triggering question!");
+
+                // Set enemy speed to zero when player is detected
+                rb.velocity = Vector2.zero; // Stop the enemy's movements
                 TriggerQuestionUI(); // Trigger question UI
                 return;
             }
@@ -128,35 +125,31 @@ public class EnemyAI : MonoBehaviour
 
     void TriggerQuestionUI()
     {
-        if (this.questionUI != null)
+        if (this.questionUI.GetCanQuestion())
         {
-            if (this.canQuestion)
+            Debug.Log("Player detected, triggering question!");
+
+            this.questionUI.SetCanQuestion(false);
+
+            this.questionUI.SetCorrectAnswerCallback(() =>
             {
-                this.canQuestion = false;
+                Debug.Log("Correct Answer!");
+                this.questionUI.SetTimeSinceQuestion(0);
 
-                this.questionUI.SetCorrectAnswerCallback(() =>
-                {
-                    Debug.Log("Correct Answer!");
-                    this.timeSinceQuestion = 0;
+                // TODO: What to do if answer is correct?
+            });
 
-                    // TODO: What to do if answer is correct?
-                });
+            this.questionUI.SetIncorrectAnswerCallback(() =>
+            {
+                Debug.Log("Incorrect Answer!");
+                this.questionUI.SetTimeSinceQuestion(0);
 
-                this.questionUI.SetIncorrectAnswerCallback(() =>
-                {
-                    Debug.Log("Incorrect Answer!");
-                    this.timeSinceQuestion = 0;
+                // TODO: What to do if answer is incorrect?
+            });
 
-                    // TODO: What to do if answer is incorrect?
-                });
-
-                this.questionUI.LoadNextQuestion();
-                this.questionUI.MakeVisible(true);
-            }
-        }
-        else
-        {
-            Debug.Log("No QuestionUI instance");
+            this.questionUI.ResetAll();
+            this.questionUI.MakeVisible(true);
+            this.questionUI.LoadNextQuestion();
         }
     }
 
@@ -193,17 +186,6 @@ public class EnemyAI : MonoBehaviour
                 // Facing left
                 viewconeLight.localRotation = Quaternion.Euler(0, 0, 90); // Rotate to face left horizontally
             }
-
-        }
-    }
-
-    void UpdateQuestionStatus()
-    {
-        this.timeSinceQuestion += Time.deltaTime;
-
-        if (!this.questionUI.IsVisible() && this.timeSinceQuestion > this.minQuestionTime)
-        {
-            this.canQuestion = true;
         }
     }
 

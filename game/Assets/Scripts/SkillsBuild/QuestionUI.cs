@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class SkillsBuildUI : MonoBehaviour
+public class QuestionUI : MonoBehaviour
 {
     private int currentQuestionIndex;
-    public UITypeWriter typewriter;
+    public UITypeWriter questionTypewriter;
     public Button[] answerButtons;
     public SkillsBuilder skillsBuilder;
 
@@ -22,14 +22,28 @@ public class SkillsBuildUI : MonoBehaviour
     private Action correctAnswerCallback;
     private Action incorrectAnswerCallback;
 
+    public float minQuestionTime = 5.0f;
+    private float timeSinceQuestion = 0.0f;
+    private bool canQuestion = true;
+
     void Start()
     {
         this.currentQuestionIndex = -1;
     }
 
+    void Update()
+    {
+        this.timeSinceQuestion += Time.deltaTime;
+
+        if (!this.active && this.timeSinceQuestion > this.minQuestionTime)
+        {
+            this.canQuestion = true;
+        }
+    }
+
     public void MakeVisible(bool visible = true)
     {
-        this.typewriter.gameObject.SetActive(visible);
+        this.questionTypewriter.gameObject.SetActive(visible);
 
         foreach (var button in this.answerButtons)
         {
@@ -49,6 +63,26 @@ public class SkillsBuildUI : MonoBehaviour
         this.MakeVisible(false);
     }
 
+    public void SetTimeSinceQuestion(float time)
+    {
+        this.timeSinceQuestion = time;
+    }
+
+    public float GetTimeSinceQuestion()
+    {
+        return this.timeSinceQuestion;
+    }
+
+    public void SetCanQuestion(bool can)
+    {
+        this.canQuestion = can;
+    }
+
+    public bool GetCanQuestion()
+    {
+        return this.canQuestion;
+    }
+
     public void SetCorrectAnswerCallback(Action callback)
     {
         this.correctAnswerCallback = callback;
@@ -63,48 +97,35 @@ public class SkillsBuildUI : MonoBehaviour
     {
         currentQuestionIndex = this.skillsBuilder.GetRandomQuestionIndex();
         SkillsBuildEntry currentQuestion = this.skillsBuilder.GetQuestion(currentQuestionIndex);
-        currentQuestion.Shuffle();
 
-        this.typewriter.typeWhenReady = true;
-        this.typewriter.SetText(currentQuestion.question);
-        this.typewriter.SetCallback(() =>
+        this.questionTypewriter.Clear();
+        foreach (var button in this.answerButtons)
         {
-            StartButtonRendering(0);
-        });
-
-        int display_answers = Math.Min(currentQuestion.possible_answers.Length,
-                                   answerButtons.Length);
-
-        if (display_answers < currentQuestion.possible_answers.Length)
-        {
-            Debug.Log("Not enough answer buttons to display all possible answers");
+            button.GetComponentInChildren<UITypeWriter>().Clear();
         }
 
-        for (int i = 0; i < display_answers; i++)
-        {
-            UITypeWriter buttonWriter = answerButtons[i].GetComponentInChildren<UITypeWriter>();
-            buttonWriter.typeWhenReady = false;
-            buttonWriter.SetText(currentQuestion.possible_answers[i]);
-            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.defaultTextColor;
-            buttonWriter.GetComponentInChildren<Image>().color = this.defaultButtonColor;
+        Debug.Log("Sending Request");
 
-            // NOTE: For some reason this requires a local copy
-            int localI = i;
-            buttonWriter.SetCallback(() =>
-            {
-                StartButtonRendering(localI + 1);
-            });
+        // Start the loading spinner
+        this.questionTypewriter.StartSpinner();
 
-            // NOTE: Button presses are valid while the text is still typing
-            int choiceIndex = i;
-            answerButtons[i].onClick.RemoveAllListeners();
-            answerButtons[i].onClick.AddListener(() =>
+        QuestionAPIRequest request = new QuestionAPIRequest(currentQuestion.question);
+        StartCoroutine(
+            request.SendRequest(
+                (QuestionAPIResponse response) =>
                 {
-                    if (this.active) { OnAnswerSelected(choiceIndex); }
+                    this.questionTypewriter.StopSpinner();
+                    SkillsBuildEntry entry = ProcessAIResponse(response);
+                    UpdateUIEntry(entry);
+                },
+                (string msg) =>
+                {
+                    Debug.Log($"Error: {msg}");
+                    this.questionTypewriter.StopSpinner();
+                    UpdateUIEntry(currentQuestion);
                 }
-            );
-        }
+            )
+        );
     }
 
     private void StartButtonRendering(int currentIndex)
@@ -173,9 +194,103 @@ public class SkillsBuildUI : MonoBehaviour
         Invoke("hideUI", 1.5f);
     }
 
-    private void ClearButtonText(GameObject obj)
+    public void ResetText()
     {
-        TextMeshProUGUI textComponent = obj.GetComponentInChildren<TextMeshProUGUI>();
-        textComponent.text = "";
+        this.questionTypewriter.Clear();
+
+        TextMeshProUGUI questionText = this.questionTypewriter.GetComponentInChildren<TextMeshProUGUI>();
+        questionText.text = "";
+
+        for (int i = 0; i < this.answerButtons.Length; i++)
+        {
+            this.answerButtons[i].GetComponentInChildren<UITypeWriter>().Clear();
+            TextMeshProUGUI text = this.answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            text.text = "";
+        }
+    }
+
+    public void ResetColors()
+    {
+        for (int i = 0; i < this.answerButtons.Length; i++)
+        {
+            TextMeshProUGUI text = this.answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            Image img = this.answerButtons[i].GetComponentInChildren<Image>();
+
+            img.color = this.defaultButtonColor;
+            text.color = this.defaultTextColor;
+        }
+    }
+
+    public void ResetAll()
+    {
+        this.ResetText();
+        this.ResetColors();
+    }
+
+    SkillsBuildEntry ProcessAIResponse(QuestionAPIResponse aiResponse)
+    {
+        SkillsBuildEntry aiEntry = new SkillsBuildEntry();
+
+        aiEntry.question = aiResponse.question;
+        aiEntry.answer = 0;
+        aiEntry.possible_answers = new string[aiResponse.answer.incorrect.Length + 1];
+
+        aiEntry.possible_answers[0] = aiResponse.answer.correct;
+
+        for (int i = 0; i < aiResponse.answer.incorrect.Length; i++)
+        {
+            aiEntry.possible_answers[i + 1] = aiResponse.answer.incorrect[i];
+        }
+
+        aiEntry.Shuffle();
+
+        return aiEntry;
+    }
+
+    void UpdateUIEntry(SkillsBuildEntry entry)
+    {
+        this.skillsBuilder.SetQuestion(currentQuestionIndex, entry);
+
+        this.questionTypewriter.typeWhenReady = true;
+        this.questionTypewriter.SetText(entry.question);
+        this.questionTypewriter.SetCallback(() =>
+        {
+            StartButtonRendering(0);
+        });
+        this.questionTypewriter.StartTyping();
+
+        int display_answers = Math.Min(entry.possible_answers.Length,
+                                   answerButtons.Length);
+
+        if (display_answers < entry.possible_answers.Length)
+        {
+            Debug.Log("Not enough answer buttons to display all possible answers");
+        }
+
+        for (int i = 0; i < display_answers; i++)
+        {
+            UITypeWriter buttonWriter = answerButtons[i].GetComponentInChildren<UITypeWriter>();
+            buttonWriter.typeWhenReady = false;
+            buttonWriter.SetText(entry.possible_answers[i]);
+            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            buttonWriter.GetComponentInChildren<TextMeshProUGUI>().color = this.defaultTextColor;
+            buttonWriter.GetComponentInChildren<Image>().color = this.defaultButtonColor;
+
+            // NOTE: For some reason this requires a local copy
+            int localI = i;
+            buttonWriter.SetCallback(() =>
+            {
+                StartButtonRendering(localI + 1);
+            });
+
+            // NOTE: Button presses are valid while the text is still typing
+            int choiceIndex = i;
+            answerButtons[i].onClick.RemoveAllListeners();
+            answerButtons[i].onClick.AddListener(() =>
+                {
+                    if (this.active) { OnAnswerSelected(choiceIndex); }
+                }
+            );
+        }
     }
 }

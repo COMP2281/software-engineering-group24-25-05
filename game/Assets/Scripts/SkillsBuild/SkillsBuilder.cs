@@ -3,9 +3,30 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 
+public enum SkillsBuildQuestionClass
+{
+    SampleQuestions,
+    ArtificialIntelligence,
+}
+
+public static class SkillsBuildQuestionClassResolver
+{
+    public static string GetString(SkillsBuildQuestionClass questionClass)
+    {
+        return questionClass switch
+        {
+            SkillsBuildQuestionClass.ArtificialIntelligence => "SkillsBuild/artificial_intelligence.json",
+            SkillsBuildQuestionClass.SampleQuestions or _ => "SkillsBuild/sample_questions.json",
+        };
+    }
+}
+
 public class SkillsBuilder : MonoBehaviour
 {
     public static SkillsBuilder Instance { get; private set; }
+
+    [SerializeField] private SkillsBuildQuestionClass questionClass;
+    private string questionPath;
 
     private List<SkillsBuildEntry> skillEntries = new List<SkillsBuildEntry>();
     private List<double> entryWeights;
@@ -18,7 +39,9 @@ public class SkillsBuilder : MonoBehaviour
         {
             // Keep the instance alive between scenes
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            // I am going to make the very bold assumption that this is fine
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -28,6 +51,8 @@ public class SkillsBuilder : MonoBehaviour
 
     public void Start()
     {
+        this.questionPath = SkillsBuildQuestionClassResolver.GetString(this.questionClass);
+
         Instance.LoadSkills();
 
         var v = System.DateTime.Now.Ticks;
@@ -35,10 +60,17 @@ public class SkillsBuilder : MonoBehaviour
         this.prng = new Unity.Mathematics.Random(seed);
     }
 
+    public void SetQuestionClass(SkillsBuildQuestionClass questionClass)
+    {
+        this.questionClass = questionClass;
+        this.questionPath = SkillsBuildQuestionClassResolver.GetString(questionClass);
+        this.LoadSkills();
+    }
+
     public void LoadSkills()
     {
         SkillsBuildDataLoader loader = new SkillsBuildDataLoader();
-        string path = Path.Combine(Application.streamingAssetsPath, "SkillsBuild/sample_questions.json");
+        string path = Path.Combine(Application.streamingAssetsPath, this.questionPath);
         this.skillEntries = loader.LoadEntries(path);
 
         this.entryWeights = new List<double>(this.skillEntries.Count);
@@ -48,6 +80,11 @@ public class SkillsBuilder : MonoBehaviour
     public SkillsBuildEntry GetQuestion(int index)
     {
         return this.skillEntries[index];
+    }
+
+    public void SetQuestion(int index, SkillsBuildEntry question)
+    {
+        this.skillEntries[index] = question;
     }
 
     public int GetRandomQuestionIndex()
@@ -73,7 +110,7 @@ public class SkillsBuilder : MonoBehaviour
             }
         }
 
-        return -1;
+        return numElements - 1;
     }
 
     public void QuestionAnswered(int index, bool correct)

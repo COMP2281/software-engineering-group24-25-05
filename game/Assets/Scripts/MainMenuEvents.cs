@@ -13,7 +13,7 @@ public class MainMenuEvents : MonoBehaviour
     private Button dataAnalyticsButton;
     private Button cyberSecurityButton;
     private Button settingsButton;
-    private Button backButton;
+    private Button exitButton;
     private VisualElement mainMenu;
     private VisualElement titleContainer;
     private VisualElement leftContainer;
@@ -24,14 +24,14 @@ public class MainMenuEvents : MonoBehaviour
     private Label cyberSecurityText;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
-    
+
     // Audio clip for locked level attempt
     [SerializeField] private AudioClip lockedSound;
 
     // Notification popup
     private VisualElement notificationPopup;
     private Label notificationText;
-    
+
     void OnEnable()
     {
         // Load the UXML and USS
@@ -44,7 +44,7 @@ public class MainMenuEvents : MonoBehaviour
         dataAnalyticsButton = root.Q<Button>("dataAnalyticsButton");
         cyberSecurityButton = root.Q<Button>("cyberSecurityButton");
         settingsButton = root.Q<Button>("settingsButton");
-        backButton = root.Q<Button>("backButton");
+        exitButton = root.Q<Button>("exitButton");
 
         // Retrieve visual elements by their name
         mainMenu = root.Q<VisualElement>("mainMenu");
@@ -65,6 +65,7 @@ public class MainMenuEvents : MonoBehaviour
         dataAnalyticsButton.RegisterCallback<ClickEvent>(evt => ShowLockedLevelPopup(LevelManager.LevelType.DataAnalytics));
         cyberSecurityButton.RegisterCallback<ClickEvent>(evt => ShowLockedLevelPopup(LevelManager.LevelType.CyberSecurity));
         settingsButton.RegisterCallback<ClickEvent>(evt => LoadScene("SettingsScene"));
+        exitButton.RegisterCallback<ClickEvent>(evt => Application.Quit());
 
         // Register specific mouse leave events for specialty buttons
         tutorialButton.RegisterCallback<MouseLeaveEvent>(OnSpecialtyButtonLeave);
@@ -105,10 +106,10 @@ public class MainMenuEvents : MonoBehaviour
             notificationPopup = new VisualElement();
             notificationPopup.name = "notificationPopup";
             notificationPopup.AddToClassList("notification-popup");
-            
+
             notificationText = new Label();
             notificationText.name = "notificationText";
-            
+
             notificationPopup.Add(notificationText);
             root.Add(notificationPopup);
         }
@@ -123,12 +124,6 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        // Add transition classes
-        // mainMenu.AddToClassList("main-menu-hidden");
-        // titleContainer.AddToClassList("title-container-hidden");
-        // leftContainer.AddToClassList("left-container-hidden");
-        // rightContainer.AddToClassList("right-container-hidden");
-
         Debug.Log("Loading Scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
@@ -141,10 +136,10 @@ public class MainMenuEvents : MonoBehaviour
     private void OnButtonHover(MouseEnterEvent evt)
     {
         _audioSource.Play();
-        
+
         // Get the button that was hovered
         Button hoveredButton = evt.target as Button;
-        
+
         // Show appropriate description text based on which button is hovered
         if (hoveredButton == artificialIntelligenceButton && artificialIntelligenceText != null)
         {
@@ -156,7 +151,7 @@ public class MainMenuEvents : MonoBehaviour
         {
             HideAllTooltipTexts();
             dataAnalyticsText.style.display = DisplayStyle.Flex;
-            
+
         }
         else if (hoveredButton == cyberSecurityButton && cyberSecurityText != null)
         {
@@ -169,22 +164,22 @@ public class MainMenuEvents : MonoBehaviour
             tutorialText.style.display = DisplayStyle.Flex;
         }
     }
-    
+
     private void OnSpecialtyButtonLeave(MouseLeaveEvent evt)
     {
         // Hide all tooltip texts when mouse leaves any specialty button
         HideAllTooltipTexts();
     }
-    
+
     private void HideAllTooltipTexts()
     {
         // Hide all specialty tooltip texts
         if (artificialIntelligenceText != null)
             artificialIntelligenceText.style.display = DisplayStyle.None;
-            
+
         if (dataAnalyticsText != null)
             dataAnalyticsText.style.display = DisplayStyle.None;
-            
+
         if (cyberSecurityText != null)
             cyberSecurityText.style.display = DisplayStyle.None;
         if (tutorialText != null)
@@ -198,20 +193,20 @@ public class MainMenuEvents : MonoBehaviour
             Debug.LogWarning("LevelManager instance not found!");
             return;
         }
-        
+
         // Always unlock the tutorial button
         SetButtonLockState(tutorialButton, true);
-        
+
         // Force lock other levels
         SetButtonLockState(artificialIntelligenceButton, false);
         SetButtonLockState(dataAnalyticsButton, false);
         SetButtonLockState(cyberSecurityButton, false);
     }
-    
+
     private void SetButtonLockState(Button button, bool isUnlocked)
     {
         if (button == null) return;
-        
+
         if (isUnlocked)
         {
             button.RemoveFromClassList("locked-button");
@@ -232,66 +227,69 @@ public class MainMenuEvents : MonoBehaviour
         // for all levels except tutorial
         ShowLockedLevelPopup(levelType);
     }
-    
+
     private void ShowLockedLevelPopup(LevelManager.LevelType levelType)
     {
         string message = "";
-        
+
         // Show custom locked message based on level type
         switch (levelType)
         {
             case LevelManager.LevelType.ArtificialIntelligence:
-                message = "Complete Tutorial to unlock Artificial Intelligence";
+                if(LevelManager.Instance.IsLevelUnlocked(levelType))
+                    LoadScene("SampleScene");
+                else
+                    message = "Complete Tutorial to unlock Artificial Intelligence";
                 break;
             case LevelManager.LevelType.DataAnalytics:
                 message = "Complete AI track to unlock Data Analytics";
                 break;
-                
+
             case LevelManager.LevelType.CyberSecurity:
                 message = "Complete Data Analytics track to unlock Cyber Security";
                 break;
-                
+
             default:
                 message = "This level is locked";
                 break;
         }
-        
+
         // Show the notification popup
         ShowNotificationPopup(message);
     }
-    
+
     private void ShowNotificationPopup(string message)
     {
         // Stop any existing fade coroutines
         StopAllCoroutines();
-        
+
         // Set popup text
         notificationText.text = message;
-        
+
         // Show popup
         notificationPopup.style.display = DisplayStyle.Flex;
         notificationPopup.RemoveFromClassList("hiding");
         notificationPopup.AddToClassList("visible");
-        
+
         // Start fade out coroutine
         StartCoroutine(HideNotificationAfterDelay(2.5f));
     }
-    
+
     private IEnumerator HideNotificationAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
         // Start fade out
         notificationPopup.RemoveFromClassList("visible");
         notificationPopup.AddToClassList("hiding");
-        
+
         // Wait for fade animation
         yield return new WaitForSeconds(0.5f);
-        
+
         // Hide completely
         notificationPopup.style.display = DisplayStyle.None;
     }
-    
+
     // Remove or modify the old ShowLockedLevelFeedback method
 
 }
