@@ -50,6 +50,11 @@ public class SkillsBuilder : MonoBehaviour
         return this.skillEntries[index];
     }
 
+    public void SetQuestion(int index, SkillsBuildEntry question)
+    {
+        this.skillEntries[index] = question;
+    }
+
     public int GetRandomQuestionIndex()
     {
         int numElements = this.skillEntries.Count;

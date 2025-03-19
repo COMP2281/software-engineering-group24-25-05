@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -185,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Skip movement if dialogue is open
-        SkillsBuildUI globalUI = FindObjectOfType<SkillsBuildUI>();
+        QuestionUI globalUI = FindObjectOfType<QuestionUI>();
         if (dialogueManager.dialogueBox.activeSelf || globalUI.IsVisible())
             return;
 
@@ -380,5 +378,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerViewcone.RefreshLightPosition();
         }
+    }
+
+    public Rigidbody2D GetRigidBody()
+    {
+        return this.rb;
     }
 }
