@@ -132,16 +132,21 @@ public class SkillsBuilder : MonoBehaviour
         //      - Combined with the first rule, this gives a 1.32x scale factor
         //      - Incorrectly answered questions are more likely to be shown
 
-        this.entryWeights[index] *= 1.1;
+        // This question was just seen, so decrease weighting. This makes other
+        // questions more likely to show up
+        this.entryWeights[index] *= 0.8;
 
         if (correct)
         {
-            this.entryWeights[index] *= 0.7;
+            // Answer was correct ==> 0.64x
+            this.entryWeights[index] *= 0.8;
         }
         else
         {
-            this.entryWeights[index] *= 1.2;
+            // Answer was incorrect => 1.2x
+            this.entryWeights[index] *= 1.5;
         }
+
 
         Debug.Log("Answering Question:");
         Debug.Log($"Correct? {correct}");
