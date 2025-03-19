@@ -194,10 +194,19 @@ public class QuestionUI : MonoBehaviour
         Invoke("hideUI", 1.5f);
     }
 
-    private void ClearButtonText(GameObject obj)
+    public void ResetText()
     {
-        TextMeshProUGUI textComponent = obj.GetComponentInChildren<TextMeshProUGUI>();
-        textComponent.text = "";
+        this.questionTypewriter.Clear();
+
+        TextMeshProUGUI questionText = this.questionTypewriter.GetComponentInChildren<TextMeshProUGUI>();
+        questionText.text = "";
+
+        for (int i = 0; i < this.answerButtons.Length; i++)
+        {
+            this.answerButtons[i].GetComponentInChildren<UITypeWriter>().Clear();
+            TextMeshProUGUI text = this.answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            text.text = "";
+        }
     }
 
     public void ResetColors()
@@ -210,6 +219,12 @@ public class QuestionUI : MonoBehaviour
             img.color = this.defaultButtonColor;
             text.color = this.defaultTextColor;
         }
+    }
+
+    public void ResetAll()
+    {
+        this.ResetText();
+        this.ResetColors();
     }
 
     SkillsBuildEntry ProcessAIResponse(QuestionAPIResponse aiResponse)

@@ -147,7 +147,7 @@ public class EnemyAI : MonoBehaviour
                 // TODO: What to do if answer is incorrect?
             });
 
-            this.questionUI.ResetColors();
+            this.questionUI.ResetAll();
             this.questionUI.MakeVisible(true);
             this.questionUI.LoadNextQuestion();
         }
@@ -186,7 +186,6 @@ public class EnemyAI : MonoBehaviour
                 // Facing left
                 viewconeLight.localRotation = Quaternion.Euler(0, 0, 90); // Rotate to face left horizontally
             }
-
         }
     }
 
