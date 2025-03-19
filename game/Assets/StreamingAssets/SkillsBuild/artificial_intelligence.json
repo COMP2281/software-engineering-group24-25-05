@@ -1,0 +1,202 @@
+{
+	"entries": [
+		{
+			"question": "What is the primary function of artificial intelligence?",
+			"possible_answers": [
+				"To replace human decisions",
+				"To learn patterns and make predictions",
+				"To create human-like consciousness",
+				"To automate all workplace tasks"
+			],
+			"answer": 1,
+			"difficulty": 1
+		},
+		{
+			"question": "What is the primary goal of augmented intelligence?",
+			"possible_answers": [
+				"To mimic human thinking processes",
+				"To help humans with impractical tasks",
+				"To diagnose complex medical conditions",
+				"To replace human workers entirely"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "How does artificial intelligence differ from augmented intelligence in terms of goals?",
+			"possible_answers": [
+				"Artificial intelligence aims to mimic human thinking, while augmented intelligence aims to assist humans",
+				"Artificial intelligence focuses on practical tasks, while augmented intelligence focuses on theoretical concepts",
+				"Artificial intelligence is designed for business, while augmented intelligence is designed for healthcare",
+				"Artificial intelligence requires human input while, augmented intelligence operates independently"
+			],
+			"answer": 0,
+			"difficulty": 3
+		},
+		{
+			"question": "What is a limitation of current AI technology?",
+			"possible_answers": [
+				"It cannot process large volumes of text",
+				"It is not mature enough to perform independent diagnostic tasks",
+				"It cannot assist humans with practical tasks",
+				"It cannot learn from existing data"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "What technology do online chatbots use to analyze poorly typed questions?",
+			"possible_answers": [
+				"Natural language processing",
+				"Image recognition algorithms",
+				"Voice recognition software",
+				"Automated response systems"
+			],
+			"answer": 0,
+			"difficulty": 2
+		},
+		{
+			"question": "What are the three levels of AI identified by computer scientists?",
+			"possible_answers": [
+				"Basic AI, Intermediate AI, Advanced AI",
+				"Simple AI, Complex AI, Superintelligent AI",
+				"Narrow AI, Broad AI, General AI",
+				"Weak AI, Strong AI, Super AI"
+			],
+			"answer": 2,
+			"difficulty": 2
+		},
+		{
+			"question": "Which type of AI is most commonly used by enterprises today (2025)?",
+			"possible_answers": [
+				"Narrow AI",
+				"Broad AI",
+				"General AI",
+				"Quantum AI"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "What is the primary focus of Narrow AI?",
+			"possible_answers": [
+				"Addressing multiple complex tasks simultaneously",
+				"Addressing a single task such as predicting purchases or planning schedules",
+				"Creating human-like general intelligence",
+				"Managing enterprise-wide operations"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "Which of these is an example of Narrow AI?",
+			"possible_answers": [
+				"A system that can learn any new skill without training",
+				"A voice assistant like Siri on an iPhone",
+				"A robot that can perform any household task",
+				"A computer that can reason about abstract concepts"
+			],
+			"answer": 1,
+			"difficulty": 1
+		},
+		{
+			"question": "How does Broad AI differ from Narrow AI in terms of capabilities?",
+			"possible_answers": [
+				"Broad AI can only perform simple tasks",
+				"Broad AI is more versatile and can handle a wider range of related tasks",
+				"Broad AI is limited to consumer applications",
+				"Broad AI can only work on mobile devices"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "What is the primary focus of Broad AI systems?",
+			"possible_answers": [
+				"Entertainment and gaming applications",
+				"Replacing human workers in all industries",
+				"Integrating AI within specific business processes using enterprise-specific knowledge",
+				"Creating fully autonomous robots"
+			],
+			"answer": 2,
+			"difficulty": 3
+		},
+		{
+			"question": "Which of these is an example of what newer Broad AI systems can do?",
+			"possible_answers": [
+				"Create original works of art",
+				"Predict global weather patterns",
+				"Develop human-like consciousness",
+				"Replace government decision-making"
+			],
+			"answer": 1,
+			"difficulty": 1
+		},
+		{
+			"question": "What is the primary focus of Broad AI systems?",
+			"possible_answers": [
+				"Entertainment and gaming applications",
+				"Replacing human workers in all industries",
+				"Integrating AI within specific business processes using enterprise-specific knowledge",
+				"Creating fully autonomous robots"
+			],
+			"answer": 2,
+			"difficulty": 3
+		},
+		{
+			"question": "Which capability does current AI lack compared to human intelligence?",
+			"possible_answers": [
+				"Basic pattern recognition",
+				"Mathematical calculations",
+				"Abstract thinking and creativity",
+				"Data processing speed"
+			],
+			"answer": 2,
+			"difficulty": 2
+		},
+		{
+			"question": "Which class of AI can predict future business and predict weather?",
+			"possible_answers": [
+				"Narrow AI",
+				"BroadAI",
+				"General AI",
+				"Artificial Super Intelligence"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "Which of the following Narrow AI systems would you want to include when building the Broad AI system for a self-driving car?",
+			"possible_answers": [
+				"International news",
+				"Long-term weather patterns",
+				"Entertainment trends",
+				"Information from the Global Positioning System (GPS)"
+			],
+			"answer": 3,
+			"difficulty": 2
+		},
+		{
+			"question": "Which AI systems are used to predict global weather, trace pandemics, and help businesses predict future trends",
+			"possible_answers": [
+				"Targeted AI",
+				"Broad AI",
+				"General AI",
+				"Narrow AI"
+			],
+			"answer": 1,
+			"difficulty": 2
+		},
+		{
+			"question": "Which one word best describes what AI can do?",
+			"possible_answers": [
+				"Think",
+				"Calculate",
+				"Decide",
+				"Predict"
+			],
+			"answer": 3,
+			"difficulty": 2
+		}
+	]
+}
